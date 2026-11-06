@@ -21,7 +21,7 @@ export interface Metro {
   opportunity: number; ease_of_entry: number; vegas_similarity: number
   demand_estimate?: { tpr_low: number; tpr_base: number; tpr_high: number; trips_low: number; trips_base: number; trips_high: number; city_pop: number }
   unit_economics?: { low: Econ; base: Econ; high: Econ }
-  confidence?: number | null; median_rank?: number | null
+  confidence?: number | null; median_rank?: number | null; wave?: number | null
   why: string[]; competitors: Competitor[]; regulation: Regulation
   nhtsa_incidents: { operating_entity: string; ads_incidents: number }[]
 }

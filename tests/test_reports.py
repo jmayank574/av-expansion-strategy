@@ -15,7 +15,7 @@ def build_reports():
 
 def test_memo_fits_one_page_by_length():
     memo = (ROOT / "reports/memo.md").read_text(encoding="utf-8")
-    assert len(memo.split()) <= 760          # rendered to a single Letter page at 10 pt in Edge (render_memo.py checks the real page count)
+    assert len(memo.split()) <= 800          # rendered to a single Letter page at 10 pt in Edge (render_memo.py checks the real page count)
     for h in ["Recommendation", "Why these metros", "Deprioritize", "Key risks", "Confidence", "Data"]:
         assert h in memo
 

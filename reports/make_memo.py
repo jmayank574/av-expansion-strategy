@@ -120,7 +120,7 @@ memo = f"""# Where should the operator launch after Las Vegas?
 
 *For the strategy team. Data as of {asof}. Sources: Census ACS 2024 5-year, NHTSA SGO ADS reports, NOAA GHCN-Daily, EIA, FAA, and researched seed files (AV rules, competitors) as of {asof}.*
 
-**Recommendation.** {plan.one_line_answer(p)} The sequence uses balanced-weight scores for 25 US metros (demand 35, operating conditions 25, regulation 20, competition 15, charging 5). Waves 1 and 2 are limited to states with Tier 2+ AV rules; wave 1 also needs a top-5 finish in at least half of 10,000 weight draws.
+**Recommendation.** {plan.one_line_answer(p)} {plan.wave1_timing(p)} {plan.gate_note(p)} The sequence uses balanced-weight scores for 25 US metros (demand 35, operating conditions 25, regulation 20, competition 15, charging 5). Waves 1 and 2 are limited to states with Tier 2+ AV rules; wave 1 also needs a top-5 finish in at least half of 10,000 weight draws.
 
 **Why these metros** (rank, score, demand score, regulation, competitors, confidence, fleet at {pct(meta['assumptions']['capture_share']['value'])} capture)
 
@@ -134,11 +134,11 @@ memo = f"""# Where should the operator launch after Las Vegas?
 
 **Key risks and de-risking**
 
-- *Regulation:* {n_top10_low} of the top 10 sit in Tier 0-1 states; engage {plan.names(sorted({m['state'] for m in w3}))} regulators early. {plan.names(sorted({m['state'] for m in slow_open}))} {'is' if len({m['state'] for m in slow_open}) == 1 else 'are'} Tier 2+ but a slow path for a new entrant (multi-step permits): start filings in wave 1.
+- *Regulation:* {n_top10_low} of the top 10 sit in Tier 0-1 states; engage {plan.names(sorted({m['state'] for m in w3}))} regulators early. {plan.names(sorted({m['state'] for m in slow_open}))} {'is' if len({m['state'] for m in slow_open}) == 1 else 'are'} Tier 2+ but {'needs' if len({m['state'] for m in slow_open}) == 1 else 'need'} multi-step permits for a new entrant.
 - *Weather:* {weather_risk()}
 - *Competition:* {plan.names(crowded)} already have operators (crowding {min(m['raw']['crowding'] for m in crowded):.1f}-{max(m['raw']['crowding'] for m in crowded):.1f}); {least_crowded['metro']} is the least crowded launch metro ({least_crowded['raw']['crowding']:.1f}). Competitor status is dated and cross-checked against NHTSA activity.
 
-**Confidence.** {w1[0]['metro']} is top 5 in {pct(w1[0]['confidence'])} of weight draws and {w1[-1]['metro']} in {pct(w1[-1]['confidence'])};{gate} {weakest['metro']} is the softest pick ({pct(weakest['confidence'])}), so wave 2 order is not firm. A low-risk lens puts {plan.names(low_risk)} on top; fast growth, {plan.names(fast)}. {vegas_line} The answer would also change if a Tier 1 state legalized driverless service, a competitor entered {least_crowded['metro']}, or fare and capture differ from our labeled assumptions.
+**Confidence.** {w1[0]['metro']} is top 5 in {pct(w1[0]['confidence'])} of weight draws and {w1[-1]['metro']} in {pct(w1[-1]['confidence'])}; {weakest['metro']} is the softest pick ({pct(weakest['confidence'])}), so wave 2 order is not firm. A low-risk lens puts {plan.names(low_risk)} on top; fast growth, {plan.names(fast)}. {vegas_line} The answer would also change if a Tier 1 state legalized driverless service, a competitor entered {least_crowded['metro']}, or fare and capture differ from our labeled assumptions.
 
 **Data.** ACS {v['acs']}; FAA {v['faa']}; NOAA GHCN-Daily airport-station weather 2016-2025; NHTSA SGO reports to Sep 2026 (activity only, never rates); EIA {v['eia'].split(' (')[0]}; AV rules, new-entrant paths and competitors researched {asof} (some rows medium/low confidence); demand is a two-anchor estimate (Chicago and NYC ride-hail trips), not a forecast.
 """

@@ -401,7 +401,8 @@
    "confidence": 0.5799,
    "median_rank": 4.0,
    "rank_p10": 1.0,
-   "rank_p90": 12.0
+   "rank_p90": 12.0,
+   "wave": 3
   },
   {
    "metro": "Los Angeles",
@@ -576,7 +577,8 @@
    "confidence": 0.9117,
    "median_rank": 2.0,
    "rank_p10": 1.0,
-   "rank_p90": 5.0
+   "rank_p90": 5.0,
+   "wave": 1
   },
   {
    "metro": "Chicago",
@@ -723,7 +725,8 @@
    "confidence": 0.3535,
    "median_rank": 8.0,
    "rank_p10": 3.0,
-   "rank_p90": 16.0
+   "rank_p90": 16.0,
+   "wave": 3
   },
   {
    "metro": "Dallas-Fort Worth",
@@ -939,7 +942,8 @@
    "confidence": 0.0026,
    "median_rank": 17.0,
    "rank_p10": 10.0,
-   "rank_p90": 22.0
+   "rank_p90": 22.0,
+   "wave": null
   },
   {
    "metro": "Houston",
@@ -1129,7 +1133,8 @@
    "confidence": 0.2727,
    "median_rank": 7.0,
    "rank_p10": 4.0,
-   "rank_p90": 13.0
+   "rank_p90": 13.0,
+   "wave": 2
   },
   {
    "metro": "Washington DC",
@@ -1296,7 +1301,8 @@
    "confidence": 0.0186,
    "median_rank": 13.0,
    "rank_p10": 7.0,
-   "rank_p90": 18.0
+   "rank_p90": 18.0,
+   "wave": null
   },
   {
    "metro": "Philadelphia",
@@ -1448,7 +1454,8 @@
    "confidence": 0.1082,
    "median_rank": 10.0,
    "rank_p10": 5.0,
-   "rank_p90": 14.0
+   "rank_p90": 14.0,
+   "wave": null
   },
   {
    "metro": "Miami",
@@ -1626,7 +1633,8 @@
    "confidence": 0.9666,
    "median_rank": 1.0,
    "rank_p10": 1.0,
-   "rank_p90": 3.0
+   "rank_p90": 3.0,
+   "wave": 1
   },
   {
    "metro": "Atlanta",
@@ -1804,7 +1812,8 @@
    "confidence": 0.0882,
    "median_rank": 9.0,
    "rank_p10": 6.0,
-   "rank_p90": 15.0
+   "rank_p90": 15.0,
+   "wave": 2
   },
   {
    "metro": "Boston",
@@ -1951,7 +1960,8 @@
    "confidence": 0.0043,
    "median_rank": 16.0,
    "rank_p10": 9.0,
-   "rank_p90": 21.0
+   "rank_p90": 21.0,
+   "wave": null
   },
   {
    "metro": "Phoenix",
@@ -2118,7 +2128,8 @@
    "confidence": 0.6465,
    "median_rank": 4.0,
    "rank_p10": 2.0,
-   "rank_p90": 10.0
+   "rank_p90": 10.0,
+   "wave": 1
   },
   {
    "metro": "San Francisco",
@@ -2311,7 +2322,8 @@
    "confidence": 0.5417,
    "median_rank": 5.0,
    "rank_p10": 3.0,
-   "rank_p90": 13.0
+   "rank_p90": 13.0,
+   "wave": 1
   },
   {
    "metro": "Detroit",
@@ -2467,7 +2479,8 @@
    "confidence": 0.0144,
    "median_rank": 13.0,
    "rank_p10": 8.0,
-   "rank_p90": 16.0
+   "rank_p90": 16.0,
+   "wave": null
   },
   {
    "metro": "Seattle",
@@ -2625,7 +2638,8 @@
    "confidence": 0.0,
    "median_rank": 21.0,
    "rank_p10": 18.0,
-   "rank_p90": 23.0
+   "rank_p90": 23.0,
+   "wave": null
   },
   {
    "metro": "Minneapolis",
@@ -2777,7 +2791,8 @@
    "confidence": 0.0,
    "median_rank": 19.0,
    "rank_p10": 16.0,
-   "rank_p90": 22.0
+   "rank_p90": 22.0,
+   "wave": null
   },
   {
    "metro": "San Diego",
@@ -2933,7 +2948,8 @@
    "confidence": 0.0303,
    "median_rank": 15.0,
    "rank_p10": 8.0,
-   "rank_p90": 19.0
+   "rank_p90": 19.0,
+   "wave": null
   },
   {
    "metro": "Tampa",
@@ -3096,7 +3112,8 @@
    "confidence": 0.327,
    "median_rank": 7.0,
    "rank_p10": 4.0,
-   "rank_p90": 13.0
+   "rank_p90": 13.0,
+   "wave": 2
   },
   {
    "metro": "Denver",
@@ -3248,7 +3265,8 @@
    "confidence": 0.0,
    "median_rank": 15.0,
    "rank_p10": 12.0,
-   "rank_p90": 16.0
+   "rank_p90": 16.0,
+   "wave": null
   },
   {
    "metro": "Orlando",
@@ -3415,7 +3433,8 @@
    "confidence": 0.1224,
    "median_rank": 9.0,
    "rank_p10": 5.0,
-   "rank_p90": 14.0
+   "rank_p90": 14.0,
+   "wave": 2
   },
   {
    "metro": "Charlotte",
@@ -3562,7 +3581,8 @@
    "confidence": 0.0001,
    "median_rank": 22.0,
    "rank_p10": 19.0,
-   "rank_p90": 23.0
+   "rank_p90": 23.0,
+   "wave": null
   },
   {
    "metro": "San Antonio",
@@ -3714,7 +3734,8 @@
    "confidence": 0.0065,
    "median_rank": 16.0,
    "rank_p10": 9.0,
-   "rank_p90": 19.0
+   "rank_p90": 19.0,
+   "wave": null
   },
   {
    "metro": "Austin",
@@ -3919,7 +3940,8 @@
    "confidence": 0.0,
    "median_rank": 23.0,
    "rank_p10": 18.0,
-   "rank_p90": 25.0
+   "rank_p90": 25.0,
+   "wave": null
   },
   {
    "metro": "Nashville",
@@ -4071,7 +4093,8 @@
    "confidence": 0.0,
    "median_rank": 24.0,
    "rank_p10": 21.0,
-   "rank_p90": 25.0
+   "rank_p90": 25.0,
+   "wave": null
   },
   {
    "metro": "Pittsburgh",
@@ -4223,7 +4246,8 @@
    "confidence": 0.0,
    "median_rank": 25.0,
    "rank_p10": 22.0,
-   "rank_p90": 25.0
+   "rank_p90": 25.0,
+   "wave": null
   },
   {
    "metro": "Sacramento",
@@ -4370,7 +4394,8 @@
    "confidence": 0.0048,
    "median_rank": 18.0,
    "rank_p10": 12.0,
-   "rank_p90": 21.0
+   "rank_p90": 21.0,
+   "wave": null
   },
   {
    "metro": "Las Vegas",
@@ -4567,7 +4592,8 @@
    "confidence": null,
    "median_rank": null,
    "rank_p10": null,
-   "rank_p90": null
+   "rank_p90": null,
+   "wave": null
   }
  ]
 }

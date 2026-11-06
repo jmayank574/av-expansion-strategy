@@ -10,7 +10,7 @@
 | 2 | Houston, Tampa, Orlando and Atlanta | Tier 2+ rules, top 10; weather to validate (Houston 27%, Tampa 33%, Orlando 12%, Atlanta 9%) |
 | 3 | New York and Chicago | Top-10 demand, but driverless commercial service is not yet allowed |
 
-Miami, Los Angeles, Phoenix and San Francisco already have operating competitors, so wave 1 is a bet on demand and rules, not on an open field. CA is Tier 2+ but a slow path for a new entrant (multi-step permits). Dallas-Fort Worth (#18, no wave) and Houston (#6, wave 2) are explained in the memo. Ranks below about #5 are close: read them as a tier, not a strict order (see the Monte Carlo confidence column). Read the one-page memo ([reports/memo.md](reports/memo.md)), the 7-slide deck (`reports/deck.pptx`) and the external accuracy check ([docs/validation.md](docs/validation.md)) for the reasoning, risks and evidence.
+Miami, Los Angeles, Phoenix and San Francisco already have operating competitors, so wave 1 is a bet on demand and rules, not on an open field. Wave 1 is not one launch date: Miami and Phoenix launch first; Los Angeles and San Francisco (California) start the permit process now, with paid service only after permits. San Francisco only just clears the 50% gate (54%). Dallas-Fort Worth (#18, no wave) and Houston (#6, wave 2) are explained in the memo. Ranks below about #5 are close: read them as a tier, not a strict order (see the Monte Carlo confidence column). Read the one-page memo ([reports/memo.md](reports/memo.md)), the 7-slide deck (`reports/deck.pptx`) and the external accuracy check ([docs/validation.md](docs/validation.md)) for the reasoning, risks and evidence.
 
 ## Screenshots
 

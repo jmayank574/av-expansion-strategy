@@ -34,5 +34,12 @@ d["meta"]["demand_method"] = dict(
              "New York": dict(source="NYC TLC High Volume FHV trip records, monthly row counts from parquet footers", tpr=float(dem.loc["New York", "tpr_base"]))},
     note="Estimate from two anchors scaled by a demand index; not a forecast.")
 d["meta"]["vintages"]["demand"] = f"Chicago TNP and NYC HVFHV calendar {int(dem.anchor_year.iloc[0])}"
+# wave membership of the balanced plan, from the same rules the memo and deck use (reports/plan.py), so the app can label them
+sys.path.insert(0, str(ROOT / "reports"))
+import plan
+pl = plan.build(d)
+wave = {m["metro"]: w for w, ms in ((1, pl["w1"]), (2, pl["w2"]), (3, pl["w3"])) for m in ms}
+for m in d["metros"]:
+    m["wave"] = wave.get(m["metro"])
 json.dump(d, open(OUT, "w"), indent=1)
 print("enriched", len(d["metros"]), "metros")

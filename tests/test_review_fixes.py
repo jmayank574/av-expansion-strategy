@@ -156,3 +156,30 @@ def test_assumption_references_added_and_values_unchanged():
     assert "thenextweb.com" in a["vehicle_cost_usd"]["source_url"]
     assert "softwareseni.com" in a["cost_per_mile_usd"]["source_url"] and "newsroom.aaa.com" in a["cost_per_mile_usd"]["source_url"]
     assert (a["avg_fare_usd"]["value"], a["vehicle_cost_usd"]["value"], a["cost_per_mile_usd"]["value"]) == (20.0, 140000, 1.10)
+
+
+def test_json_stamps_waves_for_the_app():
+    d = json.load(open(ROOT / "data/output/metros_scored.json"))
+    p = plan.build(d)
+    stamped = {m["metro"]: m["wave"] for m in d["metros"] if m.get("wave")}
+    assert stamped == {m["metro"]: w for w, ms in ((1, p["w1"]), (2, p["w2"]), (3, p["w3"])) for m in ms}
+    assert all(m.get("wave") is None for m in d["metros"] if m["benchmark"])
+
+
+def test_memo_and_deck_say_slow_permit_wave1_metros_start_permits_first(memo):
+    p = plan.build()
+    first, slow = plan.wave1_split(p)
+    assert slow, "this check assumes at least one wave 1 metro in a slow-path state"
+    assert plan.wave1_timing(p) in memo
+    gate = plan.gate_note(p)
+    if gate:
+        assert gate in memo
+    import subprocess
+    subprocess.run([sys.executable, str(ROOT / "reports/make_deck.py")], check=True, capture_output=True)
+    prs = Presentation(ROOT / "reports/deck.pptx")
+    s4 = " ".join(sh.text_frame.text for sh in prs.slides[3].shapes if sh.has_text_frame)
+    assert "launches first" in s4 and "permits now, paid service after" in s4
+    for m in first + slow:
+        assert m["metro"] in s4
+    if gate:
+        assert "only just clears the 50% gate" in s4

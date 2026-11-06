@@ -145,6 +145,19 @@ def text(slide, x, y, w, h, s, size=18, bold=False, color=INK, align=PP_ALIGN.LE
     return tb
 
 
+def rich(slide, x, y, w, h, items):
+    """One text box, one paragraph per (text, size, bold, color) item."""
+    tb = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
+    tf = tb.text_frame; tf.word_wrap = True
+    tf.margin_left = tf.margin_right = Inches(0.05)
+    for i, (s_, size, bold, color) in enumerate(items):
+        para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        para.space_before = Pt(5 if size >= 20 and i else 0)
+        r = para.add_run(); r.text = s_
+        r.font.size = Pt(size); r.font.bold = bold; r.font.color.rgb = rgb(color); r.font.name = "Calibri"
+    return tb
+
+
 def box(slide, x, y, w, h, fill=PANEL, line=LINE):
     sh = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
     sh.adjustments[0] = 0.04
@@ -200,7 +213,7 @@ s.shapes.add_picture(str(chart_quadrant()), Inches(0.6), Inches(1.65), width=Inc
 
 # ---------------------------------------------------------------- slide 4
 s = new_slide("Launch in three waves, gated by regulation and proof", 4)
-cols = [("Wave 1", "Start now", p["w1"], "Tier 2+ rules, top-5 in at least half of weight draws"),
+cols = [("Wave 1", (f"Start now: {len(plan.wave1_split(p)[0])} launch, {len(plan.wave1_split(p)[1])} start permits" if plan.wave1_split(p)[1] else "Start now"), p["w1"], "Tier 2+ rules, top-5 in at least half of weight draws"),
         ("Wave 2", "After wave 1 proves the playbook", p["w2"], "Tier 2+ rules, top 10; validate weather"),
         ("Wave 3", "When the law changes", p["w3"], "Top-10 demand, driverless service not yet allowed")]
 for i, (wn, when, ms, rule) in enumerate(cols):
@@ -208,8 +221,20 @@ for i, (wn, when, ms, rule) in enumerate(cols):
     box(s, x, 1.9, 3.9, 4.6, fill="#ffffff" if i else "#eef3ff", line=ACCENT if i == 0 else LINE)
     text(s, x + 0.15, 2.0, 3.6, 0.5, wn, size=24, bold=True, color=ACCENT)
     text(s, x + 0.15, 2.6, 3.6, 0.4, when, size=14, color=MUTED)
-    text(s, x + 0.15, 3.15, 3.6, 2.2, [m["metro"] for m in ms], size=22, bold=True)
-    text(s, x + 0.15, 5.45, 3.6, 0.9, rule, size=12, color=MUTED)
+    if i == 0:
+        # wave 1 is not one launch date: metros in slow-permit states start permits now, paid service follows
+        first, slow = plan.wave1_split(p)
+        items = []
+        for m in first:
+            items += [(m["metro"], 20, True, INK), ("launches first", 11, False, MUTED)]
+        for m in slow:
+            items += [(m["metro"], 20, True, INK), (f"{plan.STATE_NAMES.get(m['state'], m['state'])}: permits now, paid service after", 11, False, MUTED)]
+            if m["confidence"] < 0.6:
+                items += [(f"only just clears the 50% gate ({m['confidence'] * 100:.0f}%)", 11, False, MUTED)]
+        rich(s, x + 0.15, 3.05, 3.6, 2.7, items)
+    else:
+        text(s, x + 0.15, 3.15, 3.6, 2.2, [m["metro"] for m in ms], size=22, bold=True)
+    text(s, x + 0.15, 5.8, 3.6, 0.65, rule, size=12, color=MUTED)
 text(s, 0.6, 6.6, 12, 0.35, "Timing is indicative: sequence follows evidence gates, not calendar dates", size=11, color=MUTED)
 
 # ---------------------------------------------------------------- slide 5

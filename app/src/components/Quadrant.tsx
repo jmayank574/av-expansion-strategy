@@ -3,14 +3,14 @@ import { CartesianGrid, Cell, LabelList, ReferenceLine, ResponsiveContainer, Sca
 import type { Row } from '../scoring'
 import { median } from '../scoring'
 
-interface Pt { name: string; x: number; y: number; z: number; q: string }
+interface Pt { name: string; x: number; y: number; z: number; q: string; wave: number | null }
 interface Place { dx: number; dy: number; anchor: 'start' | 'end' | 'middle' }
 
 const CHAR_W = 6.1, LABEL_H = 13
 
 /** Greedy label placement in approximate pixel space: try right, left, above, below (then diagonals) and keep the first spot that
- *  overlaps no bubble and no earlier label. Earlier names in `order` get first choice. */
-function placeLabels(pts: Pt[], order: string[], plotW: number, plotH: number, dx: [number, number], dy: [number, number]): Record<string, Place> {
+ *  overlaps no bubble and no earlier label. Earlier names in `order` get first choice. A label with must = false is dropped if no clean spot exists. */
+function placeLabels(pts: Pt[], order: { name: string; must: boolean }[], plotW: number, plotH: number, dx: [number, number], dy: [number, number]): Record<string, Place> {
   const px = (p: Pt) => ((p.x - dx[0]) / (dx[1] - dx[0])) * plotW
   const py = (p: Pt) => plotH - ((p.y - dy[0]) / (dy[1] - dy[0])) * plotH
   const zs = pts.map(p => p.z), zmin = Math.min(...zs), zmax = Math.max(...zs)
@@ -20,7 +20,7 @@ function placeLabels(pts: Pt[], order: string[], plotW: number, plotH: number, d
   const bubbles: Box[] = pts.map(p => [px(p) - radius(p), py(p) - radius(p), px(p) + radius(p), py(p) + radius(p)])
   const placed: Box[] = []
   const out: Record<string, Place> = {}
-  for (const name of order) {
+  for (const { name, must } of order) {
     const p = pts.find(q => q.name === name)
     if (!p) continue
     const w = name.length * CHAR_W, r = radius(p), cx = px(p), cy = py(p)
@@ -36,7 +36,8 @@ function placeLabels(pts: Pt[], order: string[], plotW: number, plotH: number, d
     ]
     const inside = (b: Box) => b[0] >= -60 && b[2] <= plotW + 80 && b[1] >= 0 && b[3] <= plotH
     const free = (b: Box) => inside(b) && !bubbles.some((bb, i) => pts[i].name !== name && hit(b, bb)) && !placed.some(pb => hit(b, pb))
-    const pick = cands.find(c => free(c.box)) ?? cands[0]
+    const pick = cands.find(c => free(c.box)) ?? (must ? cands[0] : undefined)
+    if (!pick) continue
     out[name] = pick.pl
     placed.push(pick.box)
   }
@@ -48,9 +49,9 @@ export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: st
   const mx = median(cand.map(r => r.ease))
   const my = median(cand.map(r => r.opportunity))
   const quad = (x: number, y: number) => (y >= my ? (x >= mx ? 'Launch next' : 'Build case') : (x >= mx ? 'Opportunistic' : 'Deprioritize'))
-  const pts: Pt[] = cand.map(r => ({ name: r.m.metro, x: r.ease, y: r.opportunity, z: 0.5 + r.m.raw.crowding, q: quad(r.ease, r.opportunity) }))
+  const pts: Pt[] = cand.map(r => ({ name: r.m.metro, x: r.ease, y: r.opportunity, z: 0.5 + r.m.raw.crowding, q: quad(r.ease, r.opportunity), wave: r.m.wave ?? null }))
   const v = rows.find(r => r.m.benchmark)
-  const vegas: Pt[] = v ? [{ name: 'Las Vegas (benchmark)', x: v.ease, y: v.opportunity, z: 0.5 + v.m.raw.crowding, q: quad(v.ease, v.opportunity) }] : []
+  const vegas: Pt[] = v ? [{ name: 'Las Vegas (benchmark)', x: v.ease, y: v.opportunity, z: 0.5 + v.m.raw.crowding, q: quad(v.ease, v.opportunity), wave: null }] : []
   const launch = pts.filter(p => p.q === 'Launch next').sort((a, b) => b.x + b.y - a.x - a.y)
   const dom = (k: 'x' | 'y'): [number, number] => {
     const all = [...pts, ...vegas].map(p => p[k])
@@ -66,8 +67,11 @@ export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: st
     ro.observe(el); setWidth(el.clientWidth)
     return () => ro.disconnect()
   }, [])
-  const labelled = [...launch.map(p => p.name), ...pts.filter(p => p.y >= 70 && p.q !== 'Launch next').sort((a, b) => b.y - a.y).map(p => p.name)]
-  const places = placeLabels([...pts, ...vegas], [...labelled, ...vegas.map(p => p.name)], Math.max(width - 98, 300), 560 - 16 - 56 - 40, dom('x'), dom('y'))
+  // every wave 1-3 metro and Las Vegas must be labelled (waves 1 first, so they get the best spots); other high-demand metros only if there is room
+  const inWave = pts.filter(p => p.wave != null).sort((a, b) => (a.wave as number) - (b.wave as number))
+  const extras = pts.filter(p => p.wave == null && (p.q === 'Launch next' || p.y >= 70)).sort((a, b) => b.y - a.y)
+  const labelled = [...inWave.map(p => ({ name: p.name, must: true })), ...vegas.map(p => ({ name: p.name, must: true })), ...extras.map(p => ({ name: p.name, must: false }))]
+  const places = placeLabels([...pts, ...vegas], labelled, Math.max(width - 98, 300), 560 - 16 - 56 - 40, dom('x'), dom('y'))
   // Recharts passes the symbol's top-left corner plus its width/height, so aim at the centre
   const renderLabel = (props: { x?: number | string; y?: number | string; width?: number | string; height?: number | string; value?: unknown }) => {
     const name = String(props.value ?? '')
@@ -125,7 +129,7 @@ export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: st
       </div>
       <p className="mt-3 text-sm">
         <span className="font-semibold">Launch-next quadrant: </span>{launch.map(p => p.name).join(', ') || 'none'}.
-        <span className="text-muted"> The chart labels this quadrant plus the highest-demand metros; hover any bubble for details, click to open it.</span>
+        <span className="text-muted"> The chart labels every metro in the launch plan (waves 1-3, from the balanced scenario) and Las Vegas, plus other high-demand metros where there is room; hover any bubble for details, click to open it.</span>
       </p>
     </div>
   )

@@ -116,3 +116,32 @@ def why_rank(m, cand, med_opp=50.8):
            "competition": "a light competitive field", "charging": "cheap power"}[strong]
     w = [weak_phrase(k, m, crowd_rank, n, med_opp) for k in weak]
     return f"{m['metro']} ranks #{m['ranks']['balanced']} of {n} ({m['total']:.1f}): {sfx}, held back by {w[0]} and {w[1]}."
+
+
+# ---- wave 1 timing (memo, README and deck share this wording) --------------------------------
+STATE_NAMES = {"AZ": "Arizona", "CA": "California", "CO": "Colorado", "DC": "the District of Columbia", "FL": "Florida", "GA": "Georgia",
+               "IL": "Illinois", "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "NC": "North Carolina", "NV": "Nevada",
+               "NY": "New York", "PA": "Pennsylvania", "TN": "Tennessee", "TX": "Texas", "WA": "Washington"}
+
+
+def wave1_split(p):
+    """(launch first, permits first): wave 1 metros whose state has a fast or moderate new-entrant path vs a slow one."""
+    first = [m for m in p["w1"] if m["regulation"]["new_entrant_path"] != "slow"]
+    slow = [m for m in p["w1"] if m["regulation"]["new_entrant_path"] == "slow"]
+    return first, slow
+
+
+def gate_note(p):
+    """'X only just clears the 50% gate (54%).' for the wave 1 metro closest to the gate, if it is within 10 points."""
+    m = min(p["w1"], key=lambda x: x["confidence"])
+    return f"{m['metro']} only just clears the 50% gate ({m['confidence'] * 100:.0f}%)." if m["confidence"] < 0.6 else ""
+
+
+def wave1_timing(p):
+    """One sentence on what wave 1 means when some wave 1 states have a slow permit path."""
+    first, slow = wave1_split(p)
+    if not slow:
+        return ""
+    states = sorted({STATE_NAMES.get(m["state"], m["state"]) for m in slow})
+    return (f"Wave 1 is not one launch date: {names(first)} launch first; {names(slow)} ({names(states)}) start the permit process now, "
+            f"with paid service only after permits.")
