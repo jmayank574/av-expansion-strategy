@@ -11,3 +11,4 @@ dbt/logs/
 .env
 reports/memo_preview.*
 reports/deck_preview/
+*.egg-info/
