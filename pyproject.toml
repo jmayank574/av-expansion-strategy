@@ -1,0 +1,15 @@
+[project]
+name = "av-expansion-strategy"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas", "requests", "pyyaml", "duckdb", "python-pptx", "matplotlib",
+  "pytest", "pyarrow", "openpyxl", "dbt-duckdb",
+]
+
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

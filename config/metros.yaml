@@ -1,0 +1,483 @@
+metros:
+- name: New York
+  benchmark: false
+  cbsa: '35620'
+  cbsa_title: New York-Newark-Jersey City, NY-NJ
+  principal_city: New York
+  state: NY
+  state_fips: '36'
+  place_fips: '51000'
+  place_geoid: '3651000'
+  census_place_name: New York city
+  lat: 40.7143
+  lon: -74.006
+  land_sqmi: 300.483
+  airports:
+  - JFK
+  - LGA
+  - EWR
+  gaz_lat: 40.6627
+  gaz_lon: -73.9387
+  coord_source: Open-Meteo geocoding API, GeoNames id 5128581
+- name: Los Angeles
+  benchmark: false
+  cbsa: '31080'
+  cbsa_title: Los Angeles-Long Beach-Anaheim, CA
+  principal_city: Los Angeles
+  state: CA
+  state_fips: '06'
+  place_fips: '44000'
+  place_geoid: '0644000'
+  census_place_name: Los Angeles city
+  lat: 34.0522
+  lon: -118.2437
+  land_sqmi: 470.518
+  airports:
+  - LAX
+  - BUR
+  - LGB
+  - SNA
+  gaz_lat: 34.0194
+  gaz_lon: -118.4108
+  coord_source: Open-Meteo geocoding API, GeoNames id 5368361
+- name: Chicago
+  benchmark: false
+  cbsa: '16980'
+  cbsa_title: Chicago-Naperville-Elgin, IL-IN
+  principal_city: Chicago
+  state: IL
+  state_fips: '17'
+  place_fips: '14000'
+  place_geoid: '1714000'
+  census_place_name: Chicago city
+  lat: 41.85
+  lon: -87.65
+  land_sqmi: 227.748
+  airports:
+  - ORD
+  - MDW
+  gaz_lat: 41.837
+  gaz_lon: -87.6849
+  coord_source: Open-Meteo geocoding API, GeoNames id 4887398
+- name: Dallas-Fort Worth
+  benchmark: false
+  cbsa: '19100'
+  cbsa_title: Dallas-Fort Worth-Arlington, TX
+  principal_city: Dallas
+  state: TX
+  state_fips: '48'
+  place_fips: '19000'
+  place_geoid: '4819000'
+  census_place_name: Dallas city
+  lat: 32.7831
+  lon: -96.8067
+  land_sqmi: 339.685
+  airports:
+  - DFW
+  - DAL
+  gaz_lat: 32.7933
+  gaz_lon: -96.7665
+  coord_source: Open-Meteo geocoding API, GeoNames id 4684888
+- name: Houston
+  benchmark: false
+  cbsa: '26420'
+  cbsa_title: Houston-Pasadena-The Woodlands, TX
+  principal_city: Houston
+  state: TX
+  state_fips: '48'
+  place_fips: '35000'
+  place_geoid: '4835000'
+  census_place_name: Houston city
+  lat: 29.7633
+  lon: -95.3633
+  land_sqmi: 640.819
+  airports:
+  - IAH
+  - HOU
+  gaz_lat: 29.7857
+  gaz_lon: -95.3888
+  coord_source: Open-Meteo geocoding API, GeoNames id 4699066
+- name: Washington DC
+  benchmark: false
+  cbsa: '47900'
+  cbsa_title: Washington-Arlington-Alexandria, DC-VA-MD-WV
+  principal_city: Washington
+  state: DC
+  state_fips: '11'
+  place_fips: '50000'
+  place_geoid: '1150000'
+  census_place_name: Washington city
+  lat: 38.8951
+  lon: -77.0364
+  land_sqmi: 61.127
+  airports:
+  - DCA
+  - IAD
+  gaz_lat: 38.9042
+  gaz_lon: -77.0165
+  coord_source: Open-Meteo geocoding API, GeoNames id 4140963
+- name: Philadelphia
+  benchmark: false
+  cbsa: '37980'
+  cbsa_title: Philadelphia-Camden-Wilmington, PA-NJ-DE-MD
+  principal_city: Philadelphia
+  state: PA
+  state_fips: '42'
+  place_fips: '60000'
+  place_geoid: '4260000'
+  census_place_name: Philadelphia city
+  lat: 39.9524
+  lon: -75.1636
+  land_sqmi: 134.325
+  airports:
+  - PHL
+  gaz_lat: 40.0094
+  gaz_lon: -75.1333
+  coord_source: Open-Meteo geocoding API, GeoNames id 4560349
+- name: Miami
+  benchmark: false
+  cbsa: '33100'
+  cbsa_title: Miami-Fort Lauderdale-West Palm Beach, FL
+  principal_city: Miami
+  state: FL
+  state_fips: '12'
+  place_fips: '45000'
+  place_geoid: '1245000'
+  census_place_name: Miami city
+  lat: 25.7743
+  lon: -80.1937
+  land_sqmi: 35.997
+  airports:
+  - MIA
+  - FLL
+  - DJT
+  gaz_lat: 25.7752
+  gaz_lon: -80.2086
+  coord_source: Open-Meteo geocoding API, GeoNames id 4164138
+- name: Atlanta
+  benchmark: false
+  cbsa: '12060'
+  cbsa_title: Atlanta-Sandy Springs-Roswell, GA
+  principal_city: Atlanta
+  state: GA
+  state_fips: '13'
+  place_fips: '04000'
+  place_geoid: '1304000'
+  census_place_name: Atlanta city
+  lat: 33.749
+  lon: -84.388
+  land_sqmi: 135.277
+  airports:
+  - ATL
+  gaz_lat: 33.7629
+  gaz_lon: -84.4227
+  coord_source: Open-Meteo geocoding API, GeoNames id 4180439
+- name: Boston
+  benchmark: false
+  cbsa: '14460'
+  cbsa_title: Boston-Cambridge-Newton, MA-NH
+  principal_city: Boston
+  state: MA
+  state_fips: '25'
+  place_fips: '07000'
+  place_geoid: '2507000'
+  census_place_name: Boston city
+  lat: 42.3584
+  lon: -71.0598
+  land_sqmi: 48.341
+  airports:
+  - BOS
+  gaz_lat: 42.3386
+  gaz_lon: -71.0183
+  coord_source: Open-Meteo geocoding API, GeoNames id 4930956
+- name: Phoenix
+  benchmark: false
+  cbsa: '38060'
+  cbsa_title: Phoenix-Mesa-Chandler, AZ
+  principal_city: Phoenix
+  state: AZ
+  state_fips: '04'
+  place_fips: '55000'
+  place_geoid: '0455000'
+  census_place_name: Phoenix city
+  lat: 33.4484
+  lon: -112.074
+  land_sqmi: 518.423
+  airports:
+  - PHX
+  gaz_lat: 33.5722
+  gaz_lon: -112.0901
+  coord_source: Open-Meteo geocoding API, GeoNames id 5308655
+- name: San Francisco
+  benchmark: false
+  cbsa: '41860'
+  cbsa_title: San Francisco-Oakland-Fremont, CA
+  principal_city: San Francisco
+  state: CA
+  state_fips: '06'
+  place_fips: '67000'
+  place_geoid: '0667000'
+  census_place_name: San Francisco city
+  lat: 37.7749
+  lon: -122.4194
+  land_sqmi: 46.685
+  airports:
+  - SFO
+  - OAK
+  gaz_lat: 37.7272
+  gaz_lon: -123.0322
+  coord_source: Open-Meteo geocoding API, GeoNames id 5391959
+- name: Detroit
+  benchmark: false
+  cbsa: '19820'
+  cbsa_title: Detroit-Warren-Dearborn, MI
+  principal_city: Detroit
+  state: MI
+  state_fips: '26'
+  place_fips: '22000'
+  place_geoid: '2622000'
+  census_place_name: Detroit city
+  lat: 42.3314
+  lon: -83.0457
+  land_sqmi: 138.735
+  airports:
+  - DTW
+  gaz_lat: 42.383
+  gaz_lon: -83.1022
+  coord_source: Open-Meteo geocoding API, GeoNames id 4990729
+- name: Seattle
+  benchmark: false
+  cbsa: '42660'
+  cbsa_title: Seattle-Tacoma-Bellevue, WA
+  principal_city: Seattle
+  state: WA
+  state_fips: '53'
+  place_fips: '63000'
+  place_geoid: '5363000'
+  census_place_name: Seattle city
+  lat: 47.6062
+  lon: -122.3321
+  land_sqmi: 84.025
+  airports:
+  - SEA
+  gaz_lat: 47.6193
+  gaz_lon: -122.3515
+  coord_source: Open-Meteo geocoding API, GeoNames id 5809844
+- name: Minneapolis
+  benchmark: false
+  cbsa: '33460'
+  cbsa_title: Minneapolis-St. Paul-Bloomington, MN-WI
+  principal_city: Minneapolis
+  state: MN
+  state_fips: '27'
+  place_fips: '43000'
+  place_geoid: '2743000'
+  census_place_name: Minneapolis city
+  lat: 44.98
+  lon: -93.2638
+  land_sqmi: 54.0
+  airports:
+  - MSP
+  gaz_lat: 44.9633
+  gaz_lon: -93.2683
+  coord_source: Open-Meteo geocoding API, GeoNames id 5037649
+- name: San Diego
+  benchmark: false
+  cbsa: '41740'
+  cbsa_title: San Diego-Chula Vista-Carlsbad, CA
+  principal_city: San Diego
+  state: CA
+  state_fips: '06'
+  place_fips: '66000'
+  place_geoid: '0666000'
+  census_place_name: San Diego city
+  lat: 32.7157
+  lon: -117.1647
+  land_sqmi: 326.028
+  airports:
+  - SAN
+  gaz_lat: 32.8304
+  gaz_lon: -117.1209
+  coord_source: Open-Meteo geocoding API, GeoNames id 5391811
+- name: Tampa
+  benchmark: false
+  cbsa: '45300'
+  cbsa_title: Tampa-St. Petersburg-Clearwater, FL
+  principal_city: Tampa
+  state: FL
+  state_fips: '12'
+  place_fips: '71000'
+  place_geoid: '1271000'
+  census_place_name: Tampa city
+  lat: 27.9475
+  lon: -82.4584
+  land_sqmi: 114.487
+  airports:
+  - TPA
+  gaz_lat: 27.9701
+  gaz_lon: -82.4797
+  coord_source: Open-Meteo geocoding API, GeoNames id 4174757
+- name: Denver
+  benchmark: false
+  cbsa: '19740'
+  cbsa_title: Denver-Aurora-Centennial, CO
+  principal_city: Denver
+  state: CO
+  state_fips: 08
+  place_fips: '20000'
+  place_geoid: 0820000
+  census_place_name: Denver city
+  lat: 39.7392
+  lon: -104.9847
+  land_sqmi: 153.074
+  airports:
+  - DEN
+  gaz_lat: 39.7619
+  gaz_lon: -104.8811
+  coord_source: Open-Meteo geocoding API, GeoNames id 5419384
+- name: Orlando
+  benchmark: false
+  cbsa: '36740'
+  cbsa_title: Orlando-Kissimmee-Sanford, FL
+  principal_city: Orlando
+  state: FL
+  state_fips: '12'
+  place_fips: '53000'
+  place_geoid: '1253000'
+  census_place_name: Orlando city
+  lat: 28.5383
+  lon: -81.3792
+  land_sqmi: 129.601
+  airports:
+  - MCO
+  gaz_lat: 28.4728
+  gaz_lon: -81.3202
+  coord_source: Open-Meteo geocoding API, GeoNames id 4167147
+- name: Charlotte
+  benchmark: false
+  cbsa: '16740'
+  cbsa_title: Charlotte-Concord-Gastonia, NC-SC
+  principal_city: Charlotte
+  state: NC
+  state_fips: '37'
+  place_fips: '12000'
+  place_geoid: '3712000'
+  census_place_name: Charlotte city
+  lat: 35.2271
+  lon: -80.8431
+  land_sqmi: 312.099
+  airports:
+  - CLT
+  gaz_lat: 35.209
+  gaz_lon: -80.831
+  coord_source: Open-Meteo geocoding API, GeoNames id 4460243
+- name: San Antonio
+  benchmark: false
+  cbsa: '41700'
+  cbsa_title: San Antonio-New Braunfels, TX
+  principal_city: San Antonio
+  state: TX
+  state_fips: '48'
+  place_fips: '65000'
+  place_geoid: '4865000'
+  census_place_name: San Antonio city
+  lat: 29.4241
+  lon: -98.4936
+  land_sqmi: 498.979
+  airports:
+  - SAT
+  gaz_lat: 29.4628
+  gaz_lon: -98.5246
+  coord_source: Open-Meteo geocoding API, GeoNames id 4726206
+- name: Austin
+  benchmark: false
+  cbsa: '12420'
+  cbsa_title: Austin-Round Rock-San Marcos, TX
+  principal_city: Austin
+  state: TX
+  state_fips: '48'
+  place_fips: '05000'
+  place_geoid: '4805000'
+  census_place_name: Austin city
+  lat: 30.2672
+  lon: -97.7431
+  land_sqmi: 325.013
+  airports:
+  - AUS
+  gaz_lat: 30.2986
+  gaz_lon: -97.7541
+  coord_source: Open-Meteo geocoding API, GeoNames id 4671654
+- name: Nashville
+  benchmark: false
+  cbsa: '34980'
+  cbsa_title: Nashville-Davidson--Murfreesboro--Franklin, TN
+  principal_city: Nashville
+  state: TN
+  state_fips: '47'
+  place_fips: '52006'
+  place_geoid: '4752006'
+  census_place_name: Nashville-Davidson metropolitan government (balance)
+  lat: 36.1659
+  lon: -86.7844
+  land_sqmi: 475.61
+  airports:
+  - BNA
+  gaz_lat: 36.1718
+  gaz_lon: -86.785
+  coord_source: Open-Meteo geocoding API, GeoNames id 4644585
+- name: Pittsburgh
+  benchmark: false
+  cbsa: '38300'
+  cbsa_title: Pittsburgh, PA
+  principal_city: Pittsburgh
+  state: PA
+  state_fips: '42'
+  place_fips: '61000'
+  place_geoid: '4261000'
+  census_place_name: Pittsburgh city
+  lat: 40.4406
+  lon: -79.9959
+  land_sqmi: 55.373
+  airports:
+  - PIT
+  gaz_lat: 40.4399
+  gaz_lon: -79.9757
+  coord_source: Open-Meteo geocoding API, GeoNames id 5206379
+- name: Sacramento
+  benchmark: false
+  cbsa: '40900'
+  cbsa_title: Sacramento-Roseville-Folsom, CA
+  principal_city: Sacramento
+  state: CA
+  state_fips: '06'
+  place_fips: '64000'
+  place_geoid: '0664000'
+  census_place_name: Sacramento city
+  lat: 38.5816
+  lon: -121.4944
+  land_sqmi: 98.651
+  airports:
+  - SMF
+  gaz_lat: 38.5677
+  gaz_lon: -121.4682
+  coord_source: Open-Meteo geocoding API, GeoNames id 5389489
+- name: Las Vegas
+  benchmark: true
+  cbsa: '29820'
+  cbsa_title: Las Vegas-Henderson-North Las Vegas, NV
+  principal_city: Las Vegas
+  state: NV
+  state_fips: '32'
+  place_fips: '40000'
+  place_geoid: '3240000'
+  census_place_name: Las Vegas city
+  lat: 36.175
+  lon: -115.1372
+  land_sqmi: 141.865
+  airports:
+  - LAS
+  gaz_lat: 36.2335
+  gaz_lon: -115.264
+  coord_source: Open-Meteo geocoding API, GeoNames id 5506956
+coordinate_note: lat/lon = city-center point from Open-Meteo geocoding (GeoNames)
+  as downtown proxy; gaz_lat/gaz_lon = Census Gazetteer internal point.
