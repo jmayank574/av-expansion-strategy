@@ -12,4 +12,4 @@ packages = []
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["."]
+pythonpath = [".", "pipeline"]

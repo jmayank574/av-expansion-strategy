@@ -1,0 +1,27 @@
+metro,seed_active,seed_announced,nhtsa_active,nhtsa_not_in_seed,announced_without_nhtsa
+Atlanta,"Waymo, Zoox",-,"May Mobility (13), Waymo (77)",May Mobility,-
+Austin,"Tesla, Waymo, Zoox",-,"Avride (29), Tesla (26), Waymo (181), Zoox (5)",Avride,-
+Boston,Waymo,-,-,-,-
+Charlotte,-,Waymo,-,-,Waymo
+Chicago,-,Waymo,-,-,Waymo
+Dallas-Fort Worth,"Avride, Tesla, Waymo",Lyft/Mobileye/Marubeni,"Avride (54), May Mobility (8), Tesla (7), Waymo (14)",May Mobility,Lyft/Mobileye/Marubeni
+Denver,Waymo,-,-,-,-
+Detroit,-,Waymo,-,-,-
+Houston,"Tesla, Waymo",-,"Nuro (5), Waymo (18)",Nuro,-
+Las Vegas,"Waymo, Zoox",Tesla,"Motional (20), Zoox (46)",Motional,Tesla
+Los Angeles,"Waymo, Zoox",-,Waymo (462),-,-
+Miami,"Tesla, Waymo, Zoox",-,"Waymo (25), Zoox (6)",-,-
+Minneapolis,Waymo,-,-,-,-
+Nashville,Waymo,-,Waymo (10),-,-
+New York,Waymo,-,-,-,-
+Orlando,Waymo,Tesla,Waymo (9),-,Tesla
+Philadelphia,-,Waymo,Waymo (5),-,-
+Phoenix,Waymo,Tesla,Waymo (338),-,Tesla
+Pittsburgh,-,Waymo,-,-,Waymo
+Sacramento,-,Waymo,-,-,Waymo
+San Antonio,Waymo,-,Waymo (5),-,-
+San Diego,Waymo,-,-,-,-
+San Francisco,"Waymo, Zoox",-,"Waymo (691), Zoox (49)",-,-
+Seattle,-,Waymo,-,-,Waymo
+Tampa,Waymo,Tesla,-,-,-
+Washington DC,-,Waymo,Waymo (6),-,-

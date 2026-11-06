@@ -8,3 +8,4 @@ data/raw/
 dbt/target/
 dbt/logs/
 .pytest_cache/
+.env

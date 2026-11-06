@@ -1,0 +1,38 @@
+# Pillar weights per scenario (each set sums to 100) and sub-metric weights within each pillar (each pillar sums to 100).
+# direction: +1 higher is better, -1 lower is better.
+scenarios:
+  balanced:      {demand: 35, operating: 25, regulatory: 20, competition: 15, charging: 5}
+  fast_growth:   {demand: 50, operating: 20, regulatory: 15, competition: 10, charging: 5}
+  low_risk:      {demand: 20, operating: 35, regulatory: 30, competition: 10, charging: 5}
+  capital_light: {demand: 25, operating: 25, regulatory: 20, competition: 20, charging: 10}
+default_scenario: balanced
+
+pillars:
+  demand:
+    label: Market demand
+    submetrics:
+      log_metro_pop:        {weight: 30, direction: 1,  label: "Metro population (log)", unit: "people"}
+      city_density:         {weight: 25, direction: 1,  label: "Principal-city density", unit: "people / sq mi"}
+      taxi_ridehail_share:  {weight: 20, direction: 1,  label: "Taxi / ride-hail commute share", unit: "share of workers"}
+      no_vehicle_share:     {weight: 15, direction: 1,  label: "No-vehicle household share", unit: "share of households"}
+      enplanements_per_resident: {weight: 10, direction: 1, label: "Airport enplanements per metro resident", unit: "per resident"}
+  operating:
+    label: Operating conditions
+    submetrics:
+      rain_days:  {weight: 40, direction: -1, label: "Rain days (>= 2.5 mm)", unit: "days / yr"}
+      snow_days:  {weight: 40, direction: -1, label: "Snow days (>= 1 cm)", unit: "days / yr"}
+      heat_days:  {weight: 20, direction: -1, label: "Extreme-heat days (>= 40 C)", unit: "days / yr"}
+  regulatory:
+    label: Regulatory readiness
+    submetrics:
+      reg_tier: {weight: 100, direction: 1, label: "State AV regulation tier (0-3)", unit: "tier"}
+  competition:
+    label: Competitive intensity
+    submetrics:
+      crowding: {weight: 100, direction: -1, label: "Competitor crowding", unit: "weighted count"}
+  charging:
+    label: Charging cost
+    submetrics:
+      elec_cents_kwh: {weight: 100, direction: -1, label: "Commercial electricity price", unit: "cents / kWh"}
+
+crowding_status_weights: {operating_public: 1.0, operating_limited: 0.7, testing: 0.4, announced: 0.3}

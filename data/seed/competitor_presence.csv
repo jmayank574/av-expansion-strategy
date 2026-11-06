@@ -1,0 +1,43 @@
+metro,competitor,status,first_public_date,platform_partner,source_url,source_title,as_of_date,confidence
+Atlanta,Waymo,operating_public,,Uber,https://waymo.com/,Waymo - Serving Riders In,2026-11-05,high
+Austin,Waymo,operating_public,,Uber,https://waymo.com/,Waymo - Serving Riders In,2026-11-05,high
+Los Angeles,Waymo,operating_public,,,https://waymo.com/,Waymo - Serving Riders In,2026-11-05,high
+Phoenix,Waymo,operating_public,,,https://waymo.com/,Waymo - Serving Riders In,2026-11-05,high
+San Francisco,Waymo,operating_public,,,https://waymo.com/,Waymo - Serving Riders In,2026-11-05,high
+Dallas-Fort Worth,Waymo,operating_limited,,,https://waymo.com/,Waymo - Serving Riders In (limited access per search results),2026-11-05,medium
+Houston,Waymo,operating_limited,,,https://waymo.com/,Waymo - Serving Riders In (limited access per search results),2026-11-05,medium
+Miami,Waymo,operating_limited,,,https://waymo.com/,Waymo - Serving Riders In (limited access per search results),2026-11-05,medium
+Nashville,Waymo,operating_limited,,,https://waymo.com/,Waymo - Serving Riders In (limited access per search results),2026-11-05,medium
+Orlando,Waymo,operating_limited,,,https://waymo.com/,Waymo - Serving Riders In (limited access per search results),2026-11-05,medium
+San Antonio,Waymo,operating_limited,,,https://waymo.com/,Waymo - Serving Riders In (limited access per search results),2026-11-05,medium
+Denver,Waymo,operating_limited,,,http://cleantechnica.com/2026/09/01/waymo-invites-riders-in-3-new-cities/,CleanTechnica: Waymo invites riders in 3 new cities (public but limited areas),2026-09-01,high
+San Diego,Waymo,operating_limited,,,http://cleantechnica.com/2026/09/01/waymo-invites-riders-in-3-new-cities/,CleanTechnica: Waymo invites riders in 3 new cities (public but limited areas),2026-09-01,high
+Tampa,Waymo,operating_limited,,,http://cleantechnica.com/2026/09/01/waymo-invites-riders-in-3-new-cities/,CleanTechnica: Waymo invites riders in 3 new cities (public but limited areas),2026-09-01,high
+Las Vegas,Waymo,operating_limited,,,https://waymo.com/,Waymo - Serving Riders In (benchmark market),2026-11-05,medium
+Boston,Waymo,testing,,,https://www.bostonglobe.com/2026/02/07/business/autonomous-vehicles-boston-waymo/,Boston Globe summary: Waymo returns to Boston testing with human drivers,2026-02-07,medium
+Minneapolis,Waymo,testing,,,https://www.cbsnews.com/minnesota/news/waymo-future-minnesota-2026-legislative-session/,CBS Minnesota: Waymo testing with human drivers in Twin Cities,2026-05-20,high
+New York,Waymo,testing,,,https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm,Insurance Journal: Waymo NYC permit with specialist behind wheel,2026-02-20,high
+Charlotte,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Chicago,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Detroit,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Philadelphia,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Pittsburgh,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Sacramento,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Seattle,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Washington DC,Waymo,announced,,,https://waymo.com/,Waymo - Up Next,2026-11-05,high
+Austin,Tesla,operating_limited,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
+Dallas-Fort Worth,Tesla,operating_limited,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
+Houston,Tesla,operating_limited,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
+Miami,Tesla,operating_limited,2026-07-03,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
+Phoenix,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: upcoming cities list (fan site),2026-07-03,medium
+Orlando,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: upcoming cities list (fan site),2026-07-03,medium
+Tampa,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: upcoming cities list (fan site),2026-07-03,medium
+Las Vegas,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: upcoming cities list (fan site),2026-07-03,medium
+San Francisco,Zoox,operating_limited,,,https://zoox.com/,Zoox - Where to Ride (page lists city but gives no status),2026-11-05,low
+Austin,Zoox,testing,,,https://zoox.com/,Zoox - Where to Ride (page lists city but gives no status),2026-11-05,low
+Miami,Zoox,testing,,,https://zoox.com/,Zoox - Where to Ride (page lists city but gives no status),2026-11-05,low
+Atlanta,Zoox,testing,,,https://zoox.com/,Zoox - Where to Ride (page lists city but gives no status),2026-11-05,low
+Los Angeles,Zoox,testing,,,https://zoox.com/,Zoox - Where to Ride (page lists city but gives no status),2026-11-05,low
+Las Vegas,Zoox,operating_limited,,,https://zoox.com/,Zoox - Where to Ride (page lists city but gives no status),2026-11-05,low
+Dallas-Fort Worth,Avride,operating_limited,2025-12-03,Uber,https://amp.insurancejournal.com/news/southcentral/2025/12/03/849795.htm,Insurance Journal: Uber teams with Avride to offer robotaxi rides in Dallas (search extract only; human supervision at launch),2025-12-03,medium
+Dallas-Fort Worth,Lyft/Mobileye/Marubeni,announced,,Lyft,https://dallasinnovates.com/?p=271288,Dallas Innovates: Lyft is launching a robotaxi service in Dallas (possible as soon as 2026),2025-02-11,high
