@@ -1,8 +1,47 @@
+import { useEffect, useRef, useState } from 'react'
 import { CartesianGrid, Cell, LabelList, ReferenceLine, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from 'recharts'
 import type { Row } from '../scoring'
 import { median } from '../scoring'
 
 interface Pt { name: string; x: number; y: number; z: number; q: string }
+interface Place { dx: number; dy: number; anchor: 'start' | 'end' | 'middle' }
+
+const CHAR_W = 6.1, LABEL_H = 13
+
+/** Greedy label placement in approximate pixel space: try right, left, above, below (then diagonals) and keep the first spot that
+ *  overlaps no bubble and no earlier label. Earlier names in `order` get first choice. */
+function placeLabels(pts: Pt[], order: string[], plotW: number, plotH: number, dx: [number, number], dy: [number, number]): Record<string, Place> {
+  const px = (p: Pt) => ((p.x - dx[0]) / (dx[1] - dx[0])) * plotW
+  const py = (p: Pt) => plotH - ((p.y - dy[0]) / (dy[1] - dy[0])) * plotH
+  const zs = pts.map(p => p.z), zmin = Math.min(...zs), zmax = Math.max(...zs)
+  const radius = (p: Pt) => Math.sqrt((60 + ((p.z - zmin) / (zmax - zmin || 1)) * 540) / Math.PI)
+  type Box = [number, number, number, number]                         // x0, y0, x1, y1
+  const hit = (a: Box, b: Box) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1]
+  const bubbles: Box[] = pts.map(p => [px(p) - radius(p), py(p) - radius(p), px(p) + radius(p), py(p) + radius(p)])
+  const placed: Box[] = []
+  const out: Record<string, Place> = {}
+  for (const name of order) {
+    const p = pts.find(q => q.name === name)
+    if (!p) continue
+    const w = name.length * CHAR_W, r = radius(p), cx = px(p), cy = py(p)
+    const cands: { pl: Place; box: Box }[] = [
+      { pl: { dx: r + 4, dy: 4, anchor: 'start' }, box: [cx + r + 4, cy - LABEL_H / 2, cx + r + 4 + w, cy + LABEL_H / 2] },
+      { pl: { dx: -r - 4, dy: 4, anchor: 'end' }, box: [cx - r - 4 - w, cy - LABEL_H / 2, cx - r - 4, cy + LABEL_H / 2] },
+      { pl: { dx: 0, dy: -r - 5, anchor: 'middle' }, box: [cx - w / 2, cy - r - 5 - LABEL_H, cx + w / 2, cy - r - 5] },
+      { pl: { dx: 0, dy: r + 14, anchor: 'middle' }, box: [cx - w / 2, cy + r + 2, cx + w / 2, cy + r + 2 + LABEL_H] },
+      { pl: { dx: r + 2, dy: -r - 2, anchor: 'start' }, box: [cx + r + 2, cy - r - 2 - LABEL_H, cx + r + 2 + w, cy - r - 2] },
+      { pl: { dx: r + 2, dy: r + 12, anchor: 'start' }, box: [cx + r + 2, cy + r, cx + r + 2 + w, cy + r + LABEL_H] },
+      { pl: { dx: -r - 2, dy: -r - 2, anchor: 'end' }, box: [cx - r - 2 - w, cy - r - 2 - LABEL_H, cx - r - 2, cy - r - 2] },
+      { pl: { dx: -r - 2, dy: r + 12, anchor: 'end' }, box: [cx - r - 2 - w, cy + r, cx - r - 2, cy + r + LABEL_H] },
+    ]
+    const inside = (b: Box) => b[0] >= -60 && b[2] <= plotW + 80 && b[1] >= 0 && b[3] <= plotH
+    const free = (b: Box) => inside(b) && !bubbles.some((bb, i) => pts[i].name !== name && hit(b, bb)) && !placed.some(pb => hit(b, pb))
+    const pick = cands.find(c => free(c.box)) ?? cands[0]
+    out[name] = pick.pl
+    placed.push(pick.box)
+  }
+  return out
+}
 
 export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: string) => void }) {
   const cand = rows.filter(r => !r.m.benchmark)
@@ -18,6 +57,25 @@ export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: st
     return [Math.floor(Math.min(...all) / 10) * 10, Math.ceil(Math.max(...all) / 10) * 10]
   }
   const ticks = (d: [number, number]) => { const t: number[] = []; for (let v = d[0]; v <= d[1]; v += 10) t.push(v); return t }
+  const box = useRef<HTMLDivElement>(null)
+  const [width, setWidth] = useState(1000)
+  useEffect(() => {
+    const el = box.current
+    if (!el) return
+    const ro = new ResizeObserver(() => setWidth(el.clientWidth))
+    ro.observe(el); setWidth(el.clientWidth)
+    return () => ro.disconnect()
+  }, [])
+  const labelled = [...launch.map(p => p.name), ...pts.filter(p => p.y >= 70 && p.q !== 'Launch next').sort((a, b) => b.y - a.y).map(p => p.name)]
+  const places = placeLabels([...pts, ...vegas], [...labelled, ...vegas.map(p => p.name)], Math.max(width - 98, 300), 560 - 16 - 56 - 40, dom('x'), dom('y'))
+  // Recharts passes the symbol's top-left corner plus its width/height, so aim at the centre
+  const renderLabel = (props: { x?: number | string; y?: number | string; width?: number | string; height?: number | string; value?: unknown }) => {
+    const name = String(props.value ?? '')
+    const pl = places[name]
+    if (!pl) return null
+    const cx = Number(props.x) + Number(props.width ?? 0) / 2, cy = Number(props.y) + Number(props.height ?? 0) / 2
+    return <text x={cx + pl.dx} y={cy + pl.dy} fontSize={11} fill="#111827" textAnchor={pl.anchor} style={{ paintOrder: 'stroke', stroke: '#ffffff', strokeWidth: 3 }}>{name}</text>
+  }
   const qLabel = 'pointer-events-none absolute text-xs font-semibold uppercase tracking-wide'
   return (
     <div>
@@ -25,7 +83,7 @@ export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: st
         <strong className="text-ink">Opportunity</strong> = demand pillar. <strong className="text-ink">Ease of entry</strong> = the other four pillars, re-weighted.
         Dashed lines are the medians of the 25 candidates. Bubble size = competitor crowding; the black diamond is the Las Vegas benchmark.
       </p>
-      <div className="relative h-[560px] rounded-lg border border-line p-2">
+      <div ref={box} className="relative h-[560px] rounded-lg border border-line p-2">
         <div className={`${qLabel} left-20 top-3 text-muted`}>Build case</div>
         <div className={`${qLabel} right-6 top-3 text-accent`}>Launch next</div>
         <div className={`${qLabel} bottom-16 left-20 text-muted`}>Deprioritize</div>
@@ -57,10 +115,10 @@ export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: st
             />
             <Scatter data={pts} isAnimationActive={false} onClick={(d: unknown) => onOpen((d as Pt).name)} cursor="pointer">
               {pts.map(p => <Cell key={p.name} fill="#1d4ed8" fillOpacity={p.q === 'Launch next' ? 0.85 : 0.35} stroke="#ffffff" strokeWidth={1.5} />)}
-              <LabelList dataKey="name" position="right" fontSize={11} fill="#111827" formatter={(n: unknown) => (launch.some(l => l.name === n) || pts.some(p => p.name === n && p.y >= 70) ? String(n) : '')} />
+              <LabelList dataKey="name" content={renderLabel} />
             </Scatter>
             <Scatter data={vegas} isAnimationActive={false} shape="diamond" fill="#111827">
-              <LabelList dataKey="name" position="right" fontSize={11} fill="#111827" />
+              <LabelList dataKey="name" content={renderLabel} />
             </Scatter>
           </ScatterChart>
         </ResponsiveContainer>
