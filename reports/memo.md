@@ -4,7 +4,7 @@
 
 **Recommendation.** Enter Miami, Los Angeles, Phoenix and San Francisco first, then Houston, Tampa, Orlando and Atlanta; hold New York and Chicago until the rules change. Wave 1 is not one launch date: Miami and Phoenix launch first; Los Angeles and San Francisco (California) start the permit process now, with paid service only after permits. San Francisco only just clears the 50% gate (54%). The sequence uses balanced-weight scores for 25 US metros (demand 35, operating conditions 25, regulation 20, competition 15, charging 5). Waves 1 and 2 are limited to states with Tier 2+ AV rules; wave 1 also needs a top-5 finish in at least half of 10,000 weight draws.
 
-**Why these metros** (rank, score, demand score, regulation, competitors, confidence, fleet at 3% capture)
+**Why these metros** (rank, score, demand score, regulation, competitors, confidence; fleet at 3% capture of principal-city ride-hail trips, not the whole metro, so a metro can rank high with a small fleet)
 
 - **Miami** (#1, 63.2): demand 78, Tier 3 (fast new-entrant path), Tesla and Waymo operating; top 5 in 97% of draws; ~56 vehicles.
 - **Los Angeles** (#2, 60.9): demand 63, Tier 3 (slow new-entrant path), Waymo operating; top 5 in 91% of draws; ~263 vehicles.

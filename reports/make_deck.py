@@ -200,7 +200,7 @@ for i, (k, name, sub) in enumerate(CARDS):
     text(s, x + 0.1, 3.15, 2.1, 0.3, "weight, balanced case", size=10, color=MUTED)
     text(s, x + 0.1, 3.6, 2.1, 0.7, name, size=18, bold=True)
     text(s, x + 0.1, 4.4, 2.1, 1.2, sub, size=12, color=MUTED)
-text(s, 0.6, 6.05, 12, 0.5, "25 candidate metros, each scored 0-100 by percentile rank; Las Vegas scored as a benchmark, not ranked", size=14, color=MUTED)
+text(s, 0.6, 5.95, 12.1, 0.8, ["25 candidate metros, each scored 0-100. Metrics are percentile-ranked, except competitor crowding, which is min-max scaled.", "Las Vegas is scored as a benchmark, not ranked."], size=14, color=MUTED)
 
 # ---------------------------------------------------------------- slide 3
 elig = sorted([m for m in cand if m["regulation"]["tier"] >= 2], key=lambda m: m["ranks"]["balanced"])[:len(p["w1"])]
@@ -238,26 +238,27 @@ for i, (wn, when, ms, rule) in enumerate(cols):
 text(s, 0.6, 6.6, 12, 0.35, "Timing is indicative: sequence follows evidence gates, not calendar dates", size=11, color=MUTED)
 
 # ---------------------------------------------------------------- slide 5
-top5 = sorted([m for m in cand if m["ranks"]["balanced"] <= 5], key=lambda m: m["ranks"]["balanced"])
-fl = [plan.fleet(m) for m in top5]
-pl = [pool(m) for m in top5]
-pays = [m["unit_economics"]["base"]["payback_years"] for m in top5]
+w1m = sorted(p["w1"], key=lambda m: m["ranks"]["balanced"])          # wave 1 only, in rank order
+fl = [plan.fleet(m) for m in w1m]
+pl = [pool(m) for m in w1m]
+pays = [m["unit_economics"]["base"]["payback_years"] for m in w1m]
 cap, fare = meta["assumptions"]["capture_share"]["value"], meta["assumptions"]["avg_fare_usd"]["value"]
-s = new_slide(f"Demand sets the prize: the top five metros need {min(fl):,.0f}-{max(fl):,.0f} vehicles and a ${min(pl):,.0f}M-${max(pl):,.0f}M annual revenue pool", 5)
-s.shapes.add_picture(str(chart_unit_econ(top5)), Inches(0.6), Inches(1.75), width=Inches(12.1))
-text(s, 0.6, 6.5, 12.1, 0.45, f"Top five by balanced score. Base case: {cap * 100:.0f}% capture of ride-hail trips, ${fare:.0f} fare. Payback is assumption-driven: about {min(pays):.1f}-{max(pays):.1f} years in every metro because fare, utilization and cost per mile are national assumptions (only the power price varies).", size=11, color=MUTED)
+top = w1m[0]
+small = (f", which is why {top['metro']}'s pool is small despite ranking #{top['ranks']['balanced']}" if pool(top) == min(pl) else "")
+s = new_slide(f"Wave 1 needs {min(fl):,.0f}-{max(fl):,.0f} vehicles per metro for a ${min(pl):,.0f}M-${max(pl):,.0f}M annual revenue pool", 5)
+s.shapes.add_picture(str(chart_unit_econ(w1m)), Inches(1.15), Inches(1.7), width=Inches(11.0))
+text(s, 0.6, 6.2, 12.1, 0.75, f"Wave 1 metros, base case: {cap * 100:.0f}% capture of ride-hail trips, ${fare:.0f} fare. Demand and revenue are for the principal-city launch area, not the whole metro{small}. "
+     f"Payback is assumption-driven: about {min(pays):.1f}-{max(pays):.1f} years in every metro because fare, utilization and cost per mile are national assumptions (only the power price varies).", size=11, color=MUTED)
+s.notes_slide.notes_text_frame.text = "Chart metros (wave 1 only): " + ", ".join(m["metro"] for m in w1m)
 
 # ---------------------------------------------------------------- slide 6
-snow = max(p["w1"] + p["w2"], key=lambda m: m["raw"]["snow_days"])
-heat = max(p["w1"] + p["w2"], key=lambda m: m["raw"]["heat_days"])
 crowded = [m for m in p["w1"] if m["raw"]["crowding"] >= 1.0]
-least = min(p["w1"] + p["w2"], key=lambda m: m["raw"]["crowding"])
 s = new_slide("Regulation, weather and crowding are the three risks to manage", 6)
 n_low = sum(1 for m in cand if m["ranks"]["balanced"] <= 10 and m["regulation"]["tier"] <= 1)
 slow_open = sorted({m["state"] for m in p["w1"] + p["w2"] if m["regulation"]["tier"] >= 2 and m["regulation"]["new_entrant_path"] == "slow"})
 rows = [("Regulation", f"{n_low} of the top 10 are in Tier 0-1 states; {plan.names(slow_open)} permits are slow for a new entrant", "Engage regulators early; file in slow-permit states during wave 1; hold wave 3 until the law changes"),
-        ("Weather", f"{snow['metro']} snow ~{snow['raw']['snow_days']:.0f} days; {heat['metro']} 40 C+ ~{heat['raw']['heat_days']:.0f} days", "Winter and heat validation before public launch"),
-        ("Competition", f"{plan.names(crowded)} already have operators (crowding {min(m['raw']['crowding'] for m in crowded):.1f}-{max(m['raw']['crowding'] for m in crowded):.1f})", f"Enter with a clear service or cost edge; {least['metro']} is the least crowded launch metro")]
+        ("Weather", plan.weather_evidence(p), plan.weather_mitigation(p)),
+        ("Competition", f"{plan.names(crowded)} already have operators (crowding {min(m['raw']['crowding'] for m in crowded):.1f}-{max(m['raw']['crowding'] for m in crowded):.1f})", f"Enter with a service or cost edge. {plan.fewest_operators_note(p)}")]
 text(s, 0.6, 1.85, 2.4, 0.4, "RISK", size=12, bold=True, color=MUTED)
 text(s, 3.2, 1.85, 4.6, 0.4, "EVIDENCE", size=12, bold=True, color=MUTED)
 text(s, 8.2, 1.85, 4.5, 0.4, "MITIGATION", size=12, bold=True, color=MUTED)
@@ -270,13 +271,13 @@ for i, (r, e, mtg) in enumerate(rows):
 
 # ---------------------------------------------------------------- slide 7
 s = new_slide("Appendix: methodology and sources", 7)
-left = ["Percentile rank of each metric across 25 metros",
+left = ["Percentile rank of each metric across 25 metros, except competitor crowding (min-max scaled)",
         "Pillar score = weighted mean of its sub-scores",
         "Total = weighted mean of five pillars",
         "Opportunity = demand; ease = other four pillars",
         "Monte Carlo: 10,000 weight draws (Dirichlet, seed 42)",
         "Demand: two anchors, Chicago and NYC, calendar 2025",
-        "Unit economics: labeled analyst assumptions"]
+        "Unit economics: labeled assumptions, benchmarked to public references (Obi fares, Morgan Stanley vehicle cost, AAA operating cost)"]
 v = meta["vintages"]
 right = [f"Census ACS {v['acs']}", f"FAA {v['faa']}", "NOAA GHCN-Daily airport stations, 2016-2025", "NHTSA SGO ADS reports to Sep 2026 (activity only)",
          v["eia"].split(" (")[0].replace("August 2026 YTD", "EIA commercial price, Jan-Aug 2026"), f"Researched seed files: AV rules, new-entrant paths, competitors (as of {meta['data_as_of']})",
@@ -285,6 +286,7 @@ text(s, 0.6, 1.75, 5.9, 0.4, "METHOD", size=12, bold=True, color=MUTED)
 text(s, 7.0, 1.75, 5.7, 0.4, "SOURCES", size=12, bold=True, color=MUTED)
 text(s, 0.6, 2.2, 6.0, 4.5, ["•  " + t for t in left], size=16)
 text(s, 7.0, 2.2, 5.7, 4.5, ["•  " + t for t in right], size=16)
+text(s, 0.6, 6.05, 12.1, 0.5, f"Inputs validated against Census estimates, NYC TLC and Chicago trip data; all competitor and regulation sources re-checked {meta['data_as_of']} (docs/validation.md)", size=13, color=INK)
 text(s, 0.6, 6.55, 12, 0.35, "NHTSA reports have no mileage: never used as crash rates. Full method in the methodology note", size=11, color=MUTED)
 
 out = HERE / "deck.pptx"

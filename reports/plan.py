@@ -145,3 +145,51 @@ def wave1_timing(p):
     states = sorted({STATE_NAMES.get(m["state"], m["state"]) for m in slow})
     return (f"Wave 1 is not one launch date: {names(first)} launch first; {names(slow)} ({names(states)}) start the permit process now, "
             f"with paid service only after permits.")
+
+
+# ---- weather risk for the launch metros (deck slide 6) ----------------------------------------
+# A weather metric counts as a risk for a metro only when its value is practically meaningful; near-zero values are never listed.
+# Judgment thresholds: rain on one day in six, two weeks of 40 C+, a working week of snow.
+RISK_THRESHOLD = {"rain_days": 60, "heat_days": 15, "snow_days": 5}
+RISK_LABEL = {"rain_days": "Rain", "heat_days": "40 C+", "snow_days": "Snow"}
+RISK_MITIGATION = {"rain_days": "storm and heavy-rain validation", "heat_days": "heat validation", "snow_days": "winter validation"}
+
+
+def weather_risks(p):
+    """{metric: [(metro, days), ...]} for wave 1 and 2 metros whose value is at or above its threshold, worst first."""
+    out = {}
+    for k, thr in RISK_THRESHOLD.items():
+        hits = [(m["metro"], m["raw"][k]) for m in p["w1"] + p["w2"] if m["raw"][k] >= thr]
+        if hits:
+            out[k] = sorted(hits, key=lambda x: -x[1])
+    return out
+
+
+def weather_evidence(p):
+    parts = []
+    for k, hits in weather_risks(p).items():
+        vals = [v for _, v in hits]
+        rng = f"~{vals[0]:.0f}" if len(vals) == 1 or round(min(vals)) == round(max(vals)) else f"~{min(vals):.0f}-{max(vals):.0f}"
+        parts.append(f"{RISK_LABEL[k]} on {rng} days a year in {names([m for m, _ in hits])}")
+    return "; ".join(parts) or "No wave 1 or 2 metro has a weather metric above its risk threshold"
+
+
+def weather_mitigation(p):
+    ph = [RISK_MITIGATION[k] for k in weather_risks(p)]
+    if not ph:
+        return "No weather validation gate needed"
+    return ph[0][0].upper() + ph[0][1:] + "".join(f", plus {x}" for x in ph[1:]) + ", before public launch"
+
+
+# Waymo service-area figure published on waymo.com/whereyoucango (opened 2026-11-06); the largest square-mile figure on that page
+# (Los Angeles: more than 120). Used only to qualify "fewest operators" for Phoenix.
+WAYMO_SERVICE_AREA_SQMI = {"Phoenix": 315}
+
+
+def fewest_operators_note(p):
+    least = min(p["w1"] + p["w2"], key=lambda m: m["raw"]["crowding"])
+    ops = operating(least)
+    s = f"{least['metro']} has the fewest operators"
+    if ops == ["Waymo"] and least["metro"] in WAYMO_SERVICE_AREA_SQMI:
+        s += f", but Waymo's largest service area ({WAYMO_SERVICE_AREA_SQMI[least['metro']]} sq mi)"
+    return s

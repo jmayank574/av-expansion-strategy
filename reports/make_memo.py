@@ -122,7 +122,7 @@ memo = f"""# Where should the operator launch after Las Vegas?
 
 **Recommendation.** {plan.one_line_answer(p)} {plan.wave1_timing(p)} {plan.gate_note(p)} The sequence uses balanced-weight scores for 25 US metros (demand 35, operating conditions 25, regulation 20, competition 15, charging 5). Waves 1 and 2 are limited to states with Tier 2+ AV rules; wave 1 also needs a top-5 finish in at least half of 10,000 weight draws.
 
-**Why these metros** (rank, score, demand score, regulation, competitors, confidence, fleet at {pct(meta['assumptions']['capture_share']['value'])} capture)
+**Why these metros** (rank, score, demand score, regulation, competitors, confidence; fleet at {pct(meta['assumptions']['capture_share']['value'])} capture of principal-city ride-hail trips, not the whole metro, so a metro can rank high with a small fleet)
 
 {chr(10).join(line(m) for m in w1)}
 - **Wave 2:** {plan.names(w2)} (top 5 in {', '.join(pct(m['confidence']) for m in w2)} of draws). Demand {min(m['opportunity'] for m in w2):.0f}-{max(m['opportunity'] for m in w2):.0f} (wave 1: {min(m['opportunity'] for m in w1):.0f}-{max(m['opportunity'] for m in w1):.0f}). Watch: {watch_line()}.

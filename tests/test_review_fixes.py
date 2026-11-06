@@ -183,3 +183,52 @@ def test_memo_and_deck_say_slow_permit_wave1_metros_start_permits_first(memo):
         assert m["metro"] in s4
     if gate:
         assert "only just clears the 50% gate" in s4
+
+
+def _slide_text(prs, i, notes=False):
+    s = prs.slides[i]
+    t = " ".join(sh.text_frame.text for sh in s.shapes if sh.has_text_frame)
+    return (t + " " + s.notes_slide.notes_text_frame.text) if notes else t
+
+
+def test_slide5_contains_only_wave1_metros():
+    p = plan.build()
+    prs = Presentation(ROOT / "reports/deck.pptx")
+    w1 = [m["metro"] for m in p["w1"]]
+    text = _slide_text(prs, 4, notes=True)
+    notes = prs.slides[4].notes_slide.notes_text_frame.text
+    assert sorted(notes.split(": ", 1)[1].split(", ")) == sorted(w1)          # the chart's metro list is recorded in the notes
+    for m in p["cand"]:
+        if m["metro"] not in w1:
+            assert m["metro"] not in text, f"{m['metro']} is not wave 1 but appears on slide 5"
+    assert "principal-city launch area, not the whole metro" in text and "Wave 1 needs" in text
+
+
+def test_slide6_weather_row_lists_only_meaningful_values_and_competition_wording():
+    p = plan.build()
+    prs = Presentation(ROOT / "reports/deck.pptx")
+    t = _slide_text(prs, 5)
+    risks = plan.weather_risks(p)
+    assert risks and all(v >= plan.RISK_THRESHOLD[k] for k, hits in risks.items() for _, v in hits)
+    for k, hits in risks.items():
+        assert all(m in t for m, _ in hits)
+    import re
+    assert not re.search(r"~0\b|\b0 days", t)                                 # never list a zero value as a risk
+    weather_row = t.split("Weather")[1].split("Competition")[0]
+    launch = {m["metro"] for m in p["w1"] + p["w2"]}
+    assert all(m["metro"] in launch for m in p["cand"] if m["metro"] in weather_row), "weather evidence must come from wave 1 and 2 metros only"
+    assert "fewest operators" in t and "least crowded" not in t
+    assert "storm and heavy-rain validation" in t.lower() and "heat validation" in t.lower()
+
+
+def test_slides_2_and_7_state_normalization_references_and_validation():
+    prs = Presentation(ROOT / "reports/deck.pptx")
+    assert "except competitor crowding, which is min-max scaled" in _slide_text(prs, 1)
+    s7 = _slide_text(prs, 6)
+    assert "except competitor crowding (min-max scaled)" in s7
+    assert "benchmarked to public references (Obi fares, Morgan Stanley vehicle cost, AAA operating cost)" in s7
+    assert "Inputs validated against Census estimates, NYC TLC and Chicago trip data" in s7 and "docs/validation.md" in s7
+
+
+def test_memo_unit_economics_line_says_principal_city(memo):
+    assert "principal-city ride-hail trips, not the whole metro" in memo
