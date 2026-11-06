@@ -36,11 +36,24 @@ flowchart LR
 ```bash
 python -m venv .venv && .venv/Scripts/python -m pip install -e .      # or pip install the dependencies in pyproject.toml
 cp .env.example .env                                                  # add your free Census API key
-make all                                                              # data, score, analysis, dbt, tests, memo, deck
-cd app && npm install && npm run dev                                  # http://localhost:5173
 ```
 
-No `make` on Windows? Run the commands listed in the [Makefile](Makefile) in order.
+Run the pipeline with either `make` (macOS/Linux) or `tasks.py` (any OS, including Windows without `make`). They run the same steps.
+
+| Step | With make | Without make |
+|---|---|---|
+| Everything: data, score, analysis, dbt, tests, memo, deck | `make all` | `python tasks.py all` |
+| Ingest sources | `make data` | `python tasks.py data` |
+| Score, analysis, publish JSON to the app | `make score` | `python tasks.py score` |
+| dbt build + Python-vs-dbt parity check | `make dbt` | `python tasks.py dbt` |
+| pytest + vitest | `make test` | `python tasks.py test` |
+| Memo / deck | `make memo` / `make deck` | `python tasks.py memo` / `python tasks.py deck` |
+
+`tasks.py` uses `.venv` automatically when it exists. Then start the app:
+
+```bash
+cd app && npm install && npm run dev                                  # http://localhost:5173
+```
 
 ## Methodology in brief
 
