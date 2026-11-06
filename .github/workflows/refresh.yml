@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: "22"
       - name: Install Python dependencies
-        run: pip install pandas requests pyyaml duckdb python-pptx matplotlib pytest pyarrow openpyxl lxml tabulate dbt-duckdb
+        run: pip install -e .      # one list of dependencies: pyproject.toml
       - name: Write .env for the ingest scripts
         run: echo "CENSUS_API_KEY=${CENSUS_API_KEY}" > .env
       - name: Ingest (raw to interim parquet)

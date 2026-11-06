@@ -24,7 +24,7 @@ Miami, Los Angeles, Phoenix and San Francisco already have operating competitors
 flowchart LR
   A[Census ACS + Gazetteer<br/>FAA enplanements<br/>NOAA GHCN-Daily weather<br/>NHTSA SGO ADS reports<br/>EIA electricity] --> B[pipeline/ingest_*.py<br/>raw to data/raw, clean to parquet]
   S[Seed CSVs<br/>state regulation<br/>competitor presence] --> B
-  B --> C[build_features + score.py<br/>dbt/DuckDB in Phase 2]
+  B --> C[build_features + score.py<br/>dbt/DuckDB]
   C --> D[data/output/metros_scored.json]
   D --> E[React app]
   D --> F[reports/memo.md]
@@ -80,5 +80,8 @@ Details and caveats: [docs/data_sources.md](docs/data_sources.md). Profiles of e
 - Public data only.
 - NHTSA reports have no mileage, so they are used as evidence of where operators are active and never as crash rates.
 - Regulation and competitor status are as of 2026-11-06 and some rows are low or medium confidence (listed in `data/profiles/07_seed_and_crosscheck.md`).
-- Demand is an estimate from two anchors (Phase 3), not a forecast.
+- Demand is an estimate from two anchors (Chicago and NYC), not a forecast. Fleet and revenue figures are for the principal-city launch area, not the whole metro.
 - The EIA price is a year-to-date average, not a 12-month average.
+- Weather is one NOAA airport station per metro, so it measures the airport, not the metro average.
+- Ranks below about #5 are close and sensitive to the weights (see the Monte Carlo confidence column); read them as a tier. Competitor crowding is min-max scaled so that one status change moves a metro proportionally, not by a rank jump.
+- External accuracy check and what changed after it: [docs/validation.md](docs/validation.md).

@@ -1,3 +1,5 @@
+> **Note: this is the original build brief, kept as written.** The delivered project differs in a few places, all documented in `docs/methodology.md` and `docs/validation.md`: weather comes from NOAA GHCN-Daily airport stations (Open-Meteo is only a fallback); competitor crowding is min-max scaled while every other metric is percentile-ranked; regulatory readiness is 60% legal tier and 40% new-entrant path; the operator's own presence is excluded from crowding; and the repo includes `tasks.py` for machines without `make`.
+
 # Build: AV Market Expansion Strategy (robotaxi next-market recommendation)
 
 ## 0. Read this first

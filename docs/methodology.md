@@ -18,7 +18,7 @@ Operator presence (rows flagged `is_operator` in the seed file) is shown in the 
 
 ## 2. Scoring in two minutes
 
-1. Each sub-metric is turned into a 0-100 score by **percentile rank across the 25 candidates** (the lowest candidate gets 0, the highest 100, ties share the average rank). Where lower is better the score is flipped (100 minus the percentile). Percentile ranks are robust to outliers such as New York.
+1. Each sub-metric is turned into a 0-100 score by **percentile rank across the 25 candidates** (the lowest candidate gets 0, the highest 100, ties share the average rank). The one exception is competitor crowding, which is min-max scaled (see "Normalization" below). Where lower is better the score is flipped (100 minus the percentile). Percentile ranks are robust to outliers such as New York.
 2. A pillar score is the weighted mean of its sub-scores.
 3. The total is the weighted mean of the five pillars.
 4. **Opportunity** is the demand pillar. **Ease of entry** is the weighted mean of the other four pillars, with weights re-normalized to sum to 100.
@@ -79,7 +79,7 @@ Two anchors, one estimate. This is an estimate from two cities, not a forecast.
 
 ## 6. Unit economics (Phase 3)
 
-Inputs come only from `config/assumptions.yaml`. Each has a value, a low (pessimistic) and a high (optimistic) end, and a rationale. All are labeled analyst assumptions: none comes from a published source. Only the electricity price (EIA, by state) and the demand estimate come from data.
+Inputs come only from `config/assumptions.yaml`. Each has a value, a low (pessimistic) and a high (optimistic) end, and a rationale. The values are analyst assumptions, benchmarked where public references exist: fare against Obi pricing data (via TechCrunch; the $20 base is a robotaxi-premium assumption), vehicle cost against Morgan Stanley estimates (via TheNextWeb), and non-energy operating cost against AAA's 2025 driving-cost study and a Sacra estimate (via SoftwareSeni). Capture share, trips per vehicle per day, trip length, deadhead share and energy use remain labeled analyst assumptions. Only the electricity price (EIA, by state) and the demand estimate come from data. The comparison is in `docs/validation.md`.
 
 - Addressable robotaxi trips per day = estimated annual ride-hail trips x capture share / 365.
 - Fleet needed = trips per day / paid trips per vehicle per day.
@@ -100,6 +100,7 @@ The memo and deck derive the sequence from `data/output/metros_scored.json` with
 - **Wave 1:** balanced rank 1-5, state regulation tier 2 or higher, and top 5 in at least 50% of Monte Carlo weight draws.
 - **Wave 2:** remaining metros ranked 1-10 in tier 2+ states.
 - **Wave 3:** remaining metros ranked 1-10 in tier 0-1 states. These are policy-dependent options: build the case, launch when driverless commercial service becomes legal.
+- **Wave 1 timing:** wave 1 is not one launch date. Metros in states with a fast or moderate new-entrant path launch first; metros in a slow-path state (California) start the permit process now, with paid service only after permits. The metro closest to the 50% gate is named in the memo.
 - **Deprioritize:** balanced rank 18 or lower. Their best rank in any of the four scenarios is reported alongside.
 
 Timing is stated as evidence gates (rules, proof from the earlier wave), not calendar dates. The thresholds (50%, rank 10, rank 18) are analyst choices and are visible in the code.

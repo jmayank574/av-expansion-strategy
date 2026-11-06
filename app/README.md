@@ -1,32 +1,16 @@
-# React + TypeScript + Vite
+# App
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interactive view of the AV market-expansion scoring: a ranking table with live weight sliders, an Opportunity vs. Ease of Entry 2x2, and a metro drill-down (pillar breakdown, raw metrics, competitors, regulation with sources, unit economics with assumption sliders). Built with Vite, React, TypeScript, Recharts and Tailwind.
 
-Currently, two official plugins are available:
+The app reads `public/metros_scored.json`, which the pipeline writes (`python tasks.py score`, or `make score`, copies it from `data/output/`). Scores recompute in the browser from the normalized sub-scores, and a Vitest test checks that the browser's balanced-scenario scores match Python's to 2 decimals. Launch-plan waves in the 2x2 come from the balanced scenario and do not change when weights are moved.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build && npm run preview     # production build
+npx vitest run     # browser-vs-Python parity tests
+npm run lint
+node scripts/screenshots.mjs         # re-capture docs/screenshots (Playwright, uses the installed Edge or Chrome)
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+See the repository README for the recommendation and `docs/methodology.md` for the method.
