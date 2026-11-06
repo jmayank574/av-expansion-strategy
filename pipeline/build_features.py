@@ -13,6 +13,7 @@ PATH_SCORE = {"slow": 0, "moderate": 1, "fast": 2}   # ordinal; percentile ranki
 reg["new_entrant_score"] = reg.new_entrant_path.map(PATH_SCORE)
 comp = pd.read_parquet(INTERIM / "competitors.parquet")
 W = yaml.safe_load(open(ROOT / "config/weights.yaml"))["crowding_status_weights"]
+comp = comp[comp.is_operator != "true"].copy()      # the operator's own presence is not competition
 comp["w"] = comp.status.map(W)
 crowd = comp.groupby("metro").agg(crowding=("w", "sum"), n_competitors=("competitor", "nunique")).reset_index()
 

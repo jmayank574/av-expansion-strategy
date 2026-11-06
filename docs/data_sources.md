@@ -22,5 +22,5 @@
 
 ## Seed files re-researched 2026-11-06
 
-- `data/seed/competitor_presence.csv`: all 26 metros re-researched from opened company, news, SEC and regulator pages (Waymo, Tesla, Zoox, Avride, May Mobility, Motional, Nuro/Lucid, Lyft/Mobileye). Every row has source URL, title, as-of date and confidence. Cross-checked against NHTSA SGO activity in `data/profiles/07_seed_and_crosscheck.md`.
+- `data/seed/competitor_presence.csv`: all 26 metros re-researched from opened company, news, SEC and regulator pages (Waymo, Tesla, Zoox, Avride, May Mobility, Motional, Nuro/Lucid, Lyft/Mobileye). Every row has source URL, title, as-of date and confidence, plus an `is_operator` flag: the operator's own presence (Las Vegas) is shown in the app as "operator presence" and is excluded from the crowding score. Cross-checked against NHTSA SGO activity in `data/profiles/07_seed_and_crosscheck.md`.
 - `data/seed/state_av_regulation.csv`: added `new_entrant_path` (fast / moderate / slow) with rationale, source URL, title, as-of date and confidence for each of 17 states. Sources include CPUC, CA DMV, TxDMV, NV DMV and NTA, ADOT statute text, Florida Statutes, and AFDC summaries for Georgia and Tennessee.

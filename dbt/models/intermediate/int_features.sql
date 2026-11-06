@@ -3,6 +3,7 @@ with crowd as (
     select c.metro, round(sum(w.weight), 6) as crowding
     from {{ ref('stg_competitors') }} c
     join {{ ref('stg_status_weights') }} w on w.status = c.status
+    where c.is_operator <> 'true'
     group by c.metro
 )
 select

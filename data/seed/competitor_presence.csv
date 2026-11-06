@@ -1,52 +1,52 @@
-metro,competitor,status,first_public_date,platform_partner,source_url,source_title,as_of_date,confidence
-Atlanta,May Mobility,operating_limited,2025-09,Lyft,https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm,"May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",2026-05-29,medium
-Atlanta,Waymo,operating_public,,Uber,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium
-Atlanta,Zoox,testing,,,https://www.insurancejournal.com/news/southeast/2025/05/21/824605.htm,"Insurance Journal: Zoox testing in Atlanta (safety drivers, mapping); Electrek 2026-03-24 lists Atlanta as being mapped and tested",2025-05-21,medium
-Austin,Avride,testing,,,https://en.wikipedia.org/wiki/Avride,Wikipedia: Avride (secondary source) lists Austin as on-road testing; paid robotaxi is Dallas only,2026-11-06,medium
-Austin,Tesla,operating_limited,,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",2026-04-30,high
-Austin,Waymo,operating_public,,Uber,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium
-Austin,Zoox,testing,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,high
-Boston,Waymo,testing,,,https://www.bostonglobe.com/2026/02/07/business/autonomous-vehicles-boston-waymo/,Boston Globe: Waymo returns to Boston testing with human drivers (page undated; URL date),2026-02-07,medium
-Charlotte,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high
-Chicago,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high
-Dallas-Fort Worth,Avride,operating_limited,2025-12-03,Uber,https://www.uber.com/us/en/newsroom/avride-on-uber,"Uber newsroom: Avride on Uber, Dallas (on-board specialist at launch)",2025-12-03,high
-Dallas-Fort Worth,Lyft/Mobileye/Marubeni,announced,,Lyft,https://dallasinnovates.com/?p=271288,Dallas Innovates: Lyft robotaxi service in Dallas (as soon as 2026),2025-02-11,medium
-Dallas-Fort Worth,May Mobility,announced,,Uber,https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm,"May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",2026-05-29,medium
-Dallas-Fort Worth,Tesla,operating_limited,2026-04-18,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",2026-04-30,high
-Dallas-Fort Worth,Waymo,operating_public,2026-02-24,,https://techcrunch.com/2026/08/04/waymo-opens-up-robotaxi-service-in-dallas-to-everyone/,TechCrunch: Waymo opens up robotaxi service in Dallas to everyone,2026-08-04,high
-Denver,Waymo,operating_limited,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium
-Detroit,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high
-Houston,Nuro/Lucid,testing,,Uber,https://electrek.co/2026/06/17/uber-lucid-robotaxi-houston/,"Electrek: Uber, Lucid, Nuro robotaxi Houston mid-2027; Nuro already testing with safety operators",2026-06-17,high
-Houston,Tesla,operating_limited,2026-04-18,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",2026-04-30,high
-Houston,Waymo,operating_public,2026-02-24,,https://gmg-kprc-prod.cdn.arcpublishing.com/news/local/2026/08/21/waymo-opens-robotaxi-rides-to-anyone-with-the-app-in-houston/,KPRC: Waymo opens robotaxi rides to anyone with the app in Houston (waymo.com page still says gradually adding riders),2026-08-21,medium
-Las Vegas,Motional,operating_limited,2026-03-13,Uber,https://motional.com/news/uber-and-motional-launch-robotaxi-service-las-vegas,Motional: Uber and Motional launch robotaxi service in Las Vegas (safety operator on board),2026-03-13,high
-Las Vegas,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
-Las Vegas,Waymo,operating_limited,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium
-Las Vegas,Zoox,operating_limited,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,medium
-Los Angeles,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high
-Los Angeles,Zoox,testing,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,medium
-Miami,Tesla,operating_limited,2026-07-03,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
-Miami,Waymo,operating_public,,,https://waymo.com/blog/2026/04/floridas-new-way-to-ride/,Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando),2026-04-15,high
-Miami,Zoox,testing,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,high
-Minneapolis,Waymo,testing,,,https://www.cbsnews.com/minnesota/news/waymo-future-minnesota-2026-legislative-session/,CBS Minnesota: Waymo testing with drivers in Twin Cities since late 2025,2026-05-20,high
-Nashville,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high
-New York,Waymo,testing,,,https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm,"Insurance Journal: Waymo NYC test permit, specialist in driver seat",2026-02-20,high
-Orlando,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
-Orlando,Waymo,operating_public,2026-02-24,,https://waymo.com/blog/2026/04/floridas-new-way-to-ride/,Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando),2026-04-15,high
-Philadelphia,Waymo,testing,,,https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/,PhillyVoice: Waymo tested in Philly with safety drivers since July 2025; not yet configured for driverless,2026-10-09,high
-Phoenix,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
-Phoenix,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high
-Pittsburgh,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high
-Sacramento,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high
-San Antonio,Waymo,operating_public,2026-02-24,,https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport,"EVwire: Waymo open to all in San Antonio, San Diego, Tampa",2026-10-15,medium
-San Diego,Waymo,operating_public,,,https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport,"EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",2026-10-15,high
-San Francisco,Nuro/Lucid,testing,,Uber,https://sfstandard.com/2025/10/29/uber-launch-bay-area-robotaxi-service-nuru-lucid/,"SF Standard: Uber, Lucid, Nuro Bay Area robotaxi (on-road development underway; launch late 2026)",2025-10-29,medium
-San Francisco,Tesla,testing,,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Bay Area fleet runs supervised FSD, not unsupervised Robotaxi",2026-04-30,medium
-San Francisco,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high
-San Francisco,Zoox,operating_limited,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,medium
-Seattle,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high
-Seattle,Zoox,testing,,,https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/,TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site),2025-09-30,medium
-Tampa,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium
-Tampa,Waymo,operating_public,,,https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport,"EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",2026-10-15,high
-Washington DC,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high
-Washington DC,Zoox,testing,,,https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/,TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site),2025-09-30,low
+metro,competitor,status,first_public_date,platform_partner,source_url,source_title,as_of_date,confidence,is_operator
+Atlanta,May Mobility,operating_limited,2025-09,Lyft,https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm,"May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",2026-05-29,medium,false
+Atlanta,Waymo,operating_public,,Uber,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium,false
+Atlanta,Zoox,testing,,,https://www.insurancejournal.com/news/southeast/2025/05/21/824605.htm,"Insurance Journal: Zoox testing in Atlanta (safety drivers, mapping); Electrek 2026-03-24 lists Atlanta as being mapped and tested",2025-05-21,medium,false
+Austin,Avride,testing,,,https://en.wikipedia.org/wiki/Avride,Wikipedia: Avride (secondary source) lists Austin as on-road testing; paid robotaxi is Dallas only,2026-11-06,medium,false
+Austin,Tesla,operating_limited,,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",2026-04-30,high,false
+Austin,Waymo,operating_public,,Uber,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium,false
+Austin,Zoox,testing,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,high,false
+Boston,Waymo,testing,,,https://www.bostonglobe.com/2026/02/07/business/autonomous-vehicles-boston-waymo/,Boston Globe: Waymo returns to Boston testing with human drivers (page undated; URL date),2026-02-07,medium,false
+Charlotte,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high,false
+Chicago,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high,false
+Dallas-Fort Worth,Avride,operating_limited,2025-12-03,Uber,https://www.uber.com/us/en/newsroom/avride-on-uber,"Uber newsroom: Avride on Uber, Dallas (on-board specialist at launch)",2025-12-03,high,false
+Dallas-Fort Worth,Lyft/Mobileye/Marubeni,announced,,Lyft,https://dallasinnovates.com/?p=271288,Dallas Innovates: Lyft robotaxi service in Dallas (as soon as 2026),2025-02-11,medium,false
+Dallas-Fort Worth,May Mobility,announced,,Uber,https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm,"May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",2026-05-29,medium,false
+Dallas-Fort Worth,Tesla,operating_limited,2026-04-18,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",2026-04-30,high,false
+Dallas-Fort Worth,Waymo,operating_public,2026-02-24,,https://techcrunch.com/2026/08/04/waymo-opens-up-robotaxi-service-in-dallas-to-everyone/,TechCrunch: Waymo opens up robotaxi service in Dallas to everyone,2026-08-04,high,false
+Denver,Waymo,operating_limited,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium,false
+Detroit,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high,false
+Houston,Nuro/Lucid,testing,,Uber,https://electrek.co/2026/06/17/uber-lucid-robotaxi-houston/,"Electrek: Uber, Lucid, Nuro robotaxi Houston mid-2027; Nuro already testing with safety operators",2026-06-17,high,false
+Houston,Tesla,operating_limited,2026-04-18,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",2026-04-30,high,false
+Houston,Waymo,operating_public,2026-02-24,,https://gmg-kprc-prod.cdn.arcpublishing.com/news/local/2026/08/21/waymo-opens-robotaxi-rides-to-anyone-with-the-app-in-houston/,KPRC: Waymo opens robotaxi rides to anyone with the app in Houston (waymo.com page still says gradually adding riders),2026-08-21,medium,false
+Las Vegas,Motional,operating_limited,2026-03-13,Uber,https://motional.com/news/uber-and-motional-launch-robotaxi-service-las-vegas,Motional: Uber and Motional launch robotaxi service in Las Vegas (safety operator on board),2026-03-13,high,true
+Las Vegas,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium,false
+Las Vegas,Waymo,operating_limited,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,medium,false
+Las Vegas,Zoox,operating_limited,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,medium,false
+Los Angeles,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high,false
+Los Angeles,Zoox,testing,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,medium,false
+Miami,Tesla,operating_limited,2026-07-03,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium,false
+Miami,Waymo,operating_public,,,https://waymo.com/blog/2026/04/floridas-new-way-to-ride/,Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando),2026-04-15,high,false
+Miami,Zoox,testing,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,high,false
+Minneapolis,Waymo,testing,,,https://www.cbsnews.com/minnesota/news/waymo-future-minnesota-2026-legislative-session/,CBS Minnesota: Waymo testing with drivers in Twin Cities since late 2025,2026-05-20,high,false
+Nashville,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high,false
+New York,Waymo,testing,,,https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm,"Insurance Journal: Waymo NYC test permit, specialist in driver seat",2026-02-20,high,false
+Orlando,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium,false
+Orlando,Waymo,operating_public,2026-02-24,,https://waymo.com/blog/2026/04/floridas-new-way-to-ride/,Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando),2026-04-15,high,false
+Philadelphia,Waymo,testing,,,https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/,PhillyVoice: Waymo tested in Philly with safety drivers since July 2025; not yet configured for driverless,2026-10-09,high,false
+Phoenix,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium,false
+Phoenix,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high,false
+Pittsburgh,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high,false
+Sacramento,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high,false
+San Antonio,Waymo,operating_public,2026-02-24,,https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport,"EVwire: Waymo open to all in San Antonio, San Diego, Tampa",2026-10-15,medium,false
+San Diego,Waymo,operating_public,,,https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport,"EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",2026-10-15,high,false
+San Francisco,Nuro/Lucid,testing,,Uber,https://sfstandard.com/2025/10/29/uber-launch-bay-area-robotaxi-service-nuru-lucid/,"SF Standard: Uber, Lucid, Nuro Bay Area robotaxi (on-road development underway; launch late 2026)",2025-10-29,medium,false
+San Francisco,Tesla,testing,,,https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/,"Electrek: Bay Area fleet runs supervised FSD, not unsupervised Robotaxi",2026-04-30,medium,false
+San Francisco,Waymo,operating_public,,,https://waymo.com/whereyoucango/,"Waymo - Where you can go (undated page, opened 2026-11-06)",2026-11-06,high,false
+San Francisco,Zoox,operating_limited,,,https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/,"Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",2026-03-24,medium,false
+Seattle,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high,false
+Seattle,Zoox,testing,,,https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/,TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site),2025-09-30,medium,false
+Tampa,Tesla,announced,,,https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/,Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site),2026-07-03,medium,false
+Tampa,Waymo,operating_public,,,https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport,"EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",2026-10-15,high,false
+Washington DC,Waymo,announced,,,https://waymo.com/,Waymo - Up Next list (opened 2026-11-06),2026-11-06,high,false
+Washington DC,Zoox,testing,,,https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/,TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site),2025-09-30,low,false

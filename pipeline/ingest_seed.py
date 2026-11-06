@@ -22,6 +22,7 @@ checks = [
     ("competitors: metro names all in metros.yaml", set(comp.metro) <= set(m["name"])),
     ("competitors: status values valid", comp.status.isin(["operating_public", "operating_limited", "testing", "announced"]).all()),
     ("competitors: source fields filled", bool((comp[req_src] != "").all().all())),
+    ("competitors: is_operator is true or false", comp.is_operator.isin(["true", "false"]).all()),
     ("competitors: no duplicate (metro, competitor)", not comp.duplicated(["metro", "competitor"]).any()),
 ]
 reg.to_parquet(INTERIM / "regulation.parquet", index=False)

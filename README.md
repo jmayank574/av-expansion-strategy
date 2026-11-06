@@ -48,6 +48,7 @@ Run the pipeline with either `make` (macOS/Linux) or `tasks.py` (any OS, includi
 | dbt build + Python-vs-dbt parity check | `make dbt` | `python tasks.py dbt` |
 | pytest + vitest | `make test` | `python tasks.py test` |
 | Memo / deck | `make memo` / `make deck` | `python tasks.py memo` / `python tasks.py deck` |
+| Refresh README screenshots (Playwright, needs Edge or Chrome) | n/a | `python tasks.py screenshots` |
 
 `tasks.py` uses `.venv` automatically when it exists. Then start the app:
 

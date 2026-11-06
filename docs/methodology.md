@@ -14,7 +14,7 @@ The answer is built in four steps: score 25 candidate metros on five criteria, e
 | Competitive intensity | 15 | crowding (100) | lower is better |
 | Charging cost | 5 | commercial electricity price, cents/kWh (100) | lower is better |
 
-Crowding = sum over competitors of a status weight: operating_public 1.0, operating_limited 0.7, testing 0.4, announced 0.3.
+Operator presence (rows flagged `is_operator` in the seed file) is shown in the app but never counted as competition. Crowding = sum over competitors of a status weight: operating_public 1.0, operating_limited 0.7, testing 0.4, announced 0.3.
 
 ## 2. Scoring in two minutes
 

@@ -102,7 +102,7 @@ def main():
     metros = []
     for i, r in f.iterrows():
         cs = comp[comp.metro == r.metro].sort_values("status")
-        active = cs[cs.status.isin(["operating_public", "operating_limited"])].competitor.tolist()
+        active = cs[cs.status.isin(["operating_public", "operating_limited"]) & (cs.is_operator != "true")].competitor.tolist()
         rg = reg.loc[r.state]
         raw_keys = ["metro_pop", "city_pop", "city_density", "land_sqmi", "taxi_ridehail_share", "no_vehicle_share", "city_median_hh_income",
                     "enplanements", "enplanements_per_resident", "rain_days", "snow_days", "heat_days", "reg_tier", "new_entrant_score", "crowding", "n_competitors", "elec_cents_kwh", "log_metro_pop"]
@@ -116,14 +116,17 @@ def main():
             ranks={k: (int(ranks[k][i]) if cand[i] else None) for k in scen},
             opportunity=float(pill.at[i, "demand"]), ease_of_entry=float(ease[i]), vegas_similarity=float(sim[i]),
             why=why_bullets(r, pill.loc[i], sub.loc[i], bw, active),
-            competitors=cs[["competitor", "status", "platform_partner", "first_public_date", "source_url", "source_title", "as_of_date", "confidence"]].to_dict("records"),
+            competitors=[dict(c, is_operator=(c["is_operator"] == "true"), competitor=("The operator" if c["is_operator"] == "true" else c["competitor"]),
+                          source_title=("Public announcement of the operator's own service" if c["is_operator"] == "true" else c["source_title"]))
+                     for c in cs[["competitor", "status", "platform_partner", "first_public_date", "source_url", "source_title", "as_of_date", "confidence", "is_operator"]].to_dict("records")],
             regulation=dict(tier=int(rg.tier), new_entrant_path=rg.new_entrant_path, new_entrant_rationale=rg.new_entrant_rationale,
                             new_entrant_source_url=rg.new_entrant_source_url, new_entrant_source_title=rg.new_entrant_source_title,
                             new_entrant_as_of_date=rg.new_entrant_as_of_date, new_entrant_confidence=rg.new_entrant_confidence,
                             driverless_commercial_allowed=rg.driverless_commercial_allowed, permit_body=rg.permit_body,
                             key_law_or_rule=rg.key_law_or_rule, notes=rg.notes, source_url=rg.source_url, source_title=rg.source_title,
                             as_of_date=rg.as_of_date, confidence=rg.confidence),
-            nhtsa_incidents=nh[nh.metro == r.metro][["operating_entity", "ads_incidents"]].to_dict("records"),
+            nhtsa_incidents=[dict(n, operating_entity=("The operator" if n["operating_entity"].startswith("Motional") else n["operating_entity"]))
+                         for n in nh[nh.metro == r.metro][["operating_entity", "ads_incidents"]].to_dict("records")],
         ))
     meta = dict(
         question="Which US metros should a Level 4 robotaxi operator enter after its Las Vegas beachhead, and in what order?",

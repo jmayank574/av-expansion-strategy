@@ -92,3 +92,16 @@ def test_deck_title_labels_and_footers():
 def test_memo_explains_detroit_rank(memo):
     d = plan.build()["by"]["Detroit"]
     assert f"**Why Detroit is #{d['ranks']['balanced']}:**" in memo and "competition (+" in memo
+
+
+def test_operator_presence_is_not_competition_and_is_not_named_in_outputs():
+    comp = pd.read_csv(ROOT / "data/seed/competitor_presence.csv", dtype=str, keep_default_na=False)
+    op = comp[comp.is_operator == "true"]
+    assert len(op) >= 1 and set(comp.is_operator) <= {"true", "false"}
+    w = yaml.safe_load(open(ROOT / "config/weights.yaml"))["crowding_status_weights"]
+    d = json.load(open(ROOT / "data/output/metros_scored.json"))
+    for m in d["metros"]:
+        expect = sum(w[c.status] for c in comp[(comp.metro == m["metro"]) & (comp.is_operator == "false")].itertuples())
+        assert abs(m["raw"]["crowding"] - expect) < 1e-6, m["metro"]
+    assert "Motional" not in json.dumps(d)                 # ground rule 6: the operator is never named in app data
+    assert "Motional" not in (ROOT / "reports/memo.md").read_text(encoding="utf-8")

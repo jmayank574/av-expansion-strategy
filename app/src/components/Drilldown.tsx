@@ -87,9 +87,9 @@ export default function Drilldown({ rows, meta, selected, onSelect }: { rows: Ro
           <p className="mt-1 text-xs text-muted">Right-hand column: the 0–100 percentile sub-score used in the ranking.</p>
 
           <h3 className="mb-1 mt-4 text-sm font-semibold">Competitors</h3>
-          {m.competitors.length === 0 ? <p className="text-sm text-muted">None found in the seed file.</p> : (
+          {m.competitors.filter(c => !c.is_operator).length === 0 ? <p className="text-sm text-muted">None found in the seed file.</p> : (
             <ul className="space-y-1 text-sm">
-              {m.competitors.map(c => (
+              {m.competitors.filter(c => !c.is_operator).map(c => (
                 <li key={c.competitor}>
                   <span className="font-medium">{c.competitor}</span> · {STATUS[c.status] ?? c.status}
                   {c.platform_partner && <span className="text-muted"> · via {c.platform_partner}</span>}
@@ -99,6 +99,14 @@ export default function Drilldown({ rows, meta, selected, onSelect }: { rows: Ro
               ))}
             </ul>
           )}
+          {m.competitors.filter(c => c.is_operator).map(c => (
+            <p key={c.competitor} className="mt-2 text-sm">
+              <span className="font-medium">Operator presence:</span> {STATUS[c.status] ?? c.status}
+              {c.platform_partner && <span className="text-muted"> · via {c.platform_partner}</span>}
+              <span className="text-muted"> (not counted as competition)</span>
+              <a className="ml-2 text-xs text-accent underline" href={c.source_url} target="_blank" rel="noreferrer">source</a>
+            </p>
+          ))}
           {m.nhtsa_incidents.length > 0 && (
             <p className="mt-1 text-xs text-muted">NHTSA ADS incident reports, 24 months (activity, not a rate): {m.nhtsa_incidents.map(n => `${n.operating_entity} ${n.ads_incidents}`).join(', ')}.</p>
           )}

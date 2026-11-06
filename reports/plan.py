@@ -60,7 +60,7 @@ def sources_line(meta):
 
 
 def operating(m):
-    return [c["competitor"] for c in m["competitors"] if c["status"] in ("operating_public", "operating_limited")]
+    return [c["competitor"] for c in m["competitors"] if c["status"] in ("operating_public", "operating_limited") and not c.get("is_operator")]
 
 
 PATH_TXT = {"fast": "fast", "moderate": "moderate", "slow": "slow"}

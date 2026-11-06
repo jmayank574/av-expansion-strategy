@@ -1,7 +1,7 @@
 """Cross-platform task runner: the same steps as the Makefile, for machines without `make`.
 
 Usage: python tasks.py <task> [<task> ...]     e.g. python tasks.py all     python tasks.py data score
-Tasks: data, score, analyze, publish-json, dbt, test, memo, deck, app, all
+Tasks: data, score, analyze, publish-json, dbt, test, memo, deck, screenshots, app, all
 """
 import pathlib, shutil, subprocess, sys
 
@@ -62,6 +62,11 @@ def deck():
     run(PY, "reports/make_deck.py")
 
 
+def screenshots():
+    """Capture the three app views to docs/screenshots (Playwright, system Edge/Chrome)."""
+    run("node", "scripts/screenshots.mjs", cwd=ROOT / "app", shell=SHELL_NPM)
+
+
 def app():
     run("npm", "install", cwd=ROOT / "app", shell=SHELL_NPM)
     run("npm", "run", "dev", cwd=ROOT / "app", shell=SHELL_NPM)
@@ -73,7 +78,7 @@ def all_():
 
 
 TASKS = {"data": data, "score": score, "analyze": analyze, "publish-json": publish_json, "dbt": dbt,
-         "test": test, "memo": memo, "deck": deck, "app": app, "all": all_}
+         "test": test, "memo": memo, "deck": deck, "screenshots": screenshots, "app": app, "all": all_}
 
 if __name__ == "__main__":
     names = sys.argv[1:]

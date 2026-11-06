@@ -15,7 +15,7 @@ rows: 26
 ## Numeric summary
 | column | min | median | max |
 |---|---|---|---|
-| total | 37.26 | 49.44 | 60.79 |
+| total | 37.26 | 49.69 | 60.79 |
 | demand | 11.9 | 50.3 | 91.7 |
 | operating | 28.8 | 47.7 | 85.4 |
 | regulatory | 13.3 | 52.1 | 75.4 |
@@ -111,7 +111,7 @@ rows: 26
 | Phoenix       |          5 |            11 |          1 |               2 |           10 |
 
 ### Vegas benchmark (not ranked)
-Total 48.2; pillars {"demand": 35.8, "operating": 68.6, "regulatory": 63.7, "competition": 8.9, "charging": 89.8}
+Total 50.1; pillars {"demand": 35.8, "operating": 68.6, "regulatory": 63.7, "competition": 21.4, "charging": 89.8}
 
 ### Most / least similar to Vegas
 | metro             |   sim |

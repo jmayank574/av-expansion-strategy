@@ -13,15 +13,16 @@ rows: 51
 | source_title | str | 0 |
 | as_of_date | str | 0 |
 | confidence | str | 0 |
+| is_operator | str | 0 |
 
 ## Sample rows
-| metro   | competitor   | status            | first_public_date   | platform_partner   | source_url                                                                                  | source_title                                                                                                                       | as_of_date   | confidence   |
-|:--------|:-------------|:------------------|:--------------------|:-------------------|:--------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:-------------|:-------------|
-| Atlanta | May Mobility | operating_limited | 2025-09             | Lyft               | https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm | May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17                                                          | 2026-05-29   | medium       |
-| Atlanta | Waymo        | operating_public  |                     | Uber               | https://waymo.com/whereyoucango/                                                            | Waymo - Where you can go (undated page, opened 2026-11-06)                                                                         | 2026-11-06   | medium       |
-| Atlanta | Zoox         | testing           |                     |                    | https://www.insurancejournal.com/news/southeast/2025/05/21/824605.htm                       | Insurance Journal: Zoox testing in Atlanta (safety drivers, mapping); Electrek 2026-03-24 lists Atlanta as being mapped and tested | 2025-05-21   | medium       |
-| Austin  | Avride       | testing           |                     |                    | https://en.wikipedia.org/wiki/Avride                                                        | Wikipedia: Avride (secondary source) lists Austin as on-road testing; paid robotaxi is Dallas only                                 | 2026-11-06   | medium       |
-| Austin  | Tesla        | operating_limited |                     |                    | https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/        | Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)                                              | 2026-04-30   | high         |
+| metro   | competitor   | status            | first_public_date   | platform_partner   | source_url                                                                                  | source_title                                                                                                                       | as_of_date   | confidence   | is_operator   |
+|:--------|:-------------|:------------------|:--------------------|:-------------------|:--------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:-------------|:-------------|:--------------|
+| Atlanta | May Mobility | operating_limited | 2025-09             | Lyft               | https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm | May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17                                                          | 2026-05-29   | medium       | false         |
+| Atlanta | Waymo        | operating_public  |                     | Uber               | https://waymo.com/whereyoucango/                                                            | Waymo - Where you can go (undated page, opened 2026-11-06)                                                                         | 2026-11-06   | medium       | false         |
+| Atlanta | Zoox         | testing           |                     |                    | https://www.insurancejournal.com/news/southeast/2025/05/21/824605.htm                       | Insurance Journal: Zoox testing in Atlanta (safety drivers, mapping); Electrek 2026-03-24 lists Atlanta as being mapped and tested | 2025-05-21   | medium       | false         |
+| Austin  | Avride       | testing           |                     |                    | https://en.wikipedia.org/wiki/Avride                                                        | Wikipedia: Avride (secondary source) lists Austin as on-road testing; paid robotaxi is Dallas only                                 | 2026-11-06   | medium       | false         |
+| Austin  | Tesla        | operating_limited |                     |                    | https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/        | Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)                                              | 2026-04-30   | high         | false         |
 
 ## Sanity checks
 - [PASS] regulation covers every state of the 26 metros
@@ -35,6 +36,7 @@ rows: 51
 - [PASS] competitors: metro names all in metros.yaml
 - [PASS] competitors: status values valid
 - [PASS] competitors: source fields filled
+- [PASS] competitors: is_operator is true or false
 - [PASS] competitors: no duplicate (metro, competitor)
 
 ## Cross-check: seed competitor_presence vs NHTSA ADS incidents (24 months, operators with >= 5 incidents in the metro)

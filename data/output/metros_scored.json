@@ -150,7 +150,7 @@
    "demand": "Chicago TNP and NYC HVFHV calendar 2025"
   },
   "data_as_of": "2026-11-06",
-  "generated_at": "2026-11-06T09:50:57+00:00",
+  "generated_at": "2026-11-06T10:09:50+00:00",
   "assumptions": {
    "capture_share": {
     "label": "Robotaxi share of ride-hail trips in the principal city",
@@ -331,7 +331,8 @@
      "source_url": "https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm",
      "source_title": "Insurance Journal: Waymo NYC test permit, specialist in driver seat",
      "as_of_date": "2026-02-20",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -477,7 +478,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Zoox",
@@ -487,7 +489,8 @@
      "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
      "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
      "as_of_date": "2026-03-24",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -650,7 +653,8 @@
      "source_url": "https://waymo.com/",
      "source_title": "Waymo - Up Next list (opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -796,7 +800,8 @@
      "source_url": "https://dallasinnovates.com/?p=271288",
      "source_title": "Dallas Innovates: Lyft robotaxi service in Dallas (as soon as 2026)",
      "as_of_date": "2025-02-11",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "May Mobility",
@@ -806,7 +811,8 @@
      "source_url": "https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm",
      "source_title": "May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",
      "as_of_date": "2026-05-29",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Avride",
@@ -816,7 +822,8 @@
      "source_url": "https://www.uber.com/us/en/newsroom/avride-on-uber",
      "source_title": "Uber newsroom: Avride on Uber, Dallas (on-board specialist at launch)",
      "as_of_date": "2025-12-03",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Tesla",
@@ -826,7 +833,8 @@
      "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
      "source_title": "Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",
      "as_of_date": "2026-04-30",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -836,7 +844,8 @@
      "source_url": "https://techcrunch.com/2026/08/04/waymo-opens-up-robotaxi-service-in-dallas-to-everyone/",
      "source_title": "TechCrunch: Waymo opens up robotaxi service in Dallas to everyone",
      "as_of_date": "2026-08-04",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -1007,7 +1016,8 @@
      "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
      "source_title": "Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",
      "as_of_date": "2026-04-30",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -1017,7 +1027,8 @@
      "source_url": "https://gmg-kprc-prod.cdn.arcpublishing.com/news/local/2026/08/21/waymo-opens-robotaxi-rides-to-anyone-with-the-app-in-houston/",
      "source_title": "KPRC: Waymo opens robotaxi rides to anyone with the app in Houston (waymo.com page still says gradually adding riders)",
      "as_of_date": "2026-08-21",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Nuro/Lucid",
@@ -1027,7 +1038,8 @@
      "source_url": "https://electrek.co/2026/06/17/uber-lucid-robotaxi-houston/",
      "source_title": "Electrek: Uber, Lucid, Nuro robotaxi Houston mid-2027; Nuro already testing with safety operators",
      "as_of_date": "2026-06-17",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -1194,7 +1206,8 @@
      "source_url": "https://waymo.com/",
      "source_title": "Waymo - Up Next list (opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Zoox",
@@ -1204,7 +1217,8 @@
      "source_url": "https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/",
      "source_title": "TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site)",
      "as_of_date": "2025-09-30",
-     "confidence": "low"
+     "confidence": "low",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -1359,7 +1373,8 @@
      "source_url": "https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/",
      "source_title": "PhillyVoice: Waymo tested in Philly with safety drivers since July 2025; not yet configured for driverless",
      "as_of_date": "2026-10-09",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -1373,7 +1388,7 @@
     "driverless_commercial_allowed": "Y",
     "permit_body": "PennDOT",
     "key_law_or_rule": "Act 130 of 2022 (75 Pa.C.S. Ch.85) and PennDOT guidelines (Oct 2024)",
-    "notes": "PennDOT is sole regulator; driverless certification guidelines adopted Oct 2024; certificates reported for Aurora Motional Perrone Mapless AI (from search results; article body not read because page was truncated)",
+    "notes": "PennDOT is sole regulator; driverless certification guidelines adopted Oct 2024; driverless certificates reported for several AV developers (from search results; article body not read because page was truncated)",
     "source_url": "https://www.pa.gov/agencies/penndot/news-and-media/newsroom/statewide/2024/penndot-adopts-new-automated-vehicle-guidelines-for-driverless-operation",
     "source_title": "PennDOT adopts AV guidelines for driverless operation",
     "as_of_date": "2026-11-05",
@@ -1510,7 +1525,8 @@
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
      "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -1520,7 +1536,8 @@
      "source_url": "https://waymo.com/blog/2026/04/floridas-new-way-to-ride/",
      "source_title": "Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando)",
      "as_of_date": "2026-04-15",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Zoox",
@@ -1530,7 +1547,8 @@
      "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
      "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
      "as_of_date": "2026-03-24",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -1685,7 +1703,8 @@
      "source_url": "https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm",
      "source_title": "May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",
      "as_of_date": "2026-05-29",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -1695,7 +1714,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Zoox",
@@ -1705,7 +1725,8 @@
      "source_url": "https://www.insurancejournal.com/news/southeast/2025/05/21/824605.htm",
      "source_title": "Insurance Journal: Zoox testing in Atlanta (safety drivers, mapping); Electrek 2026-03-24 lists Atlanta as being mapped and tested",
      "as_of_date": "2025-05-21",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -1860,7 +1881,8 @@
      "source_url": "https://www.bostonglobe.com/2026/02/07/business/autonomous-vehicles-boston-waymo/",
      "source_title": "Boston Globe: Waymo returns to Boston testing with human drivers (page undated; URL date)",
      "as_of_date": "2026-02-07",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -2006,7 +2028,8 @@
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
      "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -2016,7 +2039,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -2171,7 +2195,8 @@
      "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
      "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
      "as_of_date": "2026-03-24",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -2181,7 +2206,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Nuro/Lucid",
@@ -2191,7 +2217,8 @@
      "source_url": "https://sfstandard.com/2025/10/29/uber-launch-bay-area-robotaxi-service-nuru-lucid/",
      "source_title": "SF Standard: Uber, Lucid, Nuro Bay Area robotaxi (on-road development underway; launch late 2026)",
      "as_of_date": "2025-10-29",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Tesla",
@@ -2201,7 +2228,8 @@
      "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
      "source_title": "Electrek: Bay Area fleet runs supervised FSD, not unsupervised Robotaxi",
      "as_of_date": "2026-04-30",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -2360,7 +2388,8 @@
      "source_url": "https://waymo.com/",
      "source_title": "Waymo - Up Next list (opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -2515,7 +2544,8 @@
      "source_url": "https://waymo.com/",
      "source_title": "Waymo - Up Next list (opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Zoox",
@@ -2525,7 +2555,8 @@
      "source_url": "https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/",
      "source_title": "TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site)",
      "as_of_date": "2025-09-30",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -2671,7 +2702,8 @@
      "source_url": "https://www.cbsnews.com/minnesota/news/waymo-future-minnesota-2026-legislative-session/",
      "source_title": "CBS Minnesota: Waymo testing with drivers in Twin Cities since late 2025",
      "as_of_date": "2026-05-20",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -2822,7 +2854,8 @@
      "source_url": "https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport",
      "source_title": "EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",
      "as_of_date": "2026-10-15",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -2977,7 +3010,8 @@
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
      "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -2987,7 +3021,8 @@
      "source_url": "https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport",
      "source_title": "EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",
      "as_of_date": "2026-10-15",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -3138,7 +3173,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -3289,7 +3325,8 @@
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
      "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -3299,7 +3336,8 @@
      "source_url": "https://waymo.com/blog/2026/04/floridas-new-way-to-ride/",
      "source_title": "Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando)",
      "as_of_date": "2026-04-15",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -3454,7 +3492,8 @@
      "source_url": "https://waymo.com/",
      "source_title": "Waymo - Up Next list (opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -3600,7 +3639,8 @@
      "source_url": "https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport",
      "source_title": "EVwire: Waymo open to all in San Antonio, San Diego, Tampa",
      "as_of_date": "2026-10-15",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -3751,7 +3791,8 @@
      "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
      "source_title": "Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",
      "as_of_date": "2026-04-30",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     },
     {
      "competitor": "Waymo",
@@ -3761,7 +3802,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Avride",
@@ -3771,7 +3813,8 @@
      "source_url": "https://en.wikipedia.org/wiki/Avride",
      "source_title": "Wikipedia: Avride (secondary source) lists Austin as on-road testing; paid robotaxi is Dallas only",
      "as_of_date": "2026-11-06",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Zoox",
@@ -3781,7 +3824,8 @@
      "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
      "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
      "as_of_date": "2026-03-24",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -3952,7 +3996,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -4103,7 +4148,8 @@
      "source_url": "https://waymo.com/",
      "source_title": "Waymo - Up Next list (opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -4117,7 +4163,7 @@
     "driverless_commercial_allowed": "Y",
     "permit_body": "PennDOT",
     "key_law_or_rule": "Act 130 of 2022 (75 Pa.C.S. Ch.85) and PennDOT guidelines (Oct 2024)",
-    "notes": "PennDOT is sole regulator; driverless certification guidelines adopted Oct 2024; certificates reported for Aurora Motional Perrone Mapless AI (from search results; article body not read because page was truncated)",
+    "notes": "PennDOT is sole regulator; driverless certification guidelines adopted Oct 2024; driverless certificates reported for several AV developers (from search results; article body not read because page was truncated)",
     "source_url": "https://www.pa.gov/agencies/penndot/news-and-media/newsroom/statewide/2024/penndot-adopts-new-automated-vehicle-guidelines-for-driverless-operation",
     "source_title": "PennDOT adopts AV guidelines for driverless operation",
     "as_of_date": "2026-11-05",
@@ -4125,7 +4171,7 @@
    },
    "nhtsa_incidents": [
     {
-     "operating_entity": "Motional",
+     "operating_entity": "The operator",
      "ads_incidents": 1
     }
    ],
@@ -4254,7 +4300,8 @@
      "source_url": "https://waymo.com/",
      "source_title": "Waymo - Up Next list (opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -4344,8 +4391,8 @@
     "heat_days": 55.0,
     "reg_tier": 3.0,
     "new_entrant_score": 1.0,
-    "crowding": 2.4,
-    "n_competitors": 4.0,
+    "crowding": 1.7,
+    "n_competitors": 3.0,
     "elec_cents_kwh": 9.36,
     "log_metro_pop": 14.661184815306806
    },
@@ -4360,22 +4407,22 @@
     "heat_days": 1.1000602772754604,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 50.0,
-    "crowding": 8.854166666666671,
+    "crowding": 21.42857142857143,
     "elec_cents_kwh": 89.81135986733003
    },
    "pillar_scores": {
     "demand": 35.82975438867068,
     "operating": 68.55334538878841,
     "regulatory": 63.74999999999999,
-    "competition": 8.854166666666671,
+    "competition": 21.42857142857143,
     "charging": 89.81135986733003
    },
-   "total": 48.24744337659834,
+   "total": 50.133604090884056,
    "totals": {
-    "balanced": 48.24744337659834,
-    "fast_growth": 46.5640309321262,
-    "low_risk": 55.660606423843255,
-    "capital_light": 49.597744264431114
+    "balanced": 50.133604090884056,
+    "fast_growth": 47.821471408316675,
+    "low_risk": 56.91804690003373,
+    "capital_light": 52.11262521681206
    },
    "ranks": {
     "balanced": null,
@@ -4384,7 +4431,7 @@
     "capital_light": null
    },
    "opportunity": 35.82975438867068,
-   "ease_of_entry": 54.933891293174774,
+   "ease_of_entry": 57.83567700746049,
    "vegas_similarity": 100.0,
    "why": [
     "Operating conditions score 69/100: ~13 rain, 0 snow and 55 extreme-heat days a year",
@@ -4400,17 +4447,19 @@
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
      "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
-     "competitor": "Motional",
+     "competitor": "The operator",
      "status": "operating_limited",
      "platform_partner": "Uber",
      "first_public_date": "2026-03-13",
      "source_url": "https://motional.com/news/uber-and-motional-launch-robotaxi-service-las-vegas",
-     "source_title": "Motional: Uber and Motional launch robotaxi service in Las Vegas (safety operator on board)",
+     "source_title": "Public announcement of the operator's own service",
      "as_of_date": "2026-03-13",
-     "confidence": "high"
+     "confidence": "high",
+     "is_operator": true
     },
     {
      "competitor": "Waymo",
@@ -4420,7 +4469,8 @@
      "source_url": "https://waymo.com/whereyoucango/",
      "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
      "as_of_date": "2026-11-06",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     },
     {
      "competitor": "Zoox",
@@ -4430,7 +4480,8 @@
      "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
      "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
      "as_of_date": "2026-03-24",
-     "confidence": "medium"
+     "confidence": "medium",
+     "is_operator": false
     }
    ],
    "regulation": {
@@ -4452,7 +4503,7 @@
    },
    "nhtsa_incidents": [
     {
-     "operating_entity": "Motional",
+     "operating_entity": "The operator",
      "ads_incidents": 20
     },
     {
