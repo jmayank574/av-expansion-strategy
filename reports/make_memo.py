@@ -57,6 +57,24 @@ dep_lines = "; ".join(f"{m['metro']} ({reasons(m)})" for m in dep)
 best = min(dep, key=lambda m: min(m["ranks"].values()))
 best_rank = min(best["ranks"].values())
 n_top10_low = sum(1 for m in p["cand"] if m["ranks"]["balanced"] <= 10 and m["regulation"]["tier"] <= 1)
+def contrib_vs_median(m):
+    """Weighted points each pillar adds to (or takes from) the total versus the median metro, balanced weights."""
+    import statistics
+    w = meta["weights"]["scenarios"][meta["weights"]["default_scenario"]]
+    return {k: (m["pillar_scores"][k] - statistics.median(x["pillar_scores"][k] for x in p["cand"])) * w[k] / 100 for k in w}
+
+
+def why_rank_line(m):
+    c = contrib_vs_median(m)
+    pos = sorted((k for k in c if c[k] > 0), key=lambda k: -c[k])
+    neg = sorted((k for k in c if c[k] < 0), key=lambda k: c[k])
+    nm = {"demand": "demand", "operating": "operating conditions", "regulatory": "regulation", "competition": "competition", "charging": "power price"}
+    fmt = lambda ks: ", ".join(f"{nm[k]} ({c[k]:+.1f})" for k in ks)
+    top = f"{nm[pos[0]]} (crowding {m['raw']['crowding']:.1f})" if pos[0] == "competition" else nm[pos[0]]
+    return (f"- **Why {m['metro']} is #{m['ranks']['balanced']}:** points versus the median metro come from {fmt(pos)}; {fmt(neg)} pull it down. "
+            f"Its rank rests mostly on {top}, not on strength across the board.")
+
+
 dfw, hou = by["Dallas-Fort Worth"], by["Houston"]
 vq = p["quad"](vegas)
 v = meta["vintages"]
@@ -79,6 +97,7 @@ memo = f"""# Where should the operator launch after Las Vegas?
 - **Wave 2:** {plan.names(w2)} (top 5 in {', '.join(pct(m['confidence']) for m in w2)} of draws). Demand {min(m['opportunity'] for m in w2):.0f}-{max(m['opportunity'] for m in w2):.0f} (wave 1: {min(m['opportunity'] for m in w1):.0f}-{max(m['opportunity'] for m in w1):.0f}). Watch: {'; '.join(watch(m) for m in w2)}.
 - **Wave 3:** {plan.names(w3)}. Demand {min(m['opportunity'] for m in w3):.0f}-{max(m['opportunity'] for m in w3):.0f}, but driverless commercial service is not yet allowed. Build the policy case now; launch when the law changes.
 - **Dallas-Fort Worth and Houston** are in no wave. {plan.why_rank(dfw, p['cand'], p['med_opp'])} {plan.why_rank(hou, p['cand'], p['med_opp'])}
+{why_rank_line(by['Detroit']) if 'Detroit' in by else ''}
 
 **Deprioritize.** {dep_lines}. None ranks better than #{best_rank} in any scenario ({best['metro']}).
 

@@ -87,3 +87,8 @@ def test_deck_title_labels_and_footers():
         assert "metros_scored.json" not in foot and "Census ACS 2024 5-year" in foot, f"slide {i}"
     s5 = " ".join(texts[4])
     assert "annual revenue pool" in s5 and "assumption-driven" in s5 and "50 years" not in s5
+
+
+def test_memo_explains_detroit_rank(memo):
+    d = plan.build()["by"]["Detroit"]
+    assert f"**Why Detroit is #{d['ranks']['balanced']}:**" in memo and "competition (+" in memo

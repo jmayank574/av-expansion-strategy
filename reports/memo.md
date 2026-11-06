@@ -13,6 +13,7 @@
 - **Wave 2:** Detroit, Atlanta and Philadelphia (top 5 in 27%, 36%, 11% of draws). Demand 59-69 (wave 1: 38-78). Watch: Detroit: weather (rain ~93, snow ~17, 40 C+ ~0 days a year); Atlanta: weather (rain ~108, snow ~1, 40 C+ ~0 days a year); Philadelphia: a slow new-entrant path in PA (Tier 2).
 - **Wave 3:** Chicago, New York and Boston. Demand 76-92, but driverless commercial service is not yet allowed. Build the policy case now; launch when the law changes.
 - **Dallas-Fort Worth and Houston** are in no wave. Dallas-Fort Worth ranks #14 of 25 (49.2): Tier 3 rules with a fast new-entrant path, held back by middling demand (51/100) and the most crowded field of 25 (crowding 3.0; Avride, Tesla and Waymo operating). Houston ranks #12 of 25 (49.7): Tier 3 rules with a fast new-entrant path, held back by middling demand (53/100) and weather (rain ~119, snow ~0, 40 C+ ~0 days a year).
+- **Why Detroit is #7:** points versus the median metro come from competition (+6.9), demand (+2.9); regulation (-2.7), operating conditions (-1.7), power price (-1.0) pull it down. Its rank rests mostly on competition (crowding 0.3), not on strength across the board.
 
 **Deprioritize.** San Antonio (demand 20/100); Sacramento (demand 20/100); Seattle (mid-pack on every pillar); Minneapolis (snow ~22 days, Tier 1 rules); Charlotte (demand 22/100); Pittsburgh (snow ~16 days); Austin (demand 18/100, crowding 2.5); Nashville (demand 12/100). None ranks better than #5 in any scenario (San Antonio).
 
