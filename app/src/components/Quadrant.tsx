@@ -84,10 +84,10 @@ export default function Quadrant({ rows, onOpen }: { rows: Row[]; onOpen: (m: st
         Dashed lines are the medians of the 25 candidates. Bubble size = competitor crowding; the black diamond is the Las Vegas benchmark.
       </p>
       <div ref={box} className="relative h-[560px] rounded-lg border border-line p-2">
-        <div className={`${qLabel} left-20 top-3 text-muted`}>Build case</div>
-        <div className={`${qLabel} right-6 top-3 text-accent`}>Launch next</div>
-        <div className={`${qLabel} bottom-16 left-20 text-muted`}>Deprioritize</div>
-        <div className={`${qLabel} bottom-16 right-6 text-muted`}>Opportunistic</div>
+        <div className={`${qLabel} left-24 top-9 text-muted`}>Build case</div>
+        <div className={`${qLabel} right-28 top-9 text-accent`}>Launch next</div>
+        <div className={`${qLabel} bottom-24 left-24 text-muted`}>Deprioritize</div>
+        <div className={`${qLabel} bottom-24 right-28 text-muted`}>Opportunistic</div>
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 28, right: 90, bottom: 28, left: 8 }}>
             <CartesianGrid stroke="#eef0f3" />

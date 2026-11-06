@@ -11,7 +11,12 @@ const PORT = 5199
 const base = `http://localhost:${PORT}/`
 
 const server = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['vite', '--port', String(PORT), '--strictPort'], { cwd: path.resolve(here, '..'), shell: process.platform === 'win32', stdio: 'ignore' })
-const stop = () => { try { process.platform === 'win32' ? spawn('taskkill', ['/pid', String(server.pid), '/t', '/f'], { stdio: 'ignore' }) : server.kill() } catch {} }
+const stop = () => {
+  try {
+    if (process.platform === 'win32') spawn('taskkill', ['/pid', String(server.pid), '/t', '/f'], { stdio: 'ignore' })
+    else server.kill()
+  } catch { /* already stopped */ }
+}
 
 async function up() {
   for (let i = 0; i < 60; i++) { try { if ((await fetch(base)).ok) return } catch {} await new Promise(r => setTimeout(r, 500)) }
