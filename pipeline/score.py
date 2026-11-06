@@ -63,7 +63,7 @@ def why_bullets(r, pill, sub, weights, active_comp):
     def strong(p):
         if p == "demand": return f"Demand score {pill['demand']:.0f}/100: {r.metro_pop/1e6:.1f}M-person metro, {r.city_density:,.0f} people per sq mi in {r.principal_city}"
         if p == "operating": return f"Operating conditions score {pill['operating']:.0f}/100: ~{r.rain_days:.0f} rain, {r.snow_days:.0f} snow and {r.heat_days:.0f} extreme-heat days a year"
-        if p == "regulatory": return f"{r.state} is regulation Tier {int(r.reg_tier)}: {TIER_TXT[int(r.reg_tier)]}"
+        if p == "regulatory": return f"{r.state} is regulation Tier {int(r.reg_tier)} ({TIER_TXT[int(r.reg_tier)]}); a new operator's path to paid driverless service is {r.new_entrant_path}"
         if p == "competition": return f"Light competition: {len(active_comp)} operator(s) in service, crowding score {r.crowding:.1f}"
         return f"Low commercial power price ({r.elec_cents_kwh:.1f} cents/kWh)"
     # biggest risk = largest weighted shortfall
@@ -75,7 +75,7 @@ def why_bullets(r, pill, sub, weights, active_comp):
                 "rain_days": f"Rain on ~{r.rain_days:.0f} days a year: needs wet-weather validation before launch",
                 "heat_days": f"Extreme heat (40 C+) on ~{r.heat_days:.0f} days a year: needs thermal validation before launch"}[worst]
     elif rp == "regulatory":
-        risk = f"{r.state} is regulation Tier {int(r.reg_tier)} ({TIER_TXT[int(r.reg_tier)]}): launch depends on policy change or permits"
+        risk = f"{r.state} is regulation Tier {int(r.reg_tier)} ({TIER_TXT[int(r.reg_tier)]}) and a new operator's path is {r.new_entrant_path}: launch depends on policy change or permits"
     elif rp == "competition":
         risk = f"Crowded field: {', '.join(active_comp) or 'several operators'} already present (crowding {r.crowding:.1f})"
     elif rp == "demand":
@@ -105,7 +105,7 @@ def main():
         active = cs[cs.status.isin(["operating_public", "operating_limited"])].competitor.tolist()
         rg = reg.loc[r.state]
         raw_keys = ["metro_pop", "city_pop", "city_density", "land_sqmi", "taxi_ridehail_share", "no_vehicle_share", "city_median_hh_income",
-                    "enplanements", "enplanements_per_resident", "rain_days", "snow_days", "heat_days", "reg_tier", "crowding", "n_competitors", "elec_cents_kwh", "log_metro_pop"]
+                    "enplanements", "enplanements_per_resident", "rain_days", "snow_days", "heat_days", "reg_tier", "new_entrant_score", "crowding", "n_competitors", "elec_cents_kwh", "log_metro_pop"]
         metros.append(dict(
             metro=r.metro, state=r.state, principal_city=r.principal_city, benchmark=bool(r.benchmark),
             raw={k: float(r[k]) for k in raw_keys},
@@ -117,7 +117,10 @@ def main():
             opportunity=float(pill.at[i, "demand"]), ease_of_entry=float(ease[i]), vegas_similarity=float(sim[i]),
             why=why_bullets(r, pill.loc[i], sub.loc[i], bw, active),
             competitors=cs[["competitor", "status", "platform_partner", "first_public_date", "source_url", "source_title", "as_of_date", "confidence"]].to_dict("records"),
-            regulation=dict(tier=int(rg.tier), driverless_commercial_allowed=rg.driverless_commercial_allowed, permit_body=rg.permit_body,
+            regulation=dict(tier=int(rg.tier), new_entrant_path=rg.new_entrant_path, new_entrant_rationale=rg.new_entrant_rationale,
+                            new_entrant_source_url=rg.new_entrant_source_url, new_entrant_source_title=rg.new_entrant_source_title,
+                            new_entrant_as_of_date=rg.new_entrant_as_of_date, new_entrant_confidence=rg.new_entrant_confidence,
+                            driverless_commercial_allowed=rg.driverless_commercial_allowed, permit_body=rg.permit_body,
                             key_law_or_rule=rg.key_law_or_rule, notes=rg.notes, source_url=rg.source_url, source_title=rg.source_title,
                             as_of_date=rg.as_of_date, confidence=rg.confidence),
             nhtsa_incidents=nh[nh.metro == r.metro][["operating_entity", "ads_incidents"]].to_dict("records"),
@@ -130,8 +133,8 @@ def main():
         vintages=dict(acs=f.acs_vintage.iloc[0], faa="CY2025 enplanements", weather="Open-Meteo daily archive 2016-2025",
                       nhtsa=pd.read_parquet(INTERIM / "nhtsa_incidents.parquet").shape[0] and "NHTSA SGO ADS reports, 24 months ending Sep 2026",
                       eia=pd.read_parquet(INTERIM / "eia.parquet").eia_period.iloc[0] + " (commercial, Table 5.6.B)",
-                      regulation_and_competitors="seed CSVs researched 2026-11-05", gazetteer="Census Gazetteer 2025"),
-        data_as_of="2026-11-05",
+                      regulation_and_competitors="seed CSVs researched 2026-11-06", gazetteer="Census Gazetteer 2025"),
+        data_as_of="2026-11-06",
         generated_at=datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
     )
     OUT = ROOT / "data/output"

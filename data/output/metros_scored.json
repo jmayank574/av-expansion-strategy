@@ -96,10 +96,16 @@
      "label": "Regulatory readiness",
      "submetrics": {
       "reg_tier": {
-       "weight": 100,
+       "weight": 60,
        "direction": 1,
        "label": "State AV regulation tier (0-3)",
        "unit": "tier"
+      },
+      "new_entrant_score": {
+       "weight": 40,
+       "direction": 1,
+       "label": "New-entrant path to paid driverless service (0 slow, 1 moderate, 2 fast)",
+       "unit": "path"
       }
      }
     },
@@ -139,12 +145,12 @@
    "weather": "Open-Meteo daily archive 2016-2025",
    "nhtsa": "NHTSA SGO ADS reports, 24 months ending Sep 2026",
    "eia": "August 2026 YTD (commercial, Table 5.6.B)",
-   "regulation_and_competitors": "seed CSVs researched 2026-11-05",
+   "regulation_and_competitors": "seed CSVs researched 2026-11-06",
    "gazetteer": "Census Gazetteer 2025",
    "demand": "Chicago TNP and NYC HVFHV calendar 2025"
   },
-  "data_as_of": "2026-11-05",
-  "generated_at": "2026-11-06T09:27:43+00:00",
+  "data_as_of": "2026-11-06",
+  "generated_at": "2026-11-06T09:50:57+00:00",
   "assumptions": {
    "capture_share": {
     "label": "Robotaxi share of ride-hail trips in the principal city",
@@ -268,6 +274,7 @@
     "snow_days": 10.1,
     "heat_days": 0.2,
     "reg_tier": 1.0,
+    "new_entrant_score": 0.0,
     "crowding": 0.4,
     "n_competitors": 1.0,
     "elec_cents_kwh": 22.93,
@@ -283,36 +290,37 @@
     "snow_days": 25.0,
     "heat_days": 27.083333333333343,
     "reg_tier": 8.333333333333332,
-    "crowding": 62.5,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 72.91666666666667,
     "elec_cents_kwh": 25.0
    },
    "pillar_scores": {
     "demand": 91.66666666666666,
     "operating": 30.41666666666667,
-    "regulatory": 8.333333333333332,
-    "competition": 62.5,
+    "regulatory": 13.333333333333336,
+    "competition": 72.91666666666667,
     "charging": 25.0
    },
-   "total": 51.97916666666667,
+   "total": 54.54166666666667,
    "totals": {
-    "balanced": 51.97916666666667,
-    "fast_growth": 60.66666666666666,
-    "low_risk": 38.979166666666664,
-    "capital_light": 47.1875
+    "balanced": 54.54166666666667,
+    "fast_growth": 62.45833333333333,
+    "low_risk": 41.52083333333333,
+    "capital_light": 50.27083333333334
    },
    "ranks": {
-    "balanced": 10,
+    "balanced": 6,
     "fast_growth": 3,
-    "low_risk": 23,
-    "capital_light": 19
+    "low_risk": 22,
+    "capital_light": 13
    },
    "opportunity": 91.66666666666666,
-   "ease_of_entry": 30.60897435897436,
+   "ease_of_entry": 34.55128205128205,
    "vegas_similarity": 0.0,
    "why": [
     "Demand score 92/100: 19.8M-person metro, 28,234 people per sq mi in New York",
     "Light competition: 0 operator(s) in service, crowding score 0.4",
-    "NY is regulation Tier 1 (testing only, driverless commercial service not yet allowed): launch depends on policy change or permits"
+    "Snow on ~10 days a year: needs winter validation before launch"
    ],
    "competitors": [
     {
@@ -321,13 +329,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm",
-     "source_title": "Insurance Journal: Waymo NYC permit with specialist behind wheel",
+     "source_title": "Insurance Journal: Waymo NYC test permit, specialist in driver seat",
      "as_of_date": "2026-02-20",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 1,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Driverless operation is not allowed; testing needs a specialist behind the wheel under State Police supervision and a governor's proposal was withdrawn in 2026-02. A law change is needed first.",
+    "new_entrant_source_url": "https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm",
+    "new_entrant_source_title": "Insurance Journal 2026-02-20 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "N",
     "permit_body": "NY DMV (testing under State Police supervision); NYC TLC for fares",
     "key_law_or_rule": "NY VTL (one hand on wheel) and 2017 testing law",
@@ -382,10 +396,10 @@
      "payback_years": 0.6765820613484863
     }
    },
-   "confidence": 0.1353,
-   "median_rank": 10.0,
-   "rank_p10": 5.0,
-   "rank_p90": 18.0
+   "confidence": 0.473,
+   "median_rank": 6.0,
+   "rank_p10": 3.0,
+   "rank_p90": 16.0
   },
   {
    "metro": "Los Angeles",
@@ -406,6 +420,7 @@
     "snow_days": 0.0,
     "heat_days": 2.0,
     "reg_tier": 3.0,
+    "new_entrant_score": 0.0,
     "crowding": 1.4,
     "n_competitors": 2.0,
     "elec_cents_kwh": 26.96,
@@ -421,31 +436,32 @@
     "snow_days": 87.5,
     "heat_days": 20.833333333333343,
     "reg_tier": 72.91666666666666,
-    "crowding": 20.833333333333343,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 25.0,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 63.33333333333333,
     "operating": 77.5,
-    "regulatory": 72.91666666666666,
-    "competition": 20.833333333333343,
+    "regulatory": 52.08333333333332,
+    "competition": 25.0,
     "charging": 6.25
    },
-   "total": 59.56249999999999,
+   "total": 56.02083333333332,
    "totals": {
-    "balanced": 59.56249999999999,
-    "fast_growth": 60.49999999999999,
-    "low_risk": 64.06249999999999,
-    "capital_light": 54.58333333333333
+    "balanced": 56.02083333333332,
+    "fast_growth": 57.79166666666666,
+    "low_risk": 58.22916666666666,
+    "capital_light": 51.25
    },
    "ranks": {
-    "balanced": 2,
-    "fast_growth": 4,
-    "low_risk": 2,
-    "capital_light": 4
+    "balanced": 3,
+    "fast_growth": 5,
+    "low_risk": 4,
+    "capital_light": 11
    },
    "opportunity": 63.33333333333333,
-   "ease_of_entry": 57.53205128205128,
+   "ease_of_entry": 52.08333333333333,
    "vegas_similarity": 30.17405128104336,
    "why": [
     "Demand score 63/100: 13.0M-person metro, 8,198 people per sq mi in Los Angeles",
@@ -458,9 +474,9 @@
      "status": "operating_public",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In",
-     "as_of_date": "2026-11-05",
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
     },
     {
@@ -468,14 +484,20 @@
      "status": "testing",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://zoox.com/",
-     "source_title": "Zoox - Where to Ride (page lists city but gives no status)",
-     "as_of_date": "2026-11-05",
-     "confidence": "low"
+     "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
+     "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
+     "as_of_date": "2026-03-24",
+     "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Separate regimes: DMV testing, driverless testing and deployment permits, plus four CPUC programs (drivered pilot, driverless pilot, drivered deployment, driverless deployment); fares are allowed only at deployment stages and a DMV deployment permit is a prerequisite.",
+    "new_entrant_source_url": "https://www.cpuc.ca.gov/regulatory-services/licensing/transportation-licensing-and-analysis-branch/autonomous-vehicle-programs",
+    "new_entrant_source_title": "CPUC Autonomous Vehicle Programs; CA DMV autonomous vehicles page (both opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "CA DMV (deployment permit) and CPUC (passenger service)",
     "key_law_or_rule": "DMV AV regulations (13 CCR Div.1 Ch.1 Art.3.7 and 3.8); CPUC permits",
@@ -547,10 +569,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.8643,
-   "median_rank": 3.0,
-   "rank_p10": 2.0,
-   "rank_p90": 7.0
+   "confidence": 0.6319,
+   "median_rank": 5.0,
+   "rank_p10": 3.0,
+   "rank_p90": 9.0
   },
   {
    "metro": "Chicago",
@@ -571,6 +593,7 @@
     "snow_days": 18.2,
     "heat_days": 0.0,
     "reg_tier": 1.0,
+    "new_entrant_score": 0.0,
     "crowding": 0.3,
     "n_competitors": 1.0,
     "elec_cents_kwh": 14.05,
@@ -586,36 +609,37 @@
     "snow_days": 8.333333333333343,
     "heat_days": 68.75,
     "reg_tier": 8.333333333333332,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 91.66666666666667,
     "elec_cents_kwh": 33.33333333333334
    },
    "pillar_scores": {
     "demand": 82.29166666666666,
     "operating": 35.41666666666667,
-    "regulatory": 8.333333333333332,
-    "competition": 85.41666666666669,
+    "regulatory": 13.333333333333336,
+    "competition": 91.66666666666669,
     "charging": 33.33333333333334
    },
-   "total": 53.80208333333334,
+   "total": 55.73958333333334,
    "totals": {
-    "balanced": 53.80208333333334,
-    "fast_growth": 59.6875,
-    "low_risk": 41.5625,
-    "capital_light": 51.51041666666666
+    "balanced": 55.73958333333334,
+    "fast_growth": 61.0625,
+    "low_risk": 43.6875,
+    "capital_light": 53.76041666666667
    },
    "ranks": {
-    "balanced": 7,
-    "fast_growth": 5,
-    "low_risk": 21,
-    "capital_light": 12
+    "balanced": 4,
+    "fast_growth": 4,
+    "low_risk": 20,
+    "capital_light": 4
    },
    "opportunity": 82.29166666666666,
-   "ease_of_entry": 38.46153846153847,
+   "ease_of_entry": 41.4423076923077,
    "vegas_similarity": 15.528811110877598,
    "why": [
     "Demand score 82/100: 9.4M-person metro, 11,904 people per sq mi in Chicago",
     "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "IL is regulation Tier 1 (testing only, driverless commercial service not yet allowed): launch depends on policy change or permits"
+    "IL is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -624,13 +648,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 1,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "No enacted authorization for driverless taxis; pilot bills HB4663 and HB4789 are pending and disagree on local control, so legislation is needed first.",
+    "new_entrant_source_url": "https://activetransportation.org/?p=24155",
+    "new_entrant_source_title": "Active Transportation Alliance (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "unclear",
     "permit_body": "IDOT (proposed)",
     "key_law_or_rule": "No enacted driverless authorization found; HB4663 (AV Pilot Project Act) and HB4789 pending",
@@ -685,10 +715,10 @@
      "payback_years": 0.6638440845994603
     }
    },
-   "confidence": 0.4088,
-   "median_rank": 7.0,
-   "rank_p10": 3.0,
-   "rank_p90": 15.0
+   "confidence": 0.6176,
+   "median_rank": 4.0,
+   "rank_p10": 1.0,
+   "rank_p90": 12.0
   },
   {
    "metro": "Dallas-Fort Worth",
@@ -709,8 +739,9 @@
     "snow_days": 0.8,
     "heat_days": 3.9,
     "reg_tier": 3.0,
-    "crowding": 2.4,
-    "n_competitors": 4.0,
+    "new_entrant_score": 2.0,
+    "crowding": 3.0,
+    "n_competitors": 5.0,
     "elec_cents_kwh": 8.6,
     "log_metro_pop": 15.89314922544264
    },
@@ -724,36 +755,37 @@
     "snow_days": 50.0,
     "heat_days": 8.333333333333343,
     "reg_tier": 72.91666666666666,
+    "new_entrant_score": 79.16666666666666,
     "crowding": 0.0,
     "elec_cents_kwh": 93.75
    },
    "pillar_scores": {
     "demand": 50.83333333333334,
     "operating": 46.66666666666667,
-    "regulatory": 72.91666666666666,
+    "regulatory": 75.41666666666666,
     "competition": 0.0,
     "charging": 93.75
    },
-   "total": 48.72916666666667,
+   "total": 49.22916666666667,
    "totals": {
-    "balanced": 48.72916666666667,
-    "fast_growth": 50.375,
-    "low_risk": 53.0625,
-    "capital_light": 48.33333333333333
+    "balanced": 49.22916666666667,
+    "fast_growth": 50.75,
+    "low_risk": 53.8125,
+    "capital_light": 48.83333333333333
    },
    "ranks": {
-    "balanced": 17,
+    "balanced": 14,
     "fast_growth": 13,
-    "low_risk": 11,
-    "capital_light": 18
+    "low_risk": 10,
+    "capital_light": 17
    },
    "opportunity": 50.83333333333334,
-   "ease_of_entry": 47.59615384615385,
+   "ease_of_entry": 48.36538461538461,
    "vegas_similarity": 31.621093767714598,
    "why": [
     "Demand score 51/100: 8.0M-person metro, 3,850 people per sq mi in Dallas",
-    "TX is regulation Tier 3: driverless commercial service allowed and operating",
-    "Crowded field: Waymo, Tesla, Avride already present (crowding 2.4)"
+    "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
+    "Crowded field: Avride, Tesla, Waymo already present (crowding 3.0)"
    ],
    "competitors": [
     {
@@ -762,28 +794,18 @@
      "platform_partner": "Lyft",
      "first_public_date": "",
      "source_url": "https://dallasinnovates.com/?p=271288",
-     "source_title": "Dallas Innovates: Lyft is launching a robotaxi service in Dallas (possible as soon as 2026)",
+     "source_title": "Dallas Innovates: Lyft robotaxi service in Dallas (as soon as 2026)",
      "as_of_date": "2025-02-11",
-     "confidence": "high"
-    },
-    {
-     "competitor": "Waymo",
-     "status": "operating_limited",
-     "platform_partner": "",
-     "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In (limited access per search results)",
-     "as_of_date": "2026-11-05",
      "confidence": "medium"
     },
     {
-     "competitor": "Tesla",
-     "status": "operating_limited",
-     "platform_partner": "",
+     "competitor": "May Mobility",
+     "status": "announced",
+     "platform_partner": "Uber",
      "first_public_date": "",
-     "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
-     "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
-     "as_of_date": "2026-07-03",
+     "source_url": "https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm",
+     "source_title": "May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",
+     "as_of_date": "2026-05-29",
      "confidence": "medium"
     },
     {
@@ -791,14 +813,40 @@
      "status": "operating_limited",
      "platform_partner": "Uber",
      "first_public_date": "2025-12-03",
-     "source_url": "https://amp.insurancejournal.com/news/southcentral/2025/12/03/849795.htm",
-     "source_title": "Insurance Journal: Uber teams with Avride to offer robotaxi rides in Dallas (search extract only; human supervision at launch)",
+     "source_url": "https://www.uber.com/us/en/newsroom/avride-on-uber",
+     "source_title": "Uber newsroom: Avride on Uber, Dallas (on-board specialist at launch)",
      "as_of_date": "2025-12-03",
-     "confidence": "medium"
+     "confidence": "high"
+    },
+    {
+     "competitor": "Tesla",
+     "status": "operating_limited",
+     "platform_partner": "",
+     "first_public_date": "2026-04-18",
+     "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
+     "source_title": "Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",
+     "as_of_date": "2026-04-30",
+     "confidence": "high"
+    },
+    {
+     "competitor": "Waymo",
+     "status": "operating_public",
+     "platform_partner": "",
+     "first_public_date": "2026-02-24",
+     "source_url": "https://techcrunch.com/2026/08/04/waymo-opens-up-robotaxi-service-in-dallas-to-everyone/",
+     "source_title": "TechCrunch: Waymo opens up robotaxi service in Dallas to everyone",
+     "as_of_date": "2026-08-04",
+     "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "One online TxMCCS application, a written acknowledgment of six vehicle conditions and a DPS emergency-responder plan; no fee, no expiry; enforceable from 2026-05-28. No separate fare permit on the page.",
+    "new_entrant_source_url": "https://www.txdmv.gov/AVprogram",
+    "new_entrant_source_title": "TxDMV Automated Vehicle program (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "TxDMV",
     "key_law_or_rule": "Texas Transportation Code ch. 545 subch. J (SB 2807 of 2025)",
@@ -878,10 +926,10 @@
      "payback_years": 0.6562611000412624
     }
    },
-   "confidence": 0.0071,
-   "median_rank": 15.0,
-   "rank_p10": 8.0,
-   "rank_p90": 21.0
+   "confidence": 0.0249,
+   "median_rank": 13.0,
+   "rank_p10": 7.0,
+   "rank_p90": 22.0
   },
   {
    "metro": "Houston",
@@ -902,8 +950,9 @@
     "snow_days": 0.4,
     "heat_days": 0.2,
     "reg_tier": 3.0,
-    "crowding": 1.4,
-    "n_competitors": 2.0,
+    "new_entrant_score": 2.0,
+    "crowding": 2.1,
+    "n_competitors": 3.0,
     "elec_cents_kwh": 8.6,
     "log_metro_pop": 15.822756067797876
    },
@@ -917,61 +966,78 @@
     "snow_days": 66.66666666666667,
     "heat_days": 27.083333333333343,
     "reg_tier": 72.91666666666666,
-    "crowding": 20.833333333333343,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 16.666666666666657,
     "elec_cents_kwh": 93.75
    },
    "pillar_scores": {
     "demand": 53.125,
     "operating": 35.41666666666668,
-    "regulatory": 72.91666666666666,
-    "competition": 20.833333333333343,
+    "regulatory": 75.41666666666666,
+    "competition": 16.666666666666657,
     "charging": 93.75
    },
-   "total": 49.84375,
+   "total": 49.71875,
    "totals": {
-    "balanced": 49.84375,
-    "fast_growth": 51.35416666666666,
-    "low_risk": 51.66666666666667,
-    "capital_light": 50.26041666666667
+    "balanced": 49.71875,
+    "fast_growth": 51.3125,
+    "low_risk": 52.00000000000001,
+    "capital_light": 49.92708333333333
    },
    "ranks": {
-    "balanced": 13,
-    "fast_growth": 11,
-    "low_risk": 12,
-    "capital_light": 15
+    "balanced": 12,
+    "fast_growth": 12,
+    "low_risk": 11,
+    "capital_light": 14
    },
    "opportunity": 53.125,
-   "ease_of_entry": 48.07692307692308,
+   "ease_of_entry": 47.88461538461539,
    "vegas_similarity": 16.017682206370708,
    "why": [
     "Demand score 53/100: 7.4M-person metro, 3,633 people per sq mi in Houston",
-    "TX is regulation Tier 3: driverless commercial service allowed and operating",
+    "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Rain on ~119 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
-     "competitor": "Waymo",
-     "status": "operating_limited",
-     "platform_partner": "",
-     "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In (limited access per search results)",
-     "as_of_date": "2026-11-05",
-     "confidence": "medium"
-    },
-    {
      "competitor": "Tesla",
      "status": "operating_limited",
      "platform_partner": "",
-     "first_public_date": "",
-     "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
-     "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
-     "as_of_date": "2026-07-03",
+     "first_public_date": "2026-04-18",
+     "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
+     "source_title": "Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",
+     "as_of_date": "2026-04-30",
+     "confidence": "high"
+    },
+    {
+     "competitor": "Waymo",
+     "status": "operating_public",
+     "platform_partner": "",
+     "first_public_date": "2026-02-24",
+     "source_url": "https://gmg-kprc-prod.cdn.arcpublishing.com/news/local/2026/08/21/waymo-opens-robotaxi-rides-to-anyone-with-the-app-in-houston/",
+     "source_title": "KPRC: Waymo opens robotaxi rides to anyone with the app in Houston (waymo.com page still says gradually adding riders)",
+     "as_of_date": "2026-08-21",
      "confidence": "medium"
+    },
+    {
+     "competitor": "Nuro/Lucid",
+     "status": "testing",
+     "platform_partner": "Uber",
+     "first_public_date": "",
+     "source_url": "https://electrek.co/2026/06/17/uber-lucid-robotaxi-houston/",
+     "source_title": "Electrek: Uber, Lucid, Nuro robotaxi Houston mid-2027; Nuro already testing with safety operators",
+     "as_of_date": "2026-06-17",
+     "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "One online TxMCCS application, a written acknowledgment of six vehicle conditions and a DPS emergency-responder plan; no fee, no expiry; enforceable from 2026-05-28. No separate fare permit on the page.",
+    "new_entrant_source_url": "https://www.txdmv.gov/AVprogram",
+    "new_entrant_source_title": "TxDMV Automated Vehicle program (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "TxDMV",
     "key_law_or_rule": "Texas Transportation Code ch. 545 subch. J (SB 2807 of 2025)",
@@ -1047,10 +1113,10 @@
      "payback_years": 0.6562611000412624
     }
    },
-   "confidence": 0.0239,
+   "confidence": 0.0348,
    "median_rank": 13.0,
-   "rank_p10": 8.0,
-   "rank_p90": 18.0
+   "rank_p10": 7.0,
+   "rank_p90": 20.0
   },
   {
    "metro": "Washington DC",
@@ -1071,8 +1137,9 @@
     "snow_days": 6.5,
     "heat_days": 0.0,
     "reg_tier": 1.0,
-    "crowding": 0.3,
-    "n_competitors": 1.0,
+    "new_entrant_score": 0.0,
+    "crowding": 0.7,
+    "n_competitors": 2.0,
     "elec_cents_kwh": 23.7,
     "log_metro_pop": 15.65897292934583
    },
@@ -1086,36 +1153,37 @@
     "snow_days": 37.5,
     "heat_days": 68.75,
     "reg_tier": 8.333333333333332,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 58.33333333333333,
     "elec_cents_kwh": 20.833333333333343
    },
    "pillar_scores": {
     "demand": 77.70833333333334,
     "operating": 42.08333333333334,
-    "regulatory": 8.333333333333332,
-    "competition": 85.41666666666669,
+    "regulatory": 13.333333333333336,
+    "competition": 58.33333333333333,
     "charging": 20.833333333333343
    },
-   "total": 53.23958333333334,
+   "total": 50.17708333333334,
    "totals": {
-    "balanced": 53.23958333333334,
-    "fast_growth": 58.10416666666668,
-    "low_risk": 42.35416666666668,
-    "capital_light": 50.78125
+    "balanced": 50.17708333333334,
+    "fast_growth": 56.14583333333334,
+    "low_risk": 41.14583333333334,
+    "capital_light": 46.36458333333333
    },
    "ranks": {
-    "balanced": 8,
-    "fast_growth": 6,
-    "low_risk": 20,
-    "capital_light": 14
+    "balanced": 11,
+    "fast_growth": 8,
+    "low_risk": 23,
+    "capital_light": 22
    },
    "opportunity": 77.70833333333334,
-   "ease_of_entry": 40.06410256410256,
+   "ease_of_entry": 35.3525641025641,
    "vegas_similarity": 17.520954972500803,
    "why": [
     "Demand score 78/100: 6.3M-person metro, 11,146 people per sq mi in Washington",
-    "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "DC is regulation Tier 1 (testing only, driverless commercial service not yet allowed): launch depends on policy change or permits"
+    "Operating conditions score 42/100: ~103 rain, 6 snow and 0 extreme-heat days a year",
+    "DC is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -1124,13 +1192,29 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
+    },
+    {
+     "competitor": "Zoox",
+     "status": "testing",
+     "platform_partner": "",
+     "first_public_date": "",
+     "source_url": "https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/",
+     "source_title": "TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site)",
+     "as_of_date": "2025-09-30",
+     "confidence": "low"
     }
    ],
    "regulation": {
     "tier": 1,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Commercial driverless service is not authorized; the Autonomous Vehicle Deployment Authorization Amendment Act of 2026 (B26-0684) is at an early hearing stage with labor opposition.",
+    "new_entrant_source_url": "https://wjla.com/news/local/dc-bill-autonomous-vehicles-robotaxi-robotaxis-self-driving-cars-driverless-washington-council-charles-allen-waymo-transportation-tech-ai-rideshare-public-safety-traffic-hearing",
+    "new_entrant_source_title": "WJLA (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "N",
     "permit_body": "DDOT (testing with driver in car)",
     "key_law_or_rule": "DC Code testing law; Autonomous Vehicle Deployment Authorization Amendment Act of 2026 (proposed)",
@@ -1194,10 +1278,10 @@
      "payback_years": 0.677709663250304
     }
    },
-   "confidence": 0.1833,
-   "median_rank": 8.0,
-   "rank_p10": 4.0,
-   "rank_p90": 16.0
+   "confidence": 0.0005,
+   "median_rank": 13.0,
+   "rank_p10": 9.0,
+   "rank_p90": 20.0
   },
   {
    "metro": "Philadelphia",
@@ -1218,7 +1302,8 @@
     "snow_days": 7.7,
     "heat_days": 0.0,
     "reg_tier": 2.0,
-    "crowding": 0.3,
+    "new_entrant_score": 0.0,
+    "crowding": 0.4,
     "n_competitors": 1.0,
     "elec_cents_kwh": 13.9,
     "log_metro_pop": 15.651608073152747
@@ -1233,51 +1318,58 @@
     "snow_days": 29.166666666666657,
     "heat_days": 68.75,
     "reg_tier": 31.25,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 72.91666666666667,
     "elec_cents_kwh": 39.583333333333336
    },
    "pillar_scores": {
     "demand": 68.95833333333331,
     "operating": 42.08333333333333,
-    "regulatory": 31.25,
-    "competition": 85.41666666666669,
+    "regulatory": 27.083333333333336,
+    "competition": 72.91666666666667,
     "charging": 39.583333333333336
    },
-   "total": 55.69791666666666,
+   "total": 52.98958333333333,
    "totals": {
-    "balanced": 55.69791666666666,
-    "fast_growth": 58.10416666666666,
-    "low_risk": 48.41666666666667,
-    "capital_light": 55.05208333333333
+    "balanced": 52.98958333333333,
+    "fast_growth": 56.22916666666666,
+    "low_risk": 45.91666666666667,
+    "capital_light": 51.71874999999999
    },
    "ranks": {
-    "balanced": 4,
-    "fast_growth": 6,
-    "low_risk": 14,
-    "capital_light": 3
+    "balanced": 9,
+    "fast_growth": 7,
+    "low_risk": 17,
+    "capital_light": 8
    },
    "opportunity": 68.95833333333331,
-   "ease_of_entry": 48.55769230769231,
+   "ease_of_entry": 44.391025641025635,
    "vegas_similarity": 13.029978388411436,
    "why": [
     "Demand score 69/100: 6.3M-person metro, 11,760 people per sq mi in Philadelphia",
-    "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "Snow on ~8 days a year: needs winter validation before launch"
+    "Light competition: 0 operator(s) in service, crowding score 0.4",
+    "PA is regulation Tier 2 (driverless deployment allowed with a permit or filing process) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
      "competitor": "Waymo",
-     "status": "announced",
+     "status": "testing",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_url": "https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/",
+     "source_title": "PhillyVoice: Waymo tested in Philly with safety drivers since July 2025; not yet configured for driverless",
+     "as_of_date": "2026-10-09",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 2,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Sequential gates: supervised testing, then PennDOT driverless certification, notice to the city, and Pennsylvania PUC approval for commercial service. Waymo has tested for over a year and still lacks the certification.",
+    "new_entrant_source_url": "https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/",
+    "new_entrant_source_title": "PhillyVoice 2026-10-09 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "Y",
     "permit_body": "PennDOT",
     "key_law_or_rule": "Act 130 of 2022 (75 Pa.C.S. Ch.85) and PennDOT guidelines (Oct 2024)",
@@ -1337,10 +1429,10 @@
      "payback_years": 0.6636330341592661
     }
    },
-   "confidence": 0.5734,
-   "median_rank": 5.0,
-   "rank_p10": 2.0,
-   "rank_p90": 9.0
+   "confidence": 0.1087,
+   "median_rank": 8.0,
+   "rank_p10": 5.0,
+   "rank_p90": 13.0
   },
   {
    "metro": "Miami",
@@ -1361,7 +1453,8 @@
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
-    "crowding": 1.7999999999999998,
+    "new_entrant_score": 2.0,
+    "crowding": 2.1,
     "n_competitors": 3.0,
     "elec_cents_kwh": 11.78,
     "log_metro_pop": 15.647978575277781
@@ -1376,48 +1469,39 @@
     "snow_days": 87.5,
     "heat_days": 68.75,
     "reg_tier": 72.91666666666666,
-    "crowding": 8.333333333333343,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 16.666666666666657,
     "elec_cents_kwh": 75.0
    },
    "pillar_scores": {
     "demand": 77.91666666666666,
     "operating": 48.75,
-    "regulatory": 72.91666666666666,
-    "competition": 8.333333333333343,
+    "regulatory": 75.41666666666666,
+    "competition": 16.666666666666657,
     "charging": 75.0
    },
-   "total": 59.04166666666666,
+   "total": 60.79166666666666,
    "totals": {
-    "balanced": 59.04166666666666,
-    "fast_growth": 64.22916666666666,
-    "low_risk": 59.10416666666665,
-    "capital_light": 55.41666666666667
+    "balanced": 60.79166666666666,
+    "fast_growth": 65.4375,
+    "low_risk": 60.68749999999999,
+    "capital_light": 57.58333333333333
    },
    "ranks": {
-    "balanced": 3,
-    "fast_growth": 2,
-    "low_risk": 5,
-    "capital_light": 2
+    "balanced": 1,
+    "fast_growth": 1,
+    "low_risk": 2,
+    "capital_light": 1
    },
    "opportunity": 77.91666666666666,
-   "ease_of_entry": 48.878205128205124,
+   "ease_of_entry": 51.57051282051282,
    "vegas_similarity": 16.85005227096549,
    "why": [
     "Demand score 78/100: 6.2M-person metro, 12,772 people per sq mi in Miami",
-    "FL is regulation Tier 3: driverless commercial service allowed and operating",
-    "Crowded field: Waymo, Tesla already present (crowding 1.8)"
+    "FL is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
+    "Rain on ~132 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
-    {
-     "competitor": "Waymo",
-     "status": "operating_limited",
-     "platform_partner": "",
-     "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In (limited access per search results)",
-     "as_of_date": "2026-11-05",
-     "confidence": "medium"
-    },
     {
      "competitor": "Tesla",
      "status": "operating_limited",
@@ -1429,18 +1513,34 @@
      "confidence": "medium"
     },
     {
+     "competitor": "Waymo",
+     "status": "operating_public",
+     "platform_partner": "",
+     "first_public_date": "",
+     "source_url": "https://waymo.com/blog/2026/04/floridas-new-way-to-ride/",
+     "source_title": "Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando)",
+     "as_of_date": "2026-04-15",
+     "confidence": "high"
+    },
+    {
      "competitor": "Zoox",
      "status": "testing",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://zoox.com/",
-     "source_title": "Zoox - Where to Ride (page lists city but gives no status)",
-     "as_of_date": "2026-11-05",
-     "confidence": "low"
+     "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
+     "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
+     "as_of_date": "2026-03-24",
+     "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "No state permit: a human operator is not required, and on-demand networks need only the insurance in s.627.749. Operators already serve riders in Miami, Orlando and Tampa.",
+    "new_entrant_source_url": "https://flsenate.gov/Laws/Statutes/2025/0316.85",
+    "new_entrant_source_title": "Florida Statutes 316.85 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "None for vehicle operation (insurance rules apply)",
     "key_law_or_rule": "Fla. Stat. 316.85",
@@ -1504,10 +1604,10 @@
      "payback_years": 0.6606644748572159
     }
    },
-   "confidence": 0.812,
-   "median_rank": 3.0,
-   "rank_p10": 2.0,
-   "rank_p90": 7.0
+   "confidence": 0.9505,
+   "median_rank": 1.0,
+   "rank_p10": 1.0,
+   "rank_p90": 4.0
   },
   {
    "metro": "Atlanta",
@@ -1528,8 +1628,9 @@
     "snow_days": 0.7,
     "heat_days": 0.0,
     "reg_tier": 3.0,
-    "crowding": 1.4,
-    "n_competitors": 2.0,
+    "new_entrant_score": 2.0,
+    "crowding": 2.1,
+    "n_competitors": 3.0,
     "elec_cents_kwh": 12.01,
     "log_metro_pop": 15.64911182153993
    },
@@ -1543,61 +1644,78 @@
     "snow_days": 54.16666666666667,
     "heat_days": 68.75,
     "reg_tier": 72.91666666666666,
-    "crowding": 20.833333333333343,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 16.666666666666657,
     "elec_cents_kwh": 62.5
    },
    "pillar_scores": {
     "demand": 60.62500000000001,
     "operating": 47.08333333333333,
-    "regulatory": 72.91666666666666,
-    "competition": 20.833333333333343,
+    "regulatory": 75.41666666666666,
+    "competition": 16.666666666666657,
     "charging": 62.5
    },
-   "total": 53.82291666666667,
+   "total": 53.69791666666667,
    "totals": {
-    "balanced": 53.82291666666667,
-    "fast_growth": 55.875,
-    "low_risk": 55.68749999999999,
-    "capital_light": 51.92708333333333
+    "balanced": 53.69791666666667,
+    "fast_growth": 55.83333333333334,
+    "low_risk": 56.02083333333333,
+    "capital_light": 51.59374999999999
    },
    "ranks": {
-    "balanced": 5,
-    "fast_growth": 8,
-    "low_risk": 7,
-    "capital_light": 9
+    "balanced": 8,
+    "fast_growth": 9,
+    "low_risk": 5,
+    "capital_light": 10
    },
    "opportunity": 60.62500000000001,
-   "ease_of_entry": 50.1602564102564,
+   "ease_of_entry": 49.96794871794871,
    "vegas_similarity": 26.677978473263693,
    "why": [
     "Demand score 61/100: 6.3M-person metro, 3,735 people per sq mi in Atlanta",
-    "GA is regulation Tier 3: driverless commercial service allowed and operating",
+    "GA is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Rain on ~108 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
+    {
+     "competitor": "May Mobility",
+     "status": "operating_limited",
+     "platform_partner": "Lyft",
+     "first_public_date": "2025-09",
+     "source_url": "https://www.sec.gov/Archives/edgar/data/0002111542/000121390026100367/ea030470201ex99-2.htm",
+     "source_title": "May Mobility investor presentation (SEC Form 8-K exhibit, 2026), slide 17",
+     "as_of_date": "2026-05-29",
+     "confidence": "medium"
+    },
     {
      "competitor": "Waymo",
      "status": "operating_public",
      "platform_partner": "Uber",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In",
-     "as_of_date": "2026-11-05",
-     "confidence": "high"
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
+     "confidence": "medium"
     },
     {
      "competitor": "Zoox",
      "status": "testing",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://zoox.com/",
-     "source_title": "Zoox - Where to Ride (page lists city but gives no status)",
-     "as_of_date": "2026-11-05",
-     "confidence": "low"
+     "source_url": "https://www.insurancejournal.com/news/southeast/2025/05/21/824605.htm",
+     "source_title": "Insurance Journal: Zoox testing in Atlanta (safety drivers, mapping); Electrek 2026-03-24 lists Atlanta as being mapped and tested",
+     "as_of_date": "2025-05-21",
+     "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "Vehicle must meet federal standards and be registered as fully autonomous; no separate permit on the AFDC summary (statute text not opened). Operators already serve riders in Atlanta.",
+    "new_entrant_source_url": "https://www.afdc.energy.gov/laws/11956",
+    "new_entrant_source_title": "AFDC summary of Georgia law (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "Y",
     "permit_body": "GA Dept of Driver Services (registration as fully autonomous vehicle; agency not named on AFDC page)",
     "key_law_or_rule": "O.C.G.A. 40-1-1 and 40-8-11",
@@ -1661,8 +1779,8 @@
      "payback_years": 0.660985250568561
     }
    },
-   "confidence": 0.271,
-   "median_rank": 8.0,
+   "confidence": 0.3619,
+   "median_rank": 7.0,
    "rank_p10": 4.0,
    "rank_p90": 12.0
   },
@@ -1685,6 +1803,7 @@
     "snow_days": 14.3,
     "heat_days": 0.0,
     "reg_tier": 1.0,
+    "new_entrant_score": 0.0,
     "crowding": 0.4,
     "n_competitors": 1.0,
     "elec_cents_kwh": 24.66,
@@ -1700,36 +1819,37 @@
     "snow_days": 20.833333333333343,
     "heat_days": 68.75,
     "reg_tier": 8.333333333333332,
-    "crowding": 62.5,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 72.91666666666667,
     "elec_cents_kwh": 16.666666666666657
    },
    "pillar_scores": {
     "demand": 76.24999999999999,
     "operating": 42.08333333333334,
-    "regulatory": 8.333333333333332,
-    "competition": 62.5,
+    "regulatory": 13.333333333333336,
+    "competition": 72.91666666666667,
     "charging": 16.666666666666657
    },
-   "total": 49.08333333333333,
+   "total": 51.64583333333333,
    "totals": {
-    "balanced": 49.08333333333333,
-    "fast_growth": 54.87499999999999,
-    "low_risk": 39.56250000000001,
-    "capital_light": 45.41666666666667
+    "balanced": 51.64583333333333,
+    "fast_growth": 56.66666666666666,
+    "low_risk": 42.10416666666667,
+    "capital_light": 48.50000000000001
    },
    "ranks": {
-    "balanced": 16,
-    "fast_growth": 9,
-    "low_risk": 22,
-    "capital_light": 20
+    "balanced": 10,
+    "fast_growth": 6,
+    "low_risk": 21,
+    "capital_light": 18
    },
    "opportunity": 76.24999999999999,
-   "ease_of_entry": 34.455128205128204,
+   "ease_of_entry": 38.3974358974359,
    "vegas_similarity": 15.095399878428836,
    "why": [
     "Demand score 76/100: 5.0M-person metro, 13,786 people per sq mi in Boston",
-    "Operating conditions score 42/100: ~95 rain, 14 snow and 0 extreme-heat days a year",
-    "MA is regulation Tier 1 (testing only, driverless commercial service not yet allowed): launch depends on policy change or permits"
+    "Light competition: 0 operator(s) in service, crowding score 0.4",
+    "MA is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -1738,13 +1858,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://www.bostonglobe.com/2026/02/07/business/autonomous-vehicles-boston-waymo/",
-     "source_title": "Boston Globe summary: Waymo returns to Boston testing with human drivers",
+     "source_title": "Boston Globe: Waymo returns to Boston testing with human drivers (page undated; URL date)",
      "as_of_date": "2026-02-07",
      "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 1,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "No law allows driverless vehicles; Beacon Hill must pass a framework (H3634/S2379) while a union-backed bill (H3669/S2393) would require a human operator. Waymo uses trained specialists until it is legalized.",
+    "new_entrant_source_url": "https://www.statehousenews.com/news/transportation/industry-seeks-massachusetts-foothold-for-driverless-cars/article_adef87cc-dd80-4f4e-ac91-1c5fa47ec7f7.html",
+    "new_entrant_source_title": "State House News 2026-02-05 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "N",
     "permit_body": "MassDOT (testing); no deployment framework",
     "key_law_or_rule": "No enabling law; bills H3634/S2379 (framework, industry-backed) and H3669/S2393 (human operator required) pending as of Feb 2026",
@@ -1799,10 +1925,10 @@
      "payback_years": 0.6791207796781935
     }
    },
-   "confidence": 0.0001,
-   "median_rank": 15.0,
-   "rank_p10": 9.0,
-   "rank_p90": 20.0
+   "confidence": 0.0618,
+   "median_rank": 10.0,
+   "rank_p10": 6.0,
+   "rank_p90": 18.0
   },
   {
    "metro": "Phoenix",
@@ -1823,6 +1949,7 @@
     "snow_days": 0.0,
     "heat_days": 69.6,
     "reg_tier": 3.0,
+    "new_entrant_score": 2.0,
     "crowding": 1.3,
     "n_competitors": 2.0,
     "elec_cents_kwh": 12.28,
@@ -1838,35 +1965,36 @@
     "snow_days": 87.5,
     "heat_days": 0.0,
     "reg_tier": 72.91666666666666,
-    "crowding": 29.166666666666657,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 33.33333333333334,
     "elec_cents_kwh": 58.33333333333333
    },
    "pillar_scores": {
     "demand": 37.708333333333336,
     "operating": 75.0,
-    "regulatory": 72.91666666666666,
-    "competition": 29.166666666666657,
+    "regulatory": 75.41666666666666,
+    "competition": 33.33333333333334,
     "charging": 58.33333333333333
    },
-   "total": 53.82291666666667,
+   "total": 54.94791666666667,
    "totals": {
-    "balanced": 53.82291666666667,
-    "fast_growth": 50.62500000000001,
-    "low_risk": 61.5,
-    "capital_light": 54.42708333333332
+    "balanced": 54.94791666666667,
+    "fast_growth": 51.41666666666667,
+    "low_risk": 62.66666666666666,
+    "capital_light": 55.76041666666666
    },
    "ranks": {
     "balanced": 5,
-    "fast_growth": 12,
-    "low_risk": 4,
-    "capital_light": 5
+    "fast_growth": 11,
+    "low_risk": 1,
+    "capital_light": 2
    },
    "opportunity": 37.708333333333336,
-   "ease_of_entry": 62.49999999999999,
+   "ease_of_entry": 64.23076923076923,
    "vegas_similarity": 61.87167854301529,
    "why": [
     "Operating conditions score 75/100: ~25 rain, 0 snow and 70 extreme-heat days a year",
-    "AZ is regulation Tier 3: driverless commercial service allowed and operating",
+    "AZ is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Demand is the biggest gap to a perfect score (38/100): 5.0M metro, 3,168 people per sq mi in Phoenix"
    ],
    "competitors": [
@@ -1876,7 +2004,7 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
-     "source_title": "Drive Tesla Canada: upcoming cities list (fan site)",
+     "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
      "confidence": "medium"
     },
@@ -1885,14 +2013,20 @@
      "status": "operating_public",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In",
-     "as_of_date": "2026-11-05",
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "Two filings to ADOT/DPS (law-enforcement interaction plan and a written statement); the statute requires submission, not approval. Operators already serve riders in Phoenix.",
+    "new_entrant_source_url": "https://www.azleg.gov/ars/28/09702.htm",
+    "new_entrant_source_title": "Arizona A.R.S. 28-9702 (text opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "ADOT (filings) and AZ DPS",
     "key_law_or_rule": "A.R.S. 28-9702",
@@ -1956,10 +2090,10 @@
      "payback_years": 0.6613622110529167
     }
    },
-   "confidence": 0.3732,
-   "median_rank": 7.0,
-   "rank_p10": 4.0,
-   "rank_p90": 12.0
+   "confidence": 0.5062,
+   "median_rank": 5.0,
+   "rank_p10": 2.0,
+   "rank_p90": 11.0
   },
   {
    "metro": "San Francisco",
@@ -1980,8 +2114,9 @@
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
-    "crowding": 1.7,
-    "n_competitors": 2.0,
+    "new_entrant_score": 0.0,
+    "crowding": 2.5,
+    "n_competitors": 4.0,
     "elec_cents_kwh": 26.96,
     "log_metro_pop": 15.351308173482922
    },
@@ -1995,36 +2130,37 @@
     "snow_days": 87.5,
     "heat_days": 68.75,
     "reg_tier": 72.91666666666666,
-    "crowding": 12.5,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 6.25,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 76.25,
     "operating": 82.08333333333334,
-    "regulatory": 72.91666666666666,
-    "competition": 12.5,
+    "regulatory": 52.08333333333332,
+    "competition": 6.25,
     "charging": 6.25
    },
-   "total": 63.97916666666667,
+   "total": 58.875,
    "totals": {
-    "balanced": 63.97916666666667,
-    "fast_growth": 67.04166666666667,
-    "low_risk": 67.41666666666666,
-    "capital_light": 57.29166666666666
+    "balanced": 58.875,
+    "fast_growth": 63.29166666666667,
+    "low_risk": 60.54166666666666,
+    "capital_light": 51.875
    },
    "ranks": {
-    "balanced": 1,
-    "fast_growth": 1,
-    "low_risk": 1,
-    "capital_light": 1
+    "balanced": 2,
+    "fast_growth": 2,
+    "low_risk": 3,
+    "capital_light": 7
    },
    "opportunity": 76.25,
-   "ease_of_entry": 57.37179487179487,
+   "ease_of_entry": 49.51923076923077,
    "vegas_similarity": 28.40871201307334,
    "why": [
     "Demand score 76/100: 4.6M-person metro, 17,784 people per sq mi in San Francisco",
     "Operating conditions score 82/100: ~47 rain, 0 snow and 0 extreme-heat days a year",
-    "Crowded field: Zoox, Waymo already present (crowding 1.7)"
+    "Crowded field: Zoox, Waymo already present (crowding 2.5)"
    ],
    "competitors": [
     {
@@ -2032,24 +2168,50 @@
      "status": "operating_limited",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://zoox.com/",
-     "source_title": "Zoox - Where to Ride (page lists city but gives no status)",
-     "as_of_date": "2026-11-05",
-     "confidence": "low"
+     "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
+     "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
+     "as_of_date": "2026-03-24",
+     "confidence": "medium"
     },
     {
      "competitor": "Waymo",
      "status": "operating_public",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In",
-     "as_of_date": "2026-11-05",
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
+    },
+    {
+     "competitor": "Nuro/Lucid",
+     "status": "testing",
+     "platform_partner": "Uber",
+     "first_public_date": "",
+     "source_url": "https://sfstandard.com/2025/10/29/uber-launch-bay-area-robotaxi-service-nuru-lucid/",
+     "source_title": "SF Standard: Uber, Lucid, Nuro Bay Area robotaxi (on-road development underway; launch late 2026)",
+     "as_of_date": "2025-10-29",
+     "confidence": "medium"
+    },
+    {
+     "competitor": "Tesla",
+     "status": "testing",
+     "platform_partner": "",
+     "first_public_date": "",
+     "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
+     "source_title": "Electrek: Bay Area fleet runs supervised FSD, not unsupervised Robotaxi",
+     "as_of_date": "2026-04-30",
+     "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Separate regimes: DMV testing, driverless testing and deployment permits, plus four CPUC programs (drivered pilot, driverless pilot, drivered deployment, driverless deployment); fares are allowed only at deployment stages and a DMV deployment permit is a prerequisite.",
+    "new_entrant_source_url": "https://www.cpuc.ca.gov/regulatory-services/licensing/transportation-licensing-and-analysis-branch/autonomous-vehicle-programs",
+    "new_entrant_source_title": "CPUC Autonomous Vehicle Programs; CA DMV autonomous vehicles page (both opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "CA DMV (deployment permit) and CPUC (passenger service)",
     "key_law_or_rule": "DMV AV regulations (13 CCR Div.1 Ch.1 Art.3.7 and 3.8); CPUC permits",
@@ -2117,10 +2279,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.9809,
-   "median_rank": 1.0,
+   "confidence": 0.8536,
+   "median_rank": 2.0,
    "rank_p10": 1.0,
-   "rank_p90": 2.0
+   "rank_p90": 7.0
   },
   {
    "metro": "Detroit",
@@ -2141,6 +2303,7 @@
     "snow_days": 17.2,
     "heat_days": 0.0,
     "reg_tier": 2.0,
+    "new_entrant_score": 1.0,
     "crowding": 0.3,
     "n_competitors": 1.0,
     "elec_cents_kwh": 15.8,
@@ -2156,31 +2319,32 @@
     "snow_days": 12.5,
     "heat_days": 68.75,
     "reg_tier": 31.25,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 50.0,
+    "crowding": 91.66666666666667,
     "elec_cents_kwh": 29.166666666666657
    },
    "pillar_scores": {
     "demand": 59.16666666666667,
     "operating": 40.41666666666667,
-    "regulatory": 31.25,
-    "competition": 85.41666666666669,
+    "regulatory": 38.75,
+    "competition": 91.66666666666669,
     "charging": 29.166666666666657
    },
-   "total": 51.33333333333333,
+   "total": 53.77083333333333,
    "totals": {
-    "balanced": 51.33333333333333,
-    "fast_growth": 52.35416666666667,
-    "low_risk": 45.35416666666667,
-    "capital_light": 51.14583333333334
+    "balanced": 53.77083333333333,
+    "fast_growth": 54.10416666666667,
+    "low_risk": 48.22916666666667,
+    "capital_light": 53.89583333333334
    },
    "ranks": {
-    "balanced": 11,
+    "balanced": 7,
     "fast_growth": 10,
     "low_risk": 15,
-    "capital_light": 13
+    "capital_light": 3
    },
    "opportunity": 59.16666666666667,
-   "ease_of_entry": 47.11538461538462,
+   "ease_of_entry": 50.86538461538462,
    "vegas_similarity": 15.146616507475201,
    "why": [
     "Demand score 59/100: 4.4M-person metro, 4,603 people per sq mi in Detroit",
@@ -2194,13 +2358,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 2,
+    "new_entrant_path": "moderate",
+    "new_entrant_rationale": "The statute (framed around research and testing) needs proof of insurance and a monitoring or minimal-risk capability, with no separate permit; the commercial passenger path is not described, so it is untested for a new entrant.",
+    "new_entrant_source_url": "https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-257-665",
+    "new_entrant_source_title": "MCL 257.665 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "Y",
     "permit_body": "MI Secretary of State (insurance proof for testing)",
     "key_law_or_rule": "MCL 257.665 (2016 PA 332)",
@@ -2264,10 +2434,10 @@
      "payback_years": 0.6663162953480295
     }
    },
-   "confidence": 0.0282,
-   "median_rank": 11.0,
-   "rank_p10": 8.0,
-   "rank_p90": 16.0
+   "confidence": 0.269,
+   "median_rank": 7.0,
+   "rank_p10": 3.0,
+   "rank_p90": 12.0
   },
   {
    "metro": "Seattle",
@@ -2288,8 +2458,9 @@
     "snow_days": 6.8,
     "heat_days": 0.0,
     "reg_tier": 2.0,
-    "crowding": 0.3,
-    "n_competitors": 1.0,
+    "new_entrant_score": 1.0,
+    "crowding": 0.7,
+    "n_competitors": 2.0,
     "elec_cents_kwh": 11.86,
     "log_metro_pop": 15.217166326196864
    },
@@ -2303,36 +2474,37 @@
     "snow_days": 33.33333333333334,
     "heat_days": 68.75,
     "reg_tier": 31.25,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 50.0,
+    "crowding": 58.33333333333333,
     "elec_cents_kwh": 66.66666666666667
    },
    "pillar_scores": {
     "demand": 49.79166666666666,
     "operating": 37.08333333333334,
-    "regulatory": 31.25,
-    "competition": 85.41666666666669,
+    "regulatory": 38.75,
+    "competition": 58.33333333333333,
     "charging": 66.66666666666667
    },
-   "total": 49.09375,
+   "total": 46.53124999999999,
    "totals": {
-    "balanced": 49.09375,
-    "fast_growth": 48.875,
-    "low_risk": 44.1875,
-    "capital_light": 51.71875000000001
+    "balanced": 46.53124999999999,
+    "fast_growth": 47.29166666666666,
+    "low_risk": 43.72916666666666,
+    "capital_light": 47.80208333333333
    },
    "ranks": {
-    "balanced": 15,
-    "fast_growth": 14,
-    "low_risk": 16,
-    "capital_light": 10
+    "balanced": 20,
+    "fast_growth": 16,
+    "low_risk": 19,
+    "capital_light": 20
    },
    "opportunity": 49.79166666666666,
-   "ease_of_entry": 48.71794871794873,
+   "ease_of_entry": 44.77564102564103,
    "vegas_similarity": 20.438882782874103,
    "why": [
     "Demand score 50/100: 4.1M-person metro, 8,976 people per sq mi in Seattle",
-    "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "Rain on ~114 days a year: needs wet-weather validation before launch"
+    "Operating conditions score 37/100: ~114 rain, 7 snow and 0 extreme-heat days a year",
+    "WA is regulation Tier 2 (driverless deployment allowed with a permit or filing process) and a new operator's path is moderate: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -2341,13 +2513,29 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
+    },
+    {
+     "competitor": "Zoox",
+     "status": "testing",
+     "platform_partner": "",
+     "first_public_date": "",
+     "source_url": "https://techcrunch.com/2025/09/30/zooxs-next-autonomous-vehicle-testbed-is-washington-dc/",
+     "source_title": "TechCrunch: Zoox's next testbed is Washington DC (also lists Seattle as a test site)",
+     "as_of_date": "2025-09-30",
+     "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 2,
+    "new_entrant_path": "moderate",
+    "new_entrant_rationale": "One self-certification form plus a $5M umbrella insurance certificate and standard registration; the DOL page does not address deployment or paid passenger service, and no paid driverless service is operating, so the commercial path is untested.",
+    "new_entrant_source_url": "https://dol.wa.gov/vehicles-and-boats/vehicles/vehicle-registration/register-other-vehicles-and-other-services/registering-autonomous-vehicles",
+    "new_entrant_source_title": "WA DOL autonomous vehicle self-certification (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "Y",
     "permit_body": "WA Dept of Licensing (self-certification)",
     "key_law_or_rule": "Executive Order 17-01 and RCW 46.92",
@@ -2402,10 +2590,10 @@
      "payback_years": 0.6607760136985475
     }
    },
-   "confidence": 0.0084,
-   "median_rank": 14.0,
-   "rank_p10": 10.0,
-   "rank_p90": 18.0
+   "confidence": 0.0,
+   "median_rank": 19.0,
+   "rank_p10": 16.0,
+   "rank_p90": 21.0
   },
   {
    "metro": "Minneapolis",
@@ -2426,6 +2614,7 @@
     "snow_days": 22.3,
     "heat_days": 0.0,
     "reg_tier": 1.0,
+    "new_entrant_score": 0.0,
     "crowding": 0.4,
     "n_competitors": 1.0,
     "elec_cents_kwh": 12.7,
@@ -2441,36 +2630,37 @@
     "snow_days": 4.166666666666657,
     "heat_days": 68.75,
     "reg_tier": 8.333333333333332,
-    "crowding": 62.5,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 72.91666666666667,
     "elec_cents_kwh": 54.16666666666667
    },
    "pillar_scores": {
     "demand": 53.95833333333334,
     "operating": 43.74999999999999,
-    "regulatory": 8.333333333333332,
-    "competition": 62.5,
+    "regulatory": 13.333333333333336,
+    "competition": 72.91666666666667,
     "charging": 54.16666666666667
    },
-   "total": 43.57291666666667,
+   "total": 46.13541666666667,
    "totals": {
-    "balanced": 43.57291666666667,
-    "fast_growth": 45.9375,
-    "low_risk": 37.56250000000001,
-    "capital_light": 44.01041666666666
+    "balanced": 46.13541666666667,
+    "fast_growth": 47.72916666666667,
+    "low_risk": 40.10416666666667,
+    "capital_light": 47.09375000000001
    },
    "ranks": {
-    "balanced": 20,
-    "fast_growth": 17,
-    "low_risk": 25,
-    "capital_light": 22
+    "balanced": 21,
+    "fast_growth": 14,
+    "low_risk": 24,
+    "capital_light": 21
    },
    "opportunity": 53.95833333333334,
-   "ease_of_entry": 37.98076923076923,
+   "ease_of_entry": 41.92307692307692,
    "vegas_similarity": 15.617609876004423,
    "why": [
     "Demand score 54/100: 3.7M-person metro, 7,912 people per sq mi in Minneapolis",
-    "Operating conditions score 44/100: ~80 rain, 22 snow and 0 extreme-heat days a year",
-    "MN is regulation Tier 1 (testing only, driverless commercial service not yet allowed): launch depends on policy change or permits"
+    "Light competition: 0 operator(s) in service, crowding score 0.4",
+    "MN is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -2479,13 +2669,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://www.cbsnews.com/minnesota/news/waymo-future-minnesota-2026-legislative-session/",
-     "source_title": "CBS Minnesota: Waymo testing with human drivers in Twin Cities",
+     "source_title": "CBS Minnesota: Waymo testing with drivers in Twin Cities since late 2025",
      "as_of_date": "2026-05-20",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 1,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Driverless cars are not allowed under current law and the 2026 session ended without a bill; Waymo tests with drivers.",
+    "new_entrant_source_url": "https://www.cbsnews.com/minnesota/news/waymo-future-minnesota-2026-legislative-session/",
+    "new_entrant_source_title": "CBS Minnesota 2026-05-20 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "N",
     "permit_body": "None (statute silent)",
     "key_law_or_rule": "No statewide AV law",
@@ -2546,9 +2742,9 @@
     }
    },
    "confidence": 0.0,
-   "median_rank": 21.0,
-   "rank_p10": 16.0,
-   "rank_p90": 24.0
+   "median_rank": 20.0,
+   "rank_p10": 13.0,
+   "rank_p90": 23.0
   },
   {
    "metro": "San Diego",
@@ -2569,7 +2765,8 @@
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
-    "crowding": 0.7,
+    "new_entrant_score": 0.0,
+    "crowding": 1.0,
     "n_competitors": 1.0,
     "elec_cents_kwh": 26.96,
     "log_metro_pop": 15.006025408915486
@@ -2584,51 +2781,58 @@
     "snow_days": 87.5,
     "heat_days": 68.75,
     "reg_tier": 72.91666666666666,
-    "crowding": 47.916666666666664,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 45.833333333333336,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 26.04166666666666,
     "operating": 85.41666666666669,
-    "regulatory": 72.91666666666666,
-    "competition": 47.91666666666666,
+    "regulatory": 52.08333333333332,
+    "competition": 45.83333333333334,
     "charging": 6.25
    },
-   "total": 52.55208333333333,
+   "total": 48.07291666666667,
    "totals": {
-    "balanced": 52.55208333333333,
-    "fast_growth": 46.14583333333334,
-    "low_risk": 62.08333333333333,
-    "capital_light": 52.65624999999999
+    "balanced": 48.07291666666667,
+    "fast_growth": 42.8125,
+    "low_risk": 55.62499999999999,
+    "capital_light": 48.07291666666667
    },
    "ranks": {
-    "balanced": 9,
-    "fast_growth": 16,
-    "low_risk": 3,
-    "capital_light": 6
+    "balanced": 17,
+    "fast_growth": 19,
+    "low_risk": 8,
+    "capital_light": 19
    },
    "opportunity": 26.04166666666666,
-   "ease_of_entry": 66.82692307692308,
+   "ease_of_entry": 59.93589743589744,
    "vegas_similarity": 29.682338422091973,
    "why": [
     "Operating conditions score 85/100: ~28 rain, 0 snow and 0 extreme-heat days a year",
-    "CA is regulation Tier 3: driverless commercial service allowed and operating",
+    "CA is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is slow",
     "Demand is the biggest gap to a perfect score (26/100): 3.3M metro, 4,262 people per sq mi in San Diego"
    ],
    "competitors": [
     {
      "competitor": "Waymo",
-     "status": "operating_limited",
+     "status": "operating_public",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "http://cleantechnica.com/2026/09/01/waymo-invites-riders-in-3-new-cities/",
-     "source_title": "CleanTechnica: Waymo invites riders in 3 new cities (public but limited areas)",
-     "as_of_date": "2026-09-01",
+     "source_url": "https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport",
+     "source_title": "EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",
+     "as_of_date": "2026-10-15",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Separate regimes: DMV testing, driverless testing and deployment permits, plus four CPUC programs (drivered pilot, driverless pilot, drivered deployment, driverless deployment); fares are allowed only at deployment stages and a DMV deployment permit is a prerequisite.",
+    "new_entrant_source_url": "https://www.cpuc.ca.gov/regulatory-services/licensing/transportation-licensing-and-analysis-branch/autonomous-vehicle-programs",
+    "new_entrant_source_title": "CPUC Autonomous Vehicle Programs; CA DMV autonomous vehicles page (both opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "CA DMV (deployment permit) and CPUC (passenger service)",
     "key_law_or_rule": "DMV AV regulations (13 CCR Div.1 Ch.1 Art.3.7 and 3.8); CPUC permits",
@@ -2692,10 +2896,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.2481,
-   "median_rank": 9.0,
-   "rank_p10": 4.0,
-   "rank_p90": 16.0
+   "confidence": 0.0417,
+   "median_rank": 16.0,
+   "rank_p10": 8.0,
+   "rank_p90": 22.0
   },
   {
    "metro": "Tampa",
@@ -2716,7 +2920,8 @@
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
-    "crowding": 1.0,
+    "new_entrant_score": 2.0,
+    "crowding": 1.3,
     "n_competitors": 2.0,
     "elec_cents_kwh": 11.78,
     "log_metro_pop": 15.010853532192028
@@ -2731,34 +2936,35 @@
     "snow_days": 87.5,
     "heat_days": 68.75,
     "reg_tier": 72.91666666666666,
-    "crowding": 35.41666666666666,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 33.33333333333334,
     "elec_cents_kwh": 75.0
    },
    "pillar_scores": {
     "demand": 34.166666666666664,
     "operating": 55.41666666666666,
-    "regulatory": 72.91666666666666,
-    "competition": 35.41666666666666,
+    "regulatory": 75.41666666666666,
+    "competition": 33.33333333333334,
     "charging": 75.0
    },
-   "total": 49.45833333333333,
+   "total": 49.64583333333333,
    "totals": {
-    "balanced": 49.45833333333333,
-    "fast_growth": 46.39583333333333,
-    "low_risk": 55.39583333333333,
-    "capital_light": 51.56249999999999
+    "balanced": 49.64583333333333,
+    "fast_growth": 46.56249999999999,
+    "low_risk": 55.93749999999999,
+    "capital_light": 51.64583333333333
    },
    "ranks": {
-    "balanced": 14,
-    "fast_growth": 15,
-    "low_risk": 8,
-    "capital_light": 11
+    "balanced": 13,
+    "fast_growth": 17,
+    "low_risk": 6,
+    "capital_light": 9
    },
    "opportunity": 34.166666666666664,
-   "ease_of_entry": 57.692307692307686,
+   "ease_of_entry": 57.980769230769226,
    "vegas_similarity": 15.424769341770457,
    "why": [
-    "FL is regulation Tier 3: driverless commercial service allowed and operating",
+    "FL is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Operating conditions score 55/100: ~117 rain, 0 snow and 0 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (34/100): 3.3M metro, 3,508 people per sq mi in Tampa"
    ],
@@ -2769,23 +2975,29 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
-     "source_title": "Drive Tesla Canada: upcoming cities list (fan site)",
+     "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
      "confidence": "medium"
     },
     {
      "competitor": "Waymo",
-     "status": "operating_limited",
+     "status": "operating_public",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "http://cleantechnica.com/2026/09/01/waymo-invites-riders-in-3-new-cities/",
-     "source_title": "CleanTechnica: Waymo invites riders in 3 new cities (public but limited areas)",
-     "as_of_date": "2026-09-01",
+     "source_url": "https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport",
+     "source_title": "EVwire: Waymo open to all in San Antonio, San Diego, Tampa (waymo.com also says anyone can ride)",
+     "as_of_date": "2026-10-15",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "No state permit: a human operator is not required, and on-demand networks need only the insurance in s.627.749. Operators already serve riders in Miami, Orlando and Tampa.",
+    "new_entrant_source_url": "https://flsenate.gov/Laws/Statutes/2025/0316.85",
+    "new_entrant_source_title": "Florida Statutes 316.85 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "None for vehicle operation (insurance rules apply)",
     "key_law_or_rule": "Fla. Stat. 316.85",
@@ -2845,9 +3057,9 @@
      "payback_years": 0.6606644748572159
     }
    },
-   "confidence": 0.0005,
+   "confidence": 0.0113,
    "median_rank": 14.0,
-   "rank_p10": 9.0,
+   "rank_p10": 7.0,
    "rank_p90": 17.0
   },
   {
@@ -2869,6 +3081,7 @@
     "snow_days": 24.6,
     "heat_days": 0.0,
     "reg_tier": 2.0,
+    "new_entrant_score": 2.0,
     "crowding": 0.7,
     "n_competitors": 1.0,
     "elec_cents_kwh": 13.37,
@@ -2884,36 +3097,37 @@
     "snow_days": 0.0,
     "heat_days": 68.75,
     "reg_tier": 31.25,
-    "crowding": 47.916666666666664,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 58.33333333333333,
     "elec_cents_kwh": 50.0
    },
    "pillar_scores": {
     "demand": 43.95833333333334,
     "operating": 48.75,
-    "regulatory": 31.25,
-    "competition": 47.91666666666666,
+    "regulatory": 50.41666666666666,
+    "competition": 58.33333333333333,
     "charging": 50.0
    },
-   "total": 43.51041666666667,
+   "total": 48.90625,
    "totals": {
-    "balanced": 43.51041666666667,
-    "fast_growth": 43.70833333333334,
-    "low_risk": 42.52083333333334,
-    "capital_light": 44.01041666666666
+    "balanced": 48.90625,
+    "fast_growth": 47.625,
+    "low_risk": 49.3125,
+    "capital_light": 49.92708333333333
    },
    "ranks": {
-    "balanced": 21,
-    "fast_growth": 19,
-    "low_risk": 19,
-    "capital_light": 22
+    "balanced": 15,
+    "fast_growth": 15,
+    "low_risk": 14,
+    "capital_light": 14
    },
    "opportunity": 43.95833333333334,
-   "ease_of_entry": 43.26923076923077,
+   "ease_of_entry": 51.57051282051282,
    "vegas_similarity": 25.328598335544967,
    "why": [
     "Demand score 44/100: 3.0M-person metro, 4,696 people per sq mi in Denver",
     "Operating conditions score 49/100: ~47 rain, 25 snow and 0 extreme-heat days a year",
-    "CO is regulation Tier 2 (driverless deployment allowed with a permit or filing process): launch depends on policy change or permits"
+    "CO is regulation Tier 2 (driverless deployment allowed with a permit or filing process) and a new operator's path is fast: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -2921,14 +3135,20 @@
      "status": "operating_limited",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "http://cleantechnica.com/2026/09/01/waymo-invites-riders-in-3-new-cities/",
-     "source_title": "CleanTechnica: Waymo invites riders in 3 new cities (public but limited areas)",
-     "as_of_date": "2026-09-01",
-     "confidence": "high"
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
+     "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 2,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "The statute authorizes an ADS that can conform to all driving laws with no approval step; CDOT/State Patrol approval applies only to systems that cannot conform. Waymo is adding riders in Denver. Only a bill summary was opened.",
+    "new_entrant_source_url": "https://leg.colorado.gov/bills/SB17-213",
+    "new_entrant_source_title": "Colorado SB17-213 bill summary (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "unclear",
     "permit_body": "CDOT and Colorado State Patrol (only for systems that cannot yet comply with all laws)",
     "key_law_or_rule": "C.R.S. 42-4-242 (SB17-213)",
@@ -2989,9 +3209,9 @@
     }
    },
    "confidence": 0.0,
-   "median_rank": 21.0,
-   "rank_p10": 20.0,
-   "rank_p90": 23.0
+   "median_rank": 15.0,
+   "rank_p10": 13.0,
+   "rank_p90": 16.0
   },
   {
    "metro": "Orlando",
@@ -3012,7 +3232,8 @@
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
-    "crowding": 1.0,
+    "new_entrant_score": 2.0,
+    "crowding": 1.3,
     "n_competitors": 2.0,
     "elec_cents_kwh": 11.78,
     "log_metro_pop": 14.842893905575654
@@ -3027,34 +3248,35 @@
     "snow_days": 87.5,
     "heat_days": 68.75,
     "reg_tier": 72.91666666666666,
-    "crowding": 35.41666666666666,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 33.33333333333334,
     "elec_cents_kwh": 75.0
    },
    "pillar_scores": {
     "demand": 33.75,
     "operating": 50.41666666666666,
-    "regulatory": 72.91666666666666,
-    "competition": 35.41666666666666,
+    "regulatory": 75.41666666666666,
+    "competition": 33.33333333333334,
     "charging": 75.0
    },
-   "total": 48.06249999999999,
+   "total": 48.25,
    "totals": {
-    "balanced": 48.06249999999999,
-    "fast_growth": 45.1875,
-    "low_risk": 53.56249999999999,
-    "capital_light": 50.20833333333333
+    "balanced": 48.25,
+    "fast_growth": 45.35416666666666,
+    "low_risk": 54.10416666666665,
+    "capital_light": 50.29166666666666
    },
    "ranks": {
-    "balanced": 18,
+    "balanced": 16,
     "fast_growth": 18,
-    "low_risk": 10,
-    "capital_light": 16
+    "low_risk": 9,
+    "capital_light": 12
    },
    "opportunity": 33.75,
-   "ease_of_entry": 55.76923076923076,
+   "ease_of_entry": 56.0576923076923,
    "vegas_similarity": 22.41739857088558,
    "why": [
-    "FL is regulation Tier 3: driverless commercial service allowed and operating",
+    "FL is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Operating conditions score 50/100: ~129 rain, 0 snow and 0 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (34/100): 2.8M metro, 2,467 people per sq mi in Orlando"
    ],
@@ -3065,23 +3287,29 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
-     "source_title": "Drive Tesla Canada: upcoming cities list (fan site)",
+     "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
      "confidence": "medium"
     },
     {
      "competitor": "Waymo",
-     "status": "operating_limited",
+     "status": "operating_public",
      "platform_partner": "",
-     "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In (limited access per search results)",
-     "as_of_date": "2026-11-05",
-     "confidence": "medium"
+     "first_public_date": "2026-02-24",
+     "source_url": "https://waymo.com/blog/2026/04/floridas-new-way-to-ride/",
+     "source_title": "Waymo blog: Florida's new way to ride (open to everyone in Miami and Orlando)",
+     "as_of_date": "2026-04-15",
+     "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "No state permit: a human operator is not required, and on-demand networks need only the insurance in s.627.749. Operators already serve riders in Miami, Orlando and Tampa.",
+    "new_entrant_source_url": "https://flsenate.gov/Laws/Statutes/2025/0316.85",
+    "new_entrant_source_title": "Florida Statutes 316.85 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "None for vehicle operation (insurance rules apply)",
     "key_law_or_rule": "Fla. Stat. 316.85",
@@ -3145,10 +3373,10 @@
      "payback_years": 0.6606644748572159
     }
    },
-   "confidence": 0.0,
-   "median_rank": 17.0,
-   "rank_p10": 11.0,
-   "rank_p90": 19.0
+   "confidence": 0.0005,
+   "median_rank": 16.0,
+   "rank_p10": 10.0,
+   "rank_p90": 20.0
   },
   {
    "metro": "Charlotte",
@@ -3169,6 +3397,7 @@
     "snow_days": 2.5,
     "heat_days": 0.1,
     "reg_tier": 2.0,
+    "new_entrant_score": 1.0,
     "crowding": 0.3,
     "n_competitors": 1.0,
     "elec_cents_kwh": 10.61,
@@ -3184,31 +3413,32 @@
     "snow_days": 45.833333333333336,
     "heat_days": 33.33333333333334,
     "reg_tier": 31.25,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 50.0,
+    "crowding": 91.66666666666667,
     "elec_cents_kwh": 83.33333333333334
    },
    "pillar_scores": {
     "demand": 22.5,
     "operating": 48.33333333333333,
-    "regulatory": 31.25,
-    "competition": 85.41666666666669,
+    "regulatory": 38.75,
+    "competition": 91.66666666666669,
     "charging": 83.33333333333334
    },
-   "total": 43.1875,
+   "total": 45.625,
    "totals": {
-    "balanced": 43.1875,
-    "fast_growth": 38.3125,
-    "low_risk": 43.5,
-    "capital_light": 49.375
+    "balanced": 45.625,
+    "fast_growth": 40.0625,
+    "low_risk": 46.375,
+    "capital_light": 52.125
    },
    "ranks": {
     "balanced": 22,
-    "fast_growth": 23,
-    "low_risk": 18,
-    "capital_light": 17
+    "fast_growth": 22,
+    "low_risk": 16,
+    "capital_light": 6
    },
    "opportunity": 22.5,
-   "ease_of_entry": 54.32692307692308,
+   "ease_of_entry": 58.07692307692308,
    "vegas_similarity": 32.381981406803376,
    "why": [
     "Light competition: 0 operator(s) in service, crowding score 0.3",
@@ -3222,13 +3452,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 2,
+    "new_entrant_path": "moderate",
+    "new_entrant_rationale": "On paper one registration (identified as fully autonomous) with federal certification and liability insurance; no separate permit in the statute, but no operator has launched paid service under it, so the path is untested.",
+    "new_entrant_source_url": "https://ncleg.gov/EnactedLegislation/Statutes/HTML/BySection/Chapter_20/GS_20-401.html",
+    "new_entrant_source_title": "N.C.G.S. 20-401 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "Y",
     "permit_body": "NC DMV registration; NCDOT Fully Autonomous Vehicle Committee",
     "key_law_or_rule": "N.C.G.S. 20-401",
@@ -3283,9 +3519,9 @@
      "payback_years": 0.6590375111382488
     }
    },
-   "confidence": 0.0004,
-   "median_rank": 22.0,
-   "rank_p10": 17.0,
+   "confidence": 0.0104,
+   "median_rank": 20.0,
+   "rank_p10": 13.0,
    "rank_p90": 23.0
   },
   {
@@ -3307,7 +3543,8 @@
     "snow_days": 0.6,
     "heat_days": 3.0,
     "reg_tier": 3.0,
-    "crowding": 0.7,
+    "new_entrant_score": 2.0,
+    "crowding": 1.0,
     "n_competitors": 1.0,
     "elec_cents_kwh": 8.6,
     "log_metro_pop": 14.794863596907978
@@ -3322,51 +3559,58 @@
     "snow_days": 60.41666666666667,
     "heat_days": 12.5,
     "reg_tier": 72.91666666666666,
-    "crowding": 47.916666666666664,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 45.833333333333336,
     "elec_cents_kwh": 93.75
    },
    "pillar_scores": {
     "demand": 19.791666666666668,
     "operating": 56.66666666666667,
-    "regulatory": 72.91666666666666,
-    "competition": 47.91666666666666,
+    "regulatory": 75.41666666666666,
+    "competition": 45.83333333333334,
     "charging": 93.75
    },
-   "total": 47.55208333333333,
+   "total": 47.73958333333333,
    "totals": {
-    "balanced": 47.55208333333333,
-    "fast_growth": 41.64583333333334,
-    "low_risk": 55.14583333333333,
-    "capital_light": 52.65625
+    "balanced": 47.73958333333333,
+    "fast_growth": 41.8125,
+    "low_risk": 55.68749999999999,
+    "capital_light": 52.73958333333333
    },
    "ranks": {
-    "balanced": 19,
-    "fast_growth": 21,
-    "low_risk": 9,
-    "capital_light": 6
+    "balanced": 18,
+    "fast_growth": 20,
+    "low_risk": 7,
+    "capital_light": 5
    },
    "opportunity": 19.791666666666668,
-   "ease_of_entry": 62.5,
+   "ease_of_entry": 62.78846153846154,
    "vegas_similarity": 20.5925022278594,
    "why": [
-    "TX is regulation Tier 3: driverless commercial service allowed and operating",
+    "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Operating conditions score 57/100: ~77 rain, 1 snow and 3 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (20/100): 2.7M metro, 2,966 people per sq mi in San Antonio"
    ],
    "competitors": [
     {
      "competitor": "Waymo",
-     "status": "operating_limited",
+     "status": "operating_public",
      "platform_partner": "",
-     "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In (limited access per search results)",
-     "as_of_date": "2026-11-05",
+     "first_public_date": "2026-02-24",
+     "source_url": "https://evwire.com/p/waymo-open-to-all-san-antonio-san-diego-tampa-airport",
+     "source_title": "EVwire: Waymo open to all in San Antonio, San Diego, Tampa",
+     "as_of_date": "2026-10-15",
      "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "One online TxMCCS application, a written acknowledgment of six vehicle conditions and a DPS emergency-responder plan; no fee, no expiry; enforceable from 2026-05-28. No separate fare permit on the page.",
+    "new_entrant_source_url": "https://www.txdmv.gov/AVprogram",
+    "new_entrant_source_title": "TxDMV Automated Vehicle program (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "TxDMV",
     "key_law_or_rule": "Texas Transportation Code ch. 545 subch. J (SB 2807 of 2025)",
@@ -3426,10 +3670,10 @@
      "payback_years": 0.6562611000412624
     }
    },
-   "confidence": 0.0059,
-   "median_rank": 17.0,
-   "rank_p10": 10.0,
-   "rank_p90": 21.0
+   "confidence": 0.0217,
+   "median_rank": 18.0,
+   "rank_p10": 9.0,
+   "rank_p90": 22.0
   },
   {
    "metro": "Austin",
@@ -3450,8 +3694,9 @@
     "snow_days": 0.6,
     "heat_days": 2.8,
     "reg_tier": 3.0,
-    "crowding": 2.1,
-    "n_competitors": 3.0,
+    "new_entrant_score": 2.0,
+    "crowding": 2.5,
+    "n_competitors": 4.0,
     "elec_cents_kwh": 8.6,
     "log_metro_pop": 14.701998361800607
    },
@@ -3465,34 +3710,35 @@
     "snow_days": 60.41666666666667,
     "heat_days": 16.666666666666657,
     "reg_tier": 72.91666666666666,
-    "crowding": 4.166666666666657,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 6.25,
     "elec_cents_kwh": 93.75
    },
    "pillar_scores": {
     "demand": 18.333333333333336,
     "operating": 54.16666666666667,
-    "regulatory": 72.91666666666666,
-    "competition": 4.166666666666657,
+    "regulatory": 75.41666666666666,
+    "competition": 6.25,
     "charging": 93.75
    },
-   "total": 39.854166666666664,
+   "total": 40.666666666666664,
    "totals": {
-    "balanced": 39.854166666666664,
-    "fast_growth": 36.041666666666664,
-    "low_risk": 49.60416666666667,
-    "capital_light": 42.91666666666666
+    "balanced": 40.666666666666664,
+    "fast_growth": 36.625,
+    "low_risk": 50.5625,
+    "capital_light": 43.83333333333333
    },
    "ranks": {
     "balanced": 24,
     "fast_growth": 24,
-    "low_risk": 13,
+    "low_risk": 12,
     "capital_light": 24
    },
    "opportunity": 18.333333333333336,
-   "ease_of_entry": 51.44230769230769,
+   "ease_of_entry": 52.69230769230769,
    "vegas_similarity": 26.584475883760234,
    "why": [
-    "TX is regulation Tier 3: driverless commercial service allowed and operating",
+    "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Operating conditions score 54/100: ~84 rain, 1 snow and 3 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (18/100): 2.4M metro, 3,014 people per sq mi in Austin"
    ],
@@ -3502,34 +3748,50 @@
      "status": "operating_limited",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
-     "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
-     "as_of_date": "2026-07-03",
-     "confidence": "medium"
+     "source_url": "https://electrek.co/2026/04/30/tesla-robotaxi-unsupervised-finally-signs-ramping-up/",
+     "source_title": "Electrek: Tesla Robotaxi unsupervised fleet (Austin 19, Dallas 3, Houston 3 vehicles)",
+     "as_of_date": "2026-04-30",
+     "confidence": "high"
     },
     {
      "competitor": "Waymo",
      "status": "operating_public",
      "platform_partner": "Uber",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In",
-     "as_of_date": "2026-11-05",
-     "confidence": "high"
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
+     "confidence": "medium"
+    },
+    {
+     "competitor": "Avride",
+     "status": "testing",
+     "platform_partner": "",
+     "first_public_date": "",
+     "source_url": "https://en.wikipedia.org/wiki/Avride",
+     "source_title": "Wikipedia: Avride (secondary source) lists Austin as on-road testing; paid robotaxi is Dallas only",
+     "as_of_date": "2026-11-06",
+     "confidence": "medium"
     },
     {
      "competitor": "Zoox",
      "status": "testing",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://zoox.com/",
-     "source_title": "Zoox - Where to Ride (page lists city but gives no status)",
-     "as_of_date": "2026-11-05",
-     "confidence": "low"
+     "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
+     "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
+     "as_of_date": "2026-03-24",
+     "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "One online TxMCCS application, a written acknowledgment of six vehicle conditions and a DPS emergency-responder plan; no fee, no expiry; enforceable from 2026-05-28. No separate fare permit on the page.",
+    "new_entrant_source_url": "https://www.txdmv.gov/AVprogram",
+    "new_entrant_source_title": "TxDMV Automated Vehicle program (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "TxDMV",
     "key_law_or_rule": "Texas Transportation Code ch. 545 subch. J (SB 2807 of 2025)",
@@ -3611,7 +3873,7 @@
    },
    "confidence": 0.0,
    "median_rank": 24.0,
-   "rank_p10": 19.0,
+   "rank_p10": 20.0,
    "rank_p90": 25.0
   },
   {
@@ -3633,7 +3895,8 @@
     "snow_days": 3.5,
     "heat_days": 0.0,
     "reg_tier": 3.0,
-    "crowding": 0.7,
+    "new_entrant_score": 2.0,
+    "crowding": 1.0,
     "n_competitors": 1.0,
     "elec_cents_kwh": 13.57,
     "log_metro_pop": 14.547684202043031
@@ -3648,51 +3911,58 @@
     "snow_days": 41.666666666666664,
     "heat_days": 68.75,
     "reg_tier": 72.91666666666666,
-    "crowding": 47.916666666666664,
+    "new_entrant_score": 79.16666666666666,
+    "crowding": 45.833333333333336,
     "elec_cents_kwh": 45.833333333333336
    },
    "pillar_scores": {
     "demand": 11.874999999999998,
     "operating": 35.416666666666664,
-    "regulatory": 72.91666666666666,
-    "competition": 47.91666666666666,
+    "regulatory": 75.41666666666666,
+    "competition": 45.83333333333334,
     "charging": 45.83333333333334
    },
-   "total": 37.07291666666666,
+   "total": 37.26041666666666,
    "totals": {
-    "balanced": 37.07291666666666,
-    "fast_growth": 31.04166666666666,
-    "low_risk": 43.72916666666667,
-    "capital_light": 40.57291666666666
+    "balanced": 37.26041666666666,
+    "fast_growth": 31.20833333333333,
+    "low_risk": 44.27083333333333,
+    "capital_light": 40.65625
    },
    "ranks": {
     "balanced": 25,
     "fast_growth": 25,
-    "low_risk": 17,
+    "low_risk": 18,
     "capital_light": 25
    },
    "opportunity": 11.874999999999998,
-   "ease_of_entry": 50.641025641025635,
+   "ease_of_entry": 50.92948717948717,
    "vegas_similarity": 19.960421065218995,
    "why": [
-    "TN is regulation Tier 3: driverless commercial service allowed and operating",
+    "TN is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Operating conditions score 35/100: ~118 rain, 4 snow and 0 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (12/100): 2.1M metro, 1,451 people per sq mi in Nashville"
    ],
    "competitors": [
     {
      "competitor": "Waymo",
-     "status": "operating_limited",
+     "status": "operating_public",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In (limited access per search results)",
-     "as_of_date": "2026-11-05",
-     "confidence": "medium"
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
+     "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "fast",
+    "new_entrant_rationale": "Vehicle must meet federal standards, reach a safe state on failure, and be registered as an AV that can run without a driver; no separate approval on the AFDC summary (statute text not opened). Waymo serves Nashville.",
+    "new_entrant_source_url": "https://www.afdc.energy.gov/laws/11970",
+    "new_entrant_source_title": "AFDC summary of Tennessee law (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "Y",
     "permit_body": "TN Dept of Revenue (registration as ADS-operated vehicle)",
     "key_law_or_rule": "Tenn. Code 55-30-103 (Automated Vehicles Act)",
@@ -3754,7 +4024,7 @@
    },
    "confidence": 0.0,
    "median_rank": 25.0,
-   "rank_p10": 23.0,
+   "rank_p10": 24.0,
    "rank_p90": 25.0
   },
   {
@@ -3776,6 +4046,7 @@
     "snow_days": 16.0,
     "heat_days": 0.0,
     "reg_tier": 2.0,
+    "new_entrant_score": 0.0,
     "crowding": 0.3,
     "n_competitors": 1.0,
     "elec_cents_kwh": 13.9,
@@ -3791,31 +4062,32 @@
     "snow_days": 16.666666666666657,
     "heat_days": 68.75,
     "reg_tier": 31.25,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 91.66666666666667,
     "elec_cents_kwh": 39.583333333333336
    },
    "pillar_scores": {
     "demand": 39.583333333333336,
     "operating": 28.75,
-    "regulatory": 31.25,
-    "competition": 85.41666666666669,
+    "regulatory": 27.083333333333336,
+    "competition": 91.66666666666669,
     "charging": 39.583333333333336
    },
-   "total": 42.08333333333334,
+   "total": 42.18750000000001,
    "totals": {
-    "balanced": 42.08333333333334,
+    "balanced": 42.18750000000001,
     "fast_growth": 40.75000000000001,
-    "low_risk": 37.87500000000001,
-    "capital_light": 44.375
+    "low_risk": 37.25000000000001,
+    "capital_light": 44.79166666666667
    },
    "ranks": {
     "balanced": 23,
-    "fast_growth": 22,
-    "low_risk": 24,
-    "capital_light": 21
+    "fast_growth": 21,
+    "low_risk": 25,
+    "capital_light": 23
    },
    "opportunity": 39.583333333333336,
-   "ease_of_entry": 43.429487179487175,
+   "ease_of_entry": 43.58974358974359,
    "vegas_similarity": 6.434009151568958,
    "why": [
     "Demand score 40/100: 2.4M-person metro, 5,504 people per sq mi in Pittsburgh",
@@ -3829,13 +4101,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 2,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Sequential gates: supervised testing, then PennDOT driverless certification, notice to the city, and Pennsylvania PUC approval for commercial service. Waymo has tested for over a year and still lacks the certification.",
+    "new_entrant_source_url": "https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/",
+    "new_entrant_source_title": "PhillyVoice 2026-10-09 (opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "medium",
     "driverless_commercial_allowed": "Y",
     "permit_body": "PennDOT",
     "key_law_or_rule": "Act 130 of 2022 (75 Pa.C.S. Ch.85) and PennDOT guidelines (Oct 2024)",
@@ -3897,8 +4175,8 @@
    },
    "confidence": 0.0,
    "median_rank": 23.0,
-   "rank_p10": 19.0,
-   "rank_p90": 24.0
+   "rank_p10": 20.0,
+   "rank_p90": 25.0
   },
   {
    "metro": "Sacramento",
@@ -3919,6 +4197,7 @@
     "snow_days": 0.2,
     "heat_days": 14.3,
     "reg_tier": 3.0,
+    "new_entrant_score": 0.0,
     "crowding": 0.3,
     "n_competitors": 1.0,
     "elec_cents_kwh": 26.96,
@@ -3934,35 +4213,36 @@
     "snow_days": 70.83333333333333,
     "heat_days": 4.166666666666657,
     "reg_tier": 72.91666666666666,
-    "crowding": 85.41666666666667,
+    "new_entrant_score": 20.833333333333336,
+    "crowding": 91.66666666666667,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 20.416666666666664,
     "operating": 60.83333333333332,
-    "regulatory": 72.91666666666666,
-    "competition": 85.41666666666669,
+    "regulatory": 52.08333333333332,
+    "competition": 91.66666666666669,
     "charging": 6.25
    },
-   "total": 50.06249999999999,
+   "total": 46.83333333333333,
    "totals": {
-    "balanced": 50.06249999999999,
-    "fast_growth": 42.16666666666667,
-    "low_risk": 56.10416666666665,
-    "capital_light": 52.60416666666666
+    "balanced": 46.83333333333333,
+    "fast_growth": 39.66666666666667,
+    "low_risk": 50.47916666666665,
+    "capital_light": 49.6875
    },
    "ranks": {
-    "balanced": 12,
-    "fast_growth": 20,
-    "low_risk": 6,
-    "capital_light": 8
+    "balanced": 19,
+    "fast_growth": 23,
+    "low_risk": 13,
+    "capital_light": 16
    },
    "opportunity": 20.416666666666664,
-   "ease_of_entry": 66.02564102564102,
+   "ease_of_entry": 61.05769230769231,
    "vegas_similarity": 35.48565447575692,
    "why": [
     "Operating conditions score 61/100: ~48 rain, 0 snow and 14 extreme-heat days a year",
-    "CA is regulation Tier 3: driverless commercial service allowed and operating",
+    "Light competition: 0 operator(s) in service, crowding score 0.3",
     "Demand is the biggest gap to a perfect score (20/100): 2.4M metro, 5,359 people per sq mi in Sacramento"
    ],
    "competitors": [
@@ -3972,13 +4252,19 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next",
-     "as_of_date": "2026-11-05",
+     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "high"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "slow",
+    "new_entrant_rationale": "Separate regimes: DMV testing, driverless testing and deployment permits, plus four CPUC programs (drivered pilot, driverless pilot, drivered deployment, driverless deployment); fares are allowed only at deployment stages and a DMV deployment permit is a prerequisite.",
+    "new_entrant_source_url": "https://www.cpuc.ca.gov/regulatory-services/licensing/transportation-licensing-and-analysis-branch/autonomous-vehicle-programs",
+    "new_entrant_source_title": "CPUC Autonomous Vehicle Programs; CA DMV autonomous vehicles page (both opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "CA DMV (deployment permit) and CPUC (passenger service)",
     "key_law_or_rule": "DMV AV regulations (13 CCR Div.1 Ch.1 Art.3.7 and 3.8); CPUC permits",
@@ -4033,10 +4319,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.0752,
-   "median_rank": 13.0,
-   "rank_p10": 6.0,
-   "rank_p90": 19.0
+   "confidence": 0.02,
+   "median_rank": 19.0,
+   "rank_p10": 10.0,
+   "rank_p90": 22.0
   },
   {
    "metro": "Las Vegas",
@@ -4057,8 +4343,9 @@
     "snow_days": 0.2,
     "heat_days": 55.0,
     "reg_tier": 3.0,
-    "crowding": 1.7,
-    "n_competitors": 3.0,
+    "new_entrant_score": 1.0,
+    "crowding": 2.4,
+    "n_competitors": 4.0,
     "elec_cents_kwh": 9.36,
     "log_metro_pop": 14.661184815306806
    },
@@ -4072,22 +4359,23 @@
     "snow_days": 70.83333333333333,
     "heat_days": 1.1000602772754604,
     "reg_tier": 72.91666666666666,
-    "crowding": 12.5,
+    "new_entrant_score": 50.0,
+    "crowding": 8.854166666666671,
     "elec_cents_kwh": 89.81135986733003
    },
    "pillar_scores": {
     "demand": 35.82975438867068,
     "operating": 68.55334538878841,
-    "regulatory": 72.91666666666666,
-    "competition": 12.5,
+    "regulatory": 63.74999999999999,
+    "competition": 8.854166666666671,
     "charging": 89.81135986733003
    },
-   "total": 50.627651709931676,
+   "total": 48.24744337659834,
    "totals": {
-    "balanced": 50.627651709931676,
-    "fast_growth": 48.30361426545953,
-    "low_risk": 58.775189757176584,
-    "capital_light": 52.160244264431114
+    "balanced": 48.24744337659834,
+    "fast_growth": 46.5640309321262,
+    "low_risk": 55.660606423843255,
+    "capital_light": 49.597744264431114
    },
    "ranks": {
     "balanced": null,
@@ -4096,11 +4384,11 @@
     "capital_light": null
    },
    "opportunity": 35.82975438867068,
-   "ease_of_entry": 58.595750267533745,
+   "ease_of_entry": 54.933891293174774,
    "vegas_similarity": 100.0,
    "why": [
     "Operating conditions score 69/100: ~13 rain, 0 snow and 55 extreme-heat days a year",
-    "NV is regulation Tier 3: driverless commercial service allowed and operating",
+    "NV is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is moderate",
     "Demand is the biggest gap to a perfect score (36/100): 2.3M metro, 4,655 people per sq mi in Las Vegas"
    ],
    "competitors": [
@@ -4110,18 +4398,28 @@
      "platform_partner": "",
      "first_public_date": "",
      "source_url": "https://driveteslacanada.ca/news/tesla-robotaxi-miami-launch-unsupervised-rides/",
-     "source_title": "Drive Tesla Canada: upcoming cities list (fan site)",
+     "source_title": "Drive Tesla Canada: Tesla expands unsupervised Robotaxi to Miami (fan site)",
      "as_of_date": "2026-07-03",
      "confidence": "medium"
+    },
+    {
+     "competitor": "Motional",
+     "status": "operating_limited",
+     "platform_partner": "Uber",
+     "first_public_date": "2026-03-13",
+     "source_url": "https://motional.com/news/uber-and-motional-launch-robotaxi-service-las-vegas",
+     "source_title": "Motional: Uber and Motional launch robotaxi service in Las Vegas (safety operator on board)",
+     "as_of_date": "2026-03-13",
+     "confidence": "high"
     },
     {
      "competitor": "Waymo",
      "status": "operating_limited",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Serving Riders In (benchmark market)",
-     "as_of_date": "2026-11-05",
+     "source_url": "https://waymo.com/whereyoucango/",
+     "source_title": "Waymo - Where you can go (undated page, opened 2026-11-06)",
+     "as_of_date": "2026-11-06",
      "confidence": "medium"
     },
     {
@@ -4129,14 +4427,20 @@
      "status": "operating_limited",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://zoox.com/",
-     "source_title": "Zoox - Where to Ride (page lists city but gives no status)",
-     "as_of_date": "2026-11-05",
-     "confidence": "low"
+     "source_url": "https://electrek.co/2026/03/24/zoox-expands-current-service-area-and-is-bringing-its-purpose-built-robotaxi-to-two-new-cities/",
+     "source_title": "Electrek: Zoox expands service area, brings robotaxi to Austin and Miami",
+     "as_of_date": "2026-03-24",
+     "confidence": "medium"
     }
    ],
    "regulation": {
     "tier": 3,
+    "new_entrant_path": "moderate",
+    "new_entrant_rationale": "Two agencies: DMV testing registry and self-certification (certificate of compliance per make/model/year) plus a separate Nevada Transportation Authority permit for paid service, approved at a commission meeting with conditions (fleet caps, rates filed, 120-day start).",
+    "new_entrant_source_url": "https://www.business.nv.gov/news-media/press-releases/2026/ntata/nevada-transportation-authority-approves-autonomous-vehicle-network-applications-for-tesla-waymo-and-aviari/",
+    "new_entrant_source_title": "Nevada NTA press release 2026-08-21; NV DMV autonomous page (both opened)",
+    "new_entrant_as_of_date": "2026-11-06",
+    "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "Y",
     "permit_body": "NV DMV (self-certification and Certificate of Compliance)",
     "key_law_or_rule": "NRS 482A / NAC 482A",

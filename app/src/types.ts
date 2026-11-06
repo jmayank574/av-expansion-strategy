@@ -4,7 +4,7 @@ export type Weights = Record<Pillar, number>
 
 export interface SubSpec { weight: number; direction: number; label: string; unit: string }
 export interface Competitor { competitor: string; status: string; platform_partner: string; first_public_date: string; source_url: string; source_title: string; as_of_date: string; confidence: string }
-export interface Regulation { tier: number; driverless_commercial_allowed: string; permit_body: string; key_law_or_rule: string; notes: string; source_url: string; source_title: string; as_of_date: string; confidence: string }
+export interface Regulation { tier: number; new_entrant_path: string; new_entrant_rationale: string; new_entrant_source_url: string; new_entrant_source_title: string; new_entrant_as_of_date: string; new_entrant_confidence: string; driverless_commercial_allowed: string; permit_body: string; key_law_or_rule: string; notes: string; source_url: string; source_title: string; as_of_date: string; confidence: string }
 
 export interface Assumption { label: string; unit: string; value: number; low: number; high: number; higher_is_better: boolean; source_url: string; rationale: string }
 export interface Econ {

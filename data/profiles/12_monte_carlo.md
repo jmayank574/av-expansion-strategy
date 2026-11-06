@@ -13,19 +13,19 @@ rows: 25
 ## Numeric summary
 | column | min | median | max |
 |---|---|---|---|
-| top_n_share | 0 | 0.0239 | 0.9809 |
+| top_n_share | 0 | 0.0249 | 0.9505 |
 | median_rank | 1 | 13 | 25 |
-| p10_rank | 1 | 8 | 23 |
-| p90_rank | 2 | 18 | 25 |
+| p10_rank | 1 | 7 | 24 |
+| p90_rank | 4 | 20 | 25 |
 
 ## Sample rows
 | metro             |   top_n_share |   median_rank |   p10_rank |   p90_rank |
 |:------------------|--------------:|--------------:|-----------:|-----------:|
-| New York          |        0.1353 |            10 |          5 |         18 |
-| Los Angeles       |        0.8643 |             3 |          2 |          7 |
-| Chicago           |        0.4088 |             7 |          3 |         15 |
-| Dallas-Fort Worth |        0.0071 |            15 |          8 |         21 |
-| Houston           |        0.0239 |            13 |          8 |         18 |
+| New York          |        0.473  |             6 |          3 |         16 |
+| Los Angeles       |        0.6319 |             5 |          3 |          9 |
+| Chicago           |        0.6176 |             4 |          1 |         12 |
+| Dallas-Fort Worth |        0.0249 |            13 |          7 |         22 |
+| Houston           |        0.0348 |            13 |          7 |         20 |
 
 ## Sanity checks
 - [PASS] reproducible: two runs with the same seed are identical
@@ -39,28 +39,28 @@ Mean drawn weights: demand 35.0, operating 25.0, regulatory 20.0, competition 15
 ## Share of draws in the top 5 and median rank
 | metro             |   top5_share |   median_rank |   p10_rank |   p90_rank |   deterministic_rank |
 |:------------------|-------------:|--------------:|-----------:|-----------:|---------------------:|
-| San Francisco     |         98.1 |             1 |          1 |          2 |                    1 |
-| Los Angeles       |         86.4 |             3 |          2 |          7 |                    2 |
-| Miami             |         81.2 |             3 |          2 |          7 |                    3 |
-| Philadelphia      |         57.3 |             5 |          2 |          9 |                    4 |
-| Chicago           |         40.9 |             7 |          3 |         15 |                    7 |
-| Phoenix           |         37.3 |             7 |          4 |         12 |                    5 |
-| Atlanta           |         27.1 |             8 |          4 |         12 |                    5 |
-| San Diego         |         24.8 |             9 |          4 |         16 |                    9 |
-| Washington DC     |         18.3 |             8 |          4 |         16 |                    8 |
-| New York          |         13.5 |            10 |          5 |         18 |                   10 |
-| Sacramento        |          7.5 |            13 |          6 |         19 |                   12 |
-| Detroit           |          2.8 |            11 |          8 |         16 |                   11 |
-| Houston           |          2.4 |            13 |          8 |         18 |                   13 |
-| Seattle           |          0.8 |            14 |         10 |         18 |                   15 |
-| Dallas-Fort Worth |          0.7 |            15 |          8 |         21 |                   17 |
-| San Antonio       |          0.6 |            17 |         10 |         21 |                   19 |
-| Tampa             |          0   |            14 |          9 |         17 |                   14 |
-| Charlotte         |          0   |            22 |         17 |         23 |                   22 |
-| Boston            |          0   |            15 |          9 |         20 |                   16 |
-| Minneapolis       |          0   |            21 |         16 |         24 |                   20 |
-| Orlando           |          0   |            17 |         11 |         19 |                   18 |
-| Denver            |          0   |            21 |         20 |         23 |                   21 |
-| Austin            |          0   |            24 |         19 |         25 |                   24 |
-| Nashville         |          0   |            25 |         23 |         25 |                   25 |
-| Pittsburgh        |          0   |            23 |         19 |         24 |                   23 |
+| Miami             |         95   |             1 |          1 |          4 |                    1 |
+| San Francisco     |         85.4 |             2 |          1 |          7 |                    2 |
+| Los Angeles       |         63.2 |             5 |          3 |          9 |                    3 |
+| Chicago           |         61.8 |             4 |          1 |         12 |                    4 |
+| Phoenix           |         50.6 |             5 |          2 |         11 |                    5 |
+| New York          |         47.3 |             6 |          3 |         16 |                    6 |
+| Atlanta           |         36.2 |             7 |          4 |         12 |                    8 |
+| Detroit           |         26.9 |             7 |          3 |         12 |                    7 |
+| Philadelphia      |         10.9 |             8 |          5 |         13 |                    9 |
+| Boston            |          6.2 |            10 |          6 |         18 |                   10 |
+| San Diego         |          4.2 |            16 |          8 |         22 |                   17 |
+| Houston           |          3.5 |            13 |          7 |         20 |                   12 |
+| Dallas-Fort Worth |          2.5 |            13 |          7 |         22 |                   14 |
+| San Antonio       |          2.2 |            18 |          9 |         22 |                   18 |
+| Sacramento        |          2   |            19 |         10 |         22 |                   19 |
+| Tampa             |          1.1 |            14 |          7 |         17 |                   13 |
+| Charlotte         |          1   |            20 |         13 |         23 |                   22 |
+| Washington DC     |          0   |            13 |          9 |         20 |                   11 |
+| Orlando           |          0   |            16 |         10 |         20 |                   16 |
+| Seattle           |          0   |            19 |         16 |         21 |                   20 |
+| Minneapolis       |          0   |            20 |         13 |         23 |                   21 |
+| Denver            |          0   |            15 |         13 |         16 |                   15 |
+| Austin            |          0   |            24 |         20 |         25 |                   24 |
+| Nashville         |          0   |            25 |         24 |         25 |                   25 |
+| Pittsburgh        |          0   |            23 |         20 |         25 |                   23 |

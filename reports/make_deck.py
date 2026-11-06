@@ -22,6 +22,7 @@ DPI = 200
 p = plan.build()
 d, by, cand = p["d"], p["by"], p["cand"]
 meta = d["meta"]
+plan.set_weights(meta)
 vegas = next(m for m in d["metros"] if m["benchmark"])
 pct = lambda x: f"{x * 100:.0f}%"
 plt.rcParams.update({"font.family": "DejaVu Sans", "axes.edgecolor": MUTED, "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": MUTED})
@@ -29,16 +30,25 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "axes.edgecolor": MUTED, "axe
 
 # ---------------------------------------------------------------- charts
 def chart_quadrant():
+    """Every wave 1-3 metro and Las Vegas is labeled; marker style shows the wave."""
+    from matplotlib.lines import Line2D
+    wave = {m["metro"]: i for i, ws in enumerate((p["w1"], p["w2"], p["w3"]), 1) for m in ws}
     fig, ax = plt.subplots(figsize=(11, 5.4), dpi=DPI)
     mx, my = p["med_ease"], p["med_opp"]
     ax.axvline(mx, color="#9ca3af", ls=(0, (5, 4)), lw=1)
     ax.axhline(my, color="#9ca3af", ls=(0, (5, 4)), lw=1)
+    sty = {1: dict(facecolor=ACCENT, edgecolor="white", alpha=1.0), 2: dict(facecolor=ACCENT, edgecolor="white", alpha=0.5),
+           3: dict(facecolor="white", edgecolor=ACCENT, alpha=1.0), 0: dict(facecolor="#9ca3af", edgecolor="white", alpha=0.35)}
     for m in cand:
-        q = p["quad"](m)
-        ax.scatter(m["ease_of_entry"], m["opportunity"], s=60 + 260 * m["raw"]["crowding"], color=ACCENT,
-                   alpha=0.85 if q == "Launch next" else 0.3, edgecolor="white", linewidth=1.2, zorder=3)
-        if q == "Launch next" or m["opportunity"] >= 70:
-            ax.annotate(m["metro"], (m["ease_of_entry"], m["opportunity"]), xytext=(9, 3), textcoords="offset points", fontsize=9.5, color=INK)
+        w = wave.get(m["metro"], 0)
+        ax.scatter(m["ease_of_entry"], m["opportunity"], s=60 + 260 * m["raw"]["crowding"], linewidth=1.6 if w == 3 else 1.2, zorder=3, **sty[w])
+    # label offsets (points) and alignment where neighbours would collide
+    NUDGE = {"San Francisco": (-9, 4, "right"), "Atlanta": (-9, 4, "right"), "Detroit": (9, -9, "left"), "Los Angeles": (9, 0, "left")}
+    for m in cand:
+        if m["metro"] in wave:
+            dx, dy, ha = NUDGE.get(m["metro"], (9, 3, "left"))
+            ax.annotate(m["metro"], (m["ease_of_entry"], m["opportunity"]), xytext=(dx, dy), textcoords="offset points", fontsize=9.5, color=INK, ha=ha,
+                        fontweight="bold" if wave[m["metro"]] == 1 else "normal")
     ax.scatter(vegas["ease_of_entry"], vegas["opportunity"], marker="D", s=110, color=INK, zorder=4)
     ax.annotate("Las Vegas (benchmark)", (vegas["ease_of_entry"], vegas["opportunity"]), xytext=(10, -4), textcoords="offset points", fontsize=9.5, color=INK)
     ax.set_xlim(ax.get_xlim()[0] - 2, ax.get_xlim()[1] + 1); ax.set_ylim(ax.get_ylim()[0] - 4, ax.get_ylim()[1] + 9)
@@ -52,32 +62,38 @@ def chart_quadrant():
     ax.set_ylabel("Opportunity (demand)  →")
     ax.grid(color="#eef0f3", lw=0.8, zorder=0)
     for s in ("top", "right"): ax.spines[s].set_visible(False)
+    handles = [Line2D([], [], marker="o", ls="", markersize=9, markerfacecolor=ACCENT, markeredgecolor="white", label="Wave 1"),
+               Line2D([], [], marker="o", ls="", markersize=9, markerfacecolor=ACCENT, alpha=0.5, markeredgecolor="white", label="Wave 2"),
+               Line2D([], [], marker="o", ls="", markersize=9, markerfacecolor="white", markeredgecolor=ACCENT, markeredgewidth=1.6, label="Wave 3"),
+               Line2D([], [], marker="o", ls="", markersize=9, markerfacecolor="#9ca3af", alpha=0.5, markeredgecolor="white", label="Not in a wave")]
+    ax.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=4, frameon=False, fontsize=9.5, labelcolor=INK)
     ax.text(0.99, -0.16, "Bubble size = competitor crowding. Dashed lines = medians of the 25 candidates.", transform=ax.transAxes, ha="right", fontsize=8.5, color=MUTED)
     fig.tight_layout()
     f = CH / "quadrant.png"; fig.savefig(f, dpi=DPI); plt.close(fig)
     return f
 
 
+def pool(m, case="base"):
+    """Annual revenue pool in $M = fleet x annual revenue per vehicle."""
+    u = m["unit_economics"][case]
+    return u["fleet_vehicles"] * u["revenue_per_vehicle"] / 1e6
+
+
 def chart_unit_econ(top):
     names = [m["metro"] for m in top]
-    base = [plan.fleet(m) for m in top]
-    lo = [plan.fleet(m, "low") for m in top]
-    hi = [plan.fleet(m, "high") for m in top]
-    pay = [m["unit_economics"]["base"]["payback_years"] for m in top]
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4.4), dpi=DPI)
-    y = range(len(top))
-    a1.barh(list(y), base, color=ACCENT, height=0.5, zorder=3)
-    a1.errorbar(base, list(y), xerr=[[b - l for b, l in zip(base, lo)], [h - b for b, h in zip(base, hi)]], fmt="none", ecolor=MUTED, elinewidth=1.2, capsize=4, zorder=4)
-    for i, b in enumerate(base): a1.text(hi[i] + 8, i, f"{b:,.0f}", va="center", fontsize=10, color=INK)
-    a1.set_yticks(list(y)); a1.set_yticklabels(names, fontsize=10.5, color=INK); a1.invert_yaxis()
-    a1.set_title("Fleet needed, vehicles (base; whiskers = low to high case)", fontsize=10.5, color=INK, loc="left")
-    a2.barh(list(y), pay, color=ACCENT, height=0.5, zorder=3)
-    for i, v in enumerate(pay): a2.text(v + 0.05, i, f"{v:.1f} yrs", va="center", fontsize=10, color=INK)
-    a2.set_yticks(list(y)); a2.set_yticklabels([]); a2.invert_yaxis(); a2.set_xlim(0, max(pay) * 1.5)
-    a2.set_title("Payback on vehicle cost, years (base case)", fontsize=10.5, color=INK, loc="left")
-    for a in (a1, a2):
-        a.grid(axis="x", color="#eef0f3", lw=0.8, zorder=0)
-        for s in ("top", "right"): a.spines[s].set_visible(False)
+    y = list(range(len(top)))
+    for ax, fn, title, fmt in ((a1, plan.fleet, "Fleet needed, vehicles", "{:,.0f}"), (a2, pool, "Annual revenue pool, $M", "${:,.0f}M")):
+        base = [fn(m) for m in top]; lo = [fn(m, "low") for m in top]; hi = [fn(m, "high") for m in top]
+        ax.barh(y, base, color=ACCENT, height=0.5, zorder=3)
+        ax.errorbar(base, y, xerr=[[b - l for b, l in zip(base, lo)], [h - b for b, h in zip(base, hi)]], fmt="none", ecolor=MUTED, elinewidth=1.2, capsize=4, zorder=4)
+        for i in y: ax.text(hi[i] + max(hi) * 0.02, i, fmt.format(base[i]), va="center", fontsize=10, color=INK)
+        ax.set_xlim(0, max(hi) * 1.18)
+        ax.set_title(f"{title} (base; whiskers = low to high case)", fontsize=10.5, color=INK, loc="left")
+        ax.grid(axis="x", color="#eef0f3", lw=0.8, zorder=0)
+        for s in ("top", "right"): ax.spines[s].set_visible(False)
+        ax.invert_yaxis()
+    a1.set_yticks(y); a1.set_yticklabels(names, fontsize=10.5, color=INK); a2.set_yticks(y); a2.set_yticklabels([])
     fig.tight_layout()
     f = CH / "unit_economics.png"; fig.savefig(f, dpi=DPI); plt.close(fig)
     return f
@@ -116,7 +132,7 @@ def new_slide(title, n):
     bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, Inches(0.12))
     bar.fill.solid(); bar.fill.fore_color.rgb = rgb(ACCENT); bar.line.fill.background()
     text(s, 0.6, 0.35, 12.1, 1.3, title, size=30, bold=True)
-    text(s, 0.6, 7.0, 10, 0.3, f"Source: data/output/metros_scored.json, data as of {meta['data_as_of']}", size=10, color=MUTED)
+    text(s, 0.6, 7.0, 11.4, 0.3, plan.sources_line(meta), size=10, color=MUTED)
     text(s, 12.2, 7.0, 0.6, 0.3, str(n), size=10, color=MUTED, align=PP_ALIGN.RIGHT)
     return s
 
@@ -134,7 +150,7 @@ s = new_slide("Five criteria decide where a robotaxi launch works", 2)
 W = meta["weights"]["scenarios"]["balanced"]
 CARDS = [("demand", "Market demand", "Population, density, ride-hail use, no-car households, airport traffic"),
          ("operating", "Operating conditions", "Rain, snow and extreme-heat days"),
-         ("regulatory", "Regulatory readiness", "State AV rules, tier 0 to 3"),
+         ("regulatory", "Regulatory readiness", "State AV rules (tier 0-3) and a new operator's path to paid service"),
          ("competition", "Competitive intensity", "Who already operates or has announced"),
          ("charging", "Charging cost", "Commercial electricity price")]
 for i, (k, name, sub) in enumerate(CARDS):
@@ -147,9 +163,13 @@ for i, (k, name, sub) in enumerate(CARDS):
 text(s, 0.6, 6.05, 12, 0.5, "25 candidate metros, each scored 0-100 by percentile rank; Las Vegas scored as a benchmark, not ranked", size=14, color=MUTED)
 
 # ---------------------------------------------------------------- slide 3
-ln = sorted([m for m in cand if p["quad"](m) == "Launch next"], key=lambda m: -(m["ease_of_entry"] + m["opportunity"]))
-s = new_slide(f"{plan.names(ln)} pair real demand with workable entry conditions", 3)
-s.shapes.add_picture(str(chart_quadrant()), Inches(0.6), Inches(1.55), width=Inches(12.1))
+elig = sorted([m for m in cand if m["regulation"]["tier"] >= 2], key=lambda m: m["ranks"]["balanced"])[:len(p["w1"])]
+if {m["metro"] for m in elig} == {m["metro"] for m in p["w1"]}:      # only claim "top-scoring" when it is true
+    title3 = f"{plan.names(p['w1'])} are the top-scoring metros where driverless service is already allowed"
+else:
+    title3 = f"Enter {plan.names(p['w1'])} first"
+s = new_slide(title3, 3)
+s.shapes.add_picture(str(chart_quadrant()), Inches(0.6), Inches(1.65), width=Inches(12.1))
 
 # ---------------------------------------------------------------- slide 4
 s = new_slide("Launch in three waves, gated by regulation and proof", 4)
@@ -166,23 +186,26 @@ for i, (wn, when, ms, rule) in enumerate(cols):
 text(s, 0.6, 6.6, 12, 0.35, "Timing is indicative: sequence follows evidence gates, not calendar dates", size=11, color=MUTED)
 
 # ---------------------------------------------------------------- slide 5
-top5 = [m for m in cand if m["ranks"]["balanced"] <= 5]
-pays = [m["unit_economics"]["base"]["payback_years"] for m in top5]
+top5 = sorted([m for m in cand if m["ranks"]["balanced"] <= 5], key=lambda m: m["ranks"]["balanced"])
 fl = [plan.fleet(m) for m in top5]
-s = new_slide(f"Payback is ~{min(pays):.1f}-{max(pays):.1f} years per vehicle in every top-5 metro; demand sets fleet size ({min(fl):,.0f} to {max(fl):,.0f})", 5)
+pl = [pool(m) for m in top5]
+pays = [m["unit_economics"]["base"]["payback_years"] for m in top5]
+cap, fare = meta["assumptions"]["capture_share"]["value"], meta["assumptions"]["avg_fare_usd"]["value"]
+s = new_slide(f"Demand sets the prize: the top five metros need {min(fl):,.0f}-{max(fl):,.0f} vehicles and a ${min(pl):,.0f}M-${max(pl):,.0f}M annual revenue pool", 5)
 s.shapes.add_picture(str(chart_unit_econ(top5)), Inches(0.6), Inches(1.75), width=Inches(12.1))
-lows = [m["unit_economics"]["low"]["payback_years"] for m in top5]
-highs = [m["unit_economics"]["high"]["payback_years"] for m in top5]
-text(s, 0.6, 6.55, 12.1, 0.4, f"Top five by balanced score (Atlanta and Phoenix tie for fifth). Stress range with every input pessimistic or optimistic at once: {min(highs):.1f} years to {('more than 50 years' if max(l for l in lows if l) > 50 else f'{max(l for l in lows if l):.0f} years')}. Inputs are labeled analyst assumptions.", size=11, color=MUTED)
+text(s, 0.6, 6.5, 12.1, 0.45, f"Top five by balanced score. Base case: {cap * 100:.0f}% capture of ride-hail trips, ${fare:.0f} fare. Payback is assumption-driven: about {min(pays):.1f}-{max(pays):.1f} years in every metro because fare, utilization and cost per mile are national assumptions (only the power price varies).", size=11, color=MUTED)
 
 # ---------------------------------------------------------------- slide 6
 snow = max(p["w1"] + p["w2"], key=lambda m: m["raw"]["snow_days"])
 heat = max(p["w1"] + p["w2"], key=lambda m: m["raw"]["heat_days"])
 crowded = [m for m in p["w1"] if m["raw"]["crowding"] >= 1.0]
+least = min(p["w1"] + p["w2"], key=lambda m: m["raw"]["crowding"])
 s = new_slide("Regulation, weather and crowding are the three risks to manage", 6)
-rows = [("Regulation", f"{len(p['w3'])} of the top 10 are in Tier 0-1 states ({plan.names([m['state'] for m in p['w3']])})", "Engage regulators early; hold wave 3 until the law changes"),
+n_low = sum(1 for m in cand if m["ranks"]["balanced"] <= 10 and m["regulation"]["tier"] <= 1)
+slow_open = sorted({m["state"] for m in p["w1"] + p["w2"] if m["regulation"]["tier"] >= 2 and m["regulation"]["new_entrant_path"] == "slow"})
+rows = [("Regulation", f"{n_low} of the top 10 are in Tier 0-1 states; {plan.names(slow_open)} permits are slow for a new entrant", "Engage regulators early; file in slow-permit states during wave 1; hold wave 3 until the law changes"),
         ("Weather", f"{snow['metro']} snow ~{snow['raw']['snow_days']:.0f} days; {heat['metro']} 40 C+ ~{heat['raw']['heat_days']:.0f} days", "Winter and heat validation before public launch"),
-        ("Competition", f"{plan.names(crowded)} already have operators (crowding {min(m['raw']['crowding'] for m in crowded):.1f}-{max(m['raw']['crowding'] for m in crowded):.1f})", "Enter with a clear service or cost edge; Philadelphia is the open field")]
+        ("Competition", f"{plan.names(crowded)} already have operators (crowding {min(m['raw']['crowding'] for m in crowded):.1f}-{max(m['raw']['crowding'] for m in crowded):.1f})", f"Enter with a clear service or cost edge; {least['metro']} is the least crowded launch metro")]
 text(s, 0.6, 1.85, 2.4, 0.4, "RISK", size=12, bold=True, color=MUTED)
 text(s, 3.2, 1.85, 4.6, 0.4, "EVIDENCE", size=12, bold=True, color=MUTED)
 text(s, 8.2, 1.85, 4.5, 0.4, "MITIGATION", size=12, bold=True, color=MUTED)
@@ -204,13 +227,13 @@ left = ["Percentile rank of each metric across 25 metros",
         "Unit economics: labeled analyst assumptions"]
 v = meta["vintages"]
 right = [f"Census ACS {v['acs']}", f"FAA {v['faa']}", "Open-Meteo weather 2016-2025", "NHTSA SGO ADS reports to Sep 2026 (activity only)",
-         v["eia"].split(" (")[0].replace("August 2026 YTD", "EIA commercial price, Jan-Aug 2026"), "Seed files: AV rules, competitors (2026-11-05)",
+         v["eia"].split(" (")[0].replace("August 2026 YTD", "EIA commercial price, Jan-Aug 2026"), f"Researched seed files: AV rules, new-entrant paths, competitors (as of {meta['data_as_of']})",
          "Chicago TNP and NYC TLC trip counts"]
 text(s, 0.6, 1.75, 5.9, 0.4, "METHOD", size=12, bold=True, color=MUTED)
 text(s, 7.0, 1.75, 5.7, 0.4, "SOURCES", size=12, bold=True, color=MUTED)
 text(s, 0.6, 2.2, 6.0, 4.5, ["•  " + t for t in left], size=16)
 text(s, 7.0, 2.2, 5.7, 4.5, ["•  " + t for t in right], size=16)
-text(s, 0.6, 6.55, 12, 0.35, "NHTSA reports have no mileage: never used as crash rates. Full method: docs/methodology.md", size=11, color=MUTED)
+text(s, 0.6, 6.55, 12, 0.35, "NHTSA reports have no mileage: never used as crash rates. Full method in the methodology note", size=11, color=MUTED)
 
 out = HERE / "deck.pptx"
 prs.save(out)

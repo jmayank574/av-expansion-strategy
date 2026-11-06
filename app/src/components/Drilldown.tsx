@@ -17,6 +17,7 @@ function fmt(v: number, unit: string): string {
   if (unit === 'people' || unit === 'people / sq mi') return Math.round(v).toLocaleString('en-US')
   if (unit === 'per resident') return v.toFixed(2)
   if (unit === 'tier') return String(v)
+  if (unit === 'path') return ['slow', 'moderate', 'fast'][Math.round(v)] ?? String(v)
   return v.toFixed(1)
 }
 
@@ -109,6 +110,11 @@ export default function Drilldown({ rows, meta, selected, onSelect }: { rows: Ro
             {m.regulation.key_law_or_rule} · Permit body: {m.regulation.permit_body || 'n/a'} ·{' '}
             <a className="text-accent underline" href={m.regulation.source_url} target="_blank" rel="noreferrer">{m.regulation.source_title}</a>{' '}
             · as of {m.regulation.as_of_date} · confidence {m.regulation.confidence}
+          </p>
+          <p className="mt-2 text-sm"><span className="font-medium">New-entrant path: {m.regulation.new_entrant_path}.</span> {m.regulation.new_entrant_rationale}</p>
+          <p className="mt-1 text-xs text-muted">
+            <a className="text-accent underline" href={m.regulation.new_entrant_source_url} target="_blank" rel="noreferrer">{m.regulation.new_entrant_source_title}</a>{' '}
+            · as of {m.regulation.new_entrant_as_of_date} · confidence {m.regulation.new_entrant_confidence}
           </p>
         </section>
       </div>

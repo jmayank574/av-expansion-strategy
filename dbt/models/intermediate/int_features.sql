@@ -1,6 +1,6 @@
 -- One raw feature row per metro (26): mirrors pipeline/build_features.py
 with crowd as (
-    select c.metro, sum(w.weight) as crowding
+    select c.metro, round(sum(w.weight), 6) as crowding
     from {{ ref('stg_competitors') }} c
     join {{ ref('stg_status_weights') }} w on w.status = c.status
     group by c.metro
@@ -18,6 +18,7 @@ select
     w.snow_days,
     w.heat_days,
     r.tier                        as reg_tier,
+    case r.new_entrant_path when 'fast' then 2 when 'moderate' then 1 when 'slow' then 0 end as new_entrant_score,
     coalesce(c.crowding, 0)       as crowding,
     e.commercial_cents_kwh        as elec_cents_kwh
 from {{ ref('stg_metros') }} m

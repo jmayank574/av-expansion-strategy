@@ -8,8 +8,8 @@ import pathlib, shutil, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent
 VENV = ROOT / ".venv" / ("Scripts" if sys.platform == "win32" else "bin")
 PY = str(VENV / ("python.exe" if sys.platform == "win32" else "python")) if VENV.exists() else sys.executable
-DBT = str(next(iter(VENV.glob("dbt*")), "")) if VENV.exists() else ""
-DBT = DBT or shutil.which("dbt") or "dbt"
+_dbt = VENV / ("dbt.exe" if sys.platform == "win32" else "dbt")
+DBT = str(_dbt) if _dbt.exists() else (shutil.which("dbt") or "dbt")
 SHELL_NPM = sys.platform == "win32"      # npm is npm.cmd on Windows
 
 

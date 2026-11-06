@@ -1,24 +1,27 @@
 # Where should the operator launch after Las Vegas?
 
-*For the strategy team. Data as of 2026-11-05; every number is generated from `data/output/metros_scored.json`.*
+*For the strategy team. Data as of 2026-11-06. Sources: Census ACS 2024 5-year, NHTSA SGO ADS reports, Open-Meteo, EIA, FAA, and researched seed files (AV rules, competitors) as of 2026-11-06.*
 
-**Recommendation.** Enter San Francisco, Los Angeles, Miami and Philadelphia first, then Atlanta, Phoenix and San Diego; hold Chicago, Washington DC and New York until the rules change. The sequence uses balanced-weight scores for 25 US metros (demand 35, operating conditions 25, regulation 20, competition 15, charging 5). Waves 1 and 2 are limited to states with Tier 2+ AV rules; wave 1 also needs a top-5 finish in at least half of 10,000 weight draws.
+**Recommendation.** Enter Miami, San Francisco, Los Angeles and Phoenix first, then Detroit, Atlanta and Philadelphia; hold Chicago, New York and Boston until the rules change. The sequence uses balanced-weight scores for 25 US metros (demand 35, operating conditions 25, regulation 20, competition 15, charging 5). Waves 1 and 2 are limited to states with Tier 2+ AV rules; wave 1 also needs a top-5 finish in at least half of 10,000 weight draws.
 
-**Why these metros** (rank, score, demand score, regulation tier, competitors, confidence, fleet at 3% capture)
-- **San Francisco** (#1, 64.0): demand 76, Tier 3, Zoox, Waymo operating; top 5 in 98% of draws; ~115 vehicles.
-- **Los Angeles** (#2, 59.6): demand 63, Tier 3, Waymo operating; top 5 in 86% of draws; ~263 vehicles.
-- **Miami** (#3, 59.0): demand 78, Tier 3, Waymo, Tesla operating; top 5 in 81% of draws; ~56 vehicles.
-- **Philadelphia** (#4, 55.7): demand 69, Tier 2, no operating competitor; top 5 in 57% of draws; ~144 vehicles.
-- **Wave 2:** Atlanta, Phoenix and San Diego (top 5 in 27%, 37%, 25% of draws). Demand scores of 26-61 (wave 1: 63-78) and weather to validate (Atlanta rain ~108 days, Phoenix heat ~70 days), so they follow once wave 1 proves the playbook.
-- **Wave 3:** Chicago (IL), Washington DC (DC), New York (NY). Demand scores of 78-92, but driverless commercial service is not yet allowed. Build the policy case now; launch when the law changes.
+**Why these metros** (rank, score, demand score, regulation, competitors, confidence, fleet at 3% capture)
 
-**Deprioritize.** Orlando (demand 34/100); San Antonio (demand 20/100); Minneapolis (snow ~22 days, Tier 1 rules); Denver (snow ~25 days); Charlotte (demand 22/100); Pittsburgh (snow ~16 days); Austin (demand 18/100, crowding 2.1); Nashville (demand 12/100). None ranks better than #6 in any scenario (San Antonio).
+- **Miami** (#1, 60.8): demand 78, Tier 3 (fast new-entrant path), Tesla and Waymo operating; top 5 in 95% of draws; ~56 vehicles.
+- **San Francisco** (#2, 58.9): demand 76, Tier 3 (slow new-entrant path), Zoox and Waymo operating; top 5 in 85% of draws; ~115 vehicles. Left of the ease median (50 vs 51) because of a crowded field (crowding 2.5; Zoox and Waymo operating) and a slow new-entrant path in CA (Tier 3).
+- **Los Angeles** (#3, 56.0): demand 63, Tier 3 (slow new-entrant path), Waymo operating; top 5 in 63% of draws; ~263 vehicles.
+- **Phoenix** (#5, 54.9): demand 38, Tier 3 (fast new-entrant path), Waymo operating; top 5 in 51% of draws; ~79 vehicles.
+- **Wave 2:** Detroit, Atlanta and Philadelphia (top 5 in 27%, 36%, 11% of draws). Demand 59-69 (wave 1: 38-78). Watch: Detroit: weather (rain ~93, snow ~17, 40 C+ ~0 days a year); Atlanta: weather (rain ~108, snow ~1, 40 C+ ~0 days a year); Philadelphia: a slow new-entrant path in PA (Tier 2).
+- **Wave 3:** Chicago, New York and Boston. Demand 76-92, but driverless commercial service is not yet allowed. Build the policy case now; launch when the law changes.
+- **Dallas-Fort Worth and Houston** are in no wave. Dallas-Fort Worth ranks #14 of 25 (49.2): Tier 3 rules with a fast new-entrant path, held back by middling demand (51/100) and the most crowded field of 25 (crowding 3.0; Avride, Tesla and Waymo operating). Houston ranks #12 of 25 (49.7): Tier 3 rules with a fast new-entrant path, held back by middling demand (53/100) and weather (rain ~119, snow ~0, 40 C+ ~0 days a year).
+
+**Deprioritize.** San Antonio (demand 20/100); Sacramento (demand 20/100); Seattle (mid-pack on every pillar); Minneapolis (snow ~22 days, Tier 1 rules); Charlotte (demand 22/100); Pittsburgh (snow ~16 days); Austin (demand 18/100, crowding 2.5); Nashville (demand 12/100). None ranks better than #5 in any scenario (San Antonio).
 
 **Key risks and de-risking**
-- *Regulation:* 3 of the top 10 sit in Tier 0-1 states. Engage IL, DC and NY regulators early; track permit steps in Tier 2 states such as PA.
-- *Weather:* Philadelphia has snow on ~8 days a year and Phoenix has ~70 days at 40 C or higher. Validate winter and heat performance before public launch.
-- *Competition:* San Francisco, Los Angeles and Miami already have operators (crowding 1.4-1.8); Philadelphia is the open field (0.3). NHTSA reports show operators the seed file lacks in Atlanta, Austin, Dallas-Fort Worth and Houston, so crowding there is likely understated.
 
-**Confidence.** San Francisco is top 5 in 98% of weight draws and Philadelphia in 57%; San Diego is the softest pick (25%), so wave 2 order is not firm. A low-risk lens puts San Francisco, Los Angeles, San Diego, Phoenix and Miami on top; fast growth, San Francisco, Miami, New York, Los Angeles and Chicago. The answer would also change if a Tier 1 state legalized driverless service, a competitor entered Philadelphia, or fare and capture differ from our labeled assumptions.
+- *Regulation:* 3 of the top 10 sit in Tier 0-1 states; engage IL, NY and MA regulators early. CA and PA are Tier 2+ but a slow path for a new entrant (multi-step permits): start filings in wave 1.
+- *Weather:* Detroit has snow on ~17 days a year and Phoenix has ~70 days at 40 C or higher. Validate winter and heat performance before public launch.
+- *Competition:* Miami, San Francisco, Los Angeles and Phoenix already have operators (crowding 1.3-2.5); Detroit is the least crowded launch metro (0.3). Competitor status is dated and cross-checked against NHTSA activity.
 
-**Data.** ACS 2024 5-year (2020-2024); FAA CY2025 enplanements; weather 2016-2025; NHTSA reports to Sep 2026 (activity only, never rates); EIA August 2026 YTD; regulation and competitors researched 2026-11-05 (some rows medium/low confidence); demand is a two-anchor estimate, not a forecast. Method: `docs/methodology.md`.
+**Confidence.** Miami is top 5 in 95% of weight draws and Phoenix in 51%; Phoenix only just clears the 50% wave 1 gate. Philadelphia is the softest pick (11%), so wave 2 order is not firm. A low-risk lens puts Phoenix, Miami, San Francisco, Los Angeles and Atlanta on top; fast growth, Miami, San Francisco, New York, Chicago and Los Angeles. Las Vegas, the beachhead, scores "Opportunistic" on this model (demand 36/100), which shows it underweights tourism-driven demand: visitors are not in resident population, density or commute data. The answer would also change if a Tier 1 state legalized driverless service, a competitor entered Detroit, or fare and capture differ from our labeled assumptions.
+
+**Data.** ACS 2024 5-year (2020-2024); FAA CY2025 enplanements; Open-Meteo weather 2016-2025; NHTSA SGO reports to Sep 2026 (activity only, never rates); EIA August 2026 YTD; AV rules, new-entrant paths and competitors researched 2026-11-06 (some rows medium/low confidence); demand is a two-anchor estimate (Chicago and NYC ride-hail trips), not a forecast.

@@ -10,7 +10,7 @@ The answer is built in four steps: score 25 candidate metros on five criteria, e
 |---|---|---|---|
 | Market demand | 35 | log metro population (30), principal-city density (25), taxi/ride-hail commute share (20), no-vehicle household share (15), airport enplanements per metro resident (10) | higher is better |
 | Operating conditions | 25 | rain days (40), snow days (40), extreme-heat days (20) | lower is better |
-| Regulatory readiness | 20 | state AV regulation tier, 0 to 3 (100) | higher is better |
+| Regulatory readiness | 20 | state AV regulation tier, 0 to 3 (60); new-entrant path, slow / moderate / fast (40) | higher is better |
 | Competitive intensity | 15 | crowding (100) | lower is better |
 | Charging cost | 5 | commercial electricity price, cents/kWh (100) | lower is better |
 
@@ -38,16 +38,28 @@ See `docs/data_sources.md` for URLs, vintages and caveats. Notes on choices:
 - **Downtown coordinates** are Open-Meteo geocoding (GeoNames) city-center points. The Census Gazetteer internal point was rejected because it is not a downtown (San Francisco's falls in the Pacific).
 - **Enplanements** are FAA CY2025, summed over the airports mapped to each metro. West Palm Beach appears under the FAA identifier DJT.
 - **Electricity** is EIA Table 5.6.B, commercial sector, year-to-date through August 2026. It is not a 12-month average. This was a deliberate choice, since the 12-month series needs an API key.
-- **Regulation tier** (0-3) and **competitor presence** are hand-researched seed CSVs, each row with source URL, title, date and confidence. Rows that could not be verified from a page that was opened were dropped and listed in `data/profiles/07_seed_and_crosscheck.md`.
+- **Regulation tier** (0-3), the **new-entrant path** (fast / moderate / slow) and **competitor presence** are hand-researched seed CSVs, each row with source URL, title, date and confidence. Rows that could not be verified from a page that was opened were dropped and listed in `data/profiles/07_seed_and_crosscheck.md`.
 - **NHTSA SGO ADS reports** are used only as evidence of where operators are active, never as rates, because the reports carry no mileage. Reports are reduced to the latest version per Report ID, then one row per Same Incident ID, over the last 24 months. Cities are mapped to metros by principal-city name, then by Census Gazetteer city point within 40 km of downtown (for suburbs such as Tempe), plus three explicit aliases (Venice, Fort Worth, Kingwood).
+
+### Regulatory readiness: legal tier and new-entrant path
+
+The regulatory pillar has two sub-metrics, both percentile-ranked like every other: **state tier** (0-3, weight 60) says whether driverless commercial service is legal; **new-entrant path** (weight 40) says how quickly a *new* operator could reach paid driverless service in that state. Other pillar and sub-metric weights are unchanged.
+
+New-entrant path (`data/seed/state_av_regulation.csv`, each row sourced to a page that was opened):
+
+- **fast**: one registration, filing or authorization with no discretionary review and no separate passenger-fare permit, and an operator has already launched under it (AZ, TX, FL, GA, TN, CO).
+- **moderate**: two agencies or a discretionary approval, or a paper path with no commercial precedent (NV needs a DMV certificate plus a Transportation Authority permit; WA, NC and MI have light statutes but no paid driverless precedent).
+- **slow**: three or more sequential approvals including a separate fare permit (CA: DMV testing, driverless testing and deployment permits plus CPUC pilot and deployment programs; PA: supervised testing, PennDOT certification, PUC approval), or a law change is needed first (NY, MA, MN, IL, DC).
+
+The path is an analyst classification from the cited statutes and regulator pages, not an official rating.
 
 ## 4. Known limitations
 
-- Public data only. Regulation and competitor status are as of 2026-11-05 and change fast.
+- Public data only. Regulation and competitor status are as of 2026-11-06 and change fast.
 - Percentile ranking on a 0-3 tier compresses the regulatory pillar: with many metros tied at Tier 3, a Tier 3 state scores about 73, not 100. The ordering is preserved.
 - Percentile ranking says how a metro compares with the other 24, not how good it is in absolute terms.
 - The balanced total rewards demand heavily. The largest, densest markets (San Francisco, Los Angeles) rank high even though competitors are already active there. The Opportunity vs. Ease of Entry view and the scenarios show this trade-off.
-- Competitor status tiers for some cities (limited vs. public) are judgments from search extracts; Tesla rows rest on a fan/news site.
+- Competitor status was researched from opened pages on 2026-11-06 (see the notes in `data/profiles/07_seed_and_crosscheck.md`). The waymo.com access page is undated and lags press reports for some cities; Tesla Miami, Phoenix, Las Vegas, Orlando and Tampa rest partly on a fan site; Avride Austin rests on Wikipedia. Rows are marked medium or low confidence accordingly.
 - NHTSA city-to-metro mapping is approximate for small suburbs; unmapped cities are listed in the profile.
 
 ## 5. Demand calibration (Phase 3)
@@ -69,7 +81,7 @@ Inputs come only from `config/assumptions.yaml`. Each has a value, a low (pessim
 - Operating cost per vehicle = vehicle miles x cost per mile + vehicle miles x kWh per mile x state commercial price. Vehicle miles = paid miles / (1 - deadhead share).
 - Contribution = revenue - operating cost. Payback = vehicle cost / contribution (shown as "never" if contribution is not positive).
 
-The low / base / high outputs apply the pessimistic / central / optimistic end of every input together, so they are a stress range, not a statistical interval. Because fare, cost per mile and utilization are the same in every metro, per-vehicle payback varies little across metros (only the power price differs). Demand mainly sets the fleet size. The app lets a reader change fare, capture share and trips per vehicle per day.
+The low / base / high outputs apply the pessimistic / central / optimistic end of every input together, so they are a stress range, not a statistical interval. Because fare, cost per mile and utilization are the same in every metro, per-vehicle payback varies little across metros (only the power price differs): base-case payback is 2.2 to 2.4 years everywhere. Public per-metro fare or trip-length data exists only for the two calibration anchors (Chicago and NYC), so fare is not varied by metro. Stress range (every input pessimistic, or every input optimistic, at once): payback of 0.7-0.7 years in the high case and 43-276 years in the low case, i.e. effectively never. Read payback as assumption-driven; read fleet size and revenue pool as the demand-driven outputs. Demand mainly sets the fleet size. The app lets a reader change fare, capture share and trips per vehicle per day.
 
 ## 7. Monte Carlo on the weights (Phase 3)
 

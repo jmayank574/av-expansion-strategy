@@ -25,6 +25,10 @@ models:
         tests:
           - not_null
           - accepted_values: {values: [0, 1, 2, 3], quote: false}
+      - name: new_entrant_path
+        tests:
+          - not_null
+          - accepted_values: {values: ['fast', 'moderate', 'slow']}
       - name: confidence
         tests:
           - accepted_values: {values: ['high', 'medium', 'low']}

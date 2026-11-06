@@ -19,3 +19,8 @@
 - Census API key: set `CENSUS_API_KEY` in `.env` (copy `.env.example`). The key is gitignored.
 - NHTSA: the current file (Apr 2025 to Sep 2026 incidents) and the archive file (to Jun 2025) overlap, with different Report IDs, and are de-duplicated by Same Incident ID. The 24-month window is Oct 2024 to Sep 2026.
 - Open-Meteo archive responses are cached in `data/raw/weather/` (raw is gitignored). The free tier returns HTTP 429 after a burst of calls, and the ingest retries with a back-off.
+
+## Seed files re-researched 2026-11-06
+
+- `data/seed/competitor_presence.csv`: all 26 metros re-researched from opened company, news, SEC and regulator pages (Waymo, Tesla, Zoox, Avride, May Mobility, Motional, Nuro/Lucid, Lyft/Mobileye). Every row has source URL, title, as-of date and confidence. Cross-checked against NHTSA SGO activity in `data/profiles/07_seed_and_crosscheck.md`.
+- `data/seed/state_av_regulation.csv`: added `new_entrant_path` (fast / moderate / slow) with rationale, source URL, title, as-of date and confidence for each of 17 states. Sources include CPUC, CA DMV, TxDMV, NV DMV and NTA, ADOT statute text, Florida Statutes, and AFDC summaries for Georgia and Tennessee.

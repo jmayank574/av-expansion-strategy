@@ -25,7 +25,8 @@ pillars:
   regulatory:
     label: Regulatory readiness
     submetrics:
-      reg_tier: {weight: 100, direction: 1, label: "State AV regulation tier (0-3)", unit: "tier"}
+      reg_tier:           {weight: 60, direction: 1, label: "State AV regulation tier (0-3)", unit: "tier"}
+      new_entrant_score:  {weight: 40, direction: 1, label: "New-entrant path to paid driverless service (0 slow, 1 moderate, 2 fast)", unit: "path"}
   competition:
     label: Competitive intensity
     submetrics:

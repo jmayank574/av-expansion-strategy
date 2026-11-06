@@ -2,15 +2,15 @@
 
 **The problem.** A Level 4 robotaxi operator has proven its service in Las Vegas and runs on a ride-hail platform partner. Which US metros should it enter next, in what order, and what will each one take? This project scores 25 candidate metros on the five criteria the AV industry uses to pick launch markets, estimates demand and unit economics, tests how stable the ranking is, and delivers the answer as an interactive app, an executive memo and a slide deck. The operator is kept generic: "the operator" and "the Las Vegas beachhead".
 
-**Recommendation (balanced weights, data as of 2026-11-05).** Enter San Francisco, Los Angeles, Miami and Philadelphia first, then Atlanta, Phoenix and San Diego; hold Chicago, Washington DC and New York until the rules change.
+**Recommendation (balanced weights, data as of 2026-11-06).** Enter Miami, San Francisco, Los Angeles and Phoenix first, then Atlanta, Detroit and Philadelphia; hold Chicago, New York and Boston until the rules change.
 
 | Wave | Metros | Gate |
 |---|---|---|
-| 1 | San Francisco, Los Angeles, Miami and Philadelphia | Tier 2+ state rules and top 5 in at least half of 10,000 weight draws (San Francisco 98%, Los Angeles 86%, Miami 81%, Philadelphia 57%) |
-| 2 | Atlanta, Phoenix and San Diego | Tier 2+ rules, top 10; weather to validate (Atlanta 27%, Phoenix 37%, San Diego 25%) |
-| 3 | Chicago, Washington DC and New York | Top-10 demand, but driverless commercial service is not yet allowed |
+| 1 | Miami, San Francisco, Los Angeles and Phoenix | Tier 2+ state rules and top 5 in at least half of 10,000 weight draws (Miami 96%, San Francisco 87%, Los Angeles 63%, Phoenix 50%) |
+| 2 | Atlanta, Detroit and Philadelphia | Tier 2+ rules, top 10; weather and permits to validate (Atlanta 39%, Detroit 26%, Philadelphia 10%) |
+| 3 | Chicago, New York and Boston | Top-10 demand, but driverless commercial service is not yet allowed |
 
-San Francisco, Los Angeles and Miami score highest but already have operating competitors; Philadelphia is the open field. Read the one-page memo ([reports/memo.md](reports/memo.md)) and the 7-slide deck (`reports/deck.pptx`) for the reasoning and risks.
+Miami, San Francisco, Los Angeles and Phoenix already have operating competitors, so wave 1 is a bet on demand and rules, not on an open field. California is Tier 3 but slow for a new entrant (separate DMV and CPUC permits). Dallas-Fort Worth (#13) and Houston (#14) are in no wave: see the memo for why. Read the one-page memo ([reports/memo.md](reports/memo.md)) and the 7-slide deck (`reports/deck.pptx`) for the reasoning and risks.
 
 ## Screenshots
 
@@ -69,8 +69,8 @@ Five pillars (demand 35, operating conditions 25, regulatory readiness 20, compe
 | Open-Meteo historical weather | 2016-2025 daily |
 | NHTSA Standing General Order, ADS reports | 24 months ending Sep 2026 |
 | EIA Table 5.6.B, commercial price | Jan-Aug 2026 year to date |
-| Seed: state AV regulation (17 states) | researched 2026-11-05 |
-| Seed: competitor presence (42 rows) | researched 2026-11-05 |
+| Seed: state AV regulation and new-entrant path (17 states) | researched 2026-11-06 |
+| Seed: competitor presence (51 rows, all 26 metros) | researched 2026-11-06 |
 
 Details and caveats: [docs/data_sources.md](docs/data_sources.md). Profiles of every step are in [data/profiles/](data/profiles/).
 
@@ -78,6 +78,6 @@ Details and caveats: [docs/data_sources.md](docs/data_sources.md). Profiles of e
 
 - Public data only.
 - NHTSA reports have no mileage, so they are used as evidence of where operators are active and never as crash rates.
-- Regulation and competitor status are as of 2026-11-05 and some rows are low or medium confidence (listed in `data/profiles/07_seed_and_crosscheck.md`).
+- Regulation and competitor status are as of 2026-11-06 and some rows are low or medium confidence (listed in `data/profiles/07_seed_and_crosscheck.md`).
 - Demand is an estimate from two anchors (Phase 3), not a forecast.
 - The EIA price is a year-to-date average, not a 12-month average.
