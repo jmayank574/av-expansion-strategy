@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: stg_metros
+    columns:
+      - name: metro
+        tests: [not_null, unique]
+      - name: cbsa
+        tests: [not_null, unique]
+      - name: place_geoid
+        tests: [not_null, unique]
+  - name: stg_acs
+    columns:
+      - name: metro
+        tests: [not_null, unique]
+      - name: no_vehicle_share
+        tests: [{in_range: {min_value: 0, max_value: 1}}]
+      - name: taxi_ridehail_share
+        tests: [{in_range: {min_value: 0, max_value: 1}}]
+  - name: stg_regulation
+    columns:
+      - name: state
+        tests: [not_null, unique]
+      - name: tier
+        tests:
+          - not_null
+          - accepted_values: {values: [0, 1, 2, 3], quote: false}
+      - name: confidence
+        tests:
+          - accepted_values: {values: ['high', 'medium', 'low']}
+  - name: stg_competitors
+    columns:
+      - name: metro
+        tests: [not_null]
+      - name: status
+        tests:
+          - not_null
+          - accepted_values: {values: ['operating_public', 'operating_limited', 'testing', 'announced']}
+  - name: stg_weather
+    columns:
+      - name: metro
+        tests: [not_null, unique]
+      - name: snow_days
+        tests: [{in_range: {min_value: 0, max_value: 366}}]
+  - name: stg_eia
+    columns:
+      - name: state
+        tests: [not_null, unique]
+  - name: int_features
+    columns:
+      - name: metro
+        tests: [not_null, unique]
+  - name: int_pillar_scores
+    columns:
+      - name: pillar_score
+        tests: [{in_range: {min_value: 0, max_value: 100}}]
+  - name: mart_metro_scores
+    columns:
+      - name: metro
+        tests: [not_null, unique]
+      - name: total_balanced
+        tests: [{in_range: {min_value: 0, max_value: 100}}]
+      - name: total_fast_growth
+        tests: [{in_range: {min_value: 0, max_value: 100}}]
+      - name: total_low_risk
+        tests: [{in_range: {min_value: 0, max_value: 100}}]
+      - name: total_capital_light
+        tests: [{in_range: {min_value: 0, max_value: 100}}]
+      - name: ease_of_entry
+        tests: [{in_range: {min_value: 0, max_value: 100}}]

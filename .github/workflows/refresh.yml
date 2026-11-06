@@ -1,0 +1,49 @@
+name: Monthly data refresh
+
+on:
+  schedule:
+    - cron: "0 12 17 * *"      # 17th of each month, after NHTSA's mid-month SGO release
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+      PY: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Python dependencies
+        run: pip install pandas requests pyyaml duckdb python-pptx matplotlib pytest pyarrow openpyxl lxml tabulate dbt-duckdb
+      - name: Write .env for the ingest scripts
+        run: echo "CENSUS_API_KEY=${CENSUS_API_KEY}" > .env
+      - name: Ingest (raw to interim parquet)
+        run: make data
+      - name: Score, publish JSON, build dbt and check parity
+        run: |
+          make score
+          sed -i 's#\.\./\.venv/Scripts/dbt#dbt#' Makefile
+          make dbt
+      - name: Test (pytest and vitest)
+        run: |
+          cd app && npm ci && cd ..
+          make test
+      - name: Regenerate memo and deck
+        run: make memo deck
+      - name: Commit refreshed outputs
+        run: |
+          git config user.name "refresh-bot"
+          git config user.email "refresh-bot@users.noreply.github.com"
+          git checkout -- Makefile
+          git add data/output data/profiles app/public/metros_scored.json reports
+          git diff --cached --quiet || git commit -m "Monthly data refresh $(date -u +%F)"
+          git push

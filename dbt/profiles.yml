@@ -1,0 +1,7 @@
+av_expansion:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../data/av_expansion.duckdb
+      threads: 1
