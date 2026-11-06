@@ -74,3 +74,14 @@ The low / base / high outputs apply the pessimistic / central / optimistic end o
 ## 7. Monte Carlo on the weights (Phase 3)
 
 10,000 pillar-weight sets are drawn from a Dirichlet distribution centered on the balanced weights (concentration 50, seed 42), which moves each weight by roughly 5 to 7 points. For each draw all 25 candidates are re-ranked. The Confidence column in the app is the share of draws in which the metro lands in the top 5; the median rank is also reported. Concentration is an analyst choice: a lower value would explore more extreme weightings. This tests weight uncertainty only, not data error or assumption error.
+
+## 8. From scores to a launch sequence (Phase 4)
+
+The memo and deck derive the sequence from `data/output/metros_scored.json` with fixed rules (`reports/plan.py`):
+
+- **Wave 1:** balanced rank 1-5, state regulation tier 2 or higher, and top 5 in at least 50% of Monte Carlo weight draws.
+- **Wave 2:** remaining metros ranked 1-10 in tier 2+ states.
+- **Wave 3:** remaining metros ranked 1-10 in tier 0-1 states. These are policy-dependent options: build the case, launch when driverless commercial service becomes legal.
+- **Deprioritize:** balanced rank 18 or lower. Their best rank in any of the four scenarios is reported alongside.
+
+Timing is stated as evidence gates (rules, proof from the earlier wave), not calendar dates. The thresholds (50%, rank 10, rank 18) are analyst choices and are visible in the code.

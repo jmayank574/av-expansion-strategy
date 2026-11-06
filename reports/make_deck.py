@@ -1,0 +1,217 @@
+"""Generate reports/deck.pptx (7 slides) and reports/charts/*.png (200 dpi) from data/output/metros_scored.json."""
+import pathlib, sys
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from pptx import Presentation
+from pptx.util import Inches, Pt
+from pptx.dml.color import RGBColor
+from pptx.enum.shapes import MSO_SHAPE
+from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+
+HERE = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import plan
+
+CH = HERE / "charts"
+CH.mkdir(exist_ok=True)
+ACCENT, INK, MUTED, LINE, PANEL = "#1d4ed8", "#111827", "#6b7280", "#e5e7eb", "#f8fafc"
+rgb = lambda h: RGBColor.from_string(h.lstrip("#").upper())
+DPI = 200
+
+p = plan.build()
+d, by, cand = p["d"], p["by"], p["cand"]
+meta = d["meta"]
+vegas = next(m for m in d["metros"] if m["benchmark"])
+pct = lambda x: f"{x * 100:.0f}%"
+plt.rcParams.update({"font.family": "DejaVu Sans", "axes.edgecolor": MUTED, "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": MUTED})
+
+
+# ---------------------------------------------------------------- charts
+def chart_quadrant():
+    fig, ax = plt.subplots(figsize=(11, 5.4), dpi=DPI)
+    mx, my = p["med_ease"], p["med_opp"]
+    ax.axvline(mx, color="#9ca3af", ls=(0, (5, 4)), lw=1)
+    ax.axhline(my, color="#9ca3af", ls=(0, (5, 4)), lw=1)
+    for m in cand:
+        q = p["quad"](m)
+        ax.scatter(m["ease_of_entry"], m["opportunity"], s=60 + 260 * m["raw"]["crowding"], color=ACCENT,
+                   alpha=0.85 if q == "Launch next" else 0.3, edgecolor="white", linewidth=1.2, zorder=3)
+        if q == "Launch next" or m["opportunity"] >= 70:
+            ax.annotate(m["metro"], (m["ease_of_entry"], m["opportunity"]), xytext=(9, 3), textcoords="offset points", fontsize=9.5, color=INK)
+    ax.scatter(vegas["ease_of_entry"], vegas["opportunity"], marker="D", s=110, color=INK, zorder=4)
+    ax.annotate("Las Vegas (benchmark)", (vegas["ease_of_entry"], vegas["opportunity"]), xytext=(10, -4), textcoords="offset points", fontsize=9.5, color=INK)
+    ax.set_xlim(ax.get_xlim()[0] - 2, ax.get_xlim()[1] + 1); ax.set_ylim(ax.get_ylim()[0] - 4, ax.get_ylim()[1] + 9)
+    x0, x1 = ax.get_xlim(); y0, y1 = ax.get_ylim()
+    kw = dict(fontsize=10, fontweight="bold", alpha=0.9)
+    ax.text(x0 + 0.5, y1 - 1.5, "BUILD CASE", color=MUTED, va="top", **kw)
+    ax.text(x1 - 0.5, y1 - 1.5, "LAUNCH NEXT", color=ACCENT, va="top", ha="right", **kw)
+    ax.text(x0 + 0.5, y0 + 1.5, "DEPRIORITIZE", color=MUTED, va="bottom", **kw)
+    ax.text(x1 - 0.5, y0 + 1.5, "OPPORTUNISTIC", color=MUTED, va="bottom", ha="right", **kw)
+    ax.set_xlabel("Ease of entry (regulation, weather, competition, charging)  →")
+    ax.set_ylabel("Opportunity (demand)  →")
+    ax.grid(color="#eef0f3", lw=0.8, zorder=0)
+    for s in ("top", "right"): ax.spines[s].set_visible(False)
+    ax.text(0.99, -0.16, "Bubble size = competitor crowding. Dashed lines = medians of the 25 candidates.", transform=ax.transAxes, ha="right", fontsize=8.5, color=MUTED)
+    fig.tight_layout()
+    f = CH / "quadrant.png"; fig.savefig(f, dpi=DPI); plt.close(fig)
+    return f
+
+
+def chart_unit_econ(top):
+    names = [m["metro"] for m in top]
+    base = [plan.fleet(m) for m in top]
+    lo = [plan.fleet(m, "low") for m in top]
+    hi = [plan.fleet(m, "high") for m in top]
+    pay = [m["unit_economics"]["base"]["payback_years"] for m in top]
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4.4), dpi=DPI)
+    y = range(len(top))
+    a1.barh(list(y), base, color=ACCENT, height=0.5, zorder=3)
+    a1.errorbar(base, list(y), xerr=[[b - l for b, l in zip(base, lo)], [h - b for b, h in zip(base, hi)]], fmt="none", ecolor=MUTED, elinewidth=1.2, capsize=4, zorder=4)
+    for i, b in enumerate(base): a1.text(hi[i] + 8, i, f"{b:,.0f}", va="center", fontsize=10, color=INK)
+    a1.set_yticks(list(y)); a1.set_yticklabels(names, fontsize=10.5, color=INK); a1.invert_yaxis()
+    a1.set_title("Fleet needed, vehicles (base; whiskers = low to high case)", fontsize=10.5, color=INK, loc="left")
+    a2.barh(list(y), pay, color=ACCENT, height=0.5, zorder=3)
+    for i, v in enumerate(pay): a2.text(v + 0.05, i, f"{v:.1f} yrs", va="center", fontsize=10, color=INK)
+    a2.set_yticks(list(y)); a2.set_yticklabels([]); a2.invert_yaxis(); a2.set_xlim(0, max(pay) * 1.5)
+    a2.set_title("Payback on vehicle cost, years (base case)", fontsize=10.5, color=INK, loc="left")
+    for a in (a1, a2):
+        a.grid(axis="x", color="#eef0f3", lw=0.8, zorder=0)
+        for s in ("top", "right"): a.spines[s].set_visible(False)
+    fig.tight_layout()
+    f = CH / "unit_economics.png"; fig.savefig(f, dpi=DPI); plt.close(fig)
+    return f
+
+
+# ---------------------------------------------------------------- slide helpers
+prs = Presentation()
+prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+BLANK = prs.slide_layouts[6]
+
+
+def text(slide, x, y, w, h, s, size=18, bold=False, color=INK, align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP):
+    tb = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
+    tf = tb.text_frame; tf.word_wrap = True; tf.vertical_anchor = anchor
+    tf.margin_left = tf.margin_right = Inches(0.05)
+    lines = s if isinstance(s, list) else [s]
+    for i, ln in enumerate(lines):
+        para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        para.alignment = align
+        r = para.add_run(); r.text = ln
+        r.font.size = Pt(size); r.font.bold = bold; r.font.color.rgb = rgb(color); r.font.name = "Calibri"
+    return tb
+
+
+def box(slide, x, y, w, h, fill=PANEL, line=LINE):
+    sh = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
+    sh.adjustments[0] = 0.04
+    sh.fill.solid(); sh.fill.fore_color.rgb = rgb(fill)
+    sh.line.color.rgb = rgb(line); sh.line.width = Pt(0.75)
+    sh.shadow.inherit = False
+    return sh
+
+
+def new_slide(title, n):
+    s = prs.slides.add_slide(BLANK)
+    bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, Inches(0.12))
+    bar.fill.solid(); bar.fill.fore_color.rgb = rgb(ACCENT); bar.line.fill.background()
+    text(s, 0.6, 0.35, 12.1, 1.3, title, size=30, bold=True)
+    text(s, 0.6, 7.0, 10, 0.3, f"Source: data/output/metros_scored.json, data as of {meta['data_as_of']}", size=10, color=MUTED)
+    text(s, 12.2, 7.0, 0.6, 0.3, str(n), size=10, color=MUTED, align=PP_ALIGN.RIGHT)
+    return s
+
+
+# ---------------------------------------------------------------- slide 1
+s = prs.slides.add_slide(BLANK)
+bg = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height)
+bg.fill.solid(); bg.fill.fore_color.rgb = rgb(ACCENT); bg.line.fill.background()
+text(s, 0.8, 1.7, 11.7, 1.5, "Where should the operator launch after Las Vegas?", size=44, bold=True, color="#ffffff")
+text(s, 0.8, 3.7, 11.5, 1.6, plan.one_line_answer(p), size=26, color="#dbe6fb")
+text(s, 0.8, 6.4, 11, 0.5, f"Strategy team readout  |  25 US metros scored  |  data as of {meta['data_as_of']}", size=14, color="#dbe6fb")
+
+# ---------------------------------------------------------------- slide 2
+s = new_slide("Five criteria decide where a robotaxi launch works", 2)
+W = meta["weights"]["scenarios"]["balanced"]
+CARDS = [("demand", "Market demand", "Population, density, ride-hail use, no-car households, airport traffic"),
+         ("operating", "Operating conditions", "Rain, snow and extreme-heat days"),
+         ("regulatory", "Regulatory readiness", "State AV rules, tier 0 to 3"),
+         ("competition", "Competitive intensity", "Who already operates or has announced"),
+         ("charging", "Charging cost", "Commercial electricity price")]
+for i, (k, name, sub) in enumerate(CARDS):
+    x = 0.6 + i * 2.45
+    box(s, x, 2.1, 2.3, 3.6)
+    text(s, x + 0.1, 2.25, 2.1, 0.9, f"{W[k]}", size=44, bold=True, color=ACCENT)
+    text(s, x + 0.1, 3.15, 2.1, 0.3, "weight, balanced case", size=10, color=MUTED)
+    text(s, x + 0.1, 3.6, 2.1, 0.7, name, size=18, bold=True)
+    text(s, x + 0.1, 4.4, 2.1, 1.2, sub, size=12, color=MUTED)
+text(s, 0.6, 6.05, 12, 0.5, "25 candidate metros, each scored 0-100 by percentile rank; Las Vegas scored as a benchmark, not ranked", size=14, color=MUTED)
+
+# ---------------------------------------------------------------- slide 3
+ln = sorted([m for m in cand if p["quad"](m) == "Launch next"], key=lambda m: -(m["ease_of_entry"] + m["opportunity"]))
+s = new_slide(f"{plan.names(ln)} pair real demand with workable entry conditions", 3)
+s.shapes.add_picture(str(chart_quadrant()), Inches(0.6), Inches(1.55), width=Inches(12.1))
+
+# ---------------------------------------------------------------- slide 4
+s = new_slide("Launch in three waves, gated by regulation and proof", 4)
+cols = [("Wave 1", "Start now", p["w1"], "Tier 2+ rules, top-5 in at least half of weight draws"),
+        ("Wave 2", "After wave 1 proves the playbook", p["w2"], "Tier 2+ rules, top 10; validate weather"),
+        ("Wave 3", "When the law changes", p["w3"], "Top-10 demand, driverless service not yet allowed")]
+for i, (wn, when, ms, rule) in enumerate(cols):
+    x = 0.6 + i * 4.1
+    box(s, x, 1.9, 3.9, 4.6, fill="#ffffff" if i else "#eef3ff", line=ACCENT if i == 0 else LINE)
+    text(s, x + 0.15, 2.0, 3.6, 0.5, wn, size=24, bold=True, color=ACCENT)
+    text(s, x + 0.15, 2.6, 3.6, 0.4, when, size=14, color=MUTED)
+    text(s, x + 0.15, 3.15, 3.6, 2.2, [m["metro"] for m in ms], size=22, bold=True)
+    text(s, x + 0.15, 5.45, 3.6, 0.9, rule, size=12, color=MUTED)
+text(s, 0.6, 6.6, 12, 0.35, "Timing is indicative: sequence follows evidence gates, not calendar dates", size=11, color=MUTED)
+
+# ---------------------------------------------------------------- slide 5
+top5 = [m for m in cand if m["ranks"]["balanced"] <= 5]
+pays = [m["unit_economics"]["base"]["payback_years"] for m in top5]
+fl = [plan.fleet(m) for m in top5]
+s = new_slide(f"Payback is ~{min(pays):.1f}-{max(pays):.1f} years per vehicle in every top-5 metro; demand sets fleet size ({min(fl):,.0f} to {max(fl):,.0f})", 5)
+s.shapes.add_picture(str(chart_unit_econ(top5)), Inches(0.6), Inches(1.75), width=Inches(12.1))
+lows = [m["unit_economics"]["low"]["payback_years"] for m in top5]
+highs = [m["unit_economics"]["high"]["payback_years"] for m in top5]
+text(s, 0.6, 6.55, 12.1, 0.4, f"Top five by balanced score (Atlanta and Phoenix tie for fifth). Stress range with every input pessimistic or optimistic at once: {min(highs):.1f} years to {('more than 50 years' if max(l for l in lows if l) > 50 else f'{max(l for l in lows if l):.0f} years')}. Inputs are labeled analyst assumptions.", size=11, color=MUTED)
+
+# ---------------------------------------------------------------- slide 6
+snow = max(p["w1"] + p["w2"], key=lambda m: m["raw"]["snow_days"])
+heat = max(p["w1"] + p["w2"], key=lambda m: m["raw"]["heat_days"])
+crowded = [m for m in p["w1"] if m["raw"]["crowding"] >= 1.0]
+s = new_slide("Regulation, weather and crowding are the three risks to manage", 6)
+rows = [("Regulation", f"{len(p['w3'])} of the top 10 are in Tier 0-1 states ({plan.names([m['state'] for m in p['w3']])})", "Engage regulators early; hold wave 3 until the law changes"),
+        ("Weather", f"{snow['metro']} snow ~{snow['raw']['snow_days']:.0f} days; {heat['metro']} 40 C+ ~{heat['raw']['heat_days']:.0f} days", "Winter and heat validation before public launch"),
+        ("Competition", f"{plan.names(crowded)} already have operators (crowding {min(m['raw']['crowding'] for m in crowded):.1f}-{max(m['raw']['crowding'] for m in crowded):.1f})", "Enter with a clear service or cost edge; Philadelphia is the open field")]
+text(s, 0.6, 1.85, 2.4, 0.4, "RISK", size=12, bold=True, color=MUTED)
+text(s, 3.2, 1.85, 4.6, 0.4, "EVIDENCE", size=12, bold=True, color=MUTED)
+text(s, 8.2, 1.85, 4.5, 0.4, "MITIGATION", size=12, bold=True, color=MUTED)
+for i, (r, e, mtg) in enumerate(rows):
+    y = 2.35 + i * 1.45
+    box(s, 0.6, y, 12.1, 1.3)
+    text(s, 0.75, y + 0.1, 2.3, 1.1, r, size=22, bold=True, color=ACCENT, anchor=MSO_ANCHOR.MIDDLE)
+    text(s, 3.2, y + 0.1, 4.8, 1.1, e, size=15, anchor=MSO_ANCHOR.MIDDLE)
+    text(s, 8.2, y + 0.1, 4.4, 1.1, mtg, size=15, anchor=MSO_ANCHOR.MIDDLE)
+
+# ---------------------------------------------------------------- slide 7
+s = new_slide("Appendix: methodology and sources", 7)
+left = ["Percentile rank of each metric across 25 metros",
+        "Pillar score = weighted mean of its sub-scores",
+        "Total = weighted mean of five pillars",
+        "Opportunity = demand; ease = other four pillars",
+        "Monte Carlo: 10,000 weight draws (Dirichlet, seed 42)",
+        "Demand: two anchors, Chicago and NYC, calendar 2025",
+        "Unit economics: labeled analyst assumptions"]
+v = meta["vintages"]
+right = [f"Census ACS {v['acs']}", f"FAA {v['faa']}", "Open-Meteo weather 2016-2025", "NHTSA SGO ADS reports to Sep 2026 (activity only)",
+         v["eia"].split(" (")[0].replace("August 2026 YTD", "EIA commercial price, Jan-Aug 2026"), "Seed files: AV rules, competitors (2026-11-05)",
+         "Chicago TNP and NYC TLC trip counts"]
+text(s, 0.6, 1.75, 5.9, 0.4, "METHOD", size=12, bold=True, color=MUTED)
+text(s, 7.0, 1.75, 5.7, 0.4, "SOURCES", size=12, bold=True, color=MUTED)
+text(s, 0.6, 2.2, 6.0, 4.5, ["•  " + t for t in left], size=16)
+text(s, 7.0, 2.2, 5.7, 4.5, ["•  " + t for t in right], size=16)
+text(s, 0.6, 6.55, 12, 0.35, "NHTSA reports have no mileage: never used as crash rates. Full method: docs/methodology.md", size=11, color=MUTED)
+
+out = HERE / "deck.pptx"
+prs.save(out)
+print(f"wrote {out} with {len(prs.slides)} slides")

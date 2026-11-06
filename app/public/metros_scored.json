@@ -144,7 +144,7 @@
    "demand": "Chicago TNP and NYC HVFHV calendar 2025"
   },
   "data_as_of": "2026-11-05",
-  "generated_at": "2026-11-06T02:21:59+00:00",
+  "generated_at": "2026-11-06T02:27:08+00:00",
   "assumptions": {
    "capture_share": {
     "label": "Robotaxi share of ride-hail trips in the principal city",

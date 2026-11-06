@@ -9,3 +9,5 @@ dbt/target/
 dbt/logs/
 .pytest_cache/
 .env
+reports/memo_preview.*
+reports/deck_preview/

@@ -2,7 +2,15 @@
 
 **The problem.** A Level 4 robotaxi operator has proven its service in Las Vegas and runs on a ride-hail platform partner. Which US metros should it enter next, in what order, and what will each one take? This project scores 25 candidate metros on the five criteria the AV industry uses to pick launch markets, estimates demand and unit economics, tests how stable the ranking is, and delivers the answer as an interactive app, an executive memo and a slide deck. The operator is kept generic: "the operator" and "the Las Vegas beachhead".
 
-**Current recommendation (balanced weights, work in progress):** the top 5 are San Francisco, Los Angeles, Miami, Philadelphia and Atlanta/Phoenix (tied). The final recommendation is added in Phase 4.
+**Recommendation (balanced weights, data as of 2026-11-05).** Enter San Francisco, Los Angeles, Miami and Philadelphia first, then Atlanta, Phoenix and San Diego; hold Chicago, Washington DC and New York until the rules change.
+
+| Wave | Metros | Gate |
+|---|---|---|
+| 1 | San Francisco, Los Angeles, Miami and Philadelphia | Tier 2+ state rules and top 5 in at least half of 10,000 weight draws (San Francisco 98%, Los Angeles 86%, Miami 81%, Philadelphia 57%) |
+| 2 | Atlanta, Phoenix and San Diego | Tier 2+ rules, top 10; weather to validate (Atlanta 27%, Phoenix 37%, San Diego 25%) |
+| 3 | Chicago, Washington DC and New York | Top-10 demand, but driverless commercial service is not yet allowed |
+
+San Francisco, Los Angeles and Miami score highest but already have operating competitors; Philadelphia is the open field. Read the one-page memo ([reports/memo.md](reports/memo.md)) and the 7-slide deck (`reports/deck.pptx`) for the reasoning and risks.
 
 ## Screenshots
 
@@ -28,7 +36,7 @@ flowchart LR
 ```bash
 python -m venv .venv && .venv/Scripts/python -m pip install -e .      # or pip install the dependencies in pyproject.toml
 cp .env.example .env                                                  # add your free Census API key
-make all                                                              # data, score, tests, memo, deck
+make all                                                              # data, score, analysis, dbt, tests, memo, deck
 cd app && npm install && npm run dev                                  # http://localhost:5173
 ```
 
@@ -36,7 +44,7 @@ No `make` on Windows? Run the commands listed in the [Makefile](Makefile) in ord
 
 ## Methodology in brief
 
-Five pillars (demand 35, operating conditions 25, regulatory readiness 20, competitive intensity 15, charging cost 5). Every sub-metric becomes a 0-100 percentile rank across the 25 candidates. Pillar scores are weighted means, the total is the weighted mean of the pillars, and four weight scenarios are provided. Opportunity is the demand pillar and ease of entry is the other four. Las Vegas is scored on the same scale but not ranked. Full details: [docs/methodology.md](docs/methodology.md).
+Five pillars (demand 35, operating conditions 25, regulatory readiness 20, competitive intensity 15, charging cost 5). Every sub-metric becomes a 0-100 percentile rank across the 25 candidates. Pillar scores are weighted means, the total is the weighted mean of the pillars, and four weight scenarios are provided. Opportunity is the demand pillar and ease of entry is the other four. Demand is calibrated on two anchors (Chicago and NYC ride-hail trips), unit economics use labeled assumptions, and a 10,000-draw Monte Carlo on the weights gives each metro's top-5 confidence. Las Vegas is scored on the same scale but not ranked. Full details: [docs/methodology.md](docs/methodology.md).
 
 ## Data sources
 
