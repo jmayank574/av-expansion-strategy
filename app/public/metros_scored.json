@@ -140,10 +140,113 @@
    "nhtsa": "NHTSA SGO ADS reports, 24 months ending Sep 2026",
    "eia": "August 2026 YTD (commercial, Table 5.6.B)",
    "regulation_and_competitors": "seed CSVs researched 2026-11-05",
-   "gazetteer": "Census Gazetteer 2025"
+   "gazetteer": "Census Gazetteer 2025",
+   "demand": "Chicago TNP and NYC HVFHV calendar 2025"
   },
   "data_as_of": "2026-11-05",
-  "generated_at": "2026-11-06T02:00:53+00:00"
+  "generated_at": "2026-11-06T02:21:59+00:00",
+  "assumptions": {
+   "capture_share": {
+    "label": "Robotaxi share of ride-hail trips in the principal city",
+    "unit": "share",
+    "value": 0.03,
+    "low": 0.01,
+    "high": 0.08,
+    "higher_is_better": true,
+    "source_url": "analyst assumption",
+    "rationale": "Early-stage share for one operator in a mature market; one to eight percent spans a slow ramp to a strong ramp."
+   },
+   "avg_fare_usd": {
+    "label": "Average fare per trip",
+    "unit": "USD",
+    "value": 20.0,
+    "low": 15.0,
+    "high": 25.0,
+    "higher_is_better": true,
+    "source_url": "analyst assumption",
+    "rationale": "Priced near typical urban ride-hail fares; robotaxi premiums and discounts both appear in the market."
+   },
+   "trips_per_vehicle_per_day": {
+    "label": "Paid trips per vehicle per day",
+    "unit": "trips",
+    "value": 18,
+    "low": 12,
+    "high": 25,
+    "higher_is_better": true,
+    "source_url": "analyst assumption",
+    "rationale": "Utilization of a driverless fleet in a mature geofence; depends on fleet size, geofence and hours of service."
+   },
+   "avg_trip_miles": {
+    "label": "Paid miles per trip",
+    "unit": "miles",
+    "value": 5.5,
+    "low": 4.5,
+    "high": 7.0,
+    "higher_is_better": true,
+    "source_url": "analyst assumption",
+    "rationale": "Typical urban ride-hail trip length; longer trips raise revenue per trip but also cost."
+   },
+   "deadhead_share": {
+    "label": "Share of vehicle miles driven empty",
+    "unit": "share",
+    "value": 0.4,
+    "low": 0.5,
+    "high": 0.3,
+    "higher_is_better": false,
+    "source_url": "analyst assumption",
+    "rationale": "Empty repositioning and depot runs; lower with denser demand and good dispatch. Total miles = paid miles / (1 - deadhead)."
+   },
+   "cost_per_mile_usd": {
+    "label": "Non-energy operating cost per vehicle mile",
+    "unit": "USD per mile",
+    "value": 1.1,
+    "low": 1.5,
+    "high": 0.8,
+    "higher_is_better": false,
+    "source_url": "analyst assumption",
+    "rationale": "Maintenance, cleaning, insurance, remote assistance, depot and platform fees per mile. Excludes vehicle depreciation and charging."
+   },
+   "kwh_per_mile": {
+    "label": "Energy use",
+    "unit": "kWh per mile",
+    "value": 0.45,
+    "low": 0.55,
+    "high": 0.35,
+    "higher_is_better": false,
+    "source_url": "analyst assumption",
+    "rationale": "Electric SUV-class vehicle with sensor load in urban driving. Charging cost = kWh per mile x state commercial price."
+   },
+   "vehicle_cost_usd": {
+    "label": "Vehicle cost, fully equipped",
+    "unit": "USD",
+    "value": 140000,
+    "low": 200000,
+    "high": 100000,
+    "higher_is_better": false,
+    "source_url": "analyst assumption",
+    "rationale": "Vehicle plus sensor and compute suite; falls with scale. Payback is measured against this number."
+   }
+  },
+  "monte_carlo": {
+   "draws": 10000,
+   "seed": 42,
+   "concentration": 50,
+   "top_n": 5
+  },
+  "demand_method": {
+   "anchor_year": 2025,
+   "anchors": {
+    "Chicago": {
+     "source": "Chicago Transportation Network Providers trips (data.cityofchicago.org, dataset 6dvr-xwnh), SoQL count",
+     "tpr": 34.49156064452023
+    },
+    "New York": {
+     "source": "NYC TLC High Volume FHV trip records, monthly row counts from parquet footers",
+     "tpr": 28.712183298042728
+    }
+   },
+   "note": "Estimate from two anchors scaled by a demand index; not a forecast."
+  }
  },
  "metros": [
   {
@@ -234,7 +337,55 @@
     "as_of_date": "2026-02-20",
     "confidence": "medium"
    },
-   "nhtsa_incidents": []
+   "nhtsa_incidents": [],
+   "demand_estimate": {
+    "tpr_low": 28.712183298042728,
+    "tpr_base": 28.712183298042728,
+    "tpr_high": 28.712183298042728,
+    "trips_low": 243589684.0,
+    "trips_base": 243589684.0,
+    "trips_high": 243589684.0,
+    "city_pop": 8483844.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 243589684.0,
+     "addressable_trips_per_day": 6673.6899726027395,
+     "fleet_vehicles": 556.1408310502283,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 4971.4533,
+     "opex_per_vehicle": 64101.4533,
+     "contribution_per_vehicle": 1598.546699999999,
+     "payback_years": 125.11364228520826
+    },
+    "base": {
+     "city_ride_hail_trips_year": 243589684.0,
+     "addressable_trips_per_day": 20021.069917808218,
+     "fleet_vehicles": 1112.2816621004565,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 6214.3166249999995,
+     "opex_per_vehicle": 72461.816625,
+     "contribution_per_vehicle": 58938.18337499999,
+     "payback_years": 2.375370124817662
+    },
+    "high": {
+     "city_ride_hail_trips_year": 243589684.0,
+     "addressable_trips_per_day": 53389.519780821916,
+     "fleet_vehicles": 2135.5807912328764,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 7323.268749999999,
+     "opex_per_vehicle": 80323.26875,
+     "contribution_per_vehicle": 147801.73125,
+     "payback_years": 0.6765820613484863
+    }
+   },
+   "confidence": 0.1353,
+   "median_rank": 10.0,
+   "rank_p10": 5.0,
+   "rank_p90": 18.0
   },
   {
    "metro": "Los Angeles",
@@ -299,7 +450,7 @@
    "why": [
     "Demand score 63/100: 13.0M-person metro, 8,198 people per sq mi in Los Angeles",
     "Operating conditions score 78/100: ~27 rain, 0 snow and 2 extreme-heat days a year",
-    "Demand is the biggest gap to a perfect score (63/100): 13.0M metro, 8,198 people per sq mi in Los Angeles"
+    "Crowded field: Waymo already present (crowding 1.4)"
    ],
    "competitors": [
     {
@@ -351,7 +502,55 @@
      "operating_entity": "Zoox",
      "ads_incidents": 3
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 11.232983855795528,
+    "tpr_base": 14.939572228234416,
+    "tpr_high": 19.86923699240254,
+    "trips_low": 43328573.00655743,
+    "trips_base": 57625859.19179617,
+    "trips_high": 76640872.68902561,
+    "city_pop": 3857263.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 43328573.00655743,
+     "addressable_trips_per_day": 1187.0841919604775,
+     "fleet_vehicles": 98.92368266337313,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 5845.1976,
+     "opex_per_vehicle": 64975.1976,
+     "contribution_per_vehicle": 724.8024000000005,
+     "payback_years": 275.93727614588454
+    },
+    "base": {
+     "city_ride_hail_trips_year": 57625859.19179617,
+     "addressable_trips_per_day": 4736.371988366808,
+     "fleet_vehicles": 263.13177713148934,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 7306.497,
+     "opex_per_vehicle": 73553.997,
+     "contribution_per_vehicle": 57846.003,
+     "payback_years": 2.420219077193631
+    },
+    "high": {
+     "city_ride_hail_trips_year": 76640872.68902561,
+     "addressable_trips_per_day": 16797.999493485066,
+     "fleet_vehicles": 671.9199797394026,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 8610.349999999999,
+     "opex_per_vehicle": 81610.35,
+     "contribution_per_vehicle": 146514.65,
+     "payback_years": 0.6825256040948806
+    }
+   },
+   "confidence": 0.8643,
+   "median_rank": 3.0,
+   "rank_p10": 2.0,
+   "rank_p90": 7.0
   },
   {
    "metro": "Chicago",
@@ -441,7 +640,55 @@
     "as_of_date": "2026-02-27",
     "confidence": "medium"
    },
-   "nhtsa_incidents": []
+   "nhtsa_incidents": [],
+   "demand_estimate": {
+    "tpr_low": 34.49156064452023,
+    "tpr_base": 34.49156064452023,
+    "tpr_high": 34.49156064452023,
+    "trips_low": 93514416.0,
+    "trips_base": 93514416.0,
+    "trips_high": 93514416.0,
+    "city_pop": 2711226.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 93514416.0,
+     "addressable_trips_per_day": 2562.038794520548,
+     "fleet_vehicles": 213.50323287671233,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 3046.1805,
+     "opex_per_vehicle": 62176.1805,
+     "contribution_per_vehicle": 3523.819499999998,
+     "payback_years": 56.75659607423142
+    },
+    "base": {
+     "city_ride_hail_trips_year": 93514416.0,
+     "addressable_trips_per_day": 7686.1163835616435,
+     "fleet_vehicles": 427.00646575342466,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3807.725625,
+     "opex_per_vehicle": 70055.225625,
+     "contribution_per_vehicle": 61344.77437499999,
+     "payback_years": 2.282182980153801
+    },
+    "high": {
+     "city_ride_hail_trips_year": 93514416.0,
+     "addressable_trips_per_day": 20496.310356164384,
+     "fleet_vehicles": 819.8524142465753,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 4487.21875,
+     "opex_per_vehicle": 77487.21875,
+     "contribution_per_vehicle": 150637.78125,
+     "payback_years": 0.6638440845994603
+    }
+   },
+   "confidence": 0.4088,
+   "median_rank": 7.0,
+   "rank_p10": 3.0,
+   "rank_p90": 15.0
   },
   {
    "metro": "Dallas-Fort Worth",
@@ -506,7 +753,7 @@
    "why": [
     "Demand score 51/100: 8.0M-person metro, 3,850 people per sq mi in Dallas",
     "TX is regulation Tier 3: driverless commercial service allowed and operating",
-    "Demand is the biggest gap to a perfect score (51/100): 8.0M metro, 3,850 people per sq mi in Dallas"
+    "Crowded field: Waymo, Tesla, Avride already present (crowding 2.4)"
    ],
    "competitors": [
     {
@@ -586,7 +833,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 14
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 8.335092915446086,
+    "tpr_base": 11.085453717188932,
+    "tpr_high": 14.74336103538938,
+    "trips_low": 10901718.0768994,
+    "trips_base": 14498997.48032292,
+    "trips_high": 19283284.19901683,
+    "city_pop": 1307930.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 10901718.0768994,
+     "addressable_trips_per_day": 298.67720758628496,
+     "fleet_vehicles": 24.88976729885708,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 1864.566,
+     "opex_per_vehicle": 60994.566,
+     "contribution_per_vehicle": 4705.434000000001,
+     "payback_years": 42.50404957332309
+    },
+    "base": {
+     "city_ride_hail_trips_year": 14498997.48032292,
+     "addressable_trips_per_day": 1191.69842304024,
+     "fleet_vehicles": 66.20546794668,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 2330.7075,
+     "opex_per_vehicle": 68578.2075,
+     "contribution_per_vehicle": 62821.792499999996,
+     "payback_years": 2.2285260325865424
+    },
+    "high": {
+     "city_ride_hail_trips_year": 19283284.19901683,
+     "addressable_trips_per_day": 4226.473249099579,
+     "fleet_vehicles": 169.05892996398316,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 2746.6249999999995,
+     "opex_per_vehicle": 75746.625,
+     "contribution_per_vehicle": 152378.375,
+     "payback_years": 0.6562611000412624
+    }
+   },
+   "confidence": 0.0071,
+   "median_rank": 15.0,
+   "rank_p10": 8.0,
+   "rank_p90": 21.0
   },
   {
    "metro": "Houston",
@@ -651,7 +946,7 @@
    "why": [
     "Demand score 53/100: 7.4M-person metro, 3,633 people per sq mi in Houston",
     "TX is regulation Tier 3: driverless commercial service allowed and operating",
-    "Demand is the biggest gap to a perfect score (53/100): 7.4M metro, 3,633 people per sq mi in Houston"
+    "Rain on ~119 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -707,7 +1002,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 18
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 9.174208759437747,
+    "tpr_base": 12.201455655774597,
+    "tpr_high": 16.227614176174242,
+    "trips_low": 21359879.066787213,
+    "trips_base": 28408075.73492417,
+    "trips_high": 37781991.38852021,
+    "city_pop": 2328253.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 21359879.066787213,
+     "addressable_trips_per_day": 585.2021662133484,
+     "fleet_vehicles": 48.7668471844457,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 1864.566,
+     "opex_per_vehicle": 60994.566,
+     "contribution_per_vehicle": 4705.434000000001,
+     "payback_years": 42.50404957332309
+    },
+    "base": {
+     "city_ride_hail_trips_year": 28408075.73492417,
+     "addressable_trips_per_day": 2334.910334377329,
+     "fleet_vehicles": 129.7172407987405,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 2330.7075,
+     "opex_per_vehicle": 68578.2075,
+     "contribution_per_vehicle": 62821.792499999996,
+     "payback_years": 2.2285260325865424
+    },
+    "high": {
+     "city_ride_hail_trips_year": 37781991.38852021,
+     "addressable_trips_per_day": 8280.984413922239,
+     "fleet_vehicles": 331.23937655688957,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 2746.6249999999995,
+     "opex_per_vehicle": 75746.625,
+     "contribution_per_vehicle": 152378.375,
+     "payback_years": 0.6562611000412624
+    }
+   },
+   "confidence": 0.0239,
+   "median_rank": 13.0,
+   "rank_p10": 8.0,
+   "rank_p90": 18.0
   },
   {
    "metro": "Washington DC",
@@ -806,7 +1149,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 6
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 19.401195398688444,
+    "tpr_base": 25.803078121869888,
+    "tpr_high": 34.3174132769329,
+    "trips_low": 13217918.017954044,
+    "trips_base": 17579482.30596122,
+    "trips_high": 23380247.761094727,
+    "city_pop": 681294.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 13217918.017954044,
+     "addressable_trips_per_day": 362.13474021791905,
+     "fleet_vehicles": 30.17789501815992,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 5138.397,
+     "opex_per_vehicle": 64268.397,
+     "contribution_per_vehicle": 1431.6030000000028,
+     "payback_years": 139.70353512810436
+    },
+    "base": {
+     "city_ride_hail_trips_year": 17579482.30596122,
+     "addressable_trips_per_day": 1444.888956654347,
+     "fleet_vehicles": 80.27160870301928,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 6422.99625,
+     "opex_per_vehicle": 72670.49625,
+     "contribution_per_vehicle": 58729.50375,
+     "payback_years": 2.3838103689067864
+    },
+    "high": {
+     "city_ride_hail_trips_year": 23380247.761094727,
+     "addressable_trips_per_day": 5124.437865445419,
+     "fleet_vehicles": 204.97751461781678,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 7569.187499999999,
+     "opex_per_vehicle": 80569.1875,
+     "contribution_per_vehicle": 147555.8125,
+     "payback_years": 0.677709663250304
+    }
+   },
+   "confidence": 0.1833,
+   "median_rank": 8.0,
+   "rank_p10": 4.0,
+   "rank_p90": 16.0
   },
   {
    "metro": "Philadelphia",
@@ -901,7 +1292,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 5
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 14.990960744178775,
+    "tpr_base": 19.937582363099075,
+    "tpr_high": 26.516458635896143,
+    "trips_low": 23681310.633343674,
+    "trips_base": 31495518.48448179,
+    "trips_high": 41888208.805876955,
+    "city_pop": 1579706.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 23681310.633343674,
+     "addressable_trips_per_day": 648.8030310505115,
+     "fleet_vehicles": 54.066919254209296,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 3013.659,
+     "opex_per_vehicle": 62143.659,
+     "contribution_per_vehicle": 3556.3410000000003,
+     "payback_years": 56.237576767807134
+    },
+    "base": {
+     "city_ride_hail_trips_year": 31495518.48448179,
+     "addressable_trips_per_day": 2588.672752149188,
+     "fleet_vehicles": 143.81515289717711,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3767.07375,
+     "opex_per_vehicle": 70014.57375,
+     "contribution_per_vehicle": 61385.426250000004,
+     "payback_years": 2.2806716276568983
+    },
+    "high": {
+     "city_ride_hail_trips_year": 41888208.805876955,
+     "addressable_trips_per_day": 9180.977272520977,
+     "fleet_vehicles": 367.2390909008391,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 4439.312499999999,
+     "opex_per_vehicle": 77439.3125,
+     "contribution_per_vehicle": 150685.6875,
+     "payback_years": 0.6636330341592661
+    }
+   },
+   "confidence": 0.5734,
+   "median_rank": 5.0,
+   "rank_p10": 2.0,
+   "rank_p90": 9.0
   },
   {
    "metro": "Miami",
@@ -1020,7 +1459,55 @@
      "operating_entity": "Zoox",
      "ads_incidents": 6
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 19.981397470130702,
+    "tpr_base": 26.574731572507645,
+    "tpr_high": 35.34369201185883,
+    "trips_low": 9186347.57990524,
+    "trips_base": 12217599.966802526,
+    "trips_high": 16249085.683992038,
+    "city_pop": 459745.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 9186347.57990524,
+     "addressable_trips_per_day": 251.68075561384217,
+     "fleet_vehicles": 20.973396301153514,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2554.0218,
+     "opex_per_vehicle": 61684.0218,
+     "contribution_per_vehicle": 4015.9781999999977,
+     "payback_years": 49.80106714722707
+    },
+    "base": {
+     "city_ride_hail_trips_year": 12217599.966802526,
+     "addressable_trips_per_day": 1004.1862986413034,
+     "fleet_vehicles": 55.78812770229464,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3192.5272499999996,
+     "opex_per_vehicle": 69440.02725,
+     "contribution_per_vehicle": 61959.97275,
+     "payback_years": 2.259523266171869
+    },
+    "high": {
+     "city_ride_hail_trips_year": 16249085.683992038,
+     "addressable_trips_per_day": 3561.4434375872956,
+     "fleet_vehicles": 142.4577375034918,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 3762.2374999999993,
+     "opex_per_vehicle": 76762.2375,
+     "contribution_per_vehicle": 151362.7625,
+     "payback_years": 0.6606644748572159
+    }
+   },
+   "confidence": 0.812,
+   "median_rank": 3.0,
+   "rank_p10": 2.0,
+   "rank_p90": 7.0
   },
   {
    "metro": "Atlanta",
@@ -1085,7 +1572,7 @@
    "why": [
     "Demand score 61/100: 6.3M-person metro, 3,735 people per sq mi in Atlanta",
     "GA is regulation Tier 3: driverless commercial service allowed and operating",
-    "Demand is the biggest gap to a perfect score (61/100): 6.3M metro, 3,735 people per sq mi in Atlanta"
+    "Rain on ~108 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -1129,7 +1616,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 77
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 13.14122225588972,
+    "tpr_base": 17.47747896547139,
+    "tpr_high": 23.244586008854004,
+    "trips_low": 6639839.086788886,
+    "trips_base": 8830810.8419258,
+    "trips_high": 11744745.483521644,
+    "city_pop": 505268.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 6639839.086788886,
+     "addressable_trips_per_day": 181.9133996380517,
+     "fleet_vehicles": 15.15944996983764,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2603.8881,
+     "opex_per_vehicle": 61733.8881,
+     "contribution_per_vehicle": 3966.1119000000035,
+     "payback_years": 50.42722067423257
+    },
+    "base": {
+     "city_ride_hail_trips_year": 8830810.8419258,
+     "addressable_trips_per_day": 725.8200691993808,
+     "fleet_vehicles": 40.323337177743376,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3254.860125,
+     "opex_per_vehicle": 69502.360125,
+     "contribution_per_vehicle": 61897.63987499999,
+     "payback_years": 2.261798677344158
+    },
+    "high": {
+     "city_ride_hail_trips_year": 11744745.483521644,
+     "addressable_trips_per_day": 2574.1907909088536,
+     "fleet_vehicles": 102.96763163635414,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 3835.6937499999995,
+     "opex_per_vehicle": 76835.69375,
+     "contribution_per_vehicle": 151289.30625,
+     "payback_years": 0.660985250568561
+    }
+   },
+   "confidence": 0.271,
+   "median_rank": 8.0,
+   "rank_p10": 4.0,
+   "rank_p90": 12.0
   },
   {
    "metro": "Boston",
@@ -1219,7 +1754,55 @@
     "as_of_date": "2026-02-05",
     "confidence": "medium"
    },
-   "nhtsa_incidents": []
+   "nhtsa_incidents": [],
+   "demand_estimate": {
+    "tpr_low": 20.41693379753161,
+    "tpr_base": 27.15398339951608,
+    "tpr_high": 36.114081662464834,
+    "trips_low": 13606702.193894561,
+    "trips_base": 18096555.004740294,
+    "trips_high": 24067940.81129639,
+    "city_pop": 666442.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 13606702.193894561,
+     "addressable_trips_per_day": 372.7863614765633,
+     "fleet_vehicles": 31.06553012304694,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 5346.5346,
+     "opex_per_vehicle": 64476.5346,
+     "contribution_per_vehicle": 1223.465400000001,
+     "payback_years": 163.47009077657597
+    },
+    "base": {
+     "city_ride_hail_trips_year": 18096555.004740294,
+     "addressable_trips_per_day": 1487.388082581394,
+     "fleet_vehicles": 82.63267125452188,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 6683.16825,
+     "opex_per_vehicle": 72930.66825,
+     "contribution_per_vehicle": 58469.33175,
+     "payback_years": 2.394417651267239
+    },
+    "high": {
+     "city_ride_hail_trips_year": 24067940.81129639,
+     "addressable_trips_per_day": 5275.165109325236,
+     "fleet_vehicles": 211.00660437300942,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 7875.7874999999985,
+     "opex_per_vehicle": 80875.7875,
+     "contribution_per_vehicle": 147249.2125,
+     "payback_years": 0.6791207796781935
+    }
+   },
+   "confidence": 0.0001,
+   "median_rank": 15.0,
+   "rank_p10": 9.0,
+   "rank_p90": 20.0
   },
   {
    "metro": "Phoenix",
@@ -1328,7 +1911,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 338
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 7.918313955377065,
+    "tpr_base": 10.531148693956206,
+    "tpr_high": 14.006149975766435,
+    "trips_low": 13004429.130136728,
+    "trips_base": 17295547.71650424,
+    "trips_high": 23002622.24665066,
+    "city_pop": 1642323.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 13004429.130136728,
+     "addressable_trips_per_day": 356.28572959278705,
+     "fleet_vehicles": 29.690477466065587,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2662.4267999999997,
+     "opex_per_vehicle": 61792.4268,
+     "contribution_per_vehicle": 3907.573199999999,
+     "payback_years": 51.182662425876
+    },
+    "base": {
+     "city_ride_hail_trips_year": 17295547.71650424,
+     "addressable_trips_per_day": 1421.5518671099373,
+     "fleet_vehicles": 78.97510372832986,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3328.0334999999995,
+     "opex_per_vehicle": 69575.5335,
+     "contribution_per_vehicle": 61824.466499999995,
+     "payback_years": 2.2644756667653576
+    },
+    "high": {
+     "city_ride_hail_trips_year": 23002622.24665066,
+     "addressable_trips_per_day": 5041.6706294028845,
+     "fleet_vehicles": 201.66682517611537,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 3921.9249999999993,
+     "opex_per_vehicle": 76921.925,
+     "contribution_per_vehicle": 151203.075,
+     "payback_years": 0.6613622110529167
+    }
+   },
+   "confidence": 0.3732,
+   "median_rank": 7.0,
+   "rank_p10": 4.0,
+   "rank_p90": 12.0
   },
   {
    "metro": "San Francisco",
@@ -1441,7 +2072,55 @@
      "operating_entity": "Zoox",
      "ads_incidents": 49
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 22.86220434250577,
+    "tpr_base": 30.40612872378517,
+    "tpr_high": 40.439349159717196,
+    "trips_low": 18981002.222300276,
+    "trips_base": 25244232.28099178,
+    "trips_high": 33574163.049617805,
+    "city_pop": 830235.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 18981002.222300276,
+     "addressable_trips_per_day": 520.027458145213,
+     "fleet_vehicles": 43.335621512101085,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 5845.1976,
+     "opex_per_vehicle": 64975.1976,
+     "contribution_per_vehicle": 724.8024000000005,
+     "payback_years": 275.93727614588454
+    },
+    "base": {
+     "city_ride_hail_trips_year": 25244232.28099178,
+     "addressable_trips_per_day": 2074.868406656859,
+     "fleet_vehicles": 115.27046703649216,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 7306.497,
+     "opex_per_vehicle": 73553.997,
+     "contribution_per_vehicle": 57846.003,
+     "payback_years": 2.420219077193631
+    },
+    "high": {
+     "city_ride_hail_trips_year": 33574163.049617805,
+     "addressable_trips_per_day": 7358.720668409382,
+     "fleet_vehicles": 294.34882673637526,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 8610.349999999999,
+     "opex_per_vehicle": 81610.35,
+     "contribution_per_vehicle": 146514.65,
+     "payback_years": 0.6825256040948806
+    }
+   },
+   "confidence": 0.9809,
+   "median_rank": 1.0,
+   "rank_p10": 1.0,
+   "rank_p90": 2.0
   },
   {
    "metro": "Detroit",
@@ -1540,7 +2219,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 1
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 13.65036373144577,
+    "tpr_base": 18.15462369799365,
+    "tpr_high": 24.145170641606352,
+    "trips_low": 8716166.753440067,
+    "trips_base": 11592271.869879885,
+    "trips_high": 15417415.809784904,
+    "city_pop": 638530.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 8716166.753440067,
+     "addressable_trips_per_day": 238.79908913534433,
+     "fleet_vehicles": 19.89992409461203,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 3425.598,
+     "opex_per_vehicle": 62555.598,
+     "contribution_per_vehicle": 3144.402000000002,
+     "payback_years": 63.6050988391433
+    },
+    "base": {
+     "city_ride_hail_trips_year": 11592271.869879885,
+     "addressable_trips_per_day": 952.7894687572507,
+     "fleet_vehicles": 52.9327482642917,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 4281.9975,
+     "opex_per_vehicle": 70529.4975,
+     "contribution_per_vehicle": 60870.5025,
+     "payback_years": 2.299964584652476
+    },
+    "high": {
+     "city_ride_hail_trips_year": 15417415.809784904,
+     "addressable_trips_per_day": 3379.159629541897,
+     "fleet_vehicles": 135.16638518167588,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 5046.124999999999,
+     "opex_per_vehicle": 78046.125,
+     "contribution_per_vehicle": 150078.875,
+     "payback_years": 0.6663162953480295
+    }
+   },
+   "confidence": 0.0282,
+   "median_rank": 11.0,
+   "rank_p10": 8.0,
+   "rank_p90": 16.0
   },
   {
    "metro": "Seattle",
@@ -1605,7 +2332,7 @@
    "why": [
     "Demand score 50/100: 4.1M-person metro, 8,976 people per sq mi in Seattle",
     "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "Demand is the biggest gap to a perfect score (50/100): 4.1M metro, 8,976 people per sq mi in Seattle"
+    "Rain on ~114 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -1630,7 +2357,55 @@
     "as_of_date": "2026-11-05",
     "confidence": "medium"
    },
-   "nhtsa_incidents": []
+   "nhtsa_incidents": [],
+   "demand_estimate": {
+    "tpr_low": 12.310163709789597,
+    "tpr_base": 16.372193020548707,
+    "tpr_high": 21.774584856977924,
+    "trips_low": 9284263.919104764,
+    "trips_base": 12347826.115132732,
+    "trips_high": 16422283.026208466,
+    "city_pop": 754195.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 9284263.919104764,
+     "addressable_trips_per_day": 254.36339504396614,
+     "fleet_vehicles": 21.196949586997178,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2571.3666,
+     "opex_per_vehicle": 61701.3666,
+     "contribution_per_vehicle": 3998.633399999999,
+     "payback_years": 50.01708833823077
+    },
+    "base": {
+     "city_ride_hail_trips_year": 12347826.115132732,
+     "addressable_trips_per_day": 1014.8898176821424,
+     "fleet_vehicles": 56.38276764900791,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3214.20825,
+     "opex_per_vehicle": 69461.70825,
+     "contribution_per_vehicle": 61938.291750000004,
+     "payback_years": 2.2603141940865683
+    },
+    "high": {
+     "city_ride_hail_trips_year": 16422283.026208466,
+     "addressable_trips_per_day": 3599.4044988950063,
+     "fleet_vehicles": 143.97617995580026,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 3787.7874999999995,
+     "opex_per_vehicle": 76787.7875,
+     "contribution_per_vehicle": 151337.2125,
+     "payback_years": 0.6607760136985475
+    }
+   },
+   "confidence": 0.0084,
+   "median_rank": 14.0,
+   "rank_p10": 10.0,
+   "rank_p90": 18.0
   },
   {
    "metro": "Minneapolis",
@@ -1725,7 +2500,55 @@
      "operating_entity": "May Mobility",
      "ads_incidents": 1
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 13.053817059365906,
+    "tpr_base": 17.361232359640404,
+    "tpr_high": 23.08998108941373,
+    "trips_low": 5577191.123345846,
+    "trips_base": 7417517.080726924,
+    "trips_high": 9865102.060527658,
+    "city_pop": 427246.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 5577191.123345846,
+     "addressable_trips_per_day": 152.7997568039958,
+     "fleet_vehicles": 12.73331306699965,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2753.487,
+     "opex_per_vehicle": 61883.487,
+     "contribution_per_vehicle": 3816.512999999999,
+     "payback_years": 52.40385660942333
+    },
+    "base": {
+     "city_ride_hail_trips_year": 7417517.080726924,
+     "addressable_trips_per_day": 609.658938141939,
+     "fleet_vehicles": 33.8699410078855,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3441.85875,
+     "opex_per_vehicle": 69689.35875,
+     "contribution_per_vehicle": 61710.64125,
+     "payback_years": 2.268652491113111
+    },
+    "high": {
+     "city_ride_hail_trips_year": 9865102.060527658,
+     "addressable_trips_per_day": 2162.2141502526374,
+     "fleet_vehicles": 86.4885660101055,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 4056.0624999999995,
+     "opex_per_vehicle": 77056.0625,
+     "contribution_per_vehicle": 151068.9375,
+     "payback_years": 0.6619494494028595
+    }
+   },
+   "confidence": 0.0,
+   "median_rank": 21.0,
+   "rank_p10": 16.0,
+   "rank_p90": 24.0
   },
   {
    "metro": "San Diego",
@@ -1824,7 +2647,55 @@
      "operating_entity": "Zoox",
      "ads_incidents": 1
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 6.9996414954598505,
+    "tpr_base": 9.309338554707944,
+    "tpr_high": 12.381174719074423,
+    "trips_low": 9726183.848620344,
+    "trips_base": 12935567.96456911,
+    "trips_high": 17203964.182696607,
+    "city_pop": 1389526.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 9726183.848620344,
+     "addressable_trips_per_day": 266.4707903731601,
+     "fleet_vehicles": 22.205899197763344,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 5845.1976,
+     "opex_per_vehicle": 64975.1976,
+     "contribution_per_vehicle": 724.8024000000005,
+     "payback_years": 275.93727614588454
+    },
+    "base": {
+     "city_ride_hail_trips_year": 12935567.96456911,
+     "addressable_trips_per_day": 1063.197366950886,
+     "fleet_vehicles": 59.06652038616033,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 7306.497,
+     "opex_per_vehicle": 73553.997,
+     "contribution_per_vehicle": 57846.003,
+     "payback_years": 2.420219077193631
+    },
+    "high": {
+     "city_ride_hail_trips_year": 17203964.182696607,
+     "addressable_trips_per_day": 3770.7318756595305,
+     "fleet_vehicles": 150.82927502638123,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 8610.349999999999,
+     "opex_per_vehicle": 81610.35,
+     "contribution_per_vehicle": 146514.65,
+     "payback_years": 0.6825256040948806
+    }
+   },
+   "confidence": 0.2481,
+   "median_rank": 9.0,
+   "rank_p10": 4.0,
+   "rank_p90": 16.0
   },
   {
    "metro": "Tampa",
@@ -1929,7 +2800,55 @@
      "operating_entity": "Tesla",
      "ads_incidents": 1
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 8.403898313606987,
+    "tpr_base": 11.176963081816645,
+    "tpr_high": 14.865066076540153,
+    "trips_low": 3375156.832914211,
+    "trips_base": 4488869.558993037,
+    "trips_high": 5970078.107527903,
+    "city_pop": 401618.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 3375156.832914211,
+     "addressable_trips_per_day": 92.47005021682769,
+     "fleet_vehicles": 7.705837518068974,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2554.0218,
+     "opex_per_vehicle": 61684.0218,
+     "contribution_per_vehicle": 4015.9781999999977,
+     "payback_years": 49.80106714722707
+    },
+    "base": {
+     "city_ride_hail_trips_year": 4488869.558993037,
+     "addressable_trips_per_day": 368.9481829309345,
+     "fleet_vehicles": 20.497121273940806,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3192.5272499999996,
+     "opex_per_vehicle": 69440.02725,
+     "contribution_per_vehicle": 61959.97275,
+     "payback_years": 2.259523266171869
+    },
+    "high": {
+     "city_ride_hail_trips_year": 5970078.107527903,
+     "addressable_trips_per_day": 1308.5102701431022,
+     "fleet_vehicles": 52.34041080572408,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 3762.2374999999993,
+     "opex_per_vehicle": 76762.2375,
+     "contribution_per_vehicle": 151362.7625,
+     "payback_years": 0.6606644748572159
+    }
+   },
+   "confidence": 0.0005,
+   "median_rank": 14.0,
+   "rank_p10": 9.0,
+   "rank_p90": 17.0
   },
   {
    "metro": "Denver",
@@ -1994,7 +2913,7 @@
    "why": [
     "Demand score 44/100: 3.0M-person metro, 4,696 people per sq mi in Denver",
     "Operating conditions score 49/100: ~47 rain, 25 snow and 0 extreme-heat days a year",
-    "Demand is the biggest gap to a perfect score (44/100): 3.0M metro, 4,696 people per sq mi in Denver"
+    "CO is regulation Tier 2 (driverless deployment allowed with a permit or filing process): launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -2024,7 +2943,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 4
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 12.037847067667883,
+    "tpr_base": 16.01001906960613,
+    "tpr_high": 21.292903055530303,
+    "trips_low": 8653731.386463884,
+    "trips_base": 11509234.478701247,
+    "trips_high": 15306978.269850457,
+    "city_pop": 718877.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 8653731.386463884,
+     "addressable_trips_per_day": 237.08853113599682,
+     "fleet_vehicles": 19.7573775946664,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2898.7497,
+     "opex_per_vehicle": 62028.7497,
+     "contribution_per_vehicle": 3671.2502999999997,
+     "payback_years": 54.47735339647095
+    },
+    "base": {
+     "city_ride_hail_trips_year": 11509234.478701247,
+     "addressable_trips_per_day": 945.9644777014722,
+     "fleet_vehicles": 52.553582094526234,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3623.4371249999995,
+     "opex_per_vehicle": 69870.937125,
+     "contribution_per_vehicle": 61529.062875,
+     "payback_years": 2.2753475099144356
+    },
+    "high": {
+     "city_ride_hail_trips_year": 15306978.269850457,
+     "addressable_trips_per_day": 3354.9541413370866,
+     "fleet_vehicles": 134.19816565348347,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 4270.04375,
+     "opex_per_vehicle": 77270.04375,
+     "contribution_per_vehicle": 150854.95625,
+     "payback_years": 0.6628883961510545
+    }
+   },
+   "confidence": 0.0,
+   "median_rank": 21.0,
+   "rank_p10": 20.0,
+   "rank_p90": 23.0
   },
   {
    "metro": "Orlando",
@@ -2133,7 +3100,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 9
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 10.247752936665798,
+    "tpr_base": 13.629241093890773,
+    "tpr_high": 18.126531147211526,
+    "trips_low": 3276800.983522382,
+    "trips_base": 4358058.873700325,
+    "trips_high": 5796103.346570063,
+    "city_pop": 319758.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 3276800.983522382,
+     "addressable_trips_per_day": 89.77536941157211,
+     "fleet_vehicles": 7.4812807842976765,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2554.0218,
+     "opex_per_vehicle": 61684.0218,
+     "contribution_per_vehicle": 4015.9781999999977,
+     "payback_years": 49.80106714722707
+    },
+    "base": {
+     "city_ride_hail_trips_year": 4358058.873700325,
+     "addressable_trips_per_day": 358.1966197561911,
+     "fleet_vehicles": 19.899812208677286,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3192.5272499999996,
+     "opex_per_vehicle": 69440.02725,
+     "contribution_per_vehicle": 61959.97275,
+     "payback_years": 2.259523266171869
+    },
+    "high": {
+     "city_ride_hail_trips_year": 5796103.346570063,
+     "addressable_trips_per_day": 1270.3788156865892,
+     "fleet_vehicles": 50.81515262746357,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 3762.2374999999993,
+     "opex_per_vehicle": 76762.2375,
+     "contribution_per_vehicle": 151362.7625,
+     "payback_years": 0.6606644748572159
+    }
+   },
+   "confidence": 0.0,
+   "median_rank": 17.0,
+   "rank_p10": 11.0,
+   "rank_p90": 19.0
   },
   {
    "metro": "Charlotte",
@@ -2223,7 +3238,55 @@
     "as_of_date": "2026-11-05",
     "confidence": "high"
    },
-   "nhtsa_incidents": []
+   "nhtsa_incidents": [],
+   "demand_estimate": {
+    "tpr_low": 8.344242107677944,
+    "tpr_base": 11.097621901522903,
+    "tpr_high": 14.759544399585177,
+    "trips_low": 7541893.163572064,
+    "trips_base": 10030518.969960067,
+    "trips_high": 13340325.648298666,
+    "city_pop": 903844.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 7541893.163572064,
+     "addressable_trips_per_day": 206.62720996087847,
+     "fleet_vehicles": 17.21893416340654,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2300.3540999999996,
+     "opex_per_vehicle": 61430.3541,
+     "contribution_per_vehicle": 4269.645900000003,
+     "payback_years": 46.84229200365301
+    },
+    "base": {
+     "city_ride_hail_trips_year": 10030518.969960067,
+     "addressable_trips_per_day": 824.4262167090466,
+     "fleet_vehicles": 45.80145648383592,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 2875.442625,
+     "opex_per_vehicle": 69122.942625,
+     "contribution_per_vehicle": 62277.057375000004,
+     "payback_years": 2.248018867638413
+    },
+    "high": {
+     "city_ride_hail_trips_year": 13340325.648298666,
+     "addressable_trips_per_day": 2923.9069914079273,
+     "fleet_vehicles": 116.9562796563171,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 3388.5687499999995,
+     "opex_per_vehicle": 76388.56875,
+     "contribution_per_vehicle": 151736.43125,
+     "payback_years": 0.6590375111382488
+    }
+   },
+   "confidence": 0.0004,
+   "median_rank": 22.0,
+   "rank_p10": 17.0,
+   "rank_p90": 23.0
   },
   {
    "metro": "San Antonio",
@@ -2318,7 +3381,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 5
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 6.46751237723444,
+    "tpr_base": 8.60162086379596,
+    "tpr_high": 11.439928858107228,
+    "trips_low": 9570851.178764729,
+    "trips_base": 12728979.610975495,
+    "trips_high": 16929207.12173711,
+    "city_pop": 1479835.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 9570851.178764729,
+     "addressable_trips_per_day": 262.2151007880748,
+     "fleet_vehicles": 21.85125839900623,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 1864.566,
+     "opex_per_vehicle": 60994.566,
+     "contribution_per_vehicle": 4705.434000000001,
+     "payback_years": 42.50404957332309
+    },
+    "base": {
+     "city_ride_hail_trips_year": 12728979.610975495,
+     "addressable_trips_per_day": 1046.2175022719584,
+     "fleet_vehicles": 58.12319457066436,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 2330.7075,
+     "opex_per_vehicle": 68578.2075,
+     "contribution_per_vehicle": 62821.792499999996,
+     "payback_years": 2.2285260325865424
+    },
+    "high": {
+     "city_ride_hail_trips_year": 16929207.12173711,
+     "addressable_trips_per_day": 3710.511149969778,
+     "fleet_vehicles": 148.42044599879114,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 2746.6249999999995,
+     "opex_per_vehicle": 75746.625,
+     "contribution_per_vehicle": 152378.375,
+     "payback_years": 0.6562611000412624
+    }
+   },
+   "confidence": 0.0059,
+   "median_rank": 17.0,
+   "rank_p10": 10.0,
+   "rank_p90": 21.0
   },
   {
    "metro": "Austin",
@@ -2453,7 +3564,55 @@
      "operating_entity": "Zoox",
      "ads_incidents": 5
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 7.114554123019751,
+    "tpr_base": 9.462169318234912,
+    "tpr_high": 12.584435603245405,
+    "trips_low": 6968983.231108644,
+    "trips_base": 9268563.871814508,
+    "trips_high": 12326945.466367401,
+    "city_pop": 979539.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 6968983.231108644,
+     "addressable_trips_per_day": 190.9310474276341,
+     "fleet_vehicles": 15.910920618969508,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 1864.566,
+     "opex_per_vehicle": 60994.566,
+     "contribution_per_vehicle": 4705.434000000001,
+     "payback_years": 42.50404957332309
+    },
+    "base": {
+     "city_ride_hail_trips_year": 9268563.871814508,
+     "addressable_trips_per_day": 761.7997702861239,
+     "fleet_vehicles": 42.32220946034022,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 2330.7075,
+     "opex_per_vehicle": 68578.2075,
+     "contribution_per_vehicle": 62821.792499999996,
+     "payback_years": 2.2285260325865424
+    },
+    "high": {
+     "city_ride_hail_trips_year": 12326945.466367401,
+     "addressable_trips_per_day": 2701.7962666010744,
+     "fleet_vehicles": 108.07185066404298,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 2746.6249999999995,
+     "opex_per_vehicle": 75746.625,
+     "contribution_per_vehicle": 152378.375,
+     "payback_years": 0.6562611000412624
+    }
+   },
+   "confidence": 0.0,
+   "median_rank": 24.0,
+   "rank_p10": 19.0,
+   "rank_p90": 25.0
   },
   {
    "metro": "Nashville",
@@ -2548,7 +3707,55 @@
      "operating_entity": "Waymo",
      "ads_incidents": 10
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 6.2953608093131646,
+    "tpr_base": 8.372663819418408,
+    "tpr_high": 11.135422028439104,
+    "trips_low": 4344617.355331294,
+    "trips_base": 5778226.481695225,
+    "trips_high": 7684888.804486679,
+    "city_pop": 690130.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 4344617.355331294,
+     "addressable_trips_per_day": 119.03061247483,
+     "fleet_vehicles": 9.919217706235832,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2942.1117,
+     "opex_per_vehicle": 62072.1117,
+     "contribution_per_vehicle": 3627.8882999999987,
+     "payback_years": 55.12848893390683
+    },
+    "base": {
+     "city_ride_hail_trips_year": 5778226.481695225,
+     "addressable_trips_per_day": 474.9227245228952,
+     "fleet_vehicles": 26.38459580682751,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3677.6396250000003,
+     "opex_per_vehicle": 69925.139625,
+     "contribution_per_vehicle": 61474.860375000004,
+     "payback_years": 2.277353688092862
+    },
+    "high": {
+     "city_ride_hail_trips_year": 7684888.804486679,
+     "addressable_trips_per_day": 1684.3591900244776,
+     "fleet_vehicles": 67.3743676009791,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 4333.91875,
+     "opex_per_vehicle": 77333.91875,
+     "contribution_per_vehicle": 150791.08125,
+     "payback_years": 0.663169195227188
+    }
+   },
+   "confidence": 0.0,
+   "median_rank": 25.0,
+   "rank_p10": 23.0,
+   "rank_p90": 25.0
   },
   {
    "metro": "Pittsburgh",
@@ -2613,7 +3820,7 @@
    "why": [
     "Demand score 40/100: 2.4M-person metro, 5,504 people per sq mi in Pittsburgh",
     "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "Demand is the biggest gap to a perfect score (40/100): 2.4M metro, 5,504 people per sq mi in Pittsburgh"
+    "Snow on ~16 days a year: needs winter validation before launch"
    ],
    "competitors": [
     {
@@ -2643,7 +3850,55 @@
      "operating_entity": "Motional",
      "ads_incidents": 1
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 10.154694579508114,
+    "tpr_base": 13.505475933533958,
+    "tpr_high": 17.961926748573877,
+    "trips_low": 3094734.5653563133,
+    "trips_base": 4115915.3400278757,
+    "trips_high": 5474058.833968626,
+    "city_pop": 304759.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 3094734.5653563133,
+     "addressable_trips_per_day": 84.78724836592639,
+     "fleet_vehicles": 7.065604030493866,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 3013.659,
+     "opex_per_vehicle": 62143.659,
+     "contribution_per_vehicle": 3556.3410000000003,
+     "payback_years": 56.237576767807134
+    },
+    "base": {
+     "city_ride_hail_trips_year": 4115915.3400278757,
+     "addressable_trips_per_day": 338.29441150914045,
+     "fleet_vehicles": 18.794133972730023,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 3767.07375,
+     "opex_per_vehicle": 70014.57375,
+     "contribution_per_vehicle": 61385.426250000004,
+     "payback_years": 2.2806716276568983
+    },
+    "high": {
+     "city_ride_hail_trips_year": 5474058.833968626,
+     "addressable_trips_per_day": 1199.7937170342195,
+     "fleet_vehicles": 47.99174868136878,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 4439.312499999999,
+     "opex_per_vehicle": 77439.3125,
+     "contribution_per_vehicle": 150685.6875,
+     "payback_years": 0.6636330341592661
+    }
+   },
+   "confidence": 0.0,
+   "median_rank": 23.0,
+   "rank_p10": 19.0,
+   "rank_p90": 24.0
   },
   {
    "metro": "Sacramento",
@@ -2733,7 +3988,55 @@
     "as_of_date": "2026-11-05",
     "confidence": "high"
    },
-   "nhtsa_incidents": []
+   "nhtsa_incidents": [],
+   "demand_estimate": {
+    "tpr_low": 7.137027031906143,
+    "tpr_base": 9.492057694270773,
+    "tpr_high": 12.624186354987293,
+    "trips_low": 3773389.0139309694,
+    "trips_base": 5018507.855307124,
+    "trips_high": 6674483.070999912,
+    "city_pop": 528706.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 3773389.0139309694,
+     "addressable_trips_per_day": 103.38052092961561,
+     "fleet_vehicles": 8.6150434108013,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 5845.1976,
+     "opex_per_vehicle": 64975.1976,
+     "contribution_per_vehicle": 724.8024000000005,
+     "payback_years": 275.93727614588454
+    },
+    "base": {
+     "city_ride_hail_trips_year": 5018507.855307124,
+     "addressable_trips_per_day": 412.4800976964759,
+     "fleet_vehicles": 22.915560983137553,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 7306.497,
+     "opex_per_vehicle": 73553.997,
+     "contribution_per_vehicle": 57846.003,
+     "payback_years": 2.420219077193631
+    },
+    "high": {
+     "city_ride_hail_trips_year": 6674483.070999912,
+     "addressable_trips_per_day": 1462.9003991232685,
+     "fleet_vehicles": 58.51601596493074,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 8610.349999999999,
+     "opex_per_vehicle": 81610.35,
+     "contribution_per_vehicle": 146514.65,
+     "payback_years": 0.6825256040948806
+    }
+   },
+   "confidence": 0.0752,
+   "median_rank": 13.0,
+   "rank_p10": 6.0,
+   "rank_p90": 19.0
   },
   {
    "metro": "Las Vegas",
@@ -2860,7 +4163,55 @@
      "operating_entity": "zoox",
      "ads_incidents": 1
     }
-   ]
+   ],
+   "demand_estimate": {
+    "tpr_low": 11.629762181341981,
+    "tpr_base": 15.467276935122323,
+    "tpr_high": 20.57107033294132,
+    "trips_low": 7680294.944558244,
+    "trips_base": 10214589.687954782,
+    "trips_high": 13585134.847874448,
+    "city_pop": 660400.0
+   },
+   "unit_economics": {
+    "low": {
+     "city_ride_hail_trips_year": 7680294.944558244,
+     "addressable_trips_per_day": 210.41903957693822,
+     "fleet_vehicles": 17.53491996474485,
+     "revenue_per_vehicle": 65700.0,
+     "miles_per_vehicle": 39420.0,
+     "charging_cost_per_vehicle": 2029.3415999999997,
+     "opex_per_vehicle": 61159.3416,
+     "contribution_per_vehicle": 4540.6584,
+     "payback_years": 44.046475726956245
+    },
+    "base": {
+     "city_ride_hail_trips_year": 10214589.687954782,
+     "addressable_trips_per_day": 839.5553168182013,
+     "fleet_vehicles": 46.64196204545563,
+     "revenue_per_vehicle": 131400.0,
+     "miles_per_vehicle": 60225.0,
+     "charging_cost_per_vehicle": 2536.6769999999997,
+     "opex_per_vehicle": 68784.177,
+     "contribution_per_vehicle": 62615.823000000004,
+     "payback_years": 2.2358565821294083
+    },
+    "high": {
+     "city_ride_hail_trips_year": 13585134.847874448,
+     "addressable_trips_per_day": 2977.5638022738517,
+     "fleet_vehicles": 119.10255209095406,
+     "revenue_per_vehicle": 228125.0,
+     "miles_per_vehicle": 91250.0,
+     "charging_cost_per_vehicle": 2989.3499999999995,
+     "opex_per_vehicle": 75989.35,
+     "contribution_per_vehicle": 152135.65,
+     "payback_years": 0.6573081325777358
+    }
+   },
+   "confidence": null,
+   "median_rank": null,
+   "rank_p10": null,
+   "rank_p90": null
   }
  ]
 }

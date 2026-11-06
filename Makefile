@@ -1,10 +1,12 @@
 PY ?= .venv/Scripts/python
-.PHONY: data score dbt app memo deck all test publish-json
+.PHONY: data score analyze dbt app memo deck all test publish-json
 data:
 	$(PY) pipeline/ingest_acs.py && $(PY) pipeline/ingest_gazetteer.py && $(PY) pipeline/ingest_faa.py && \
 	$(PY) pipeline/ingest_weather.py && $(PY) pipeline/ingest_nhtsa.py && $(PY) pipeline/ingest_eia.py && $(PY) pipeline/ingest_seed.py
 score:
-	$(PY) pipeline/build_features.py && $(PY) pipeline/score.py && $(MAKE) publish-json
+	$(PY) pipeline/build_features.py && $(PY) pipeline/score.py && $(MAKE) analyze && $(MAKE) publish-json
+analyze:
+	$(PY) analysis/demand.py && $(PY) analysis/unit_economics.py && $(PY) analysis/monte_carlo.py && $(PY) analysis/enrich.py
 publish-json:
 	cp data/output/metros_scored.json app/public/metros_scored.json && cp docs/methodology.md app/public/methodology.md
 dbt:

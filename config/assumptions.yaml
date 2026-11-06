@@ -1,0 +1,84 @@
+# Unit-economics inputs. Every value is an ANALYST ASSUMPTION unless a source_url is given.
+# For every input, low = the pessimistic end and high = the optimistic end (so for costs, low is the larger number).
+# The low / base / high cases in the output apply the pessimistic / base / optimistic end of every input together.
+# Electricity price per metro comes from EIA data (data/interim/eia.parquet), not from this file.
+
+assumptions:
+  capture_share:
+    label: Robotaxi share of ride-hail trips in the principal city
+    unit: share
+    value: 0.03
+    low: 0.01
+    high: 0.08
+    higher_is_better: true
+    source_url: analyst assumption
+    rationale: Early-stage share for one operator in a mature market; one to eight percent spans a slow ramp to a strong ramp.
+  avg_fare_usd:
+    label: Average fare per trip
+    unit: USD
+    value: 20.0
+    low: 15.0
+    high: 25.0
+    higher_is_better: true
+    source_url: analyst assumption
+    rationale: Priced near typical urban ride-hail fares; robotaxi premiums and discounts both appear in the market.
+  trips_per_vehicle_per_day:
+    label: Paid trips per vehicle per day
+    unit: trips
+    value: 18
+    low: 12
+    high: 25
+    higher_is_better: true
+    source_url: analyst assumption
+    rationale: Utilization of a driverless fleet in a mature geofence; depends on fleet size, geofence and hours of service.
+  avg_trip_miles:
+    label: Paid miles per trip
+    unit: miles
+    value: 5.5
+    low: 4.5
+    high: 7.0
+    higher_is_better: true
+    source_url: analyst assumption
+    rationale: Typical urban ride-hail trip length; longer trips raise revenue per trip but also cost.
+  deadhead_share:
+    label: Share of vehicle miles driven empty
+    unit: share
+    value: 0.40
+    low: 0.50
+    high: 0.30
+    higher_is_better: false
+    source_url: analyst assumption
+    rationale: Empty repositioning and depot runs; lower with denser demand and good dispatch. Total miles = paid miles / (1 - deadhead).
+  cost_per_mile_usd:
+    label: Non-energy operating cost per vehicle mile
+    unit: USD per mile
+    value: 1.10
+    low: 1.50
+    high: 0.80
+    higher_is_better: false
+    source_url: analyst assumption
+    rationale: Maintenance, cleaning, insurance, remote assistance, depot and platform fees per mile. Excludes vehicle depreciation and charging.
+  kwh_per_mile:
+    label: Energy use
+    unit: kWh per mile
+    value: 0.45
+    low: 0.55
+    high: 0.35
+    higher_is_better: false
+    source_url: analyst assumption
+    rationale: Electric SUV-class vehicle with sensor load in urban driving. Charging cost = kWh per mile x state commercial price.
+  vehicle_cost_usd:
+    label: Vehicle cost, fully equipped
+    unit: USD
+    value: 140000
+    low: 200000
+    high: 100000
+    higher_is_better: false
+    source_url: analyst assumption
+    rationale: Vehicle plus sensor and compute suite; falls with scale. Payback is measured against this number.
+
+monte_carlo:
+  draws: 10000
+  seed: 42
+  concentration: 50      # Dirichlet total concentration around the balanced weights; analyst choice, about +/-7 points on the demand weight
+  top_n: 5

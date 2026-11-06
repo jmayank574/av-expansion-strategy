@@ -49,3 +49,28 @@ See `docs/data_sources.md` for URLs, vintages and caveats. Notes on choices:
 - The balanced total rewards demand heavily. The largest, densest markets (San Francisco, Los Angeles) rank high even though competitors are already active there. The Opportunity vs. Ease of Entry view and the scenarios show this trade-off.
 - Competitor status tiers for some cities (limited vs. public) are judgments from search extracts; Tesla rows rest on a fan/news site.
 - NHTSA city-to-metro mapping is approximate for small suburbs; unmapped cities are listed in the profile.
+
+## 5. Demand calibration (Phase 3)
+
+Two anchors, one estimate. This is an estimate from two cities, not a forecast.
+
+1. **Anchors (calendar 2025).** Chicago: Transportation Network Providers trips, 93.5M, from the City of Chicago data portal using a SoQL count (no trip rows downloaded). New York: High Volume FHV trips, 243.6M, taken as row counts from the TLC monthly parquet files' footers (metadata only, no trip rows downloaded). Divided by principal-city population (ACS 2024), that gives 34.5 trips per resident in Chicago and 28.7 in New York.
+2. **Demand index.** The geometric mean of principal-city density, taxi/ride-hail commute share, no-vehicle household share and enplanements per metro resident.
+3. **Scaling.** Each metro's trips per resident is the anchor's trips per resident times the ratio of demand indexes, done once from each anchor. Low and high are the smaller and larger of the two; base is their geometric mean. The two anchor cities report their observed values.
+4. **Limits.** The anchors disagree with the index: Chicago has more trips per resident than New York despite a lower index. That makes the low-to-high spread wide (about 1.3x each way from base). Two points cannot identify an elasticity, so the scaling is proportional. Chicago TNP data counts pickups within city limits and includes shared trips; NYC data covers the five boroughs and licensed high-volume FHV apps. Estimated trips are for the principal city, since that is where a launch geofence would operate.
+
+## 6. Unit economics (Phase 3)
+
+Inputs come only from `config/assumptions.yaml`. Each has a value, a low (pessimistic) and a high (optimistic) end, and a rationale. All are labeled analyst assumptions: none comes from a published source. Only the electricity price (EIA, by state) and the demand estimate come from data.
+
+- Addressable robotaxi trips per day = estimated annual ride-hail trips x capture share / 365.
+- Fleet needed = trips per day / paid trips per vehicle per day.
+- Revenue per vehicle = trips per vehicle per day x 365 x average fare.
+- Operating cost per vehicle = vehicle miles x cost per mile + vehicle miles x kWh per mile x state commercial price. Vehicle miles = paid miles / (1 - deadhead share).
+- Contribution = revenue - operating cost. Payback = vehicle cost / contribution (shown as "never" if contribution is not positive).
+
+The low / base / high outputs apply the pessimistic / central / optimistic end of every input together, so they are a stress range, not a statistical interval. Because fare, cost per mile and utilization are the same in every metro, per-vehicle payback varies little across metros (only the power price differs). Demand mainly sets the fleet size. The app lets a reader change fare, capture share and trips per vehicle per day.
+
+## 7. Monte Carlo on the weights (Phase 3)
+
+10,000 pillar-weight sets are drawn from a Dirichlet distribution centered on the balanced weights (concentration 50, seed 42), which moves each weight by roughly 5 to 7 points. For each draw all 25 candidates are re-ranked. The Confidence column in the app is the share of draws in which the metro lands in the top 5; the median rank is also reported. Concentration is an analyst choice: a lower value would explore more extreme weightings. This tests weight uncertainty only, not data error or assumption error.

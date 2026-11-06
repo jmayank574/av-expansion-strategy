@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import type { Scored } from './types'
-import { scoreAll, setWeight } from './scoring'
+import { economics, scoreAll, setWeight } from './scoring'
 
 const data: Scored = JSON.parse(readFileSync(new URL('../public/metros_scored.json', import.meta.url), 'utf-8'))
 const w = data.meta.weights.scenarios[data.meta.weights.default_scenario]
@@ -31,6 +31,19 @@ describe('setWeight', () => {
       cur = setWeight(cur, k, v)
       expect(Object.values(cur).reduce((a, b) => a + b, 0)).toBe(100)
       expect(cur[k]).toBe(v)
+    }
+  })
+})
+
+describe('browser unit economics match Python (base case)', () => {
+  const a = Object.fromEntries(Object.entries(data.meta.assumptions!).map(([k, v]) => [k, v.value]))
+  it('every metro, every field, 2 decimals', () => {
+    for (const m of data.metros) {
+      const e = economics(m.demand_estimate!.trips_base, m.raw.elec_cents_kwh, a)
+      const py = m.unit_economics!.base
+      for (const k of Object.keys(e) as (keyof typeof e)[]) {
+        if (k === 'payback_years') { expect(e[k]!, m.metro).toBeCloseTo(py[k]!, 2) } else expect(e[k] as number, m.metro + k).toBeCloseTo(py[k] as number, 2)
+      }
     }
   })
 })

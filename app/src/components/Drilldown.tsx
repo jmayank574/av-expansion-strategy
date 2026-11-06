@@ -2,6 +2,7 @@ import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis
 import type { Meta } from '../types'
 import { PILLARS } from '../types'
 import type { Row } from '../scoring'
+import UnitEconomics from './UnitEconomics'
 
 const STATUS: Record<string, string> = {
   operating_public: 'Operating (public)', operating_limited: 'Operating (limited)', testing: 'Testing', announced: 'Announced',
@@ -31,7 +32,7 @@ export default function Drilldown({ rows, meta, selected, onSelect }: { rows: Ro
           {names.map(n => <option key={n}>{n}</option>)}
         </select>
         <div className="text-sm text-muted">
-          {m.benchmark ? 'Benchmark (not ranked)' : `Rank ${row.rank} of 25`} · Total {row.total.toFixed(1)} · Opportunity {row.opportunity.toFixed(0)} · Ease of entry {row.ease.toFixed(0)}
+          {m.benchmark ? 'Benchmark (not ranked)' : `Rank ${row.rank} of 25`} · Total {row.total.toFixed(1)} · Opportunity {row.opportunity.toFixed(0)} · Ease of entry {row.ease.toFixed(0)}{m.confidence != null && ` · Top-5 in ${(m.confidence * 100).toFixed(0)}% of weight draws (median rank ${m.median_rank})`}
         </div>
       </div>
 
@@ -111,6 +112,7 @@ export default function Drilldown({ rows, meta, selected, onSelect }: { rows: Ro
           </p>
         </section>
       </div>
+      <UnitEconomics key={m.metro} m={m} meta={meta} />
     </div>
   )
 }

@@ -67,7 +67,7 @@ def why_bullets(r, pill, sub, weights, active_comp):
         if p == "competition": return f"Light competition: {len(active_comp)} operator(s) in service, crowding score {r.crowding:.1f}"
         return f"Low commercial power price ({r.elec_cents_kwh:.1f} cents/kWh)"
     # biggest risk = largest weighted shortfall
-    short = {p: (100 - pill[p]) * weights[p] for p in PILLARS}
+    short = {p: (100 - pill[p]) * weights[p] for p in PILLARS if p not in strengths}   # a pillar shown as a strength is not repeated as the risk
     rp = max(short, key=short.get)
     if rp == "operating":
         worst = max(SUBS["operating"], key=lambda s: (100 - sub[s]) * SUBS["operating"][s]["weight"])

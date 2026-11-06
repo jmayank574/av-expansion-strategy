@@ -1,4 +1,4 @@
-import type { Metro, Meta, Pillar, Weights } from './types'
+import type { Econ, Metro, Meta, Pillar, Weights } from './types'
 import { PILLARS } from './types'
 
 /** Pillar score = weighted mean of the pillar's normalized sub-scores. */
@@ -56,4 +56,20 @@ export function setWeight(w: Weights, key: Pillar, v: number): Weights {
   const out = { ...w, [key]: v } as Weights
   others.forEach((k, i) => { out[k] = floor[i] })
   return out
+}
+
+/** Unit economics for one metro; mirrors analysis/unit_economics.py. a = assumption name -> number. */
+export function economics(tripsYear: number, elecCents: number, a: Record<string, number>): Econ {
+  const tripsDay = (tripsYear * a.capture_share) / 365
+  const vehTrips = a.trips_per_vehicle_per_day * 365
+  const revenue = vehTrips * a.avg_fare_usd
+  const miles = (vehTrips * a.avg_trip_miles) / (1 - a.deadhead_share)
+  const charging = (miles * a.kwh_per_mile * elecCents) / 100
+  const opex = miles * a.cost_per_mile_usd + charging
+  const contribution = revenue - opex
+  return {
+    addressable_trips_per_day: tripsDay, fleet_vehicles: tripsDay / a.trips_per_vehicle_per_day, revenue_per_vehicle: revenue,
+    miles_per_vehicle: miles, charging_cost_per_vehicle: charging, opex_per_vehicle: opex, contribution_per_vehicle: contribution,
+    payback_years: contribution > 0 ? a.vehicle_cost_usd / contribution : null,
+  }
 }
