@@ -2,15 +2,15 @@
 
 **The problem.** A Level 4 robotaxi operator has proven its service in Las Vegas and runs on a ride-hail platform partner. Which US metros should it enter next, in what order, and what will each one take? This project scores 25 candidate metros on the five criteria the AV industry uses to pick launch markets, estimates demand and unit economics, tests how stable the ranking is, and delivers the answer as an interactive app, an executive memo and a slide deck. The operator is kept generic: "the operator" and "the Las Vegas beachhead".
 
-**Recommendation (balanced weights, data as of 2026-11-06).** Enter Miami, San Francisco, Los Angeles and Phoenix first, then Atlanta, Detroit and Philadelphia; hold Chicago, New York and Boston until the rules change.
+**Recommendation (balanced weights, data as of 2026-11-06).** Enter Miami, Los Angeles, Phoenix and San Francisco first, then Houston, Tampa, Orlando and Atlanta; hold New York and Chicago until the rules change.
 
 | Wave | Metros | Gate |
 |---|---|---|
-| 1 | Miami, San Francisco, Los Angeles and Phoenix | Tier 2+ state rules and top 5 in at least half of 10,000 weight draws (Miami 96%, San Francisco 87%, Los Angeles 63%, Phoenix 50%) |
-| 2 | Atlanta, Detroit and Philadelphia | Tier 2+ rules, top 10; weather and permits to validate (Atlanta 39%, Detroit 26%, Philadelphia 10%) |
-| 3 | Chicago, New York and Boston | Top-10 demand, but driverless commercial service is not yet allowed |
+| 1 | Miami, Los Angeles, Phoenix and San Francisco | Tier 2+ state rules and top 5 in at least half of 10,000 weight draws (Miami 97%, Los Angeles 91%, Phoenix 65%, San Francisco 54%) |
+| 2 | Houston, Tampa, Orlando and Atlanta | Tier 2+ rules, top 10; weather to validate (Houston 27%, Tampa 33%, Orlando 12%, Atlanta 9%) |
+| 3 | New York and Chicago | Top-10 demand, but driverless commercial service is not yet allowed |
 
-Miami, San Francisco, Los Angeles and Phoenix already have operating competitors, so wave 1 is a bet on demand and rules, not on an open field. California is Tier 3 but slow for a new entrant (separate DMV and CPUC permits). Dallas-Fort Worth (#13) and Houston (#14) are in no wave: see the memo for why. Read the one-page memo ([reports/memo.md](reports/memo.md)) and the 7-slide deck (`reports/deck.pptx`) for the reasoning and risks.
+Miami, Los Angeles, Phoenix and San Francisco already have operating competitors, so wave 1 is a bet on demand and rules, not on an open field. CA is Tier 2+ but a slow path for a new entrant (multi-step permits). Dallas-Fort Worth (#18, no wave) and Houston (#6, wave 2) are explained in the memo. Ranks below about #5 are close: read them as a tier, not a strict order (see the Monte Carlo confidence column). Read the one-page memo ([reports/memo.md](reports/memo.md)), the 7-slide deck (`reports/deck.pptx`) and the external accuracy check ([docs/validation.md](docs/validation.md)) for the reasoning, risks and evidence.
 
 ## Screenshots
 
@@ -22,7 +22,7 @@ Miami, San Francisco, Los Angeles and Phoenix already have operating competitors
 
 ```mermaid
 flowchart LR
-  A[Census ACS + Gazetteer<br/>FAA enplanements<br/>Open-Meteo weather<br/>NHTSA SGO ADS reports<br/>EIA electricity] --> B[pipeline/ingest_*.py<br/>raw to data/raw, clean to parquet]
+  A[Census ACS + Gazetteer<br/>FAA enplanements<br/>NOAA GHCN-Daily weather<br/>NHTSA SGO ADS reports<br/>EIA electricity] --> B[pipeline/ingest_*.py<br/>raw to data/raw, clean to parquet]
   S[Seed CSVs<br/>state regulation<br/>competitor presence] --> B
   B --> C[build_features + score.py<br/>dbt/DuckDB in Phase 2]
   C --> D[data/output/metros_scored.json]
@@ -58,7 +58,7 @@ cd app && npm install && npm run dev                                  # http://l
 
 ## Methodology in brief
 
-Five pillars (demand 35, operating conditions 25, regulatory readiness 20, competitive intensity 15, charging cost 5). Every sub-metric becomes a 0-100 percentile rank across the 25 candidates. Pillar scores are weighted means, the total is the weighted mean of the pillars, and four weight scenarios are provided. Opportunity is the demand pillar and ease of entry is the other four. Demand is calibrated on two anchors (Chicago and NYC ride-hail trips), unit economics use labeled assumptions, and a 10,000-draw Monte Carlo on the weights gives each metro's top-5 confidence. Las Vegas is scored on the same scale but not ranked. Full details: [docs/methodology.md](docs/methodology.md).
+Five pillars (demand 35, operating conditions 25, regulatory readiness 20, competitive intensity 15, charging cost 5). Every sub-metric becomes a 0-100 percentile rank across the 25 candidates, except competitor crowding, which is min-max scaled (0 crowding = 100, the most crowded candidate = 0) because it has few distinct values and percentile ranks jumped on ties. Pillar scores are weighted means, the total is the weighted mean of the pillars, and four weight scenarios are provided. Opportunity is the demand pillar and ease of entry is the other four. Demand is calibrated on two anchors (Chicago and NYC ride-hail trips), unit economics use labeled assumptions, and a 10,000-draw Monte Carlo on the weights gives each metro's top-5 confidence. Las Vegas is scored on the same scale but not ranked. Full details: [docs/methodology.md](docs/methodology.md).
 
 ## Data sources
 
@@ -67,7 +67,7 @@ Five pillars (demand 35, operating conditions 25, regulatory readiness 20, compe
 | Census ACS 5-year API | 2020-2024 |
 | Census Gazetteer (places), CBSA delineation | 2025, 2023 |
 | FAA passenger enplanements | CY2025 |
-| Open-Meteo historical weather | 2016-2025 daily |
+| NOAA GHCN-Daily airport stations (Open-Meteo archive only as fallback) | 2016-2025 daily |
 | NHTSA Standing General Order, ADS reports | 24 months ending Sep 2026 |
 | EIA Table 5.6.B, commercial price | Jan-Aug 2026 year to date |
 | Seed: state AV regulation and new-entrant path (17 states) | researched 2026-11-06 |

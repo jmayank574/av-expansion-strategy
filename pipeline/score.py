@@ -22,7 +22,12 @@ def sub_scores(f: pd.DataFrame) -> pd.DataFrame:
     out = pd.DataFrame(index=f.index)
     for p in PILLARS:
         for s, spec in SUBS[p].items():
-            sc = percentile_map(cand[s])(f[s])
+            if spec.get("normalization") == "minmax0":
+                # min-max from zero: 0 crowding scores 100, the most crowded candidate scores 0. Crowding has few distinct values, so a
+                # percentile rank would jump when one competitor's status changes; min-max moves in proportion to the change.
+                sc = (f[s] / cand[s].max() * 100).clip(0, 100)
+            else:
+                sc = percentile_map(cand[s])(f[s])
             out[s] = sc if spec["direction"] == 1 else 100 - sc
     return out
 
@@ -133,7 +138,7 @@ def main():
         weights=dict(scenarios=scen, default_scenario=CFG["default_scenario"],
                      pillars={p: dict(label=CFG["pillars"][p]["label"], submetrics=SUBS[p]) for p in PILLARS},
                      crowding_status_weights=CFG["crowding_status_weights"]),
-        vintages=dict(acs=f.acs_vintage.iloc[0], faa="CY2025 enplanements", weather="Open-Meteo daily archive 2016-2025",
+        vintages=dict(acs=f.acs_vintage.iloc[0], faa="CY2025 enplanements", weather=pd.read_parquet(INTERIM / "weather.parquet").weather_vintage.iloc[0],
                       nhtsa=pd.read_parquet(INTERIM / "nhtsa_incidents.parquet").shape[0] and "NHTSA SGO ADS reports, 24 months ending Sep 2026",
                       eia=pd.read_parquet(INTERIM / "eia.parquet").eia_period.iloc[0] + " (commercial, Table 5.6.B)",
                       regulation_and_competitors="seed CSVs researched 2026-11-06", gazetteer="Census Gazetteer 2025"),

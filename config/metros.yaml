@@ -19,6 +19,9 @@ metros:
   gaz_lat: 40.6627
   gaz_lon: -73.9387
   coord_source: Open-Meteo geocoding API, GeoNames id 5128581
+  weather_station: USW00094789
+  weather_station_name: JFK INTL AP
+  weather_station_km: 22.1
 - name: Los Angeles
   benchmark: false
   cbsa: '31080'
@@ -40,6 +43,9 @@ metros:
   gaz_lat: 34.0194
   gaz_lon: -118.4108
   coord_source: Open-Meteo geocoding API, GeoNames id 5368361
+  weather_station: USW00023174
+  weather_station_name: LOS ANGELES INTL AP
+  weather_station_km: 18.3
 - name: Chicago
   benchmark: false
   cbsa: '16980'
@@ -59,6 +65,9 @@ metros:
   gaz_lat: 41.837
   gaz_lon: -87.6849
   coord_source: Open-Meteo geocoding API, GeoNames id 4887398
+  weather_station: USW00094846
+  weather_station_name: CHICAGO OHARE INTL AP
+  weather_station_km: 26.3
 - name: Dallas-Fort Worth
   benchmark: false
   cbsa: '19100'
@@ -78,6 +87,9 @@ metros:
   gaz_lat: 32.7933
   gaz_lon: -96.7665
   coord_source: Open-Meteo geocoding API, GeoNames id 4684888
+  weather_station: USW00003927
+  weather_station_name: DAL-FTW WSCMO AP
+  weather_station_km: 23.8
 - name: Houston
   benchmark: false
   cbsa: '26420'
@@ -97,6 +109,9 @@ metros:
   gaz_lat: 29.7857
   gaz_lon: -95.3888
   coord_source: Open-Meteo geocoding API, GeoNames id 4699066
+  weather_station: USW00012960
+  weather_station_name: HOUSTON INTERCONTINENTAL AP
+  weather_station_km: 24.6
 - name: Washington DC
   benchmark: false
   cbsa: '47900'
@@ -116,6 +131,9 @@ metros:
   gaz_lat: 38.9042
   gaz_lon: -77.0165
   coord_source: Open-Meteo geocoding API, GeoNames id 4140963
+  weather_station: USW00013743
+  weather_station_name: WASHINGTON REAGAN NATL AP
+  weather_station_km: 5.3
 - name: Philadelphia
   benchmark: false
   cbsa: '37980'
@@ -134,6 +152,9 @@ metros:
   gaz_lat: 40.0094
   gaz_lon: -75.1333
   coord_source: Open-Meteo geocoding API, GeoNames id 4560349
+  weather_station: USW00013739
+  weather_station_name: PHILA INTL AP
+  weather_station_km: 10.3
 - name: Miami
   benchmark: false
   cbsa: '33100'
@@ -154,6 +175,9 @@ metros:
   gaz_lat: 25.7752
   gaz_lon: -80.2086
   coord_source: Open-Meteo geocoding API, GeoNames id 4164138
+  weather_station: USW00012839
+  weather_station_name: MIAMI INTL AP
+  weather_station_km: 12.4
 - name: Atlanta
   benchmark: false
   cbsa: '12060'
@@ -172,6 +196,9 @@ metros:
   gaz_lat: 33.7629
   gaz_lon: -84.4227
   coord_source: Open-Meteo geocoding API, GeoNames id 4180439
+  weather_station: USW00013874
+  weather_station_name: ATLANTA HARTSFIELD-JACKSON INT
+  weather_station_km: 14.2
 - name: Boston
   benchmark: false
   cbsa: '14460'
@@ -190,6 +217,9 @@ metros:
   gaz_lat: 42.3386
   gaz_lon: -71.0183
   coord_source: Open-Meteo geocoding API, GeoNames id 4930956
+  weather_station: USW00014739
+  weather_station_name: BOSTON
+  weather_station_km: 4.1
 - name: Phoenix
   benchmark: false
   cbsa: '38060'
@@ -208,6 +238,9 @@ metros:
   gaz_lat: 33.5722
   gaz_lon: -112.0901
   coord_source: Open-Meteo geocoding API, GeoNames id 5308655
+  weather_station: USW00023183
+  weather_station_name: PHOENIX AP
+  weather_station_km: 6.9
 - name: San Francisco
   benchmark: false
   cbsa: '41860'
@@ -227,6 +260,9 @@ metros:
   gaz_lat: 37.7272
   gaz_lon: -123.0322
   coord_source: Open-Meteo geocoding API, GeoNames id 5391959
+  weather_station: USW00023234
+  weather_station_name: SAN FRANCISCO INTL AP
+  weather_station_km: 17.9
 - name: Detroit
   benchmark: false
   cbsa: '19820'
@@ -245,6 +281,9 @@ metros:
   gaz_lat: 42.383
   gaz_lon: -83.1022
   coord_source: Open-Meteo geocoding API, GeoNames id 4990729
+  weather_station: USW00094847
+  weather_station_name: DETROIT METRO AP
+  weather_station_km: 26.0
 - name: Seattle
   benchmark: false
   cbsa: '42660'
@@ -263,6 +302,9 @@ metros:
   gaz_lat: 47.6193
   gaz_lon: -122.3515
   coord_source: Open-Meteo geocoding API, GeoNames id 5809844
+  weather_station: USW00024233
+  weather_station_name: SEATTLE TACOMA AP
+  weather_station_km: 18.0
 - name: Minneapolis
   benchmark: false
   cbsa: '33460'
@@ -281,6 +323,9 @@ metros:
   gaz_lat: 44.9633
   gaz_lon: -93.2683
   coord_source: Open-Meteo geocoding API, GeoNames id 5037649
+  weather_station: USW00014922
+  weather_station_name: MINNEAPOLIS-ST PAUL INTL AP
+  weather_station_km: 10.8
 - name: San Diego
   benchmark: false
   cbsa: '41740'
@@ -299,6 +344,9 @@ metros:
   gaz_lat: 32.8304
   gaz_lon: -117.1209
   coord_source: Open-Meteo geocoding API, GeoNames id 5391811
+  weather_station: USW00023188
+  weather_station_name: SAN DIEGO INTL AP
+  weather_station_km: 2.6
 - name: Tampa
   benchmark: false
   cbsa: '45300'
@@ -317,6 +365,9 @@ metros:
   gaz_lat: 27.9701
   gaz_lon: -82.4797
   coord_source: Open-Meteo geocoding API, GeoNames id 4174757
+  weather_station: USW00012842
+  weather_station_name: TAMPA INTL AP
+  weather_station_km: 8.2
 - name: Denver
   benchmark: false
   cbsa: '19740'
@@ -335,6 +386,9 @@ metros:
   gaz_lat: 39.7619
   gaz_lon: -104.8811
   coord_source: Open-Meteo geocoding API, GeoNames id 5419384
+  weather_station: USW00003017
+  weather_station_name: DENVER INTL AP
+  weather_station_km: 30.5
 - name: Orlando
   benchmark: false
   cbsa: '36740'
@@ -353,6 +407,9 @@ metros:
   gaz_lat: 28.4728
   gaz_lon: -81.3202
   coord_source: Open-Meteo geocoding API, GeoNames id 4167147
+  weather_station: USW00012815
+  weather_station_name: ORLANDO INTL AP
+  weather_station_km: 14.4
 - name: Charlotte
   benchmark: false
   cbsa: '16740'
@@ -371,6 +428,9 @@ metros:
   gaz_lat: 35.209
   gaz_lon: -80.831
   coord_source: Open-Meteo geocoding API, GeoNames id 4460243
+  weather_station: USW00013881
+  weather_station_name: CHARLOTTE DOUGLAS AP
+  weather_station_km: 10.1
 - name: San Antonio
   benchmark: false
   cbsa: '41700'
@@ -389,6 +449,9 @@ metros:
   gaz_lat: 29.4628
   gaz_lon: -98.5246
   coord_source: Open-Meteo geocoding API, GeoNames id 4726206
+  weather_station: USW00012921
+  weather_station_name: SAN ANTONIO INTL AP
+  weather_station_km: 13.4
 - name: Austin
   benchmark: false
   cbsa: '12420'
@@ -407,6 +470,9 @@ metros:
   gaz_lat: 30.2986
   gaz_lon: -97.7541
   coord_source: Open-Meteo geocoding API, GeoNames id 4671654
+  weather_station: USW00013904
+  weather_station_name: AUSTIN BERGSTROM INTL AP
+  weather_station_km: 11.1
 - name: Nashville
   benchmark: false
   cbsa: '34980'
@@ -425,6 +491,9 @@ metros:
   gaz_lat: 36.1718
   gaz_lon: -86.785
   coord_source: Open-Meteo geocoding API, GeoNames id 4644585
+  weather_station: USW00013897
+  weather_station_name: NASHVILLE INTL AP
+  weather_station_km: 10.6
 - name: Pittsburgh
   benchmark: false
   cbsa: '38300'
@@ -443,6 +512,9 @@ metros:
   gaz_lat: 40.4399
   gaz_lon: -79.9757
   coord_source: Open-Meteo geocoding API, GeoNames id 5206379
+  weather_station: USW00094823
+  weather_station_name: PITTSBURGH ASOS
+  weather_station_km: 19.1
 - name: Sacramento
   benchmark: false
   cbsa: '40900'
@@ -461,6 +533,9 @@ metros:
   gaz_lat: 38.5677
   gaz_lon: -121.4682
   coord_source: Open-Meteo geocoding API, GeoNames id 5389489
+  weather_station: USW00093225
+  weather_station_name: SACRAMENTO METRO AP
+  weather_station_km: 15.8
 - name: Las Vegas
   benchmark: true
   cbsa: '29820'
@@ -479,5 +554,11 @@ metros:
   gaz_lat: 36.2335
   gaz_lon: -115.264
   coord_source: Open-Meteo geocoding API, GeoNames id 5506956
+  weather_station: USW00023169
+  weather_station_name: MCCARRAN INTL AP
+  weather_station_km: 11.7
 coordinate_note: lat/lon = city-center point from Open-Meteo geocoding (GeoNames)
   as downtown proxy; gaz_lat/gaz_lon = Census Gazetteer internal point.
+weather_station_note: weather_station = NOAA GHCN-Daily station (USW*) at the primary
+  commercial airport, with PRCP and TMAX covering 2016-2025, chosen by pipeline/lookup_weather_stations.py
+  from NOAA's ghcnd-stations.txt and ghcnd-inventory.txt

@@ -76,6 +76,37 @@ def why_rank_line(m):
 
 
 dfw, hou = by["Dallas-Fort Worth"], by["Houston"]
+wave_of = lambda m: "wave 1" if m in w1 else "wave 2" if m in w2 else "wave 3" if m in w3 else None
+
+
+def dh_line():
+    """Where Dallas-Fort Worth and Houston rank, why, and which wave (if any) they are in."""
+    out = []
+    for m in (dfw, hou):
+        s = plan.why_rank(m, p["cand"], p["med_opp"]).rstrip(".")
+        out.append(f"{s}. It is in {wave_of(m)}." if wave_of(m) else f"{s}. It is in no wave.")
+    return " ".join(out)
+
+
+def watch_line():
+    """Largest ease shortfall per wave 2 metro; one summary phrase when they share the same pillar."""
+    ks = {m["metro"]: plan.shortfalls(m, ["regulatory", "operating", "competition", "charging"])[0] for m in w2}
+    if len(set(ks.values())) == 1 and next(iter(ks.values())) == "operating":
+        rain = [m["raw"]["rain_days"] for m in w2]
+        return f"weather is the main shortfall for all four (rain ~{min(rain):.0f}-{max(rain):.0f} days a year)"
+    return "; ".join(watch(m) for m in w2)
+
+
+def weather_risk():
+    snow = max(launch, key=lambda m: m["raw"]["snow_days"])
+    wet = max(launch, key=lambda m: m["raw"]["rain_days"])
+    heat = max(launch, key=lambda m: m["raw"]["heat_days"])
+    lead = (f"{snow['metro']} has snow on ~{snow['raw']['snow_days']:.0f} days a year, " if snow["raw"]["snow_days"] >= 3
+            else "No launch metro has meaningful snow; ")
+    return f"{lead}{wet['metro']} has rain on ~{wet['raw']['rain_days']:.0f} days and {heat['metro']} ~{heat['raw']['heat_days']:.0f} days at 40 C or higher. Validate heat and wet-weather performance before public launch."
+
+
+explain = min(w1, key=lambda m: m["opportunity"])        # the wave 1 metro whose rank leans least on demand
 vq = p["quad"](vegas)
 v = meta["vintages"]
 asof = meta["data_as_of"]
@@ -87,29 +118,29 @@ gate = (f" {min(w1, key=lambda m: m['confidence'])['metro']} only just clears th
 
 memo = f"""# Where should the operator launch after Las Vegas?
 
-*For the strategy team. Data as of {asof}. Sources: Census ACS 2024 5-year, NHTSA SGO ADS reports, Open-Meteo, EIA, FAA, and researched seed files (AV rules, competitors) as of {asof}.*
+*For the strategy team. Data as of {asof}. Sources: Census ACS 2024 5-year, NHTSA SGO ADS reports, NOAA GHCN-Daily, EIA, FAA, and researched seed files (AV rules, competitors) as of {asof}.*
 
 **Recommendation.** {plan.one_line_answer(p)} The sequence uses balanced-weight scores for 25 US metros (demand 35, operating conditions 25, regulation 20, competition 15, charging 5). Waves 1 and 2 are limited to states with Tier 2+ AV rules; wave 1 also needs a top-5 finish in at least half of 10,000 weight draws.
 
 **Why these metros** (rank, score, demand score, regulation, competitors, confidence, fleet at {pct(meta['assumptions']['capture_share']['value'])} capture)
 
 {chr(10).join(line(m) for m in w1)}
-- **Wave 2:** {plan.names(w2)} (top 5 in {', '.join(pct(m['confidence']) for m in w2)} of draws). Demand {min(m['opportunity'] for m in w2):.0f}-{max(m['opportunity'] for m in w2):.0f} (wave 1: {min(m['opportunity'] for m in w1):.0f}-{max(m['opportunity'] for m in w1):.0f}). Watch: {'; '.join(watch(m) for m in w2)}.
+- **Wave 2:** {plan.names(w2)} (top 5 in {', '.join(pct(m['confidence']) for m in w2)} of draws). Demand {min(m['opportunity'] for m in w2):.0f}-{max(m['opportunity'] for m in w2):.0f} (wave 1: {min(m['opportunity'] for m in w1):.0f}-{max(m['opportunity'] for m in w1):.0f}). Watch: {watch_line()}.
 - **Wave 3:** {plan.names(w3)}. Demand {min(m['opportunity'] for m in w3):.0f}-{max(m['opportunity'] for m in w3):.0f}, but driverless commercial service is not yet allowed. Build the policy case now; launch when the law changes.
-- **Dallas-Fort Worth and Houston** are in no wave. {plan.why_rank(dfw, p['cand'], p['med_opp'])} {plan.why_rank(hou, p['cand'], p['med_opp'])}
-{why_rank_line(by['Detroit']) if 'Detroit' in by else ''}
+- **Dallas-Fort Worth and Houston.** {dh_line()}
+{why_rank_line(explain)}
 
 **Deprioritize.** {dep_lines}. None ranks better than #{best_rank} in any scenario ({best['metro']}).
 
 **Key risks and de-risking**
 
-- *Regulation:* {n_top10_low} of the top 10 sit in Tier 0-1 states; engage {w3[0]['state']}, {w3[1]['state']} and {w3[-1]['state']} regulators early. {plan.names(sorted({m['state'] for m in slow_open}))} {'is' if len({m['state'] for m in slow_open}) == 1 else 'are'} Tier 2+ but a slow path for a new entrant (multi-step permits): start filings in wave 1.
-- *Weather:* {snow['metro']} has snow on ~{snow['raw']['snow_days']:.0f} days a year and {heat['metro']} has ~{heat['raw']['heat_days']:.0f} days at 40 C or higher. Validate winter and heat performance before public launch.
+- *Regulation:* {n_top10_low} of the top 10 sit in Tier 0-1 states; engage {plan.names(sorted({m['state'] for m in w3}))} regulators early. {plan.names(sorted({m['state'] for m in slow_open}))} {'is' if len({m['state'] for m in slow_open}) == 1 else 'are'} Tier 2+ but a slow path for a new entrant (multi-step permits): start filings in wave 1.
+- *Weather:* {weather_risk()}
 - *Competition:* {plan.names(crowded)} already have operators (crowding {min(m['raw']['crowding'] for m in crowded):.1f}-{max(m['raw']['crowding'] for m in crowded):.1f}); {least_crowded['metro']} is the least crowded launch metro ({least_crowded['raw']['crowding']:.1f}). Competitor status is dated and cross-checked against NHTSA activity.
 
 **Confidence.** {w1[0]['metro']} is top 5 in {pct(w1[0]['confidence'])} of weight draws and {w1[-1]['metro']} in {pct(w1[-1]['confidence'])};{gate} {weakest['metro']} is the softest pick ({pct(weakest['confidence'])}), so wave 2 order is not firm. A low-risk lens puts {plan.names(low_risk)} on top; fast growth, {plan.names(fast)}. {vegas_line} The answer would also change if a Tier 1 state legalized driverless service, a competitor entered {least_crowded['metro']}, or fare and capture differ from our labeled assumptions.
 
-**Data.** ACS {v['acs']}; FAA {v['faa']}; Open-Meteo weather 2016-2025; NHTSA SGO reports to Sep 2026 (activity only, never rates); EIA {v['eia'].split(' (')[0]}; AV rules, new-entrant paths and competitors researched {asof} (some rows medium/low confidence); demand is a two-anchor estimate (Chicago and NYC ride-hail trips), not a forecast.
+**Data.** ACS {v['acs']}; FAA {v['faa']}; NOAA GHCN-Daily airport-station weather 2016-2025; NHTSA SGO reports to Sep 2026 (activity only, never rates); EIA {v['eia'].split(' (')[0]}; AV rules, new-entrant paths and competitors researched {asof} (some rows medium/low confidence); demand is a two-anchor estimate (Chicago and NYC ride-hail trips), not a forecast.
 """
 out = pathlib.Path(__file__).resolve().parent / "memo.md"
 out.write_text(memo, encoding="utf-8")

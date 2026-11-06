@@ -46,7 +46,7 @@ rows: 51
 | Austin            | Avride, Tesla, Waymo, Zoox | -                                    | Avride (29), Tesla (26), Waymo (181), Zoox (5)       | -                   | -                         |
 | Boston            | Waymo                      | -                                    | -                                                    | -                   | -                         |
 | Charlotte         | -                          | Waymo                                | -                                                    | -                   | Waymo                     |
-| Chicago           | -                          | Waymo                                | -                                                    | -                   | Waymo                     |
+| Chicago           | Waymo                      | -                                    | -                                                    | -                   | -                         |
 | Dallas-Fort Worth | Avride, Tesla, Waymo       | Lyft/Mobileye/Marubeni, May Mobility | Avride (54), May Mobility (8), Tesla (7), Waymo (14) | -                   | Lyft/Mobileye/Marubeni    |
 | Denver            | Waymo                      | -                                    | -                                                    | -                   | -                         |
 | Detroit           | -                          | Waymo                                | -                                                    | -                   | -                         |
@@ -76,7 +76,6 @@ none
 | metro             | announced_without_nhtsa   |
 |:------------------|:--------------------------|
 | Charlotte         | Waymo                     |
-| Chicago           | Waymo                     |
 | Dallas-Fort Worth | Lyft/Mobileye/Marubeni    |
 | Las Vegas         | Tesla                     |
 | Orlando           | Tesla                     |

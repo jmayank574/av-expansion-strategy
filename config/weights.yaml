@@ -30,7 +30,7 @@ pillars:
   competition:
     label: Competitive intensity
     submetrics:
-      crowding: {weight: 100, direction: -1, label: "Competitor crowding", unit: "weighted count"}
+      crowding: {weight: 100, direction: -1, label: "Competitor crowding", unit: "weighted count", normalization: minmax0}   # min-max from 0; every other metric is a percentile rank
   charging:
     label: Charging cost
     submetrics:

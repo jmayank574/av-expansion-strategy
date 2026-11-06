@@ -1,12 +1,30 @@
 # External validation
 
-Checked on 2026-11-06 against independent sources that were opened during the check. This is a report only: no pipeline code, config or data was changed.
+Checked on 2026-11-06 against independent sources that were opened during the check. The original check (sections 1-8) was report-only. **The same day, the fixes it recommended were applied: see "Status after fixes" below.** Sections 1-8 are kept as originally written, as the record of what was found; where a finding has since been fixed, a "Status" line says so.
 
 **Verdicts.** PASS = within tolerance. FLAG = off, or a problem with the evidence, with the reason. UNVERIFIED = no source found that could be opened.
 
 **Method notes.** Numbers were compared in a scratch folder that read the pipeline's outputs read-only. Sources that returned an error (HTTP 403/429, certificate failure, unreadable PDF) are named where they matter, and nothing in this document relies on a page that could not be read. Search-result snippets were used only to find pages, never as evidence.
 
-## Summary
+## Status after fixes (2026-11-06)
+
+| Finding | Original verdict | Status now | What was done |
+|---|---|---|---|
+| Waymo in Chicago listed as `announced` | CHANGED | **FIXED** | Row set to `testing`, sourced to ABC7 Chicago 2026-04-07 (NPR Illinois 2026-10-22 confirms) |
+| Ranks 4-10 tie-sensitive: one 0.1 crowding change moved Chicago five places | method issue | **FIXED** | Competitor crowding is now min-max scaled (0 crowding = 100, the most crowded candidate = 0); all other metrics stay percentile ranks. Same rule in Python and dbt; parity passes (max diff 1.4e-14). Documented in `docs/methodology.md` |
+| Weather: Open-Meteo ran 17-85% high on rain days and 10-46% low on 40 C days | 3 FLAG | **FIXED** | Weather now comes from NOAA GHCN-Daily airport stations (one per metro, IDs in `config/metros.yaml`, all within 3 km of the primary airport), with Open-Meteo kept only as a documented fallback for any station missing more than 5% of days (none needed; worst station 0.6%). Side-by-side for all 26 metros in `data/profiles/05_weather.md` |
+| New York regulation citation did not support the claim | FLAG (citation) | **FIXED** | Now cites Cleantechnica 2026-02-20 (one-hand-on-the-wheel rule, testing exemptions only) |
+| Pennsylvania tier source unreadable | FLAG (citation) | **FIXED** | Now cites PhillyVoice 2026-10-09 (PennDOT certification, PA PUC approval). The PennDOT guidelines headline is still mentioned in the note, marked as headline-only |
+| Unit-economics inputs said "analyst assumption" | gap | **FIXED** | `assumptions.yaml` now cites Obi via TechCrunch (fare, flagged as a premium assumption), Morgan Stanley via TheNextWeb (vehicle cost) and AAA plus the Sacra estimate (cost per mile). Values unchanged: none was clearly wrong |
+| Michigan Tier 2 versus 3 | note | **FIXED** | Judgment call documented in `docs/methodology.md` |
+| Phoenix 3.05% below the latest-year Census estimate | FLAG | Unchanged | ACS 5-year lag; no scoring effect. Not a bug |
+| NYC 2025 annual total has no published figure | UNVERIFIED | Unchanged | Only the December 2025 month could be checked against TLC (exact) |
+
+**Effect on the results.** The weather switch moved scores the most (Gulf and Southeast metros were being penalized for rain that station gauges do not record: Orlando 129 vs 75 rain days a year, Houston 119 vs 64, Tampa 117 vs 74). Houston, Tampa and Orlando each rose 6-7 places. The wave 1 set is unchanged (Miami, Los Angeles, Phoenix, San Francisco); wave 2 is now Houston, Tampa, Orlando and Atlanta, and wave 3 is New York and Chicago. Details are in the commit message and README.
+
+**Re-check of the weather item.** The pipeline now reads the same NOAA source that this document used as the independent reference, so the original comparison is no longer independent: our values equal the station values by construction (for example Phoenix 16.5 rain, 0.0 snow, 89.3 heat days; Las Vegas 10.4 / 0.1 / 60.8). What remains to be aware of: a station is a point, not a metro average; a missing snowfall value is counted as no snow (the GHCN convention; no metro shows zero snow at the station while Open-Meteo shows three or more days); and the Open-Meteo series is retained as `om_*` columns for comparison.
+
+## Summary (original check)
 
 | # | Check | Result | Notes |
 |---|---|---|---|
@@ -34,6 +52,8 @@ Source: Census Population Estimates Program, metro/micro totals, vintage 2024 (`
 Phoenix is a flag only against the latest single-year estimate, and by 0.05 points. The ACS 5-year figure is controlled to the average of the five annual estimates, so it lags fast-growing metros (Phoenix, Las Vegas). The model ranks log population by percentile, so this has no practical effect on scores.
 
 ## 2. Weather
+
+**Status: FIXED.** This section compares the old Open-Meteo values with NOAA stations. The pipeline now uses the NOAA stations (see Status after fixes).
 
 Source: NOAA GHCN-Daily station observations from the NCEI Access Data Service, 1 Jan 2016 to 31 Dec 2025 (3,653 days, no missing precipitation or temperature days at any station). Same thresholds as ours: rain >= 2.5 mm, snow >= 10 mm (1 cm), max temperature >= 40 C. Stations are airport weather stations: Phoenix Sky Harbor USW00023183, Las Vegas USW00023169, Miami Intl USW00012839, Minneapolis-St Paul USW00014922, Boston Logan USW00014739. Tolerance: within about 25%.
 
@@ -87,6 +107,8 @@ Chicago cross-checks: June 2025 is 7,690,883 in the trips dataset vs 7,647,101 i
 
 ## 6. Competitor status, top 10 metros
 
+**Status: Chicago FIXED** (now `testing`), and the tie sensitivity described below is FIXED by min-max scaling of crowding.
+
 Top 10 by balanced rank: Miami, San Francisco, Los Angeles, Chicago, Phoenix, New York, Detroit, Atlanta, Philadelphia, Boston. All 12 source URLs behind the 19 rows were re-opened.
 
 | Metro / competitor | Seed status | Re-check | Verdict |
@@ -117,6 +139,8 @@ Top 10 by balanced rank: Miami, San Francisco, Los Angeles, Chicago, Phoenix, Ne
 
 ## 7. Regulation, states of the top 10
 
+**Status: both citation flags FIXED** (New York, Pennsylvania).
+
 States: AZ, CA, FL, GA, IL, MA, MI, NY, PA. Each row's tier source and new-entrant-path source was re-opened.
 
 | State | Tier | Path | Re-check | Verdict |
@@ -133,6 +157,8 @@ States: AZ, CA, FL, GA, IL, MA, MI, NY, PA. Each row's tier source and new-entra
 
 ## 8. Unit-economics assumptions
 
+**Status: references added to `config/assumptions.yaml`; values unchanged.**
+
 Ours are in `config/assumptions.yaml`. All are labelled "analyst assumption"; nothing in the file currently cites a public reference.
 
 | Assumption (low / base / high) | Public reference opened | Comparison | Position |
@@ -144,15 +170,13 @@ Ours are in `config/assumptions.yaml`. All are labelled "analyst assumption"; no
 
 Sensitivity worth knowing (simple division from the base case, not a pipeline run): with a $200k vehicle and every other input at base, San Francisco payback is about 3.5 years instead of 2.4 (contribution $57,846 a year). Payback therefore stays assumption-driven, as the deck states.
 
-## What to fix before sharing
+## What was left to fix before sharing
 
-In priority order. None of these were changed here.
+All six items from the original list were applied (see Status after fixes). Still open:
 
-1. **Update Waymo in Chicago to `testing`.** It is a confirmed change, and it re-orders ranks 4 to 9 (see section 6). The memo, deck, README and app all quote Chicago at #4, and Phoenix is currently described as borderline (50.4% confidence), so those would need regenerating.
-2. **Say that ranks 4 to 10 are tie-sensitive.** Because crowding has few distinct values, one competitor-status change can move a metro five places. A line in the memo's confidence section and in `docs/methodology.md` would pre-empt the question. The alternative is a finer crowding measure.
-3. **Fix two citations.** Replace New York's regulation source with a page that states the one-hand rule (Cleantechnica 2026-02-20 was readable). Replace Pennsylvania's tier source with a readable page (the PennDOT page returned no body text).
-4. **Disclose the weather level bias.** State in `docs/methodology.md` that the Open-Meteo archive runs high on rain days (20-49% vs NOAA stations in this check) and low on 40 C+ days (10-22%). The ranking is robust to this, but a reader comparing "Phoenix: 25 rain days" to NOAA's 16.5 will see a mismatch.
-5. **Put public references into `assumptions.yaml`.** Fare (Obi), vehicle cost (Morgan Stanley) and AAA/Sacra for cost per mile give those inputs a `source_url` instead of "analyst assumption". Note the fare is a premium assumption.
-6. **Two minor items.** Michigan's Tier 2 versus 3 is a judgment call worth a note. Several competitor sources are four to twelve months old (Nuro-Lucid Oct 2025, Zoox Atlanta May 2025, Tesla Phoenix Jul 2026); they re-confirmed today but will age.
+1. **Source ages.** Several competitor sources are four to twelve months old (Nuro-Lucid Oct 2025, Zoox Atlanta May 2025, Tesla Phoenix Jul 2026). They re-confirmed on 2026-11-06 but will age.
+2. **San Francisco clears the 50% wave 1 gate narrowly (54%).** Its wave 1 membership is sensitive to the weights.
+3. **The new weather source is a single airport station per metro**, so it measures the airport, not the metro average.
+4. **GA and TN regulation rest on AFDC summaries**, and the Massachusetts State House News page could not be re-opened (HTTP 429).
 
 Not validated: the Monte Carlo and demand-index methods were not checked against an external source, because there is no published ground truth for them. The NYC 2025 annual total is the only item where a source was looked for and not found.

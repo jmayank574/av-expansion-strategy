@@ -116,7 +116,8 @@
        "weight": 100,
        "direction": -1,
        "label": "Competitor crowding",
-       "unit": "weighted count"
+       "unit": "weighted count",
+       "normalization": "minmax0"
       }
      }
     },
@@ -142,7 +143,7 @@
   "vintages": {
    "acs": "2024 5-year (2020-2024)",
    "faa": "CY2025 enplanements",
-   "weather": "Open-Meteo daily archive 2016-2025",
+   "weather": "2016-2025 daily, NOAA GHCN-Daily airport stations (Open-Meteo archive as fallback)",
    "nhtsa": "NHTSA SGO ADS reports, 24 months ending Sep 2026",
    "eia": "August 2026 YTD (commercial, Table 5.6.B)",
    "regulation_and_competitors": "seed CSVs researched 2026-11-06",
@@ -150,7 +151,7 @@
    "demand": "Chicago TNP and NYC HVFHV calendar 2025"
   },
   "data_as_of": "2026-11-06",
-  "generated_at": "2026-11-06T10:09:50+00:00",
+  "generated_at": "2026-11-06T10:46:09+00:00",
   "assumptions": {
    "capture_share": {
     "label": "Robotaxi share of ride-hail trips in the principal city",
@@ -169,8 +170,8 @@
     "low": 15.0,
     "high": 25.0,
     "higher_is_better": true,
-    "source_url": "analyst assumption",
-    "rationale": "Priced near typical urban ride-hail fares; robotaxi premiums and discounts both appear in the market."
+    "source_url": "https://techcrunch.com/2026/01/27/the-price-gap-between-waymo-and-uber-is-narrowing",
+    "rationale": "PREMIUM ASSUMPTION. Obi pricing data (via TechCrunch, 2026-01-27; San Francisco Bay Area rides 27 Nov to 1 Jan) averages $19.69 for Waymo, $17.47 for Uber and $15.47 for Lyft. The $20 base assumes a robotaxi premium over mainstream ride-hail; the $15 low case equals Lyft. One city, not a national average."
    },
    "trips_per_vehicle_per_day": {
     "label": "Paid trips per vehicle per day",
@@ -209,8 +210,8 @@
     "low": 1.5,
     "high": 0.8,
     "higher_is_better": false,
-    "source_url": "analyst assumption",
-    "rationale": "Maintenance, cleaning, insurance, remote assistance, depot and platform fees per mile. Excludes vehicle depreciation and charging."
+    "source_url": "https://www.softwareseni.com/the-hidden-human-economy-inside-robotaxi-per-mile-costs (Sacra estimate: Waymo about $1.40 per mile all-in, Tesla about $0.81); https://newsroom.aaa.com/wp-content/uploads/2025/09/AAA-Brochure-Your-Driving-Cost-9.2025.pdf (AAA 2025: private-car maintenance 11.04 cents per mile, insurance $1,694 a year)",
+    "rationale": "Maintenance, cleaning, insurance, remote assistance, depot and platform fees per mile. Excludes vehicle depreciation and charging. Reference check: if Waymo's all-in $1.40 includes about $0.35 of depreciation (Goldman Sachs, as cited), its operating cost is about $1.05 per mile, so $1.10 is neutral to slightly conservative. The robotaxi figures are secondary-source company estimates; AAA covers private cars only."
    },
    "kwh_per_mile": {
     "label": "Energy use",
@@ -229,8 +230,8 @@
     "low": 200000,
     "high": 100000,
     "higher_is_better": false,
-    "source_url": "analyst assumption",
-    "rationale": "Vehicle plus sensor and compute suite; falls with scale. Payback is measured against this number."
+    "source_url": "https://thenextweb.com/news/waymo-ojai-robotaxi-geely-sixth-generation-fleet-cost",
+    "rationale": "Vehicle plus sensor and compute suite; falls with scale. Payback is measured against this number. Morgan Stanley estimates (via TheNextWeb): about $200,000 for the current Jaguar I-PACE Waymo vehicle and about $125,000 for the Zeekr-built Ojai, with next-generation driver hardware under $20,000. The $140,000 base is between the two; the $200,000 low case equals the Jaguar estimate."
    }
   },
   "monte_carlo": {
@@ -270,9 +271,9 @@
     "city_median_hh_income": 80483.0,
     "enplanements": 70535830.0,
     "enplanements_per_resident": 3.562678898950968,
-    "rain_days": 99.8,
-    "snow_days": 10.1,
-    "heat_days": 0.2,
+    "rain_days": 76.6,
+    "snow_days": 6.8,
+    "heat_days": 0.0,
     "reg_tier": 1.0,
     "new_entrant_score": 0.0,
     "crowding": 0.4,
@@ -286,41 +287,41 @@
     "taxi_ridehail_share": 100.0,
     "no_vehicle_share": 100.0,
     "enplanements_per_resident": 16.666666666666664,
-    "rain_days": 37.5,
+    "rain_days": 27.083333333333343,
     "snow_days": 25.0,
-    "heat_days": 27.083333333333343,
+    "heat_days": 72.91666666666667,
     "reg_tier": 8.333333333333332,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 72.91666666666667,
+    "crowding": 86.66666666666667,
     "elec_cents_kwh": 25.0
    },
    "pillar_scores": {
     "demand": 91.66666666666666,
-    "operating": 30.41666666666667,
+    "operating": 35.41666666666667,
     "regulatory": 13.333333333333336,
-    "competition": 72.91666666666667,
+    "competition": 86.66666666666669,
     "charging": 25.0
    },
-   "total": 54.54166666666667,
+   "total": 57.85416666666667,
    "totals": {
-    "balanced": 54.54166666666667,
-    "fast_growth": 62.45833333333333,
-    "low_risk": 41.52083333333333,
-    "capital_light": 50.27083333333334
+    "balanced": 57.85416666666667,
+    "fast_growth": 64.83333333333333,
+    "low_risk": 44.64583333333333,
+    "capital_light": 54.27083333333334
    },
    "ranks": {
-    "balanced": 6,
-    "fast_growth": 3,
-    "low_risk": 22,
-    "capital_light": 13
+    "balanced": 4,
+    "fast_growth": 2,
+    "low_risk": 19,
+    "capital_light": 8
    },
    "opportunity": 91.66666666666666,
-   "ease_of_entry": 34.55128205128205,
+   "ease_of_entry": 39.647435897435905,
    "vegas_similarity": 0.0,
    "why": [
     "Demand score 92/100: 19.8M-person metro, 28,234 people per sq mi in New York",
     "Light competition: 0 operator(s) in service, crowding score 0.4",
-    "Snow on ~10 days a year: needs winter validation before launch"
+    "NY is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -339,18 +340,18 @@
     "tier": 1,
     "new_entrant_path": "slow",
     "new_entrant_rationale": "Driverless operation is not allowed; testing needs a specialist behind the wheel under State Police supervision and a governor's proposal was withdrawn in 2026-02. A law change is needed first.",
-    "new_entrant_source_url": "https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm",
-    "new_entrant_source_title": "Insurance Journal 2026-02-20 (opened)",
+    "new_entrant_source_url": "https://cleantechnica.com/2026/02/20/new-york-pulls-back-on-robotaxi-legislation/",
+    "new_entrant_source_title": "Cleantechnica 2026-02-20: New York pulls back on robotaxi legislation (one hand on the wheel rule; testing exemptions only)",
     "new_entrant_as_of_date": "2026-11-06",
     "new_entrant_confidence": "high",
     "driverless_commercial_allowed": "N",
     "permit_body": "NY DMV (testing under State Police supervision); NYC TLC for fares",
     "key_law_or_rule": "NY VTL (one hand on wheel) and 2017 testing law",
-    "notes": "Driverless operation not allowed; Governor withdrew upstate robotaxi proposal 2026-02; Waymo NYC testing requires specialist behind wheel",
-    "source_url": "https://amp.insurancejournal.com/news/east/2026/02/20/858883.htm",
-    "source_title": "Insurance Journal: NY Governor Hochul pulls robotaxi expansion proposal",
+    "notes": "Driverless commercial service has no pathway: state law requires one hand on the steering wheel and only testing exemptions exist; the Governor withdrew her robotaxi proposal 2026-02-19; Waymo NYC testing needs a specialist behind the wheel",
+    "source_url": "https://cleantechnica.com/2026/02/20/new-york-pulls-back-on-robotaxi-legislation/",
+    "source_title": "Cleantechnica 2026-02-20: New York pulls back on robotaxi legislation (one hand on the wheel rule; testing exemptions only)",
     "as_of_date": "2026-02-20",
-    "confidence": "medium"
+    "confidence": "high"
    },
    "nhtsa_incidents": [],
    "demand_estimate": {
@@ -397,10 +398,10 @@
      "payback_years": 0.6765820613484863
     }
    },
-   "confidence": 0.473,
-   "median_rank": 6.0,
-   "rank_p10": 3.0,
-   "rank_p90": 16.0
+   "confidence": 0.5799,
+   "median_rank": 4.0,
+   "rank_p10": 1.0,
+   "rank_p90": 12.0
   },
   {
    "metro": "Los Angeles",
@@ -417,9 +418,9 @@
     "city_median_hh_income": 81939.0,
     "enplanements": 47104752.0,
     "enplanements_per_resident": 3.630567590071191,
-    "rain_days": 26.8,
+    "rain_days": 19.5,
     "snow_days": 0.0,
-    "heat_days": 2.0,
+    "heat_days": 0.1,
     "reg_tier": 3.0,
     "new_entrant_score": 0.0,
     "crowding": 1.4,
@@ -434,40 +435,40 @@
     "no_vehicle_share": 50.0,
     "enplanements_per_resident": 20.833333333333336,
     "rain_days": 95.83333333333333,
-    "snow_days": 87.5,
-    "heat_days": 20.833333333333343,
+    "snow_days": 85.41666666666667,
+    "heat_days": 37.5,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 25.0,
+    "crowding": 53.333333333333336,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 63.33333333333333,
-    "operating": 77.5,
+    "operating": 80.0,
     "regulatory": 52.08333333333332,
-    "competition": 25.0,
+    "competition": 53.33333333333334,
     "charging": 6.25
    },
-   "total": 56.02083333333332,
+   "total": 60.89583333333332,
    "totals": {
-    "balanced": 56.02083333333332,
-    "fast_growth": 57.79166666666666,
-    "low_risk": 58.22916666666666,
-    "capital_light": 51.25
+    "balanced": 60.89583333333332,
+    "fast_growth": 61.125,
+    "low_risk": 61.9375,
+    "capital_light": 57.54166666666667
    },
    "ranks": {
-    "balanced": 3,
-    "fast_growth": 5,
+    "balanced": 2,
+    "fast_growth": 4,
     "low_risk": 4,
-    "capital_light": 11
+    "capital_light": 5
    },
    "opportunity": 63.33333333333333,
-   "ease_of_entry": 52.08333333333333,
-   "vegas_similarity": 30.17405128104336,
+   "ease_of_entry": 59.58333333333333,
+   "vegas_similarity": 31.509481952776326,
    "why": [
     "Demand score 63/100: 13.0M-person metro, 8,198 people per sq mi in Los Angeles",
-    "Operating conditions score 78/100: ~27 rain, 0 snow and 2 extreme-heat days a year",
-    "Crowded field: Waymo already present (crowding 1.4)"
+    "Operating conditions score 80/100: ~20 rain, 0 snow and 0 extreme-heat days a year",
+    "CA is regulation Tier 3 (driverless commercial service allowed and operating) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
@@ -572,10 +573,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.6319,
-   "median_rank": 5.0,
-   "rank_p10": 3.0,
-   "rank_p90": 9.0
+   "confidence": 0.9117,
+   "median_rank": 2.0,
+   "rank_p10": 1.0,
+   "rank_p90": 5.0
   },
   {
    "metro": "Chicago",
@@ -592,12 +593,12 @@
     "city_median_hh_income": 77902.0,
     "enplanements": 50048447.0,
     "enplanements_per_resident": 5.340440661381547,
-    "rain_days": 97.9,
-    "snow_days": 18.2,
+    "rain_days": 74.7,
+    "snow_days": 17.4,
     "heat_days": 0.0,
     "reg_tier": 1.0,
     "new_entrant_score": 0.0,
-    "crowding": 0.3,
+    "crowding": 0.4,
     "n_competitors": 1.0,
     "elec_cents_kwh": 14.05,
     "log_metro_pop": 16.053193863847653
@@ -608,51 +609,51 @@
     "taxi_ridehail_share": 79.16666666666666,
     "no_vehicle_share": 79.16666666666666,
     "enplanements_per_resident": 62.5,
-    "rain_days": 45.833333333333336,
-    "snow_days": 8.333333333333343,
-    "heat_days": 68.75,
+    "rain_days": 41.666666666666664,
+    "snow_days": 16.666666666666657,
+    "heat_days": 72.91666666666667,
     "reg_tier": 8.333333333333332,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 91.66666666666667,
+    "crowding": 86.66666666666667,
     "elec_cents_kwh": 33.33333333333334
    },
    "pillar_scores": {
     "demand": 82.29166666666666,
-    "operating": 35.41666666666667,
+    "operating": 37.916666666666664,
     "regulatory": 13.333333333333336,
-    "competition": 91.66666666666669,
+    "competition": 86.66666666666669,
     "charging": 33.33333333333334
    },
-   "total": 55.73958333333334,
+   "total": 55.61458333333333,
    "totals": {
-    "balanced": 55.73958333333334,
+    "balanced": 55.61458333333333,
     "fast_growth": 61.0625,
-    "low_risk": 43.6875,
-    "capital_light": 53.76041666666667
+    "low_risk": 44.0625,
+    "capital_light": 53.38541666666667
    },
    "ranks": {
-    "balanced": 4,
-    "fast_growth": 4,
+    "balanced": 8,
+    "fast_growth": 5,
     "low_risk": 20,
-    "capital_light": 4
+    "capital_light": 11
    },
    "opportunity": 82.29166666666666,
-   "ease_of_entry": 41.4423076923077,
-   "vegas_similarity": 15.528811110877598,
+   "ease_of_entry": 41.25000000000001,
+   "vegas_similarity": 17.346075084524344,
    "why": [
     "Demand score 82/100: 9.4M-person metro, 11,904 people per sq mi in Chicago",
-    "Light competition: 0 operator(s) in service, crowding score 0.3",
+    "Light competition: 0 operator(s) in service, crowding score 0.4",
     "IL is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
     {
      "competitor": "Waymo",
-     "status": "announced",
+     "status": "testing",
      "platform_partner": "",
      "first_public_date": "",
-     "source_url": "https://waymo.com/",
-     "source_title": "Waymo - Up Next list (opened 2026-11-06)",
-     "as_of_date": "2026-11-06",
+     "source_url": "https://abc7chicago.com/story/waymo-begins-testing-chicago-illinois-bill-seeks-legalize-autonomous-vehicles/18853045/",
+     "source_title": "ABC7 Chicago 2026-04-07: Waymo mapping and testing downtown with safety drivers; NPR Illinois 2026-10-22 confirms testing since March 2026 (waymo.com still lists Chicago under Up Next)",
+     "as_of_date": "2026-04-07",
      "confidence": "high",
      "is_operator": false
     }
@@ -719,10 +720,10 @@
      "payback_years": 0.6638440845994603
     }
    },
-   "confidence": 0.6176,
-   "median_rank": 4.0,
-   "rank_p10": 1.0,
-   "rank_p90": 12.0
+   "confidence": 0.3535,
+   "median_rank": 8.0,
+   "rank_p10": 3.0,
+   "rank_p90": 16.0
   },
   {
    "metro": "Dallas-Fort Worth",
@@ -739,9 +740,9 @@
     "city_median_hh_income": 70518.0,
     "enplanements": 49448363.0,
     "enplanements_per_resident": 6.192199073581288,
-    "rain_days": 86.4,
+    "rain_days": 53.0,
     "snow_days": 0.8,
-    "heat_days": 3.9,
+    "heat_days": 5.9,
     "reg_tier": 3.0,
     "new_entrant_score": 2.0,
     "crowding": 3.0,
@@ -755,8 +756,8 @@
     "taxi_ridehail_share": 12.5,
     "no_vehicle_share": 37.5,
     "enplanements_per_resident": 70.83333333333334,
-    "rain_days": 62.5,
-    "snow_days": 50.0,
+    "rain_days": 66.66666666666667,
+    "snow_days": 47.916666666666664,
     "heat_days": 8.333333333333343,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
@@ -765,27 +766,27 @@
    },
    "pillar_scores": {
     "demand": 50.83333333333334,
-    "operating": 46.66666666666667,
+    "operating": 47.50000000000001,
     "regulatory": 75.41666666666666,
     "competition": 0.0,
     "charging": 93.75
    },
-   "total": 49.22916666666667,
+   "total": 49.4375,
    "totals": {
-    "balanced": 49.22916666666667,
-    "fast_growth": 50.75,
-    "low_risk": 53.8125,
-    "capital_light": 48.83333333333333
+    "balanced": 49.4375,
+    "fast_growth": 50.91666666666667,
+    "low_risk": 54.10416666666666,
+    "capital_light": 49.04166666666667
    },
    "ranks": {
-    "balanced": 14,
-    "fast_growth": 13,
-    "low_risk": 10,
-    "capital_light": 17
+    "balanced": 18,
+    "fast_growth": 14,
+    "low_risk": 11,
+    "capital_light": 19
    },
    "opportunity": 50.83333333333334,
-   "ease_of_entry": 48.36538461538461,
-   "vegas_similarity": 31.621093767714598,
+   "ease_of_entry": 48.68589743589743,
+   "vegas_similarity": 38.4239543200125,
    "why": [
     "Demand score 51/100: 8.0M-person metro, 3,850 people per sq mi in Dallas",
     "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
@@ -935,9 +936,9 @@
      "payback_years": 0.6562611000412624
     }
    },
-   "confidence": 0.0249,
-   "median_rank": 13.0,
-   "rank_p10": 7.0,
+   "confidence": 0.0026,
+   "median_rank": 17.0,
+   "rank_p10": 10.0,
    "rank_p90": 22.0
   },
   {
@@ -955,9 +956,9 @@
     "city_median_hh_income": 64813.0,
     "enplanements": 30055302.0,
     "enplanements_per_resident": 4.038177897852257,
-    "rain_days": 119.1,
-    "snow_days": 0.4,
-    "heat_days": 0.2,
+    "rain_days": 64.4,
+    "snow_days": 0.3,
+    "heat_days": 1.0,
     "reg_tier": 3.0,
     "new_entrant_score": 2.0,
     "crowding": 2.1,
@@ -971,41 +972,41 @@
     "taxi_ridehail_share": 54.166666666666664,
     "no_vehicle_share": 41.66666666666667,
     "enplanements_per_resident": 37.5,
-    "rain_days": 8.333333333333343,
-    "snow_days": 66.66666666666667,
-    "heat_days": 27.083333333333343,
+    "rain_days": 58.33333333333333,
+    "snow_days": 64.58333333333333,
+    "heat_days": 20.833333333333343,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 16.666666666666657,
+    "crowding": 30.0,
     "elec_cents_kwh": 93.75
    },
    "pillar_scores": {
     "demand": 53.125,
-    "operating": 35.41666666666668,
+    "operating": 53.33333333333333,
     "regulatory": 75.41666666666666,
-    "competition": 16.666666666666657,
+    "competition": 30.0,
     "charging": 93.75
    },
-   "total": 49.71875,
+   "total": 56.19791666666666,
    "totals": {
-    "balanced": 49.71875,
-    "fast_growth": 51.3125,
-    "low_risk": 52.00000000000001,
-    "capital_light": 49.92708333333333
+    "balanced": 56.19791666666666,
+    "fast_growth": 56.22916666666666,
+    "low_risk": 59.60416666666666,
+    "capital_light": 57.07291666666666
    },
    "ranks": {
-    "balanced": 12,
-    "fast_growth": 12,
-    "low_risk": 11,
-    "capital_light": 14
+    "balanced": 6,
+    "fast_growth": 9,
+    "low_risk": 6,
+    "capital_light": 6
    },
    "opportunity": 53.125,
-   "ease_of_entry": 47.88461538461539,
-   "vegas_similarity": 16.017682206370708,
+   "ease_of_entry": 57.852564102564095,
+   "vegas_similarity": 25.81950466908988,
    "why": [
     "Demand score 53/100: 7.4M-person metro, 3,633 people per sq mi in Houston",
     "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Rain on ~119 days a year: needs wet-weather validation before launch"
+    "Rain on ~64 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -1125,10 +1126,10 @@
      "payback_years": 0.6562611000412624
     }
    },
-   "confidence": 0.0348,
-   "median_rank": 13.0,
-   "rank_p10": 7.0,
-   "rank_p90": 20.0
+   "confidence": 0.2727,
+   "median_rank": 7.0,
+   "rank_p10": 4.0,
+   "rank_p90": 13.0
   },
   {
    "metro": "Washington DC",
@@ -1145,9 +1146,9 @@
     "city_median_hh_income": 109870.0,
     "enplanements": 25863163.0,
     "enplanements_per_resident": 4.093323807680359,
-    "rain_days": 103.4,
-    "snow_days": 6.5,
-    "heat_days": 0.0,
+    "rain_days": 73.2,
+    "snow_days": 3.7,
+    "heat_days": 0.1,
     "reg_tier": 1.0,
     "new_entrant_score": 0.0,
     "crowding": 0.7,
@@ -1161,40 +1162,40 @@
     "taxi_ridehail_share": 83.33333333333334,
     "no_vehicle_share": 95.83333333333334,
     "enplanements_per_resident": 41.66666666666667,
-    "rain_days": 33.33333333333334,
-    "snow_days": 37.5,
-    "heat_days": 68.75,
+    "rain_days": 50.0,
+    "snow_days": 33.33333333333334,
+    "heat_days": 37.5,
     "reg_tier": 8.333333333333332,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 58.33333333333333,
+    "crowding": 76.66666666666667,
     "elec_cents_kwh": 20.833333333333343
    },
    "pillar_scores": {
     "demand": 77.70833333333334,
-    "operating": 42.08333333333334,
+    "operating": 40.83333333333334,
     "regulatory": 13.333333333333336,
-    "competition": 58.33333333333333,
+    "competition": 76.66666666666667,
     "charging": 20.833333333333343
    },
-   "total": 50.17708333333334,
+   "total": 52.61458333333334,
    "totals": {
-    "balanced": 50.17708333333334,
-    "fast_growth": 56.14583333333334,
-    "low_risk": 41.14583333333334,
-    "capital_light": 46.36458333333333
+    "balanced": 52.61458333333334,
+    "fast_growth": 57.72916666666668,
+    "low_risk": 42.54166666666668,
+    "capital_light": 49.71875000000001
    },
    "ranks": {
-    "balanced": 11,
-    "fast_growth": 8,
-    "low_risk": 23,
-    "capital_light": 22
+    "balanced": 13,
+    "fast_growth": 6,
+    "low_risk": 21,
+    "capital_light": 18
    },
    "opportunity": 77.70833333333334,
-   "ease_of_entry": 35.3525641025641,
-   "vegas_similarity": 17.520954972500803,
+   "ease_of_entry": 39.10256410256411,
+   "vegas_similarity": 20.80269703240009,
    "why": [
     "Demand score 78/100: 6.3M-person metro, 11,146 people per sq mi in Washington",
-    "Operating conditions score 42/100: ~103 rain, 6 snow and 0 extreme-heat days a year",
+    "Light competition: 0 operator(s) in service, crowding score 0.7",
     "DC is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
    ],
    "competitors": [
@@ -1292,10 +1293,10 @@
      "payback_years": 0.677709663250304
     }
    },
-   "confidence": 0.0005,
+   "confidence": 0.0186,
    "median_rank": 13.0,
-   "rank_p10": 9.0,
-   "rank_p90": 20.0
+   "rank_p10": 7.0,
+   "rank_p90": 18.0
   },
   {
    "metro": "Philadelphia",
@@ -1312,8 +1313,8 @@
     "city_median_hh_income": 61953.0,
     "enplanements": 14779849.0,
     "enplanements_per_resident": 2.3564757667951635,
-    "rain_days": 98.8,
-    "snow_days": 7.7,
+    "rain_days": 76.2,
+    "snow_days": 6.2,
     "heat_days": 0.0,
     "reg_tier": 2.0,
     "new_entrant_score": 0.0,
@@ -1328,41 +1329,41 @@
     "taxi_ridehail_share": 66.66666666666666,
     "no_vehicle_share": 83.33333333333334,
     "enplanements_per_resident": 8.333333333333332,
-    "rain_days": 41.666666666666664,
+    "rain_days": 33.33333333333334,
     "snow_days": 29.166666666666657,
-    "heat_days": 68.75,
+    "heat_days": 72.91666666666667,
     "reg_tier": 31.25,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 72.91666666666667,
+    "crowding": 86.66666666666667,
     "elec_cents_kwh": 39.583333333333336
    },
    "pillar_scores": {
     "demand": 68.95833333333331,
-    "operating": 42.08333333333333,
+    "operating": 39.583333333333336,
     "regulatory": 27.083333333333336,
-    "competition": 72.91666666666667,
+    "competition": 86.66666666666669,
     "charging": 39.583333333333336
    },
-   "total": 52.98958333333333,
+   "total": 54.42708333333333,
    "totals": {
-    "balanced": 52.98958333333333,
-    "fast_growth": 56.22916666666666,
-    "low_risk": 45.91666666666667,
-    "capital_light": 51.71874999999999
+    "balanced": 54.42708333333333,
+    "fast_growth": 57.10416666666666,
+    "low_risk": 46.41666666666667,
+    "capital_light": 53.84375
    },
    "ranks": {
-    "balanced": 9,
+    "balanced": 11,
     "fast_growth": 7,
     "low_risk": 17,
-    "capital_light": 8
+    "capital_light": 9
    },
    "opportunity": 68.95833333333331,
-   "ease_of_entry": 44.391025641025635,
-   "vegas_similarity": 13.029978388411436,
+   "ease_of_entry": 46.6025641025641,
+   "vegas_similarity": 13.612634235714864,
    "why": [
     "Demand score 69/100: 6.3M-person metro, 11,760 people per sq mi in Philadelphia",
     "Light competition: 0 operator(s) in service, crowding score 0.4",
-    "PA is regulation Tier 2 (driverless deployment allowed with a permit or filing process) and a new operator's path is slow: launch depends on policy change or permits"
+    "Snow on ~6 days a year: needs winter validation before launch"
    ],
    "competitors": [
     {
@@ -1388,10 +1389,10 @@
     "driverless_commercial_allowed": "Y",
     "permit_body": "PennDOT",
     "key_law_or_rule": "Act 130 of 2022 (75 Pa.C.S. Ch.85) and PennDOT guidelines (Oct 2024)",
-    "notes": "PennDOT is sole regulator; driverless certification guidelines adopted Oct 2024; driverless certificates reported for several AV developers (from search results; article body not read because page was truncated)",
-    "source_url": "https://www.pa.gov/agencies/penndot/news-and-media/newsroom/statewide/2024/penndot-adopts-new-automated-vehicle-guidelines-for-driverless-operation",
-    "source_title": "PennDOT adopts AV guidelines for driverless operation",
-    "as_of_date": "2026-11-05",
+    "notes": "PennDOT is the sole regulator and adopted driverless-operation guidelines in Oct 2024 (headline only: that page's body text could not be read); driverless testing needs PennDOT certification and 10 days' notice to the city, and a commercial launch needs PA PUC approval as a TNC; Waymo has tested with safety drivers since July 2025 and is not yet certified",
+    "source_url": "https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/",
+    "source_title": "PhillyVoice 2026-10-09: Waymo in Philadelphia (PennDOT certification and PA PUC approval needed; not yet certified)",
+    "as_of_date": "2026-10-09",
     "confidence": "medium"
    },
    "nhtsa_incidents": [
@@ -1444,10 +1445,10 @@
      "payback_years": 0.6636330341592661
     }
    },
-   "confidence": 0.1087,
-   "median_rank": 8.0,
+   "confidence": 0.1082,
+   "median_rank": 10.0,
    "rank_p10": 5.0,
-   "rank_p90": 13.0
+   "rank_p90": 14.0
   },
   {
    "metro": "Miami",
@@ -1464,7 +1465,7 @@
     "city_median_hh_income": 62462.0,
     "enplanements": 46354909.0,
     "enplanements_per_resident": 7.417626895595037,
-    "rain_days": 131.9,
+    "rain_days": 92.0,
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
@@ -1480,27 +1481,27 @@
     "taxi_ridehail_share": 91.66666666666666,
     "no_vehicle_share": 62.5,
     "enplanements_per_resident": 83.33333333333334,
-    "rain_days": 0.0,
-    "snow_days": 87.5,
-    "heat_days": 68.75,
+    "rain_days": 4.166666666666657,
+    "snow_days": 85.41666666666667,
+    "heat_days": 72.91666666666667,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 16.666666666666657,
+    "crowding": 30.0,
     "elec_cents_kwh": 75.0
    },
    "pillar_scores": {
     "demand": 77.91666666666666,
-    "operating": 48.75,
+    "operating": 50.41666666666666,
     "regulatory": 75.41666666666666,
-    "competition": 16.666666666666657,
+    "competition": 30.0,
     "charging": 75.0
    },
-   "total": 60.79166666666666,
+   "total": 63.20833333333332,
    "totals": {
-    "balanced": 60.79166666666666,
-    "fast_growth": 65.4375,
-    "low_risk": 60.68749999999999,
-    "capital_light": 57.58333333333333
+    "balanced": 63.20833333333332,
+    "fast_growth": 67.10416666666666,
+    "low_risk": 62.60416666666666,
+    "capital_light": 60.66666666666666
    },
    "ranks": {
     "balanced": 1,
@@ -1509,12 +1510,12 @@
     "capital_light": 1
    },
    "opportunity": 77.91666666666666,
-   "ease_of_entry": 51.57051282051282,
-   "vegas_similarity": 16.85005227096549,
+   "ease_of_entry": 55.28846153846153,
+   "vegas_similarity": 20.542125719770212,
    "why": [
     "Demand score 78/100: 6.2M-person metro, 12,772 people per sq mi in Miami",
     "FL is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Rain on ~132 days a year: needs wet-weather validation before launch"
+    "Rain on ~92 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -1622,10 +1623,10 @@
      "payback_years": 0.6606644748572159
     }
    },
-   "confidence": 0.9505,
+   "confidence": 0.9666,
    "median_rank": 1.0,
    "rank_p10": 1.0,
-   "rank_p90": 4.0
+   "rank_p90": 3.0
   },
   {
    "metro": "Atlanta",
@@ -1642,8 +1643,8 @@
     "city_median_hh_income": 85652.0,
     "enplanements": 51459786.0,
     "enplanements_per_resident": 8.225173451024451,
-    "rain_days": 108.5,
-    "snow_days": 0.7,
+    "rain_days": 77.0,
+    "snow_days": 0.5,
     "heat_days": 0.0,
     "reg_tier": 3.0,
     "new_entrant_score": 2.0,
@@ -1658,41 +1659,41 @@
     "taxi_ridehail_share": 70.83333333333334,
     "no_vehicle_share": 54.166666666666664,
     "enplanements_per_resident": 87.5,
-    "rain_days": 29.166666666666657,
+    "rain_days": 20.833333333333343,
     "snow_days": 54.16666666666667,
-    "heat_days": 68.75,
+    "heat_days": 72.91666666666667,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 16.666666666666657,
+    "crowding": 30.0,
     "elec_cents_kwh": 62.5
    },
    "pillar_scores": {
     "demand": 60.62500000000001,
-    "operating": 47.08333333333333,
+    "operating": 44.58333333333334,
     "regulatory": 75.41666666666666,
-    "competition": 16.666666666666657,
+    "competition": 30.0,
     "charging": 62.5
    },
-   "total": 53.69791666666667,
+   "total": 55.07291666666667,
    "totals": {
-    "balanced": 53.69791666666667,
-    "fast_growth": 55.83333333333334,
-    "low_risk": 56.02083333333333,
-    "capital_light": 51.59374999999999
+    "balanced": 55.07291666666667,
+    "fast_growth": 56.66666666666667,
+    "low_risk": 56.47916666666666,
+    "capital_light": 53.63541666666667
    },
    "ranks": {
-    "balanced": 8,
-    "fast_growth": 9,
-    "low_risk": 5,
+    "balanced": 10,
+    "fast_growth": 8,
+    "low_risk": 10,
     "capital_light": 10
    },
    "opportunity": 60.62500000000001,
-   "ease_of_entry": 49.96794871794871,
-   "vegas_similarity": 26.677978473263693,
+   "ease_of_entry": 52.08333333333333,
+   "vegas_similarity": 30.555106491370623,
    "why": [
     "Demand score 61/100: 6.3M-person metro, 3,735 people per sq mi in Atlanta",
     "GA is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Rain on ~108 days a year: needs wet-weather validation before launch"
+    "Rain on ~77 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -1800,10 +1801,10 @@
      "payback_years": 0.660985250568561
     }
    },
-   "confidence": 0.3619,
-   "median_rank": 7.0,
-   "rank_p10": 4.0,
-   "rank_p90": 12.0
+   "confidence": 0.0882,
+   "median_rank": 9.0,
+   "rank_p10": 6.0,
+   "rank_p90": 15.0
   },
   {
    "metro": "Boston",
@@ -1820,8 +1821,8 @@
     "city_median_hh_income": 97344.0,
     "enplanements": 21021153.0,
     "enplanements_per_resident": 4.243822064806998,
-    "rain_days": 94.8,
-    "snow_days": 14.3,
+    "rain_days": 78.8,
+    "snow_days": 11.2,
     "heat_days": 0.0,
     "reg_tier": 1.0,
     "new_entrant_score": 0.0,
@@ -1836,41 +1837,41 @@
     "taxi_ridehail_share": 87.5,
     "no_vehicle_share": 91.66666666666666,
     "enplanements_per_resident": 45.83333333333333,
-    "rain_days": 50.0,
+    "rain_days": 16.666666666666657,
     "snow_days": 20.833333333333343,
-    "heat_days": 68.75,
+    "heat_days": 72.91666666666667,
     "reg_tier": 8.333333333333332,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 72.91666666666667,
+    "crowding": 86.66666666666667,
     "elec_cents_kwh": 16.666666666666657
    },
    "pillar_scores": {
     "demand": 76.24999999999999,
-    "operating": 42.08333333333334,
+    "operating": 29.583333333333336,
     "regulatory": 13.333333333333336,
-    "competition": 72.91666666666667,
+    "competition": 86.66666666666669,
     "charging": 16.666666666666657
    },
-   "total": 51.64583333333333,
+   "total": 50.58333333333333,
    "totals": {
-    "balanced": 51.64583333333333,
-    "fast_growth": 56.66666666666666,
-    "low_risk": 42.10416666666667,
-    "capital_light": 48.50000000000001
+    "balanced": 50.58333333333333,
+    "fast_growth": 55.54166666666666,
+    "low_risk": 39.10416666666667,
+    "capital_light": 48.12500000000001
    },
    "ranks": {
-    "balanced": 10,
-    "fast_growth": 6,
-    "low_risk": 21,
-    "capital_light": 18
+    "balanced": 17,
+    "fast_growth": 10,
+    "low_risk": 24,
+    "capital_light": 21
    },
    "opportunity": 76.24999999999999,
-   "ease_of_entry": 38.3974358974359,
-   "vegas_similarity": 15.095399878428836,
+   "ease_of_entry": 36.762820512820525,
+   "vegas_similarity": 15.578464809989583,
    "why": [
     "Demand score 76/100: 5.0M-person metro, 13,786 people per sq mi in Boston",
     "Light competition: 0 operator(s) in service, crowding score 0.4",
-    "MA is regulation Tier 1 (testing only, driverless commercial service not yet allowed) and a new operator's path is slow: launch depends on policy change or permits"
+    "Rain on ~79 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -1947,10 +1948,10 @@
      "payback_years": 0.6791207796781935
     }
    },
-   "confidence": 0.0618,
-   "median_rank": 10.0,
-   "rank_p10": 6.0,
-   "rank_p90": 18.0
+   "confidence": 0.0043,
+   "median_rank": 16.0,
+   "rank_p10": 9.0,
+   "rank_p90": 21.0
   },
   {
    "metro": "Phoenix",
@@ -1967,9 +1968,9 @@
     "city_median_hh_income": 81332.0,
     "enplanements": 25094817.0,
     "enplanements_per_resident": 4.990265381842103,
-    "rain_days": 24.6,
+    "rain_days": 16.5,
     "snow_days": 0.0,
-    "heat_days": 69.6,
+    "heat_days": 89.3,
     "reg_tier": 3.0,
     "new_entrant_score": 2.0,
     "crowding": 1.3,
@@ -1984,38 +1985,38 @@
     "no_vehicle_share": 8.333333333333332,
     "enplanements_per_resident": 58.333333333333336,
     "rain_days": 100.0,
-    "snow_days": 87.5,
+    "snow_days": 85.41666666666667,
     "heat_days": 0.0,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 33.33333333333334,
+    "crowding": 56.666666666666664,
     "elec_cents_kwh": 58.33333333333333
    },
    "pillar_scores": {
     "demand": 37.708333333333336,
-    "operating": 75.0,
+    "operating": 74.16666666666667,
     "regulatory": 75.41666666666666,
-    "competition": 33.33333333333334,
+    "competition": 56.66666666666666,
     "charging": 58.33333333333333
    },
-   "total": 54.94791666666667,
+   "total": 58.23958333333333,
    "totals": {
-    "balanced": 54.94791666666667,
-    "fast_growth": 51.41666666666667,
-    "low_risk": 62.66666666666666,
-    "capital_light": 55.76041666666666
+    "balanced": 58.23958333333333,
+    "fast_growth": 53.58333333333333,
+    "low_risk": 64.70833333333333,
+    "capital_light": 60.21874999999999
    },
    "ranks": {
-    "balanced": 5,
+    "balanced": 3,
     "fast_growth": 11,
     "low_risk": 1,
     "capital_light": 2
    },
    "opportunity": 37.708333333333336,
-   "ease_of_entry": 64.23076923076923,
-   "vegas_similarity": 61.87167854301529,
+   "ease_of_entry": 69.2948717948718,
+   "vegas_similarity": 56.29146913534077,
    "why": [
-    "Operating conditions score 75/100: ~25 rain, 0 snow and 70 extreme-heat days a year",
+    "Operating conditions score 74/100: ~16 rain, 0 snow and 89 extreme-heat days a year",
     "AZ is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
     "Demand is the biggest gap to a perfect score (38/100): 5.0M metro, 3,168 people per sq mi in Phoenix"
    ],
@@ -2114,10 +2115,10 @@
      "payback_years": 0.6613622110529167
     }
    },
-   "confidence": 0.5062,
-   "median_rank": 5.0,
+   "confidence": 0.6465,
+   "median_rank": 4.0,
    "rank_p10": 2.0,
-   "rank_p90": 11.0
+   "rank_p90": 10.0
   },
   {
    "metro": "San Francisco",
@@ -2134,9 +2135,9 @@
     "city_median_hh_income": 140970.0,
     "enplanements": 30784344.0,
     "enplanements_per_resident": 6.6273739087527765,
-    "rain_days": 47.0,
+    "rain_days": 38.1,
     "snow_days": 0.0,
-    "heat_days": 0.0,
+    "heat_days": 0.2,
     "reg_tier": 3.0,
     "new_entrant_score": 0.0,
     "crowding": 2.5,
@@ -2150,40 +2151,40 @@
     "taxi_ridehail_share": 75.0,
     "no_vehicle_share": 87.5,
     "enplanements_per_resident": 79.16666666666666,
-    "rain_days": 83.33333333333334,
-    "snow_days": 87.5,
-    "heat_days": 68.75,
+    "rain_days": 79.16666666666666,
+    "snow_days": 85.41666666666667,
+    "heat_days": 27.083333333333343,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 6.25,
+    "crowding": 16.666666666666657,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 76.25,
-    "operating": 82.08333333333334,
+    "operating": 71.25,
     "regulatory": 52.08333333333332,
-    "competition": 6.25,
+    "competition": 16.666666666666657,
     "charging": 6.25
    },
-   "total": 58.875,
+   "total": 57.72916666666666,
    "totals": {
-    "balanced": 58.875,
-    "fast_growth": 63.29166666666667,
-    "low_risk": 60.54166666666666,
-    "capital_light": 51.875
+    "balanced": 57.72916666666666,
+    "fast_growth": 62.16666666666667,
+    "low_risk": 57.79166666666667,
+    "capital_light": 51.24999999999999
    },
    "ranks": {
-    "balanced": 2,
-    "fast_growth": 2,
-    "low_risk": 3,
-    "capital_light": 7
+    "balanced": 5,
+    "fast_growth": 3,
+    "low_risk": 7,
+    "capital_light": 15
    },
    "opportunity": 76.25,
-   "ease_of_entry": 49.51923076923077,
-   "vegas_similarity": 28.40871201307334,
+   "ease_of_entry": 47.756410256410255,
+   "vegas_similarity": 30.940494080570346,
    "why": [
     "Demand score 76/100: 4.6M-person metro, 17,784 people per sq mi in San Francisco",
-    "Operating conditions score 82/100: ~47 rain, 0 snow and 0 extreme-heat days a year",
+    "Operating conditions score 71/100: ~38 rain, 0 snow and 0 extreme-heat days a year",
     "Crowded field: Zoox, Waymo already present (crowding 2.5)"
    ],
    "competitors": [
@@ -2307,10 +2308,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.8536,
-   "median_rank": 2.0,
-   "rank_p10": 1.0,
-   "rank_p90": 7.0
+   "confidence": 0.5417,
+   "median_rank": 5.0,
+   "rank_p10": 3.0,
+   "rank_p90": 13.0
   },
   {
    "metro": "Detroit",
@@ -2327,8 +2328,8 @@
     "city_median_hh_income": 39938.0,
     "enplanements": 16294768.0,
     "enplanements_per_resident": 3.7229628397551835,
-    "rain_days": 93.0,
-    "snow_days": 17.2,
+    "rain_days": 73.1,
+    "snow_days": 22.1,
     "heat_days": 0.0,
     "reg_tier": 2.0,
     "new_entrant_score": 1.0,
@@ -2344,40 +2345,40 @@
     "no_vehicle_share": 70.83333333333334,
     "enplanements_per_resident": 29.166666666666668,
     "rain_days": 54.16666666666667,
-    "snow_days": 12.5,
-    "heat_days": 68.75,
+    "snow_days": 4.166666666666657,
+    "heat_days": 72.91666666666667,
     "reg_tier": 31.25,
     "new_entrant_score": 50.0,
-    "crowding": 91.66666666666667,
+    "crowding": 90.0,
     "elec_cents_kwh": 29.166666666666657
    },
    "pillar_scores": {
     "demand": 59.16666666666667,
-    "operating": 40.41666666666667,
+    "operating": 37.916666666666664,
     "regulatory": 38.75,
-    "competition": 91.66666666666669,
+    "competition": 90.0,
     "charging": 29.166666666666657
    },
-   "total": 53.77083333333333,
+   "total": 52.89583333333333,
    "totals": {
-    "balanced": 53.77083333333333,
-    "fast_growth": 54.10416666666667,
-    "low_risk": 48.22916666666667,
-    "capital_light": 53.89583333333334
+    "balanced": 52.89583333333333,
+    "fast_growth": 53.4375,
+    "low_risk": 47.1875,
+    "capital_light": 52.93750000000001
    },
    "ranks": {
-    "balanced": 7,
-    "fast_growth": 10,
+    "balanced": 12,
+    "fast_growth": 12,
     "low_risk": 15,
-    "capital_light": 3
+    "capital_light": 13
    },
    "opportunity": 59.16666666666667,
-   "ease_of_entry": 50.86538461538462,
-   "vegas_similarity": 15.146616507475201,
+   "ease_of_entry": 49.51923076923077,
+   "vegas_similarity": 12.115102806185575,
    "why": [
     "Demand score 59/100: 4.4M-person metro, 4,603 people per sq mi in Detroit",
     "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "Snow on ~17 days a year: needs winter validation before launch"
+    "Snow on ~22 days a year: needs winter validation before launch"
    ],
    "competitors": [
     {
@@ -2463,10 +2464,10 @@
      "payback_years": 0.6663162953480295
     }
    },
-   "confidence": 0.269,
-   "median_rank": 7.0,
-   "rank_p10": 3.0,
-   "rank_p90": 12.0
+   "confidence": 0.0144,
+   "median_rank": 13.0,
+   "rank_p10": 8.0,
+   "rank_p90": 16.0
   },
   {
    "metro": "Seattle",
@@ -2483,9 +2484,9 @@
     "city_median_hh_income": 123860.0,
     "enplanements": 25417071.0,
     "enplanements_per_resident": 6.257403149249616,
-    "rain_days": 114.5,
-    "snow_days": 6.8,
-    "heat_days": 0.0,
+    "rain_days": 93.8,
+    "snow_days": 3.4,
+    "heat_days": 0.2,
     "reg_tier": 2.0,
     "new_entrant_score": 1.0,
     "crowding": 0.7,
@@ -2499,41 +2500,41 @@
     "taxi_ridehail_share": 4.166666666666666,
     "no_vehicle_share": 66.66666666666666,
     "enplanements_per_resident": 75.0,
-    "rain_days": 25.0,
-    "snow_days": 33.33333333333334,
-    "heat_days": 68.75,
+    "rain_days": 0.0,
+    "snow_days": 37.5,
+    "heat_days": 27.083333333333343,
     "reg_tier": 31.25,
     "new_entrant_score": 50.0,
-    "crowding": 58.33333333333333,
+    "crowding": 76.66666666666667,
     "elec_cents_kwh": 66.66666666666667
    },
    "pillar_scores": {
     "demand": 49.79166666666666,
-    "operating": 37.08333333333334,
+    "operating": 20.41666666666667,
     "regulatory": 38.75,
-    "competition": 58.33333333333333,
+    "competition": 76.66666666666667,
     "charging": 66.66666666666667
    },
-   "total": 46.53124999999999,
+   "total": 45.11458333333333,
    "totals": {
-    "balanced": 46.53124999999999,
-    "fast_growth": 47.29166666666666,
-    "low_risk": 43.72916666666666,
-    "capital_light": 47.80208333333333
+    "balanced": 45.11458333333333,
+    "fast_growth": 45.79166666666666,
+    "low_risk": 39.729166666666664,
+    "capital_light": 47.30208333333333
    },
    "ranks": {
-    "balanced": 20,
-    "fast_growth": 16,
-    "low_risk": 19,
-    "capital_light": 20
+    "balanced": 21,
+    "fast_growth": 18,
+    "low_risk": 23,
+    "capital_light": 22
    },
    "opportunity": 49.79166666666666,
-   "ease_of_entry": 44.77564102564103,
-   "vegas_similarity": 20.438882782874103,
+   "ease_of_entry": 42.596153846153854,
+   "vegas_similarity": 19.422082258463618,
    "why": [
     "Demand score 50/100: 4.1M-person metro, 8,976 people per sq mi in Seattle",
-    "Operating conditions score 37/100: ~114 rain, 7 snow and 0 extreme-heat days a year",
-    "WA is regulation Tier 2 (driverless deployment allowed with a permit or filing process) and a new operator's path is moderate: launch depends on policy change or permits"
+    "Light competition: 0 operator(s) in service, crowding score 0.7",
+    "Rain on ~94 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -2622,9 +2623,9 @@
     }
    },
    "confidence": 0.0,
-   "median_rank": 19.0,
-   "rank_p10": 16.0,
-   "rank_p90": 21.0
+   "median_rank": 21.0,
+   "rank_p10": 18.0,
+   "rank_p90": 23.0
   },
   {
    "metro": "Minneapolis",
@@ -2641,8 +2642,8 @@
     "city_median_hh_income": 80846.0,
     "enplanements": 17488261.0,
     "enplanements_per_resident": 4.709161131258906,
-    "rain_days": 79.5,
-    "snow_days": 22.3,
+    "rain_days": 63.6,
+    "snow_days": 23.8,
     "heat_days": 0.0,
     "reg_tier": 1.0,
     "new_entrant_score": 0.0,
@@ -2657,37 +2658,37 @@
     "taxi_ridehail_share": 58.333333333333336,
     "no_vehicle_share": 58.333333333333336,
     "enplanements_per_resident": 54.166666666666664,
-    "rain_days": 70.83333333333333,
-    "snow_days": 4.166666666666657,
-    "heat_days": 68.75,
+    "rain_days": 62.5,
+    "snow_days": 0.0,
+    "heat_days": 72.91666666666667,
     "reg_tier": 8.333333333333332,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 72.91666666666667,
+    "crowding": 86.66666666666667,
     "elec_cents_kwh": 54.16666666666667
    },
    "pillar_scores": {
     "demand": 53.95833333333334,
-    "operating": 43.74999999999999,
+    "operating": 39.583333333333336,
     "regulatory": 13.333333333333336,
-    "competition": 72.91666666666667,
+    "competition": 86.66666666666669,
     "charging": 54.16666666666667
    },
-   "total": 46.13541666666667,
+   "total": 47.15625,
    "totals": {
-    "balanced": 46.13541666666667,
-    "fast_growth": 47.72916666666667,
-    "low_risk": 40.10416666666667,
-    "capital_light": 47.09375000000001
+    "balanced": 47.15625,
+    "fast_growth": 48.27083333333334,
+    "low_risk": 40.02083333333334,
+    "capital_light": 48.80208333333335
    },
    "ranks": {
-    "balanced": 21,
-    "fast_growth": 14,
-    "low_risk": 24,
-    "capital_light": 21
+    "balanced": 20,
+    "fast_growth": 17,
+    "low_risk": 22,
+    "capital_light": 20
    },
    "opportunity": 53.95833333333334,
-   "ease_of_entry": 41.92307692307692,
-   "vegas_similarity": 15.617609876004423,
+   "ease_of_entry": 43.493589743589745,
+   "vegas_similarity": 15.457315707681289,
    "why": [
     "Demand score 54/100: 3.7M-person metro, 7,912 people per sq mi in Minneapolis",
     "Light competition: 0 operator(s) in service, crowding score 0.4",
@@ -2774,9 +2775,9 @@
     }
    },
    "confidence": 0.0,
-   "median_rank": 20.0,
-   "rank_p10": 13.0,
-   "rank_p90": 23.0
+   "median_rank": 19.0,
+   "rank_p10": 16.0,
+   "rank_p90": 22.0
   },
   {
    "metro": "San Diego",
@@ -2793,7 +2794,7 @@
     "city_median_hh_income": 108077.0,
     "enplanements": 12675684.0,
     "enplanements_per_resident": 3.8542277456584126,
-    "rain_days": 27.8,
+    "rain_days": 20.5,
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
@@ -2810,38 +2811,38 @@
     "no_vehicle_share": 4.166666666666666,
     "enplanements_per_resident": 33.33333333333333,
     "rain_days": 91.66666666666667,
-    "snow_days": 87.5,
-    "heat_days": 68.75,
+    "snow_days": 85.41666666666667,
+    "heat_days": 72.91666666666667,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 45.833333333333336,
+    "crowding": 66.66666666666667,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 26.04166666666666,
     "operating": 85.41666666666669,
     "regulatory": 52.08333333333332,
-    "competition": 45.83333333333334,
+    "competition": 66.66666666666667,
     "charging": 6.25
    },
-   "total": 48.07291666666667,
+   "total": 51.19791666666667,
    "totals": {
-    "balanced": 48.07291666666667,
-    "fast_growth": 42.8125,
-    "low_risk": 55.62499999999999,
-    "capital_light": 48.07291666666667
+    "balanced": 51.19791666666667,
+    "fast_growth": 44.89583333333334,
+    "low_risk": 57.70833333333333,
+    "capital_light": 52.23958333333334
    },
    "ranks": {
-    "balanced": 17,
+    "balanced": 15,
     "fast_growth": 19,
     "low_risk": 8,
-    "capital_light": 19
+    "capital_light": 14
    },
    "opportunity": 26.04166666666666,
-   "ease_of_entry": 59.93589743589744,
-   "vegas_similarity": 29.682338422091973,
+   "ease_of_entry": 64.74358974358975,
+   "vegas_similarity": 32.746268169122814,
    "why": [
-    "Operating conditions score 85/100: ~28 rain, 0 snow and 0 extreme-heat days a year",
+    "Operating conditions score 85/100: ~20 rain, 0 snow and 0 extreme-heat days a year",
     "CA is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is slow",
     "Demand is the biggest gap to a perfect score (26/100): 3.3M metro, 4,262 people per sq mi in San Diego"
    ],
@@ -2929,10 +2930,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.0417,
-   "median_rank": 16.0,
+   "confidence": 0.0303,
+   "median_rank": 15.0,
    "rank_p10": 8.0,
-   "rank_p90": 22.0
+   "rank_p90": 19.0
   },
   {
    "metro": "Tampa",
@@ -2949,7 +2950,7 @@
     "city_median_hh_income": 75475.0,
     "enplanements": 12110427.0,
     "enplanements_per_resident": 3.6646170549682253,
-    "rain_days": 117.0,
+    "rain_days": 73.6,
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
@@ -2965,40 +2966,40 @@
     "taxi_ridehail_share": 45.83333333333333,
     "no_vehicle_share": 33.33333333333333,
     "enplanements_per_resident": 25.0,
-    "rain_days": 16.666666666666657,
-    "snow_days": 87.5,
-    "heat_days": 68.75,
+    "rain_days": 45.833333333333336,
+    "snow_days": 85.41666666666667,
+    "heat_days": 72.91666666666667,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 33.33333333333334,
+    "crowding": 56.666666666666664,
     "elec_cents_kwh": 75.0
    },
    "pillar_scores": {
     "demand": 34.166666666666664,
-    "operating": 55.41666666666666,
+    "operating": 67.08333333333334,
     "regulatory": 75.41666666666666,
-    "competition": 33.33333333333334,
+    "competition": 56.66666666666666,
     "charging": 75.0
    },
-   "total": 49.64583333333333,
+   "total": 56.0625,
    "totals": {
-    "balanced": 49.64583333333333,
-    "fast_growth": 46.56249999999999,
-    "low_risk": 55.93749999999999,
-    "capital_light": 51.64583333333333
+    "balanced": 56.0625,
+    "fast_growth": 51.22916666666666,
+    "low_risk": 62.35416666666666,
+    "capital_light": 59.22916666666666
    },
    "ranks": {
-    "balanced": 13,
-    "fast_growth": 17,
-    "low_risk": 6,
-    "capital_light": 9
+    "balanced": 7,
+    "fast_growth": 13,
+    "low_risk": 3,
+    "capital_light": 3
    },
    "opportunity": 34.166666666666664,
-   "ease_of_entry": 57.980769230769226,
-   "vegas_similarity": 15.424769341770457,
+   "ease_of_entry": 67.85256410256409,
+   "vegas_similarity": 21.199489038306368,
    "why": [
+    "Operating conditions score 67/100: ~74 rain, 0 snow and 0 extreme-heat days a year",
     "FL is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Operating conditions score 55/100: ~117 rain, 0 snow and 0 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (34/100): 3.3M metro, 3,508 people per sq mi in Tampa"
    ],
    "competitors": [
@@ -3092,10 +3093,10 @@
      "payback_years": 0.6606644748572159
     }
    },
-   "confidence": 0.0113,
-   "median_rank": 14.0,
-   "rank_p10": 7.0,
-   "rank_p90": 17.0
+   "confidence": 0.327,
+   "median_rank": 7.0,
+   "rank_p10": 4.0,
+   "rank_p90": 13.0
   },
   {
    "metro": "Denver",
@@ -3112,9 +3113,9 @@
     "city_median_hh_income": 94718.0,
     "enplanements": 39976695.0,
     "enplanements_per_resident": 13.31348966487396,
-    "rain_days": 46.7,
-    "snow_days": 24.6,
-    "heat_days": 0.0,
+    "rain_days": 34.3,
+    "snow_days": 20.9,
+    "heat_days": 0.1,
     "reg_tier": 2.0,
     "new_entrant_score": 2.0,
     "crowding": 0.7,
@@ -3129,39 +3130,39 @@
     "no_vehicle_share": 45.83333333333333,
     "enplanements_per_resident": 100.0,
     "rain_days": 87.5,
-    "snow_days": 0.0,
-    "heat_days": 68.75,
+    "snow_days": 12.5,
+    "heat_days": 37.5,
     "reg_tier": 31.25,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 58.33333333333333,
+    "crowding": 76.66666666666667,
     "elec_cents_kwh": 50.0
    },
    "pillar_scores": {
     "demand": 43.95833333333334,
-    "operating": 48.75,
+    "operating": 47.5,
     "regulatory": 50.41666666666666,
-    "competition": 58.33333333333333,
+    "competition": 76.66666666666667,
     "charging": 50.0
    },
-   "total": 48.90625,
+   "total": 51.34375,
    "totals": {
-    "balanced": 48.90625,
-    "fast_growth": 47.625,
-    "low_risk": 49.3125,
-    "capital_light": 49.92708333333333
+    "balanced": 51.34375,
+    "fast_growth": 49.20833333333334,
+    "low_risk": 50.70833333333334,
+    "capital_light": 53.28125
    },
    "ranks": {
-    "balanced": 15,
-    "fast_growth": 15,
+    "balanced": 14,
+    "fast_growth": 16,
     "low_risk": 14,
-    "capital_light": 14
+    "capital_light": 12
    },
    "opportunity": 43.95833333333334,
-   "ease_of_entry": 51.57051282051282,
-   "vegas_similarity": 25.328598335544967,
+   "ease_of_entry": 55.32051282051282,
+   "vegas_similarity": 33.35461231758106,
    "why": [
     "Demand score 44/100: 3.0M-person metro, 4,696 people per sq mi in Denver",
-    "Operating conditions score 49/100: ~47 rain, 25 snow and 0 extreme-heat days a year",
+    "Operating conditions score 48/100: ~34 rain, 21 snow and 0 extreme-heat days a year",
     "CO is regulation Tier 2 (driverless deployment allowed with a permit or filing process) and a new operator's path is fast: launch depends on policy change or permits"
    ],
    "competitors": [
@@ -3246,7 +3247,7 @@
    },
    "confidence": 0.0,
    "median_rank": 15.0,
-   "rank_p10": 13.0,
+   "rank_p10": 12.0,
    "rank_p90": 16.0
   },
   {
@@ -3264,7 +3265,7 @@
     "city_median_hh_income": 72336.0,
     "enplanements": 27999709.0,
     "enplanements_per_resident": 10.022281553154796,
-    "rain_days": 128.8,
+    "rain_days": 75.3,
     "snow_days": 0.0,
     "heat_days": 0.0,
     "reg_tier": 3.0,
@@ -3280,40 +3281,40 @@
     "taxi_ridehail_share": 62.5,
     "no_vehicle_share": 20.833333333333336,
     "enplanements_per_resident": 95.83333333333334,
-    "rain_days": 4.166666666666657,
-    "snow_days": 87.5,
-    "heat_days": 68.75,
+    "rain_days": 37.5,
+    "snow_days": 85.41666666666667,
+    "heat_days": 72.91666666666667,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 33.33333333333334,
+    "crowding": 56.666666666666664,
     "elec_cents_kwh": 75.0
    },
    "pillar_scores": {
     "demand": 33.75,
-    "operating": 50.41666666666666,
+    "operating": 63.75,
     "regulatory": 75.41666666666666,
-    "competition": 33.33333333333334,
+    "competition": 56.66666666666666,
     "charging": 75.0
    },
-   "total": 48.25,
+   "total": 55.08333333333333,
    "totals": {
-    "balanced": 48.25,
-    "fast_growth": 45.35416666666666,
-    "low_risk": 54.10416666666665,
-    "capital_light": 50.29166666666666
+    "balanced": 55.08333333333333,
+    "fast_growth": 50.35416666666666,
+    "low_risk": 61.10416666666666,
+    "capital_light": 58.29166666666666
    },
    "ranks": {
-    "balanced": 16,
-    "fast_growth": 18,
-    "low_risk": 9,
-    "capital_light": 12
+    "balanced": 9,
+    "fast_growth": 15,
+    "low_risk": 5,
+    "capital_light": 4
    },
    "opportunity": 33.75,
-   "ease_of_entry": 56.0576923076923,
-   "vegas_similarity": 22.41739857088558,
+   "ease_of_entry": 66.57051282051282,
+   "vegas_similarity": 32.927267447836456,
    "why": [
+    "Operating conditions score 64/100: ~75 rain, 0 snow and 0 extreme-heat days a year",
     "FL is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Operating conditions score 50/100: ~129 rain, 0 snow and 0 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (34/100): 2.8M metro, 2,467 people per sq mi in Orlando"
    ],
    "competitors": [
@@ -3411,10 +3412,10 @@
      "payback_years": 0.6606644748572159
     }
    },
-   "confidence": 0.0005,
-   "median_rank": 16.0,
-   "rank_p10": 10.0,
-   "rank_p90": 20.0
+   "confidence": 0.1224,
+   "median_rank": 9.0,
+   "rank_p10": 5.0,
+   "rank_p90": 14.0
   },
   {
    "metro": "Charlotte",
@@ -3431,9 +3432,9 @@
     "city_median_hh_income": 82068.0,
     "enplanements": 25873555.0,
     "enplanements_per_resident": 9.346008372323867,
-    "rain_days": 89.5,
-    "snow_days": 2.5,
-    "heat_days": 0.1,
+    "rain_days": 76.6,
+    "snow_days": 0.8,
+    "heat_days": 0.0,
     "reg_tier": 2.0,
     "new_entrant_score": 1.0,
     "crowding": 0.3,
@@ -3447,40 +3448,40 @@
     "taxi_ridehail_share": 25.0,
     "no_vehicle_share": 0.0,
     "enplanements_per_resident": 91.66666666666666,
-    "rain_days": 58.33333333333333,
-    "snow_days": 45.833333333333336,
-    "heat_days": 33.33333333333334,
+    "rain_days": 27.083333333333343,
+    "snow_days": 47.916666666666664,
+    "heat_days": 72.91666666666667,
     "reg_tier": 31.25,
     "new_entrant_score": 50.0,
-    "crowding": 91.66666666666667,
+    "crowding": 90.0,
     "elec_cents_kwh": 83.33333333333334
    },
    "pillar_scores": {
     "demand": 22.5,
-    "operating": 48.33333333333333,
+    "operating": 44.58333333333334,
     "regulatory": 38.75,
-    "competition": 91.66666666666669,
+    "competition": 90.0,
     "charging": 83.33333333333334
    },
-   "total": 45.625,
+   "total": 44.4375,
    "totals": {
-    "balanced": 45.625,
-    "fast_growth": 40.0625,
-    "low_risk": 46.375,
-    "capital_light": 52.125
+    "balanced": 44.4375,
+    "fast_growth": 39.14583333333334,
+    "low_risk": 44.89583333333334,
+    "capital_light": 50.85416666666668
    },
    "ranks": {
     "balanced": 22,
     "fast_growth": 22,
-    "low_risk": 16,
-    "capital_light": 6
+    "low_risk": 18,
+    "capital_light": 17
    },
    "opportunity": 22.5,
-   "ease_of_entry": 58.07692307692308,
-   "vegas_similarity": 32.381981406803376,
+   "ease_of_entry": 56.25,
+   "vegas_similarity": 31.940976646808508,
    "why": [
     "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "Operating conditions score 48/100: ~90 rain, 2 snow and 0 extreme-heat days a year",
+    "Operating conditions score 45/100: ~77 rain, 1 snow and 0 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (22/100): 2.8M metro, 2,896 people per sq mi in Charlotte"
    ],
    "competitors": [
@@ -3558,9 +3559,9 @@
      "payback_years": 0.6590375111382488
     }
    },
-   "confidence": 0.0104,
-   "median_rank": 20.0,
-   "rank_p10": 13.0,
+   "confidence": 0.0001,
+   "median_rank": 22.0,
+   "rank_p10": 19.0,
    "rank_p90": 23.0
   },
   {
@@ -3578,9 +3579,9 @@
     "city_median_hh_income": 65056.0,
     "enplanements": 5237816.0,
     "enplanements_per_resident": 1.967082692857301,
-    "rain_days": 76.6,
-    "snow_days": 0.6,
-    "heat_days": 3.0,
+    "rain_days": 41.9,
+    "snow_days": 0.4,
+    "heat_days": 5.2,
     "reg_tier": 3.0,
     "new_entrant_score": 2.0,
     "crowding": 1.0,
@@ -3595,39 +3596,39 @@
     "no_vehicle_share": 25.0,
     "enplanements_per_resident": 4.166666666666666,
     "rain_days": 75.0,
-    "snow_days": 60.41666666666667,
-    "heat_days": 12.5,
+    "snow_days": 58.33333333333333,
+    "heat_days": 14.583333333333343,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 45.833333333333336,
+    "crowding": 66.66666666666667,
     "elec_cents_kwh": 93.75
    },
    "pillar_scores": {
     "demand": 19.791666666666668,
-    "operating": 56.66666666666667,
+    "operating": 56.25,
     "regulatory": 75.41666666666666,
-    "competition": 45.83333333333334,
+    "competition": 66.66666666666667,
     "charging": 93.75
    },
-   "total": 47.73958333333333,
+   "total": 50.76041666666667,
    "totals": {
-    "balanced": 47.73958333333333,
-    "fast_growth": 41.8125,
-    "low_risk": 55.68749999999999,
-    "capital_light": 52.73958333333333
+    "balanced": 50.76041666666667,
+    "fast_growth": 43.8125,
+    "low_risk": 57.625,
+    "capital_light": 56.80208333333334
    },
    "ranks": {
-    "balanced": 18,
+    "balanced": 16,
     "fast_growth": 20,
-    "low_risk": 7,
-    "capital_light": 5
+    "low_risk": 9,
+    "capital_light": 7
    },
    "opportunity": 19.791666666666668,
-   "ease_of_entry": 62.78846153846154,
-   "vegas_similarity": 20.5925022278594,
+   "ease_of_entry": 67.43589743589743,
+   "vegas_similarity": 26.035162689948322,
    "why": [
     "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Operating conditions score 57/100: ~77 rain, 1 snow and 3 extreme-heat days a year",
+    "Operating conditions score 56/100: ~42 rain, 0 snow and 5 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (20/100): 2.7M metro, 2,966 people per sq mi in San Antonio"
    ],
    "competitors": [
@@ -3710,10 +3711,10 @@
      "payback_years": 0.6562611000412624
     }
    },
-   "confidence": 0.0217,
-   "median_rank": 18.0,
+   "confidence": 0.0065,
+   "median_rank": 16.0,
    "rank_p10": 9.0,
-   "rank_p90": 22.0
+   "rank_p90": 19.0
   },
   {
    "metro": "Austin",
@@ -3730,9 +3731,9 @@
     "city_median_hh_income": 93658.0,
     "enplanements": 10651727.0,
     "enplanements_per_resident": 4.389583003652859,
-    "rain_days": 84.5,
-    "snow_days": 0.6,
-    "heat_days": 2.8,
+    "rain_days": 46.4,
+    "snow_days": 0.3,
+    "heat_days": 5.2,
     "reg_tier": 3.0,
     "new_entrant_score": 2.0,
     "crowding": 2.5,
@@ -3746,40 +3747,40 @@
     "taxi_ridehail_share": 20.833333333333336,
     "no_vehicle_share": 16.666666666666664,
     "enplanements_per_resident": 50.0,
-    "rain_days": 66.66666666666667,
-    "snow_days": 60.41666666666667,
-    "heat_days": 16.666666666666657,
+    "rain_days": 70.83333333333333,
+    "snow_days": 64.58333333333333,
+    "heat_days": 14.583333333333343,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 6.25,
+    "crowding": 16.666666666666657,
     "elec_cents_kwh": 93.75
    },
    "pillar_scores": {
     "demand": 18.333333333333336,
-    "operating": 54.16666666666667,
+    "operating": 57.08333333333333,
     "regulatory": 75.41666666666666,
-    "competition": 6.25,
+    "competition": 16.666666666666657,
     "charging": 93.75
    },
-   "total": 40.666666666666664,
+   "total": 42.95833333333333,
    "totals": {
-    "balanced": 40.666666666666664,
-    "fast_growth": 36.625,
-    "low_risk": 50.5625,
-    "capital_light": 43.83333333333333
+    "balanced": 42.95833333333333,
+    "fast_growth": 38.24999999999999,
+    "low_risk": 52.62499999999999,
+    "capital_light": 46.64583333333332
    },
    "ranks": {
-    "balanced": 24,
+    "balanced": 23,
     "fast_growth": 24,
-    "low_risk": 12,
-    "capital_light": 24
+    "low_risk": 13,
+    "capital_light": 23
    },
    "opportunity": 18.333333333333336,
-   "ease_of_entry": 52.69230769230769,
-   "vegas_similarity": 26.584475883760234,
+   "ease_of_entry": 56.21794871794871,
+   "vegas_similarity": 34.11994195441767,
    "why": [
     "TX is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Operating conditions score 54/100: ~84 rain, 1 snow and 3 extreme-heat days a year",
+    "Operating conditions score 57/100: ~46 rain, 0 snow and 5 extreme-heat days a year",
     "Demand is the biggest gap to a perfect score (18/100): 2.4M metro, 3,014 people per sq mi in Austin"
    ],
    "competitors": [
@@ -3916,8 +3917,8 @@
     }
    },
    "confidence": 0.0,
-   "median_rank": 24.0,
-   "rank_p10": 20.0,
+   "median_rank": 23.0,
+   "rank_p10": 18.0,
    "rank_p90": 25.0
   },
   {
@@ -3935,8 +3936,8 @@
     "city_median_hh_income": 77371.0,
     "enplanements": 12549304.0,
     "enplanements_per_resident": 6.034491314659194,
-    "rain_days": 118.5,
-    "snow_days": 3.5,
+    "rain_days": 86.0,
+    "snow_days": 2.7,
     "heat_days": 0.0,
     "reg_tier": 3.0,
     "new_entrant_score": 2.0,
@@ -3953,38 +3954,38 @@
     "enplanements_per_resident": 66.66666666666666,
     "rain_days": 12.5,
     "snow_days": 41.666666666666664,
-    "heat_days": 68.75,
+    "heat_days": 72.91666666666667,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 79.16666666666666,
-    "crowding": 45.833333333333336,
+    "crowding": 66.66666666666667,
     "elec_cents_kwh": 45.833333333333336
    },
    "pillar_scores": {
     "demand": 11.874999999999998,
-    "operating": 35.416666666666664,
+    "operating": 36.25,
     "regulatory": 75.41666666666666,
-    "competition": 45.83333333333334,
+    "competition": 66.66666666666667,
     "charging": 45.83333333333334
    },
-   "total": 37.26041666666666,
+   "total": 40.59374999999999,
    "totals": {
-    "balanced": 37.26041666666666,
-    "fast_growth": 31.20833333333333,
-    "low_risk": 44.27083333333333,
-    "capital_light": 40.65625
+    "balanced": 40.59374999999999,
+    "fast_growth": 33.458333333333336,
+    "low_risk": 46.64583333333333,
+    "capital_light": 45.03125
    },
    "ranks": {
-    "balanced": 25,
+    "balanced": 24,
     "fast_growth": 25,
-    "low_risk": 18,
-    "capital_light": 25
+    "low_risk": 16,
+    "capital_light": 24
    },
    "opportunity": 11.874999999999998,
-   "ease_of_entry": 50.92948717948717,
-   "vegas_similarity": 19.960421065218995,
+   "ease_of_entry": 56.0576923076923,
+   "vegas_similarity": 22.459027417347016,
    "why": [
     "TN is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is fast",
-    "Operating conditions score 35/100: ~118 rain, 4 snow and 0 extreme-heat days a year",
+    "Light competition: 1 operator(s) in service, crowding score 1.0",
     "Demand is the biggest gap to a perfect score (12/100): 2.1M metro, 1,451 people per sq mi in Nashville"
    ],
    "competitors": [
@@ -4068,8 +4069,8 @@
     }
    },
    "confidence": 0.0,
-   "median_rank": 25.0,
-   "rank_p10": 24.0,
+   "median_rank": 24.0,
+   "rank_p10": 21.0,
    "rank_p90": 25.0
   },
   {
@@ -4087,8 +4088,8 @@
     "city_median_hh_income": 65742.0,
     "enplanements": 4792035.0,
     "enplanements_per_resident": 1.9639970655016108,
-    "rain_days": 115.3,
-    "snow_days": 16.0,
+    "rain_days": 91.2,
+    "snow_days": 21.9,
     "heat_days": 0.0,
     "reg_tier": 2.0,
     "new_entrant_score": 0.0,
@@ -4103,41 +4104,41 @@
     "taxi_ridehail_share": 50.0,
     "no_vehicle_share": 75.0,
     "enplanements_per_resident": 0.0,
-    "rain_days": 20.833333333333343,
-    "snow_days": 16.666666666666657,
-    "heat_days": 68.75,
+    "rain_days": 8.333333333333343,
+    "snow_days": 8.333333333333343,
+    "heat_days": 72.91666666666667,
     "reg_tier": 31.25,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 91.66666666666667,
+    "crowding": 90.0,
     "elec_cents_kwh": 39.583333333333336
    },
    "pillar_scores": {
     "demand": 39.583333333333336,
-    "operating": 28.75,
+    "operating": 21.25000000000001,
     "regulatory": 27.083333333333336,
-    "competition": 91.66666666666669,
+    "competition": 90.0,
     "charging": 39.583333333333336
    },
-   "total": 42.18750000000001,
+   "total": 40.06250000000001,
    "totals": {
-    "balanced": 42.18750000000001,
-    "fast_growth": 40.75000000000001,
-    "low_risk": 37.25000000000001,
-    "capital_light": 44.79166666666667
+    "balanced": 40.06250000000001,
+    "fast_growth": 39.083333333333336,
+    "low_risk": 34.458333333333336,
+    "capital_light": 42.58333333333333
    },
    "ranks": {
-    "balanced": 23,
-    "fast_growth": 21,
+    "balanced": 25,
+    "fast_growth": 23,
     "low_risk": 25,
-    "capital_light": 23
+    "capital_light": 25
    },
    "opportunity": 39.583333333333336,
-   "ease_of_entry": 43.58974358974359,
-   "vegas_similarity": 6.434009151568958,
+   "ease_of_entry": 40.320512820512825,
+   "vegas_similarity": 1.4777566053224689,
    "why": [
     "Demand score 40/100: 2.4M-person metro, 5,504 people per sq mi in Pittsburgh",
     "Light competition: 0 operator(s) in service, crowding score 0.3",
-    "Snow on ~16 days a year: needs winter validation before launch"
+    "Rain on ~91 days a year: needs wet-weather validation before launch"
    ],
    "competitors": [
     {
@@ -4163,10 +4164,10 @@
     "driverless_commercial_allowed": "Y",
     "permit_body": "PennDOT",
     "key_law_or_rule": "Act 130 of 2022 (75 Pa.C.S. Ch.85) and PennDOT guidelines (Oct 2024)",
-    "notes": "PennDOT is sole regulator; driverless certification guidelines adopted Oct 2024; driverless certificates reported for several AV developers (from search results; article body not read because page was truncated)",
-    "source_url": "https://www.pa.gov/agencies/penndot/news-and-media/newsroom/statewide/2024/penndot-adopts-new-automated-vehicle-guidelines-for-driverless-operation",
-    "source_title": "PennDOT adopts AV guidelines for driverless operation",
-    "as_of_date": "2026-11-05",
+    "notes": "PennDOT is the sole regulator and adopted driverless-operation guidelines in Oct 2024 (headline only: that page's body text could not be read); driverless testing needs PennDOT certification and 10 days' notice to the city, and a commercial launch needs PA PUC approval as a TNC; Waymo has tested with safety drivers since July 2025 and is not yet certified",
+    "source_url": "https://www.phillyvoice.com/waymo-philly-testing-autonomous-vehicles-penndot/",
+    "source_title": "PhillyVoice 2026-10-09: Waymo in Philadelphia (PennDOT certification and PA PUC approval needed; not yet certified)",
+    "as_of_date": "2026-10-09",
     "confidence": "medium"
    },
    "nhtsa_incidents": [
@@ -4220,8 +4221,8 @@
     }
    },
    "confidence": 0.0,
-   "median_rank": 23.0,
-   "rank_p10": 20.0,
+   "median_rank": 25.0,
+   "rank_p10": 22.0,
    "rank_p90": 25.0
   },
   {
@@ -4239,9 +4240,9 @@
     "city_median_hh_income": 87321.0,
     "enplanements": 6805910.0,
     "enplanements_per_resident": 2.80495534926813,
-    "rain_days": 47.9,
-    "snow_days": 0.2,
-    "heat_days": 14.3,
+    "rain_days": 35.8,
+    "snow_days": 0.0,
+    "heat_days": 8.0,
     "reg_tier": 3.0,
     "new_entrant_score": 0.0,
     "crowding": 0.3,
@@ -4255,39 +4256,39 @@
     "taxi_ridehail_share": 0.0,
     "no_vehicle_share": 29.166666666666668,
     "enplanements_per_resident": 12.5,
-    "rain_days": 79.16666666666666,
-    "snow_days": 70.83333333333333,
+    "rain_days": 83.33333333333334,
+    "snow_days": 85.41666666666667,
     "heat_days": 4.166666666666657,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 20.833333333333336,
-    "crowding": 91.66666666666667,
+    "crowding": 90.0,
     "elec_cents_kwh": 6.25
    },
    "pillar_scores": {
     "demand": 20.416666666666664,
-    "operating": 60.83333333333332,
+    "operating": 68.33333333333334,
     "regulatory": 52.08333333333332,
-    "competition": 91.66666666666669,
+    "competition": 90.0,
     "charging": 6.25
    },
-   "total": 46.83333333333333,
+   "total": 48.45833333333334,
    "totals": {
-    "balanced": 46.83333333333333,
-    "fast_growth": 39.66666666666667,
-    "low_risk": 50.47916666666665,
-    "capital_light": 49.6875
+    "balanced": 48.45833333333334,
+    "fast_growth": 41.0,
+    "low_risk": 52.9375,
+    "capital_light": 51.22916666666666
    },
    "ranks": {
     "balanced": 19,
-    "fast_growth": 23,
-    "low_risk": 13,
+    "fast_growth": 21,
+    "low_risk": 12,
     "capital_light": 16
    },
    "opportunity": 20.416666666666664,
-   "ease_of_entry": 61.05769230769231,
-   "vegas_similarity": 35.48565447575692,
+   "ease_of_entry": 63.55769230769231,
+   "vegas_similarity": 32.04439927620268,
    "why": [
-    "Operating conditions score 61/100: ~48 rain, 0 snow and 14 extreme-heat days a year",
+    "Operating conditions score 68/100: ~36 rain, 0 snow and 8 extreme-heat days a year",
     "Light competition: 0 operator(s) in service, crowding score 0.3",
     "Demand is the biggest gap to a perfect score (20/100): 2.4M metro, 5,359 people per sq mi in Sacramento"
    ],
@@ -4366,10 +4367,10 @@
      "payback_years": 0.6825256040948806
     }
    },
-   "confidence": 0.02,
-   "median_rank": 19.0,
-   "rank_p10": 10.0,
-   "rank_p90": 22.0
+   "confidence": 0.0048,
+   "median_rank": 18.0,
+   "rank_p10": 12.0,
+   "rank_p90": 21.0
   },
   {
    "metro": "Las Vegas",
@@ -4386,9 +4387,9 @@
     "city_median_hh_income": 73877.0,
     "enplanements": 26531765.0,
     "enplanements_per_resident": 11.389233018594165,
-    "rain_days": 12.9,
-    "snow_days": 0.2,
-    "heat_days": 55.0,
+    "rain_days": 10.4,
+    "snow_days": 0.1,
+    "heat_days": 60.8,
     "reg_tier": 3.0,
     "new_entrant_score": 1.0,
     "crowding": 1.7,
@@ -4403,26 +4404,26 @@
     "no_vehicle_share": 37.66370178813072,
     "enplanements_per_resident": 97.56389272449329,
     "rain_days": 100.0,
-    "snow_days": 70.83333333333333,
-    "heat_days": 1.1000602772754604,
+    "snow_days": 78.47222222222223,
+    "heat_days": 1.4606396063960574,
     "reg_tier": 72.91666666666666,
     "new_entrant_score": 50.0,
-    "crowding": 21.42857142857143,
+    "crowding": 43.333333333333336,
     "elec_cents_kwh": 89.81135986733003
    },
    "pillar_scores": {
     "demand": 35.82975438867068,
-    "operating": 68.55334538878841,
+    "operating": 71.68101681016809,
     "regulatory": 63.74999999999999,
-    "competition": 21.42857142857143,
+    "competition": 43.33333333333334,
     "charging": 89.81135986733003
    },
-   "total": 50.133604090884056,
+   "total": 54.201236231943255,
    "totals": {
-    "balanced": 50.133604090884056,
-    "fast_growth": 47.821471408316675,
-    "low_risk": 56.91804690003373,
-    "capital_light": 52.11262521681206
+    "balanced": 54.201236231943255,
+    "fast_growth": 50.637481883068794,
+    "low_risk": 60.2032080879928,
+    "capital_light": 57.27549545310936
    },
    "ranks": {
     "balanced": null,
@@ -4431,10 +4432,10 @@
     "capital_light": null
    },
    "opportunity": 35.82975438867068,
-   "ease_of_entry": 57.83567700746049,
+   "ease_of_entry": 64.09357260909003,
    "vegas_similarity": 100.0,
    "why": [
-    "Operating conditions score 69/100: ~13 rain, 0 snow and 55 extreme-heat days a year",
+    "Operating conditions score 72/100: ~10 rain, 0 snow and 61 extreme-heat days a year",
     "NV is regulation Tier 3 (driverless commercial service allowed and operating); a new operator's path to paid driverless service is moderate",
     "Demand is the biggest gap to a perfect score (36/100): 2.3M metro, 4,655 people per sq mi in Las Vegas"
    ],

@@ -28,6 +28,38 @@ pct = lambda x: f"{x * 100:.0f}%"
 plt.rcParams.update({"font.family": "DejaVu Sans", "axes.edgecolor": MUTED, "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": MUTED})
 
 
+def place_labels(fig, ax, labelled, bubbles):
+    """Greedy label placement on the rendered figure: for each label try right, left, above, below and the diagonals, and keep the first spot
+    inside the axes that overlaps no earlier label and no bubble (own bubble excepted). labelled: (text, x, y, marker_area, wave)."""
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    px = fig.dpi / 72
+    inside = ax.get_window_extent()
+    pts = [(*ax.transData.transform((x, y)), (s / 3.14159) ** 0.5 * px) for x, y, s in bubbles]       # centre (px) and radius (px)
+    placed = []
+    CANDS = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    for text, x, y, s, wv in sorted(labelled, key=lambda r: (r[4] == 0, r[4])):                      # wave 1 first, benchmark last
+        cx, cy = ax.transData.transform((x, y))
+        r_pt = (s / 3.14159) ** 0.5
+        best = None
+        for sx, sy in CANDS:
+            off = r_pt + 2.5
+            ann = ax.annotate(text, (x, y), xytext=(sx * off, sy * off), textcoords="offset points", fontsize=9.5, color=INK,
+                              ha="left" if sx > 0 else "right" if sx < 0 else "center", va="center" if sy == 0 else "bottom" if sy > 0 else "top",
+                              fontweight="bold" if wv == 1 else "normal")
+            bb = ann.get_window_extent(rend).expanded(1.04, 1.12)
+            clash = (not (inside.x0 <= bb.x0 and bb.x1 <= inside.x1 and inside.y0 <= bb.y0 and bb.y1 <= inside.y1)
+                     or any(bb.overlaps(o) for o in placed)
+                     or any((abs(bx - cx) > 1 or abs(by - cy) > 1) and bb.x0 - br < bx < bb.x1 + br and bb.y0 - br < by < bb.y1 + br for bx, by, br in pts))
+            if not clash:
+                best = ann
+                break
+            ann.remove()
+        if best is None:                                  # no clean spot: fall back to the right-hand side
+            best = ax.annotate(text, (x, y), xytext=(r_pt + 2.5, 0), textcoords="offset points", fontsize=9.5, color=INK, va="center")
+        placed.append(best.get_window_extent(rend).expanded(1.04, 1.12))
+
+
 # ---------------------------------------------------------------- charts
 def chart_quadrant():
     """Every wave 1-3 metro and Las Vegas is labeled; marker style shows the wave."""
@@ -42,15 +74,7 @@ def chart_quadrant():
     for m in cand:
         w = wave.get(m["metro"], 0)
         ax.scatter(m["ease_of_entry"], m["opportunity"], s=60 + 260 * m["raw"]["crowding"], linewidth=1.6 if w == 3 else 1.2, zorder=3, **sty[w])
-    # label offsets (points) and alignment where neighbours would collide
-    NUDGE = {"San Francisco": (-9, 4, "right"), "Atlanta": (-9, 4, "right"), "Detroit": (9, -9, "left"), "Los Angeles": (9, 0, "left")}
-    for m in cand:
-        if m["metro"] in wave:
-            dx, dy, ha = NUDGE.get(m["metro"], (9, 3, "left"))
-            ax.annotate(m["metro"], (m["ease_of_entry"], m["opportunity"]), xytext=(dx, dy), textcoords="offset points", fontsize=9.5, color=INK, ha=ha,
-                        fontweight="bold" if wave[m["metro"]] == 1 else "normal")
     ax.scatter(vegas["ease_of_entry"], vegas["opportunity"], marker="D", s=110, color=INK, zorder=4)
-    ax.annotate("Las Vegas (benchmark)", (vegas["ease_of_entry"], vegas["opportunity"]), xytext=(10, -4), textcoords="offset points", fontsize=9.5, color=INK)
     ax.set_xlim(ax.get_xlim()[0] - 2, ax.get_xlim()[1] + 1); ax.set_ylim(ax.get_ylim()[0] - 4, ax.get_ylim()[1] + 9)
     x0, x1 = ax.get_xlim(); y0, y1 = ax.get_ylim()
     kw = dict(fontsize=10, fontweight="bold", alpha=0.9)
@@ -69,6 +93,9 @@ def chart_quadrant():
     ax.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=4, frameon=False, fontsize=9.5, labelcolor=INK)
     ax.text(0.99, -0.16, "Bubble size = competitor crowding. Dashed lines = medians of the 25 candidates.", transform=ax.transAxes, ha="right", fontsize=8.5, color=MUTED)
     fig.tight_layout()
+    place_labels(fig, ax, [(m["metro"], m["ease_of_entry"], m["opportunity"], 60 + 260 * m["raw"]["crowding"], wave[m["metro"]]) for m in cand if m["metro"] in wave]
+                 + [("Las Vegas (benchmark)", vegas["ease_of_entry"], vegas["opportunity"], 110, 0)],
+                 [(m["ease_of_entry"], m["opportunity"], 60 + 260 * m["raw"]["crowding"]) for m in cand] + [(vegas["ease_of_entry"], vegas["opportunity"], 110)])
     f = CH / "quadrant.png"; fig.savefig(f, dpi=DPI); plt.close(fig)
     return f
 
@@ -226,7 +253,7 @@ left = ["Percentile rank of each metric across 25 metros",
         "Demand: two anchors, Chicago and NYC, calendar 2025",
         "Unit economics: labeled analyst assumptions"]
 v = meta["vintages"]
-right = [f"Census ACS {v['acs']}", f"FAA {v['faa']}", "Open-Meteo weather 2016-2025", "NHTSA SGO ADS reports to Sep 2026 (activity only)",
+right = [f"Census ACS {v['acs']}", f"FAA {v['faa']}", "NOAA GHCN-Daily airport stations, 2016-2025", "NHTSA SGO ADS reports to Sep 2026 (activity only)",
          v["eia"].split(" (")[0].replace("August 2026 YTD", "EIA commercial price, Jan-Aug 2026"), f"Researched seed files: AV rules, new-entrant paths, competitors (as of {meta['data_as_of']})",
          "Chicago TNP and NYC TLC trip counts"]
 text(s, 0.6, 1.75, 5.9, 0.4, "METHOD", size=12, bold=True, color=MUTED)

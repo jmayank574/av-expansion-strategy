@@ -89,9 +89,19 @@ def test_deck_title_labels_and_footers():
     assert "annual revenue pool" in s5 and "assumption-driven" in s5 and "50 years" not in s5
 
 
-def test_memo_explains_detroit_rank(memo):
-    d = plan.build()["by"]["Detroit"]
-    assert f"**Why Detroit is #{d['ranks']['balanced']}:**" in memo and "competition (+" in memo
+def test_memo_explains_the_wave1_metro_that_leans_least_on_demand(memo):
+    p = plan.build()
+    m = min(p["w1"], key=lambda x: x["opportunity"])
+    assert f"**Why {m['metro']} is #{m['ranks']['balanced']}:**" in memo
+
+
+def test_memo_says_which_wave_dallas_and_houston_are_in(memo):
+    p = plan.build()
+    for name in ("Dallas-Fort Worth", "Houston"):
+        m = p["by"][name]
+        wv = next((w for w, ws in (("wave 1", p["w1"]), ("wave 2", p["w2"]), ("wave 3", p["w3"])) if m in ws), None)
+        assert f"{name} ranks #{m['ranks']['balanced']} of 25" in memo
+        assert (f"It is in {wv}." if wv else "It is in no wave.") in memo
 
 
 def test_operator_presence_is_not_competition_and_is_not_named_in_outputs():
@@ -105,3 +115,44 @@ def test_operator_presence_is_not_competition_and_is_not_named_in_outputs():
         assert abs(m["raw"]["crowding"] - expect) < 1e-6, m["metro"]
     assert "Motional" not in json.dumps(d)                 # ground rule 6: the operator is never named in app data
     assert "Motional" not in (ROOT / "reports/memo.md").read_text(encoding="utf-8")
+
+
+def test_crowding_is_min_max_scaled_and_other_metrics_stay_percentile():
+    import score
+    cfg = yaml.safe_load(open(ROOT / "config/weights.yaml"))
+    norm = {s: v.get("normalization", "percentile") for p in cfg["pillars"].values() for s, v in p["submetrics"].items()}
+    assert norm["crowding"] == "minmax0" and all(v == "percentile" for k, v in norm.items() if k != "crowding")
+    f = pd.read_parquet(ROOT / "data/interim/features.parquet").reset_index(drop=True)
+    sub = score.sub_scores(f)
+    cand = ~f.benchmark
+    mx = f.crowding[cand].max()
+    assert sub.crowding[f.crowding == 0].eq(100).all()
+    assert abs(sub.crowding[cand][f.crowding[cand] == mx].iloc[0]) < 1e-9
+    assert (sub.crowding[cand] - (100 - f.crowding[cand] / mx * 100)).abs().max() < 1e-9      # linear in crowding
+
+
+def test_weather_uses_noaa_stations_with_station_ids_in_metros_yaml():
+    metros = yaml.safe_load(open(ROOT / "config/metros.yaml"))["metros"]
+    assert all(m["weather_station"].startswith("USW") for m in metros)
+    w = pd.read_parquet(ROOT / "data/interim/weather.parquet")
+    assert len(w) == 26 and (w.days == 3653).all()
+    src = w[w.weather_source.str.startswith("NOAA")]
+    assert (src.missing_pct <= 5).all()
+    assert (w[~w.weather_source.str.startswith("NOAA")].missing_pct > 5).all()      # fallback only when a station is over 5% missing
+
+
+def test_chicago_waymo_is_testing_and_citations_fixed():
+    comp = pd.read_csv(ROOT / "data/seed/competitor_presence.csv", dtype=str, keep_default_na=False)
+    row = comp[(comp.metro == "Chicago") & (comp.competitor == "Waymo")].iloc[0]
+    assert row.status == "testing" and "abc7chicago.com" in row.source_url
+    reg = pd.read_csv(ROOT / "data/seed/state_av_regulation.csv", dtype=str, keep_default_na=False).set_index("state")
+    assert "cleantechnica.com/2026/02/20" in reg.at["NY", "source_url"] and "cleantechnica.com/2026/02/20" in reg.at["NY", "new_entrant_source_url"]
+    assert "phillyvoice.com" in reg.at["PA", "source_url"]
+
+
+def test_assumption_references_added_and_values_unchanged():
+    a = yaml.safe_load(open(ROOT / "config/assumptions.yaml"))["assumptions"]
+    assert "techcrunch.com" in a["avg_fare_usd"]["source_url"] and "PREMIUM" in a["avg_fare_usd"]["rationale"]
+    assert "thenextweb.com" in a["vehicle_cost_usd"]["source_url"]
+    assert "softwareseni.com" in a["cost_per_mile_usd"]["source_url"] and "newsroom.aaa.com" in a["cost_per_mile_usd"]["source_url"]
+    assert (a["avg_fare_usd"]["value"], a["vehicle_cost_usd"]["value"], a["cost_per_mile_usd"]["value"]) == (20.0, 140000, 1.10)

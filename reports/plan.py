@@ -51,12 +51,12 @@ def one_line_answer(p):
 
 
 # ---- shared wording helpers (memo and deck) -------------------------------------------------
-SOURCES = "Census ACS 2024 5-year, NHTSA SGO ADS reports, Open-Meteo, EIA, FAA, researched seed files (AV rules, competitors)"
+SOURCES = "Census ACS 2024 5-year, NHTSA SGO ADS reports, NOAA GHCN-Daily, EIA, FAA, researched seed files (AV rules, competitors)"
 
 
 def sources_line(meta):
     """Footer text naming real sources instead of a file path."""
-    return f"Sources: Census ACS 2024 5-year, NHTSA SGO, Open-Meteo, EIA, FAA, researched seed files as of {meta['data_as_of']}"
+    return f"Sources: Census ACS 2024 5-year, NHTSA SGO, NOAA GHCN-Daily, EIA, FAA, researched seed files as of {meta['data_as_of']}"
 
 
 def operating(m):

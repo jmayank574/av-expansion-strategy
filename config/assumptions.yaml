@@ -20,8 +20,8 @@ assumptions:
     low: 15.0
     high: 25.0
     higher_is_better: true
-    source_url: analyst assumption
-    rationale: Priced near typical urban ride-hail fares; robotaxi premiums and discounts both appear in the market.
+    source_url: https://techcrunch.com/2026/01/27/the-price-gap-between-waymo-and-uber-is-narrowing
+    rationale: "PREMIUM ASSUMPTION. Obi pricing data (via TechCrunch, 2026-01-27; San Francisco Bay Area rides 27 Nov to 1 Jan) averages $19.69 for Waymo, $17.47 for Uber and $15.47 for Lyft. The $20 base assumes a robotaxi premium over mainstream ride-hail; the $15 low case equals Lyft. One city, not a national average."
   trips_per_vehicle_per_day:
     label: Paid trips per vehicle per day
     unit: trips
@@ -56,8 +56,8 @@ assumptions:
     low: 1.50
     high: 0.80
     higher_is_better: false
-    source_url: analyst assumption
-    rationale: Maintenance, cleaning, insurance, remote assistance, depot and platform fees per mile. Excludes vehicle depreciation and charging.
+    source_url: "https://www.softwareseni.com/the-hidden-human-economy-inside-robotaxi-per-mile-costs (Sacra estimate: Waymo about $1.40 per mile all-in, Tesla about $0.81); https://newsroom.aaa.com/wp-content/uploads/2025/09/AAA-Brochure-Your-Driving-Cost-9.2025.pdf (AAA 2025: private-car maintenance 11.04 cents per mile, insurance $1,694 a year)"
+    rationale: "Maintenance, cleaning, insurance, remote assistance, depot and platform fees per mile. Excludes vehicle depreciation and charging. Reference check: if Waymo's all-in $1.40 includes about $0.35 of depreciation (Goldman Sachs, as cited), its operating cost is about $1.05 per mile, so $1.10 is neutral to slightly conservative. The robotaxi figures are secondary-source company estimates; AAA covers private cars only."
   kwh_per_mile:
     label: Energy use
     unit: kWh per mile
@@ -74,8 +74,8 @@ assumptions:
     low: 200000
     high: 100000
     higher_is_better: false
-    source_url: analyst assumption
-    rationale: Vehicle plus sensor and compute suite; falls with scale. Payback is measured against this number.
+    source_url: https://thenextweb.com/news/waymo-ojai-robotaxi-geely-sixth-generation-fleet-cost
+    rationale: "Vehicle plus sensor and compute suite; falls with scale. Payback is measured against this number. Morgan Stanley estimates (via TheNextWeb): about $200,000 for the current Jaguar I-PACE Waymo vehicle and about $125,000 for the Zeekr-built Ojai, with next-generation driver hardware under $20,000. The $140,000 base is between the two; the $200,000 low case equals the Jaguar estimate."
 
 monte_carlo:
   draws: 10000

@@ -24,3 +24,13 @@
 
 - `data/seed/competitor_presence.csv`: all 26 metros re-researched from opened company, news, SEC and regulator pages (Waymo, Tesla, Zoox, Avride, May Mobility, Motional, Nuro/Lucid, Lyft/Mobileye). Every row has source URL, title, as-of date and confidence, plus an `is_operator` flag: the operator's own presence (Las Vegas) is shown in the app as "operator presence" and is excluded from the crowding score. Cross-checked against NHTSA SGO activity in `data/profiles/07_seed_and_crosscheck.md`.
 - `data/seed/state_av_regulation.csv`: added `new_entrant_path` (fast / moderate / slow) with rationale, source URL, title, as-of date and confidence for each of 17 states. Sources include CPUC, CA DMV, TxDMV, NV DMV and NTA, ADOT statute text, Florida Statutes, and AFDC summaries for Georgia and Tennessee.
+
+## Weather source changed to NOAA GHCN-Daily (2026-11-06)
+
+- `pipeline/ingest_weather.py` now reads NOAA GHCN-Daily station observations from the NCEI Access Data Service
+  (`https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries`), daily PRCP, SNOW and TMAX in metric units, 2016-2025.
+- One airport station per metro, chosen by `pipeline/lookup_weather_stations.py` from NOAA's `ghcnd-stations.txt` and `ghcnd-inventory.txt`
+  (station must have PRCP and TMAX covering 2016-2025) and located within 8 km of the metro's primary commercial airport, using airport
+  coordinates from the OurAirports public dataset. The station ID, name and distance from the city point are in `config/metros.yaml`.
+- Same thresholds as before: rain >= 2.5 mm, snow >= 10 mm, max temperature >= 40 C. GHCN usually omits SNOW on days without snow, so a missing SNOW value counts as no snow.
+- Open-Meteo archive remains only as a documented fallback for any station missing more than 5% of days (none needed on 2026-11-06; worst station 0.6%), and its series is kept as `om_*` columns for comparison.

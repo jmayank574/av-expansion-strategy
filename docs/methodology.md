@@ -34,12 +34,16 @@ Rank ties share the best rank. Totals are rounded to 9 decimals before ranking s
 See `docs/data_sources.md` for URLs, vintages and caveats. Notes on choices:
 
 - **Demand** uses ACS 5-year 2024 at metro (CBSA) level for scale and at principal-city (place) level for density, no-vehicle share and ride-hail share, since a launch geofence serves the city core. Land area comes from the 2025 Census Gazetteer.
-- **Weather** is the 10-year (2016-2025) annual average of days with precipitation >= 2.5 mm, snowfall >= 1 cm, and max temperature >= 40 C, from Open-Meteo reanalysis at a downtown point. It is gridded model data, not station data.
+- **Weather** is the 10-year (2016-2025) annual average of days with precipitation >= 2.5 mm, snowfall >= 1 cm, and max temperature >= 40 C, from NOAA GHCN-Daily station observations at each metro's primary commercial airport (NCEI Access Data Service; the station ID per metro is in `config/metros.yaml`). A missing snowfall value counts as no snow, the GHCN convention. If a station were missing more than 5% of days, that metro would fall back to the Open-Meteo archive at the principal-city point; none needed to on 2026-11-06. Open-Meteo, a gridded reanalysis, ran 17-85% high on rain days (median +36%; 20 of 26 metros more than 25% high) and 10-46% low on 40 C+ days in the hot metros (Sacramento was the exception, high) against these stations, with snow-day differences up to about 50% in marginal-snow metros (see `data/profiles/05_weather.md` and `docs/validation.md`), which is why it is no longer the primary source.
 - **Downtown coordinates** are Open-Meteo geocoding (GeoNames) city-center points. The Census Gazetteer internal point was rejected because it is not a downtown (San Francisco's falls in the Pacific).
 - **Enplanements** are FAA CY2025, summed over the airports mapped to each metro. West Palm Beach appears under the FAA identifier DJT.
 - **Electricity** is EIA Table 5.6.B, commercial sector, year-to-date through August 2026. It is not a 12-month average. This was a deliberate choice, since the 12-month series needs an API key.
 - **Regulation tier** (0-3), the **new-entrant path** (fast / moderate / slow) and **competitor presence** are hand-researched seed CSVs, each row with source URL, title, date and confidence. Rows that could not be verified from a page that was opened were dropped and listed in `data/profiles/07_seed_and_crosscheck.md`.
 - **NHTSA SGO ADS reports** are used only as evidence of where operators are active, never as rates, because the reports carry no mileage. Reports are reduced to the latest version per Report ID, then one row per Same Incident ID, over the last 24 months. Cities are mapped to metros by principal-city name, then by Census Gazetteer city point within 40 km of downtown (for suburbs such as Tempe), plus three explicit aliases (Venice, Fort Worth, Kingwood).
+
+### Normalization: percentile rank, except competitor crowding
+
+Every sub-metric is a 0-100 percentile rank across the 25 candidates, with one exception. **Competitor crowding is min-max scaled from zero**: a metro with no competitors scores 100 and the most crowded of the 25 candidates scores 0, in proportion in between. Crowding is a sum of a few status weights (1.0, 0.7, 0.4, 0.3), so it takes few distinct values and many metros tie. A percentile rank turns a small change in one competitor's status into a jump across a tie group: on 2026-11-06, correcting one Waymo row from `announced` (0.3) to `testing` (0.4) would have moved Chicago from #4 to #9 under percentile ranking. Min-max moves a metro in proportion to the change. The same rule is implemented in `pipeline/score.py` and `dbt/models/intermediate/int_sub_scores.sql`, and the parity check confirms they agree. The benchmark (Las Vegas) is scaled on the candidates' maximum and clipped to 0-100.
 
 ### Regulatory readiness: legal tier and new-entrant path
 
@@ -52,6 +56,8 @@ New-entrant path (`data/seed/state_av_regulation.csv`, each row sourced to a pag
 - **slow**: three or more sequential approvals including a separate fare permit (CA: DMV testing, driverless testing and deployment permits plus CPUC pilot and deployment programs; PA: supervised testing, PennDOT certification, PUC approval), or a law change is needed first (NY, MA, MN, IL, DC).
 
 The path is an analyst classification from the cited statutes and regulator pages, not an official rating.
+
+**Michigan's Tier 2 is a judgment call between Tier 2 and Tier 3.** MCL 257.665 allows an automated vehicle to operate on a street or highway and needs only proof of insurance, with no separate permit, which is closer to Tier 3 on paper. But the section is framed around research and testing, and no operator offers driverless service in Detroit, so it is scored Tier 2 (allowed by law, commercial path untested).
 
 ## 4. Known limitations
 
